@@ -1,0 +1,6 @@
+# Global
+*tags
+*.swp
+
+# C
+*.o
