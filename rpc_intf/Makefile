@@ -6,8 +6,8 @@ CFLAGS = -Wall \
 		 -Werror
 
 EXTRAINCDIRS += intf \
-				lib \
-				../log
+				lib
+
 CFLAGS += $(patsubst %,-I %,$(EXTRAINCDIRS))
 CFLAGS += -MD -MP -MF .dep/$(@F).d
 
@@ -16,12 +16,12 @@ LFLAGS =
 server-obj += src/server.o
 server-obj += src/rpc_cmd.o
 server-obj += intf/rpc_intf.o
-server-obj += ../log/log.o
+server-obj += lib/log.o
 server-obj += lib/utils.o
 
 client-obj += src/client.o
 client-obj += intf/rpc_intf.o
-client-obj += ../log/log.o
+client-obj += lib/log.o
 client-obj += lib/utils.o
 
 all: server client
