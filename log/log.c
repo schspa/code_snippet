@@ -38,7 +38,7 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include <ipmitool/log.h>
+#include "log.h"
 
 struct logpriv_s {
 	char * name;

@@ -30,8 +30,8 @@
  * EVEN IF SUN HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
  */
 
-#ifndef IPMITOOL_LOG_H
-#define IPMITOOL_LOG_H
+#ifndef __LOG_H__
+#define __LOG_H__
 
 #include <syslog.h>
 
@@ -49,7 +49,7 @@
 #define LOG_ERROR		LOG_ERR
 #define LOG_WARN		LOG_WARNING
 
-#define LOG_NAME_DEFAULT	"ipmitool"
+#define LOG_NAME_DEFAULT	"log"
 #define LOG_MSG_LENGTH		1024
 
 void log_init(const char * name, int isdaemon, int verbose);
@@ -59,5 +59,4 @@ int log_level_get(void);
 void lprintf(int level, const char * format, ...);
 void lperror(int level, const char * format, ...);
 
-#endif /*IPMITOOL_LOG_H*/
-
+#endif /* __LOG_H__ */
