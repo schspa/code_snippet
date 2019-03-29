@@ -1,0 +1,12 @@
+# Global
+*tags
+*.swp
+*.dep
+*.build
+
+# C
+*.o
+
+# bin
+server
+client
