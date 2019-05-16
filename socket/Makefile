@@ -18,20 +18,27 @@ udp_client-obj += udp/client.o
 raw_recv_and_check_lost-obj += raw/recv_and_check_lost.o
 raw_recv_and_send-obj += raw/recv_and_send.o
 
-OUT := udp_server udp_client raw_recv_and_check_lost raw_recv_and_send
+UDPOUT := udp/server udp/client
+RAWOUT := raw/recv_and_check_lost raw/recv_and_send
 
-all: $(OUT)
+all: udp raw
 
-udp_server: $(addprefix $(ODIR)/,$(udp_server-obj))
+udp: $(UDPOUT)
+
+raw: $(RAWOUT)
+
+udp/server: $(addprefix $(ODIR)/,$(udp_server-obj))
+	@mkdir -p $(@D)
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
-udp_client: $(addprefix $(ODIR)/,$(udp_client-obj))
+udp/client: $(addprefix $(ODIR)/,$(udp_client-obj))
+	@mkdir -p $(@D)
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
-raw_recv_and_check_lost: $(addprefix $(ODIR)/,$(raw_recv_and_check_lost-obj))
+raw/recv_and_check_lost: $(addprefix $(ODIR)/,$(raw_recv_and_check_lost-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
-raw_recv_and_send: $(addprefix $(ODIR)/,$(raw_recv_and_send-obj))
+raw/recv_and_send: $(addprefix $(ODIR)/,$(raw_recv_and_send-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
 $(ODIR)/%.o: %.c
@@ -43,6 +50,6 @@ include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
 clean:
 	$(RM) -r $(ODIR) .dep
-	$(RM) $(OUT)
+	$(RM) $(UDPOUT) $(RAWOUT)
 
 .PHONY: all clean
