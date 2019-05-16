@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include "inc.h"
 
 #define BUF_SIZE 16
 
@@ -20,8 +21,8 @@ int main(int argc, char *argv[])
 
 	struct sockaddr_in servaddr;
 	servaddr.sin_family = AF_INET;
-	servaddr.sin_port = htons(8888);
-	servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	servaddr.sin_port = htons(PORT);
+	servaddr.sin_addr.s_addr = inet_addr(HOST);
 
 	int on = 1;
 	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
@@ -33,6 +34,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
+	printf("Now server listen at host:%s port:%d\n", HOST, PORT);
+
 	uint8_t expect_char = 0, buf[BUF_SIZE] = {0};
 
 	while(1) {
@@ -42,8 +45,12 @@ int main(int argc, char *argv[])
 			continue;
 		}
 
+		printf("Received %d bytes, buf[0]=0x%x\n", ret, buf[0]);
+
 		if (expect_char != buf[0])
 			fprintf(stderr, "Packet lost, expected: 0x%02x, received: 0x%02x\n", expect_char, buf[0]);
+
+		expect_char = buf[0] + 1;
 	}
 
 	return 0;

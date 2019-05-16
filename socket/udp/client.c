@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include "inc.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,8 +19,8 @@ int main(int argc, char *argv[])
 
 	struct sockaddr_in servaddr;
 	servaddr.sin_family = AF_INET;
-	servaddr.sin_port = htons(8888);
-	servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+	servaddr.sin_port = htons(PORT);
+	servaddr.sin_addr.s_addr = inet_addr(HOST);
 
 	ret = connect(sockfd, (struct sockaddr *)&servaddr, sizeof(struct sockaddr));
 	if (ret < 0) {
@@ -28,14 +29,15 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	uint8_t i = 0;
+	uint8_t buf = 0;
 
 	while(getchar() != 'q') {
-		ret = send(sockfd, &i, sizeof(i), 0);
+		ret = send(sockfd, &buf, sizeof(uint8_t), 0);
 		if (ret < 0) {
 			perror("send");
 		}
-		i++;
+		printf("Send %d bytes, data: 0x%x.\n", ret, buf);
+		buf++;
 	}
 
 	close(sockfd);
