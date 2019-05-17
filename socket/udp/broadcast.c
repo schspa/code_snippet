@@ -17,10 +17,17 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
+	const int on = 1;
+	ret = setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, &on, sizeof(on));
+	if (ret < 0) {
+		perror("setsockopt");
+		return -1;
+	}
+
 	struct sockaddr_in servaddr;
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(PORT);
-	servaddr.sin_addr.s_addr = inet_addr(LOOPBACK_HOST);
+	servaddr.sin_addr.s_addr = inet_addr(BROADCAST_HOST);
 
 	ret = connect(sockfd, (struct sockaddr *)&servaddr, sizeof(struct sockaddr));
 	if (ret < 0) {

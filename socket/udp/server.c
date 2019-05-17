@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 	struct sockaddr_in servaddr;
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(PORT);
-	servaddr.sin_addr.s_addr = inet_addr(HOST);
+	servaddr.sin_addr.s_addr = inet_addr(LOOPBACK_HOST);
 
 	int on = 1;
 	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	printf("Now server listen at host:%s port:%d\n", HOST, PORT);
+	printf("Now server listen at host:%s port:%d\n", LOOPBACK_HOST, PORT);
 
 	uint8_t expect_char = 0, buf[BUF_SIZE] = {0};
 

@@ -14,11 +14,12 @@ LFLAGS =
 
 udp_server-obj += udp/server.o
 udp_client-obj += udp/client.o
+udp_broadcast-obj += udp/broadcast.o
 
 raw_recv_and_check_lost-obj += raw/recv_and_check_lost.o
 raw_recv_and_send-obj += raw/recv_and_send.o
 
-UDPOUT := udp/server udp/client
+UDPOUT := udp/server udp/client udp/broadcast
 RAWOUT := raw/recv_and_check_lost raw/recv_and_send
 
 all: udp raw
@@ -32,6 +33,10 @@ udp/server: $(addprefix $(ODIR)/,$(udp_server-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
 udp/client: $(addprefix $(ODIR)/,$(udp_client-obj))
+	@mkdir -p $(@D)
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
+
+udp/broadcast: $(addprefix $(ODIR)/,$(udp_broadcast-obj))
 	@mkdir -p $(@D)
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
