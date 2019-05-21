@@ -16,11 +16,10 @@ udp_server-obj += udp/server.o
 udp_client-obj += udp/client.o
 udp_broadcast-obj += udp/broadcast.o
 
-raw_recv_and_check_lost-obj += raw/recv_and_check_lost.o
-raw_recv_and_send-obj += raw/recv_and_send.o
+rawsocket-obj += raw/rawsocket.o
 
 UDPOUT := udp/server udp/client udp/broadcast
-RAWOUT := raw/recv_and_check_lost raw/recv_and_send
+RAWOUT := raw/rawsocket
 
 all: udp raw
 
@@ -40,10 +39,7 @@ udp/broadcast: $(addprefix $(ODIR)/,$(udp_broadcast-obj))
 	@mkdir -p $(@D)
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
-raw/recv_and_check_lost: $(addprefix $(ODIR)/,$(raw_recv_and_check_lost-obj))
-	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
-
-raw/recv_and_send: $(addprefix $(ODIR)/,$(raw_recv_and_send-obj))
+raw/rawsocket: $(addprefix $(ODIR)/,$(rawsocket-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
 $(ODIR)/%.o: %.c
