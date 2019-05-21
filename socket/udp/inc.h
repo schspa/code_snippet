@@ -2,6 +2,8 @@
 #define __INC_H__
 
 #define PORT 8888
+
+#define HOST "192.168.1.10"
 #define LOOPBACK_HOST "127.0.0.1"
 #define BROADCAST_HOST "192.168.1.255"
 
