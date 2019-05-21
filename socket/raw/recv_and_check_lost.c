@@ -67,20 +67,17 @@ int main(int argc, char *argv[])
 
 	uint8_t buf[BUF_SIZE] = {0};
 	uint8_t expect_char = 0;
+	unsigned int i = 0;
 
 	while (1) {
 		if ((ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL)) > 0) {
 
-			if (ret <= 0) {
-				perror("recvfrom");
+			if (ret <= 0)
 				continue;
-			}
-
-			printf("Received %d bytes, data: 0x%x.\n", ret, buf[7]);
 
 			/* Check whether packet lost */
 			if (buf[7] != expect_char)
-				fprintf(stderr, "Packet lost. buf[7]=0x%02x, expect=0x%02x\n", buf[7], expect_char);
+				fprintf(stderr, "[%10d] Packet lost. buf[7]=0x%02x, expect=0x%02x\n", i, buf[7], expect_char);
 
 			/* Update expected next character */
 			if (buf[7] == 0xFF)
@@ -90,6 +87,8 @@ int main(int argc, char *argv[])
 
 			/* Send data back */
 			//sendto(sockfd, buf, ret, 0, (struct sockaddr *)&sl, sizeof(struct sockaddr_ll));
+
+			i++;
 		}
 	}
 
