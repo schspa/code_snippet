@@ -18,8 +18,6 @@ int main(int argc, char *argv[])
 	struct ifreq ifr;
 	struct sockaddr_ll sl;
 
-	char buf[BUF_SIZE] = {0};
-
 	/* RAW socket */
 	sockfd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
 	if (sockfd < 0) {
@@ -67,38 +65,30 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	fd_set read_set;
-	uint8_t next_char = 0;
-
-	FD_ZERO(&read_set);
-	FD_SET(sockfd, &read_set);
-
-	ret = select(sockfd + 1, &read_set, NULL, NULL, NULL);
-	if (ret < 0 || !FD_ISSET(sockfd, &read_set)) {
-		perror("select");
-		return -1;
-	}
-
-	ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL);
-	if (buf[7] != 0xFF)
-		next_char = buf[7] + 1;
-	else
-		next_char = 0x06;
+	uint8_t buf[BUF_SIZE] = {0};
+	uint8_t expect_char = 0;
 
 	while (1) {
 		if ((ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL)) > 0) {
-			printf("0x%02x\n", buf[7]);
+
+			if (ret <= 0) {
+				perror("recvfrom");
+				continue;
+			}
+
+			printf("Received %d bytes, data: 0x%x.\n", ret, buf[7]);
 
 			/* Check whether packet lost */
-			if (buf[7] != next_char)
-				fprintf(stderr, "Packet lost. buf[7]=0x%02x, expect=0x%02x\n", buf[7], next_char);
+			if (buf[7] != expect_char)
+				fprintf(stderr, "Packet lost. buf[7]=0x%02x, expect=0x%02x\n", buf[7], expect_char);
 
 			/* Update expected next character */
-			if (buf[7] != 0xFF)
-				next_char = buf[7] + 1;
+			if (buf[7] == 0xFF)
+				expect_char = 0x06;
 			else
-				next_char = 0x06;
+				expect_char = buf[7] + 1;
 
+			/* Send data back */
 			//sendto(sockfd, buf, ret, 0, (struct sockaddr *)&sl, sizeof(struct sockaddr_ll));
 		}
 	}
