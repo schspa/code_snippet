@@ -76,13 +76,10 @@ int main(int argc, char *argv[])
 
 		/* Check whether packet lost */
 		if (buf[7] != expect_char)
-			fprintf(stderr, "[%10d] Packet lost. buf[7]=0x%02x, expect=0x%02x\n", i, buf[7], expect_char);
+			fprintf(stderr, "[%10d] Packet lost. buf[7]=0x%02x, expect=0x%02x\n", i, buf[0], expect_char);
 
 		/* Update expected next character */
-		if (buf[7] == 0xFF)
-			expect_char = 0x06;
-		else
-			expect_char = buf[7] + 1;
+		expect_char = buf[0] + 1;
 
 		/* Send data back */
 		//sendto(sockfd, buf, ret, 0, (struct sockaddr *)&sl, sizeof(struct sockaddr_ll));
