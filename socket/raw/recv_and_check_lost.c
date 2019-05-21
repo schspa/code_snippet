@@ -70,26 +70,24 @@ int main(int argc, char *argv[])
 	unsigned int i = 0;
 
 	while (1) {
-		if ((ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL)) > 0) {
+		ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL);
+		if (ret <= 0)
+			continue;
 
-			if (ret <= 0)
-				continue;
+		/* Check whether packet lost */
+		if (buf[7] != expect_char)
+			fprintf(stderr, "[%10d] Packet lost. buf[7]=0x%02x, expect=0x%02x\n", i, buf[7], expect_char);
 
-			/* Check whether packet lost */
-			if (buf[7] != expect_char)
-				fprintf(stderr, "[%10d] Packet lost. buf[7]=0x%02x, expect=0x%02x\n", i, buf[7], expect_char);
+		/* Update expected next character */
+		if (buf[7] == 0xFF)
+			expect_char = 0x06;
+		else
+			expect_char = buf[7] + 1;
 
-			/* Update expected next character */
-			if (buf[7] == 0xFF)
-				expect_char = 0x06;
-			else
-				expect_char = buf[7] + 1;
+		/* Send data back */
+		//sendto(sockfd, buf, ret, 0, (struct sockaddr *)&sl, sizeof(struct sockaddr_ll));
 
-			/* Send data back */
-			//sendto(sockfd, buf, ret, 0, (struct sockaddr *)&sl, sizeof(struct sockaddr_ll));
-
-			i++;
-		}
+		i++;
 	}
 
 	close(sockfd);
