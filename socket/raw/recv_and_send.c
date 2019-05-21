@@ -9,8 +9,8 @@
 #include <net/if.h>
 #include <string.h>
 
+#define IF_NAME  "eth0"
 #define BUF_SIZE 4096
-#define SEND_LEN 1024
 
 int main(int argc, char *argv[])
 {
@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	/* Set NIC "eth0" as promisc mode */
+	/* Set NIC as promisc mode */
 	memset(&ifr, 0, sizeof(ifr));
-	strncpy(ifr.ifr_name, "eth0", IFNAMSIZ);
+	strncpy(ifr.ifr_name, IF_NAME, IFNAMSIZ);
 	ret = ioctl(sockfd, SIOCGIFFLAGS, &ifr);
 	if (ret < 0) {
 		perror("ioctl1");
@@ -45,9 +45,9 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	/* Define local network interface as eth0 */
+	/* Define local network interface as IF_NAME */
 	memset(&ifr, 0, sizeof(ifr));
-	strncpy(ifr.ifr_name, "eth0", IFNAMSIZ);
+	strncpy(ifr.ifr_name, IF_NAME, IFNAMSIZ);
 	ret = ioctl(sockfd, SIOCGIFINDEX, &ifr);
 	if (ret < 0) {
 		perror("ioctl3");
@@ -68,7 +68,8 @@ int main(int argc, char *argv[])
 	}
 
 	while (1) {
-		if ((ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL)) > 0)
+		ret = recvfrom(sockfd, buf, BUF_SIZE, 0, NULL, NULL);
+		if (ret > 0)
 			sendto(sockfd, buf, ret, 0, (struct sockaddr *)&sl, sizeof(struct sockaddr_ll));
 	}
 
