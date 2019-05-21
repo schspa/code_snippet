@@ -1,4 +1,4 @@
-#CROSS = arm-unknown-linux-uclibcgnueabi-
+CROSS = arm-linux-gnueabihf-
 CC = gcc
 ODIR = .build
 
