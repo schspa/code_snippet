@@ -8,9 +8,11 @@
 #include <sys/ioctl.h>
 #include <net/if.h>
 #include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #define IF_NAME  "eth0"
-#define BUF_SIZE 4096
+#define BUF_SIZE 64
 
 int main(int argc, char *argv[])
 {
@@ -65,31 +67,25 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	uint8_t buf[BUF_SIZE] = {0};
-	uint8_t expect_char = 0;
-	unsigned int i = 0, lost_packets = 0;
+	ret = fcntl(sockfd, F_GETFL, 0);
+	if (ret & O_NONBLOCK)
+		printf("NONBLOCK\n");
+	else
+		printf("BLOCK\n");
 
-	while (1) {
+	uint8_t buf[BUF_SIZE] = {0};
+	while ((buf[0] = getchar()) != 'q') {
+		ret = send(sockfd, buf, BUF_SIZE, 0);
+		if (ret <= 0)
+			perror("send");
+		else
+			printf("<<<<< Packet Send ret=%d, buf[0]=0x%02x\n", ret, buf[23]);
+
 		ret = recv(sockfd, buf, BUF_SIZE, 0);
 		if (ret <= 0)
-			continue;
-
-		printf(">>>>> [%10u] Packet Received, buf[0]=0x%02x\n", i, buf[0]);
-
-		/* Check whether packet lost */
-		if (buf[0] != expect_char) {
-			lost_packets++;
-			fprintf(stderr, "[%10u] Packet lost %u. buf[0]=0x%02x, expect=0x%02x\n", i, lost_packets, buf[0], expect_char);
-		}
-
-		/* Update expected next character */
-		expect_char = buf[0] + 1;
-
-		/* Send data back */
-		ret = send(sockfd, buf, ret, 0);
-		printf("<<<<< [%10u] Packet Send back, buf[0]=0x%02x\n", i, buf[0]);
-
-		i++;
+			perror("recv");
+		else
+			printf(">>>>> Packet Received ret=%d, buf[0]=0x%02x\n", ret, buf[23]);
 	}
 
 	close(sockfd);
