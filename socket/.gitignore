@@ -1,0 +1,13 @@
+# Global
+*tags
+*.swp
+
+# C
+*.o
+
+# obj bin
+.dep
+raw/rawsocket
+udp/broadcast
+udp/client
+udp/server
