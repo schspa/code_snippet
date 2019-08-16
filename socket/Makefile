@@ -1,4 +1,4 @@
-CROSS = arm-linux-gnueabihf-
+#CROSS = arm-linux-gnueabihf-
 CC = gcc
 ODIR = .build
 
@@ -16,10 +16,11 @@ udp_server-obj += udp/server.o
 udp_client-obj += udp/client.o
 udp_broadcast-obj += udp/broadcast.o
 
-rawsocket-obj += raw/rawsocket.o
+raw_server-obj += raw/server.o
+raw_client-obj += raw/client.o
 
 UDPOUT := udp/server udp/client udp/broadcast
-RAWOUT := raw/rawsocket
+RAWOUT := raw/server raw/client
 
 all: udp raw
 
@@ -39,7 +40,12 @@ udp/broadcast: $(addprefix $(ODIR)/,$(udp_broadcast-obj))
 	@mkdir -p $(@D)
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
-raw/rawsocket: $(addprefix $(ODIR)/,$(rawsocket-obj))
+raw/server: $(addprefix $(ODIR)/,$(raw_server-obj))
+	@mkdir -p $(@D)
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
+
+raw/client: $(addprefix $(ODIR)/,$(raw_client-obj))
+	@mkdir -p $(@D)
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
 $(ODIR)/%.o: %.c

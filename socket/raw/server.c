@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#define IF_NAME  "eth0"
+#define IF_NAME  "lo"
 #define BUF_SIZE 64
 
 int main(int argc, char *argv[])
@@ -27,6 +27,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
+#if 0
 	/* Set NIC as promisc mode */
 	memset(&ifr, 0, sizeof(ifr));
 	strncpy(ifr.ifr_name, IF_NAME, IFNAMSIZ);
@@ -44,6 +45,7 @@ int main(int argc, char *argv[])
 		close(sockfd);
 		return -1;
 	}
+#endif
 
 	/* Define local network interface as IF_NAME */
 	memset(&ifr, 0, sizeof(ifr));
@@ -69,23 +71,27 @@ int main(int argc, char *argv[])
 
 	ret = fcntl(sockfd, F_GETFL, 0);
 	if (ret & O_NONBLOCK)
-		printf("NONBLOCK\n");
+		printf("NONBLOCK Mode\n");
 	else
-		printf("BLOCK\n");
+		printf("BLOCK Mode\n");
 
+	int i = 0;
 	uint8_t buf[BUF_SIZE] = {0};
-	while ((buf[0] = getchar()) != 'q') {
-		ret = send(sockfd, buf, BUF_SIZE, 0);
-		if (ret <= 0)
-			perror("send");
-		else
-			printf("<<<<< Packet Send ret=%d, buf[0]=0x%02x\n", ret, buf[23]);
+	while (1) {
+		memset(buf, 0, BUF_SIZE);
 
 		ret = recv(sockfd, buf, BUF_SIZE, 0);
-		if (ret <= 0)
+		if (ret <= 0) {
 			perror("recv");
-		else
-			printf(">>>>> Packet Received ret=%d, buf[0]=0x%02x\n", ret, buf[23]);
+			continue;
+		}
+
+		printf("\n>>> Packet Received ret=%d\n", ret);
+		for (i = 0; i < ret; ++i) {
+			printf("0x%02x ", buf[i]);
+			if ((i+1) % 8 == 0)
+				printf("\n");
+		}
 	}
 
 	close(sockfd);
