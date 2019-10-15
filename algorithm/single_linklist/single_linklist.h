@@ -27,6 +27,7 @@ int list_insert(list_t *list, int data);
 int list_delete(list_t *list, int data);
 int list_modify(list_t *list, int old, int new);
 node_t *list_search(list_t *list, int data);
+int list_reverse(list_t *list);
 
 int list_foreach(list_t *list, datavisit_t visit);
 

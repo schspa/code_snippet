@@ -32,6 +32,11 @@ int main(int argc, char *argv[])
 	list_foreach(list, print_data);
 	putchar('\n');
 
+	list_reverse(list);
+
+	list_foreach(list, print_data);
+	putchar('\n');
+
 	list_destory(list);
 	return 0;
 }

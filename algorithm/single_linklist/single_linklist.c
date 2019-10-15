@@ -110,6 +110,24 @@ node_t *list_search(list_t *list, int data) {
 	
 }
 
+int list_reverse(list_t *list) {
+	if (list == NULL)
+		return -1;
+
+	node_t *node = list->head->next;
+	node_t *new = NULL;
+
+	list->head->next = NULL;
+	while (node != NULL) {
+		new = node;
+		node = node->next;
+
+		new->next = list->head->next;
+		list->head->next = new;
+	}
+	return 0;
+}
+
 int list_foreach(list_t *list, datavisit_t visit) {
 	node_t *node = NULL;
 
