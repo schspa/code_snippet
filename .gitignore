@@ -1,6 +1,7 @@
 # Global
 *tags
 *.swp
+a.out
 
 # C
 *.o
