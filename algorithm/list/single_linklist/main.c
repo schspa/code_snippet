@@ -24,9 +24,6 @@ int main(int argc, char *argv[])
 
 	list_modify(list, 5, 50);
 
-	node_t *node = list_search(list, 8);
-	node->data = 88;
-
 	list_delete(list, 1);
 
 	list_foreach(list, print_data);

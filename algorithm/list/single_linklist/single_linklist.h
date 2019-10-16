@@ -5,17 +5,8 @@
  * Single Linklist Implement
  */
 
-typedef struct _node_t_ {
-	int data;
-	struct _node_t_ *next;
-} node_t;
-
-typedef struct {
-	node_t *head;
-	int len;
-	int max;
-} list_t;
-
+typedef struct _node_t_ node_t;
+typedef struct _list_t_ list_t;
 typedef int (*datavisit_t)(int data);
 
 node_t *node_alloc(int data);

@@ -1,6 +1,17 @@
 #include <stdlib.h>
 #include "single_linklist.h"
 
+struct _node_t_ {
+	int data;
+	struct _node_t_ *next;
+};
+
+struct _list_t_ {
+	node_t *head;
+	int len;
+	int max;
+};
+
 node_t *node_alloc(int data) {
 	node_t *node = NULL;
 
