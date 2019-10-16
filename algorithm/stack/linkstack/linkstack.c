@@ -1,6 +1,17 @@
 #include <stdlib.h>
 #include "linkstack.h"
 
+struct _node_t_ {
+	int data;
+	struct _node_t_ *next;
+};
+
+struct _stack_t_ {
+	node_t *top;
+	int len;
+	int max;
+};
+
 node_t *node_alloc(int data) {
 	node_t *node = NULL;
 

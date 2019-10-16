@@ -4,16 +4,9 @@
 /*
  * Link Stack Implement
  */
-typedef struct _node_t_ {
-	int data;
-	struct _node_t_ *next;
-} node_t;
+typedef struct _node_t_ node_t;
 
-typedef struct _stack_t_ {
-	node_t *top;
-	int len;
-	int max;
-} stack_t;
+typedef struct _stack_t_ stack_t;
 
 node_t *node_alloc(int data);
 int node_free(node_t *node);
