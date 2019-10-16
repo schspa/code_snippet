@@ -1,6 +1,12 @@
 #include <stdlib.h>
 #include "seqstack.h"
 
+struct _stack_t_ {
+	int *buf;
+	int top;
+	int max;
+};
+
 stack_t *stack_init(int max) {
 	stack_t *stack =  malloc(sizeof(stack_t));
 	if (stack == NULL)

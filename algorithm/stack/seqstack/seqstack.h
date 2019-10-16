@@ -4,12 +4,8 @@
 /*
  * Sequence Stack Implement
  */
-typedef struct _stack_t_ {
-	int *buf;
-	int top;
-	int max;
-} stack_t;
 
+typedef struct _stack_t_ stack_t;
 
 stack_t *stack_init(int max);
 int stack_destory(stack_t *stack);
