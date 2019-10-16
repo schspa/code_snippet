@@ -6,8 +6,8 @@
  */
 
 typedef struct _node_t_ {
-	struct _node_t_ *next;
 	int data;
+	struct _node_t_ *next;
 } node_t;
 
 typedef struct {

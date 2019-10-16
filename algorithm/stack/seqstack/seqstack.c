@@ -27,12 +27,19 @@ int stack_destory(stack_t *stack) {
 	return 0;
 }
 
+int stack_isempty(stack_t *stack) {
+	return stack->top == 0;
+}
+
+int stack_isfull(stack_t *stack) {
+	return stack->top == stack->max;
+}
+
 int stack_push(stack_t *stack, int data) {
 	if (stack == NULL)
 		return -1;
 
-	// stack is full
-	if (stack->top == stack->max)
+	if (stack_isfull(stack))
 		return -1;
 
 	stack->buf[stack->top] = data;
@@ -44,8 +51,7 @@ int stack_pop(stack_t *stack, int *data) {
 	if (stack == NULL || data == NULL)
 		return -1;
 
-	// stack is empty
-	if (stack->top == 0)
+	if (stack_isempty(stack))
 		return -1;
 
 	stack->top--;

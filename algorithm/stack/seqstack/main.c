@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 	stack_foreach(stack, printf_data);
 	putchar('\n');
 
-
 	stack_push(stack, 55);
 	stack_push(stack, 56);
 	stack_push(stack, 57);
