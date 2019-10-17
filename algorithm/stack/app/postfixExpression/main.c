@@ -21,7 +21,6 @@
  * 		P70 Chapter 4.2.2 (二叉树的应用)
  */
 
-#define MAX_BUF_SIZE 16
 #define NUMBER 0
 
 int getop(char s[]) {
@@ -47,7 +46,7 @@ int getop(char s[]) {
 
 int main(int argc, char *argv[])
 {
-	char s[MAX_BUF_SIZE];
+	char s[8];
 	int type, op2;
 
 	while ((type = getop(s)) != EOF) {
