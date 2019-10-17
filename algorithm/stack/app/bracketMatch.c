@@ -3,8 +3,9 @@
 #include "../seqstack/seqstack.h"
 
 /*
- * <数据结构与算法分析 C语言描述> P76
  * 利用栈来实现判定'('与')'是否匹配，匹配返回括号对的数量，不匹配返回-1。
+ *
+ * <数据结构与算法分析 C语言描述> P76
  */
 
 int caculate(char s[], int n) {
