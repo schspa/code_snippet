@@ -1,3 +1,14 @@
+#include <stdio.h>
+
+static void swap(int arr[], int i, int j) {
+	int tmp;
+	tmp = arr[i];
+	arr[i] = arr[j];
+	arr[j] = tmp;
+}
+
+/**********************************************/
+
 void bubble_sort(int arr[], int n) {
 	if (n < 1)
 		return;
@@ -9,9 +20,7 @@ void bubble_sort(int arr[], int n) {
 		flag = 0;
 		for (j = 0; j < n - i - 1; j++) {
 			if (arr[j] > arr[j + 1]) {
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
+				swap(arr, j, j + 1);
 				flag = 1;
 			}
 		}
@@ -20,6 +29,8 @@ void bubble_sort(int arr[], int n) {
 			break;
 	}
 }
+
+/****************************************************/
 
 void insert_sort(int arr[], int n) {
 	int i, j;
@@ -33,4 +44,35 @@ void insert_sort(int arr[], int n) {
 
 		arr[j] = temp;
 	}
+}
+
+/****************************************************/
+
+static int partition(int arr[], int start, int end) {
+	int i, j, pivot;
+
+	pivot = arr[end];
+	i = start;
+	for (j = i; j < end; j++) {
+		if (arr[j] < pivot) {
+			swap(arr, j, i);
+			i++;
+		}
+	}
+	swap(arr, i, end);
+	return i;
+}
+
+static void qsort(int arr[], int start, int end) {
+	if (start >= end)
+		return;
+
+	int pivot;
+	pivot = partition(arr, start, end);
+	qsort(arr, start, pivot - 1);
+	qsort(arr, pivot + 1, end);
+}
+
+void quick_sort(int arr[], int n) {
+	qsort(arr, 0, n - 1);
 }
