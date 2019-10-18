@@ -20,11 +20,15 @@ bracketMatch-obj += bracketMatch.o
 expressionConvert-obj += $(stack-obj)
 expressionConvert-obj += expressionConvert.o
 
+postfixExpression-obj += $(stack-obj)
+postfixExpression-obj += postfixExpression.o
+
 powerExpression-obj += $(stack-obj)
 powerExpression-obj += powerExpression.o
 
 OUT += bracketMatch
 OUT += expressionConvert
+OUT += postfixExpression
 OUT += powerExpression
 
 all: $(OUT)
@@ -33,6 +37,9 @@ bracketMatch: $(addprefix $(ODIR)/,$(bracketMatch-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
 expressionConvert: $(addprefix $(ODIR)/,$(expressionConvert-obj))
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
+
+postfixExpression: $(addprefix $(ODIR)/,$(postfixExpression-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
 powerExpression: $(addprefix $(ODIR)/,$(powerExpression-obj))

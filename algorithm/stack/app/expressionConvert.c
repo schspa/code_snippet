@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include "../seqstack/seqstack.h"
 
 /*
@@ -8,82 +9,114 @@
  * 		P54-56 Chapter 3.3.3 (堆栈的应用)
  * 		P70    Chapter 4.2.2 (二叉树的应用: 利用二叉树也可以解决该问题，代码见tree/app)
  */
-int ischar(char s) {
-	return (s >= 'a' && s <= 'z') || (s >= 'A' && s <= 'Z');
-}
 
-int isop(char s) {
-	return (s == '+' || s == '*' || s == '(' || s == ')');
-}
+// Return Value: Operator Type
+#define END      0
+#define ALPHA    1
+#define NUMBER   2
+#define OPERATOR 3
 
-int oppriority(char s1, char s2) {
-	switch (s1) {
-		case '*':
-			if (s2 == '*')
-				return 0;
-			else
-				return 1;
-			break;
-		case '+':
-			if (s2 == '*')
-				return -1;
-			else
-				return 0;
-			break;
-	}
-	
-	return 0;
-}
+int getop(char s[]) {
+	int i;
 
-void transfer(char s[]) {
-	stack_t *stack = stack_init(16);
+	while ((s[0] = getchar()) == ' ' || s[0] == '\t')
+		;
 
-	int c;
-	while (*s != '\0' && *s != '\n') {
-		if (*s == ')') {
-			while (stack_pop(stack, &c) != -1 && c != '(')
-				putchar(c);
-			if (c != '(')
-				goto err;
-		} else if (*s == '(') {
-			stack_push(stack, *s);
-		} else if (isop(*s)) {
-			while (stack_pop(stack, &c) != -1 && c != '(' && oppriority(c, *s) >= 0)
-				putchar(c);
-			if (oppriority(c, *s) < 0 || c == '(')
-				stack_push(stack, c);
-			stack_push(stack, *s);
-		} else if (ischar(*s)) {
-			putchar(*s);
-		}
-
-		s++;
+	/* END */
+	if (s[0] == EOF) {
+		s[1] = '\0';
+		return END;
 	}
 
-	while(stack_pop(stack, &c) != -1) {
-		if (c != '(')
-			putchar(c);
-		else
-			goto err;
+	/* alpha */
+	if (isalpha(s[0])) {
+		i = 0;
+		while (isalpha((s[++i] = getchar())))
+			;
+		if (s[i] != EOF)
+			ungetc(s[i], stdin);
+		s[i] = '\0';
+		return ALPHA;
 	}
 
-	putchar('\n');
+	/* number */
+	if (isdigit(s[0])) {
+		i = 0;
+		while (isdigit((s[++i] = getchar())))
+			;
+		if (s[i] != EOF)
+			ungetc(s[i], stdin);
+		s[i] = '\0';
+		return NUMBER;
+	}
 
-	stack_destory(stack);
-	return;
-
-err:
-	printf("\nError!\n");
-	stack_destory(stack);
+	/* non-EOF and non-alpha and non-number ---> operator */
+	s[1] = '\0';
+	return OPERATOR;
 }
 
 int main(int argc, char *argv[])
 {
-	char s[32] = {0};
+	char s[8] = {0};
+	int optype, ch;
 
-	fgets(s, 16, stdin);
+	stack_t *stack = stack_init(16);
+	if (stack == NULL)
+		return -1;
 
-	transfer(s);
+	while ((optype = getop(s)) != END) {
+		switch (optype) {
+		case ALPHA:
+		case NUMBER:
+			printf("%s", s);
+			break;
+		case OPERATOR:
+			switch (s[0]) {
+			case '(':
+				stack_push(stack, s[0]);
+				break;
+			case ')':
+				while (stack_pop(stack, &ch) != -1 && ch != '(')
+					putchar(ch);
+				if (ch != '(')
+					goto err;
+				break;
+			case '+':
+			case '-':
+				while (stack_pop(stack, &ch) != -1 && ch != '(')
+					putchar(ch);
+				if (ch == '(')
+					stack_push(stack, ch);
+				stack_push(stack, s[0]);
+				break;
+			case '*':
+			case '/':
+				while (stack_pop(stack, &ch) != -1 && ch != '(' && ch != '+' && ch != '-')
+					putchar(ch);
+				if (ch == '(' || ch == '+' || ch == '-')
+					stack_push(stack, ch);
+				stack_push(stack, s[0]);
+				break;
+			default:
+				fprintf(stderr, "Unknown operator: %c\n", s[0]);
+				break;
+			}
+			break;
+		}
+	}
 
+	while (stack_pop(stack, &ch) != -1 && ch != '(')
+		putchar(ch);
+	if (ch == '(')
+		goto err;
+
+	putchar('\n');
+
+	stack_destory(stack);
 	return 0;
+
+err:
+	printf("Error!\n");
+	stack_destory(stack);
+	return -1;
 }
