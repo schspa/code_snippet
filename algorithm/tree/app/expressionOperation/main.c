@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "stack.h"
-#include "../bitree/bitree.h"
+#include "bitree.h"
 
 #define NUMBER 0
 

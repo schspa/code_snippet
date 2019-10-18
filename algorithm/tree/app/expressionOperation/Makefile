@@ -5,7 +5,7 @@ ODIR = .build
 CFLAGS = -Wall \
 		 -Werror
 
-EXTRAINCDIRS +=
+EXTRAINCDIRS += ../../bitree
 
 CFLAGS += $(patsubst %,-I %,$(EXTRAINCDIRS))
 CFLAGS += -MD -MP -MF .dep/$(@F).d
@@ -25,7 +25,7 @@ all: $(OUT)
 main: $(addprefix $(ODIR)/,$(main-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
 
-$(ODIR)/$(bitree-obj): ../bitree/bitree.c
+$(ODIR)/$(bitree-obj): ../../bitree/bitree.c
 	@mkdir -p $(@D)
 	@echo ">>> $<"
 	$(CROSS)$(CC) $(CFLAGS) -c $< -o $@
