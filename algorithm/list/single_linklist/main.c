@@ -3,6 +3,7 @@
 
 #define __TEST__
 #ifdef __TEST__
+
 int print_data(int data) {
 	printf("%d ", data);
 	return 0;
@@ -30,6 +31,12 @@ int main(int argc, char *argv[])
 	putchar('\n');
 
 	list_reverse(list);
+
+	list_foreach(list, print_data);
+	putchar('\n');
+
+	list_foreach_reversingly(list, print_data);
+	putchar('\n');
 
 	list_foreach(list, print_data);
 	putchar('\n');

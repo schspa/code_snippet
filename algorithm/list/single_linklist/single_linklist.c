@@ -150,3 +150,20 @@ int list_foreach(list_t *list, datavisit_t visit) {
 
 	return 0;
 }
+
+static void visit_node(node_t *node, datavisit_t visit) {
+	if (node == NULL)
+		return;
+
+	if (node->next != NULL)
+		visit_node(node->next, visit);
+	visit(node->data);
+}
+
+int list_foreach_reversingly(list_t *list, datavisit_t visit) {
+	if (list == NULL)
+		return -1;
+
+	visit_node(list->head->next, visit);
+	return 0;
+}

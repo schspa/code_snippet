@@ -21,5 +21,6 @@ node_t *list_search(list_t *list, int data);
 int list_reverse(list_t *list);
 
 int list_foreach(list_t *list, datavisit_t visit);
+int list_foreach_reversingly(list_t *list, datavisit_t visit);
 
 #endif /* __SINGLE_LINK_LIST_H__ */
