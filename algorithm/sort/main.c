@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
 
 	print_arr(arr, 9);
 
-	bubble_sort(arr, 9);
-	insert_sort(arr, 9);
+	//bubble_sort(arr, 9);
+	//insert_sort(arr, 9);
 	quick_sort(arr, 9);
 	
 	print_arr(arr, 9);

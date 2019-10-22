@@ -48,29 +48,36 @@ void insert_sort(int arr[], int n) {
 
 /****************************************************/
 
-static int partition(int arr[], int start, int end) {
-	int i, j, pivot;
+static int partition(int arr[], int low, int high) {
+	if (arr == NULL || low >= high)
+		return -1;
 
-	pivot = arr[end];
-	i = start;
-	for (j = i; j < end; j++) {
-		if (arr[j] < pivot) {
-			swap(arr, j, i);
-			i++;
-		}
+	int pivotkey;
+	pivotkey = arr[low];
+	while (low < high) {
+		while (low < high && arr[high] >= pivotkey)
+			high--;
+		if (low < high)
+			arr[low++] = arr[high];
+
+		while (low < high && arr[low] <= pivotkey)
+			low++;
+		if (low < high)
+			arr[high--] = arr[low];
 	}
-	swap(arr, i, end);
-	return i;
+	/* 此时low等于high */
+	arr[low] = pivotkey;
+	return low;
 }
 
-static void qsort(int arr[], int start, int end) {
-	if (start >= end)
+static void qsort(int arr[], int low, int high) {
+	if (low >= high)
 		return;
 
 	int pivot;
-	pivot = partition(arr, start, end);
-	qsort(arr, start, pivot - 1);
-	qsort(arr, pivot + 1, end);
+	pivot = partition(arr, low, high);
+	qsort(arr, low, pivot - 1);
+	qsort(arr, pivot + 1, high);
 }
 
 void quick_sort(int arr[], int n) {
