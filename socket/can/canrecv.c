@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
 	ret = ioctl(sockfd, SIOCGIFINDEX, &ifr);
 	if (ret < 0) {
 		perror("ioctl");
+		close(sockfd);
 		return -1;
 	}
 
