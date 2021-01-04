@@ -1,0 +1,20 @@
+CROSS := aarch64-linux-gnu-
+CC := gcc
+CFLAGS := -Wall -g
+LFLAGS :=
+
+out := gpio
+objs := gpio.o
+
+all: $(out)
+
+$(out):$(objs)
+	$(CROSS)$(CC) $< -o $@ $(LFLAGS)
+
+%.o:%.c
+	$(CROSS)$(CC) -c $< -o $@ $(CFLAGS)
+
+clean:
+	rm -rf *.o $(objs) $(out)
+
+.PHONY: clean
