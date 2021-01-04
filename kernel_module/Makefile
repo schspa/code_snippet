@@ -1,10 +1,11 @@
 #$(warning KERNELRELEASE=$(KERNELRELEASE))
 
+#EXTRA_CFLAGS = -g -O0
+
 ifeq ($(KERNELRELEASE),)
 
 KERNELDIR ?= /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
-#EXTRA_CFLAGS = -g -O0
 
 modules:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
