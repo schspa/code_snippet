@@ -5,12 +5,16 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <string.h>
 #include "inc.h"
+
+#define BUF_SIZE 64
 
 int main(int argc, char *argv[])
 {
 	int sockfd, ret;
 
+	/* UDP Socket */
 	sockfd = socket(AF_INET, SOCK_DGRAM, 0);
 	if (sockfd < 0) {
 		perror("socket");
@@ -20,8 +24,9 @@ int main(int argc, char *argv[])
 	struct sockaddr_in servaddr;
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(PORT);
-	servaddr.sin_addr.s_addr = inet_addr(LOOPBACK_HOST);
+	servaddr.sin_addr.s_addr = inet_addr(IP_LOOPBACK);
 
+	/* Connect to UDP Server */
 	ret = connect(sockfd, (struct sockaddr *)&servaddr, sizeof(struct sockaddr));
 	if (ret < 0) {
 		perror("connect");
@@ -29,18 +34,19 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	uint8_t buf = 0;
+	int cycle = 0;
+	char buf[BUF_SIZE] = {0};
 
 	while(getchar() != 'q') {
-		ret = send(sockfd, &buf, sizeof(uint8_t), 0);
+		sprintf(buf, "%d-%s", cycle, "Hello World");
+		ret = send(sockfd, &buf, strlen(buf)+1, 0);
 		if (ret < 0) {
 			perror("send");
 		}
-		printf("Send %d bytes, data: 0x%x.\n", ret, buf);
-		buf++;
+		printf("Send %d bytes, data: %s.\n", ret, buf);
+		cycle++;
 	}
 
 	close(sockfd);
-
 	return 0;
 }

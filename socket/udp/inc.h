@@ -3,8 +3,8 @@
 
 #define PORT 8888
 
-#define HOST "192.168.1.10"
-#define LOOPBACK_HOST "127.0.0.1"
-#define BROADCAST_HOST "192.168.1.255"
+#define IP_ANY       "0.0.0.0"
+#define IP_LOOPBACK  "127.0.0.1"
+#define IP_BROADCAST "192.168.1.255"
 
 #endif /* __INC_H__ */
