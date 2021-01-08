@@ -17,7 +17,9 @@ server-obj += server.o
 
 client-obj += client.o
 
-all: server client
+TARGET = server client
+
+all: $(TARGET)
 
 server: $(addprefix $(ODIR)/,$(server-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^
@@ -34,6 +36,6 @@ include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
 clean:
 	$(RM) -r $(ODIR) .dep
-	$(RM) server client
+	$(RM) $(TARGET)
 
 .PHONY: all clean

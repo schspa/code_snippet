@@ -1,1 +1,1 @@
-../../log/log.h
+../../log/ipmitool_log.h
