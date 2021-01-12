@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 	setsockopt(sockfd, SOL_CAN_RAW, CAN_RAW_FILTER, NULL, 0);
 
 	/* Construct 2 frames ready to send */
-	struct can_frame frame[2];
+	struct can_frame frame[3];
 	frame[0].can_id = 0x12;                    /* CAN ID: Standard frame */
 	frame[0].can_dlc = 2;                       /* Data length */
 	frame[0].data[0] = 0x01;                    /* Data content */
@@ -52,6 +52,8 @@ int main(int argc, char *argv[])
 	frame[1].can_dlc = 2;                       /* Data length */
 	frame[1].data[0] = 0x02;                    /* Data content */
 	frame[1].data[1] = 0xCD;                    /* Data content */
+	frame[2].can_id = CAN_RTR_FLAG | 0x12;     /* CAN ID: Remote frame */
+	frame[2].can_dlc = 0;                       /* Data length */
 
 	int cycle = 0;
 	while(cycle++ < 5) {
@@ -70,6 +72,14 @@ int main(int argc, char *argv[])
 			break;
 		}
 		printf("[cycle=%d] send Extend Frame 1 success.\n", cycle);
+		sleep(1);
+
+		ret = send(sockfd, &frame[2], sizeof(frame[1]), 0);
+		if (ret <= 0) {
+			perror("send frame 2");
+			break;
+		}
+		printf("[cycle=%d] send Remote Frame 2 success.\n", cycle);
 		sleep(1);
 	}
 
