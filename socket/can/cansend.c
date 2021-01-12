@@ -9,11 +9,32 @@
 #include <net/if.h>
 #include <linux/can.h>
 #include <linux/can/raw.h>
+#include <linux/can/error.h>
 
-#define IF_NAME   "can0"
+#define FRAME_TYPE_NUM      4
+#define FRAME_TYPE_NAME_LEN 16
+
+#define FRAME_TYPE_STD_IDX 0
+#define FRAME_TYPE_EFF_IDX 1
+#define FRAME_TYPE_RTR_IDX 2
+#define FRAME_TYPE_ERR_IDX 3
+
+#define SEND_FRAME_NUM 3
+
+static const char frame_type_name[FRAME_TYPE_NUM][FRAME_TYPE_NAME_LEN] = {
+	"Standard Frame",
+	"Extend Frame",
+	"Remote Frame",
+	"Error Frame",
+};
 
 int main(int argc, char *argv[])
 {
+	if (argc < 2) {
+		printf("\nUsage: %s <can port>\n\n", argv[0]);
+		return -1;
+	}
+
 	int sockfd, ret;
 	struct sockaddr_can addr;
 	struct ifreq ifr;
@@ -25,8 +46,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	/* Set CAN device "can0" */
-	strcpy(ifr.ifr_name, IF_NAME);
+	/* Set CAN port getting from cmd line argument */
+	strcpy(ifr.ifr_name, argv[1]);
 	ret = ioctl(sockfd, SIOCGIFINDEX, &ifr);
 	if (ret < 0) {
 		perror("ioctl");
@@ -43,44 +64,45 @@ int main(int argc, char *argv[])
 	setsockopt(sockfd, SOL_CAN_RAW, CAN_RAW_FILTER, NULL, 0);
 
 	/* Construct 2 frames ready to send */
-	struct can_frame frame[3];
+	struct can_frame frame[SEND_FRAME_NUM];
 	frame[0].can_id = 0x12;                    /* CAN ID: Standard frame */
-	frame[0].can_dlc = 2;                       /* Data length */
-	frame[0].data[0] = 0x01;                    /* Data content */
+	frame[0].can_dlc = 2;                      /* Data length */
+	frame[0].data[0] = 0x01;                   /* Data content */
 	frame[0].data[1] = 0xAB;
 	frame[1].can_id = CAN_EFF_FLAG | 0x12;     /* CAN ID: Extend frame */
-	frame[1].can_dlc = 2;                       /* Data length */
-	frame[1].data[0] = 0x02;                    /* Data content */
-	frame[1].data[1] = 0xCD;                    /* Data content */
+	frame[1].can_dlc = 2;                      /* Data length */
+	frame[1].data[0] = 0x02;                   /* Data content */
+	frame[1].data[1] = 0xCD;
 	frame[2].can_id = CAN_RTR_FLAG | 0x12;     /* CAN ID: Remote frame */
-	frame[2].can_dlc = 0;                       /* Data length */
+	frame[2].can_dlc = 0;                      /* Data length */
+	/* Error Frame is generated from system, we cant send Error frame from app. */
+	//frame[3].can_id = CAN_ERR_FLAG | CAN_ERR_CRTL;     /* CAN ID: Error frame */
+	//frame[3].can_dlc = 0;                              /* Data length */
 
+	int i = 0;
 	int cycle = 0;
-	while(cycle++ < 5) {
+	int frame_type_idx = 0;
+	while(cycle++ < 1) {
 		/* Only one frame can be sent at a time */
-		ret = send(sockfd, &frame[0], sizeof(frame[0]), 0);
-		if (ret <= 0) {
-			perror("send frame 0");
-			break;
-		}
-		printf("[cycle=%d] send Standard Frame 0 success.\n", cycle);
-		sleep(1);
+		for (i = 0; i < SEND_FRAME_NUM; ++i) {
+			ret = send(sockfd, &frame[i], sizeof(frame[i]), 0);
+			if (ret <= 0) {
+				perror("send frame");
+				break;
+			}
 
-		ret = send(sockfd, &frame[1], sizeof(frame[1]), 0);
-		if (ret <= 0) {
-			perror("send frame 1");
-			break;
+			if (frame[i].can_id & CAN_EFF_FLAG) {
+				frame_type_idx = FRAME_TYPE_EFF_IDX;
+			} else if (frame[i].can_id & CAN_RTR_FLAG) {
+				frame_type_idx = FRAME_TYPE_RTR_IDX;
+			} else if (frame[i].can_id & CAN_ERR_FLAG) {
+				frame_type_idx = FRAME_TYPE_ERR_IDX;
+			} else {
+				frame_type_idx = FRAME_TYPE_STD_IDX;
+			}
+			printf("[cycle=%d] send Frame %d (%s) success.\n", cycle, i, frame_type_name[frame_type_idx]);
+			sleep(1);
 		}
-		printf("[cycle=%d] send Extend Frame 1 success.\n", cycle);
-		sleep(1);
-
-		ret = send(sockfd, &frame[2], sizeof(frame[1]), 0);
-		if (ret <= 0) {
-			perror("send frame 2");
-			break;
-		}
-		printf("[cycle=%d] send Remote Frame 2 success.\n", cycle);
-		sleep(1);
 	}
 
 	close(sockfd);

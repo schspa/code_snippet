@@ -10,13 +10,13 @@
 #include <linux/can.h>
 #include <linux/can/raw.h>
 
-#define IF_NAME   "can0"
-
-/* To enable/disable the frame filter */
-#undef FRAME_FILTER
-
 int main(int argc, char *argv[])
 {
+	if (argc < 2) {
+		printf("\nUsage: %s <can port> [can id]\n\n", argv[0]);
+		return -1;
+	}
+
 	int sockfd, ret;
 	struct sockaddr_can addr;
 	struct ifreq ifr;
@@ -28,8 +28,8 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	/* Set CAN device "can0" */
-	strcpy(ifr.ifr_name, IF_NAME);
+	/* Set CAN port getting from cmd line argument */
+	strcpy(ifr.ifr_name, argv[1]);
 	ret = ioctl(sockfd, SIOCGIFINDEX, &ifr);
 	if (ret < 0) {
 		perror("ioctl");
@@ -42,27 +42,39 @@ int main(int argc, char *argv[])
 	addr.can_ifindex = ifr.ifr_ifindex;
 	bind(sockfd, (struct sockaddr *)&addr, sizeof(addr));
 
-#ifdef FRAME_FILTER
 	/* Add frame filter rule to get the wanted frame */
-	struct can_filter filter[1];
-	filter[0].can_id = 0x11;
-	filter[0].can_mask = C_SFF_MASK;
-	setsockopt(sockfd, SOL_CAN_RAW, CAN_RAW_FILTER, &filter, sizeof(filter));
-#endif
+	if (argc >= 3) {
+		struct can_filter filter[1];
+		int can_id = strtol(argv[2], NULL, 16);
+		filter[0].can_id = can_id;
+		filter[0].can_mask = CAN_ERR_MASK;
+		setsockopt(sockfd, SOL_CAN_RAW, CAN_RAW_FILTER, &filter, sizeof(filter));
+		printf("Add CAN frame filter: can_id=0x%x\n", can_id);
+	}
 
 	/* CAN frame */
 	struct can_frame frame;
 
 	int cycle = 0;
-	while(cycle++ < 5) {
+	while(1) {
 		ret = recv(sockfd, &frame, sizeof(frame), 0);
 		if (ret <= 0) {
 			perror("recv");
 			continue;
 		}
 
-		printf("[cycle=%d] ID=0x%x DLC=%d data[0]=0x%x data[1]=0x%x\n",
-					cycle, frame.can_id, frame.can_dlc, frame.data[0], frame.data[1]);
+		printf("[cycle=%d] ID=0x%x DLC=0x%x data[0]=0x%x data[1]=0x%x\n",
+					cycle++, frame.can_id, frame.can_dlc, frame.data[0], frame.data[1]);
+
+		if (frame.can_id & CAN_EFF_FLAG) {
+			printf("- Extend Frame\n");
+		} else if (frame.can_id & CAN_RTR_FLAG) {
+			printf("- Remote Frame\n");
+		} else if (frame.can_id & CAN_ERR_FLAG) {
+			printf("- Error Frame\n");
+		} else {
+			printf("- Standard Frame\n");
+		}
 
 		sleep(1);
 	}
