@@ -26,5 +26,5 @@ static int __init regrw_init(void)
 }
 
 module_init(regrw_init);
-MODULE_AUTHOR("pan.kang<pan.kang@ritrontek.com>");
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR("iamcopper<kangpan519@gmail.com>");
+MODULE_LICENSE("GPL v2");

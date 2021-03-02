@@ -32,5 +32,5 @@ static void __exit regrw_exit(void)
 
 module_init(regrw_init);
 module_exit(regrw_exit);
-MODULE_AUTHOR("pan.kang<pan.kang@ritrontek.com>");
-MODULE_LICENSE("GPL");
+MODULE_AUTHOR("iamcopper<kangpan519@gmail.com>");
+MODULE_LICENSE("GPL v2");
