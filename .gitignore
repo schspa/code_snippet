@@ -5,3 +5,9 @@ a.out
 
 # C
 *.o
+
+# Driver
+*.ko
+*.order
+*.cmd
+*.symvers
