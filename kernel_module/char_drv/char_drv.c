@@ -104,6 +104,8 @@ static int __init char_drv_init(void)
 		printk(KERN_NOTICE "Error %d adding %s\n", ret, CHDRV_NAME);
 	}
 
+	printk(KERN_INFO "%s init ok, major=%d, minor=%d\n", CHDRV_NAME, chdrv_major, chdrv_minor);
+
 	return 0;
 
 FAIL:
@@ -123,6 +125,8 @@ static void __exit char_drv_exit(void)
 
 	/* Step2: 清除占用的设备号 */
 	unregister_chrdev_region(devno, 1);
+
+	printk(KERN_INFO "%s exit ok, major=%d, minor=%d\n", CHDRV_NAME, chdrv_major, chdrv_minor);
 }
 
 module_init(char_drv_init);
