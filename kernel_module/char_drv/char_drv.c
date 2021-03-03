@@ -23,12 +23,40 @@ struct chdrv_dev_t {
 	// ... 其他成员
 };
 
+
+static int chdrv_open(struct inode *inode, struct file *filp)
+{
+	/* 从inode中通过cdev指针得到chdrv_dev_t指针 */
+	struct chdrv_dev_t *chdrv_dev;
+	chdrv_dev = container_of(inode->i_cdev, struct chdrv_dev_t, cdev);
+
+	/**
+	 * 将获取到的chdrv_dev_t指针保存在filp的private_data中，
+	 * 以便后续其他函数（read/write/ioctl...）使用。
+	 * 在这些原型中没有inode参数了，只有filp参数，
+	 * 因此通过filp->private_data以保存私有信息，此处为chdrv_dev_t指针。
+	 *
+	 * inode ------- 描述文件系统中的一个文件（对应于应用程序中的pathname-文件名称）
+	 * filp -------- 代表一个打开的文件（对应于应用程序中的fd-文件描述符）
+	 */
+	filp->private_data = chdrv_dev;
+
+	// ... 其他必要动作
+
+	return 0;
+}
+
+static int chdrv_close(struct inode *inode, struct file *filp)
+{
+	return 0;
+}
+
 /* 设备操作集合 */
 static const struct file_operations chdrv_fops = {
 	.owner = THIS_MODULE,
-	/*
 	.open = chdrv_open,
 	.release = chdrv_close,
+	/*
 	.read = chdrv_read,
 	.write = chdrv_write,
 	.llseek = chdrv_llseek,
