@@ -9,5 +9,8 @@ a.out
 # Driver
 *.ko
 *.order
-*.cmd
 *.symvers
+*.cmd
+*.mod
+*.mod.c
+*.mod.o
