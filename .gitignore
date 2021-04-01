@@ -14,3 +14,9 @@ a.out
 *.mod
 *.mod.c
 *.mod.o
+
+# other
+client
+server_blocked
+server_select
+server_epoll
