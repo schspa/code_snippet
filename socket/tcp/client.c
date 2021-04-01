@@ -34,17 +34,31 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	int cycle = 0;
-	char buf[BUF_SIZE] = {0};
+	char send_buf[BUF_SIZE] = {0};
+	char recv_buf[BUF_SIZE] = {0};
 
-	while(getchar() != 'q') {
-		sprintf(buf, "%d-%s", cycle, "Hello World");
-		ret = send(sockfd, &buf, strlen(buf)+1, 0);
+	while(1) {
+		fgets(send_buf, BUF_SIZE, stdin);
+
+		ret = send(sockfd, &send_buf, strlen(send_buf), 0);
 		if (ret < 0) {
 			perror("send");
+			break;
 		}
-		printf("Send %d bytes, data: %s.\n", ret, buf);
-		cycle++;
+		printf(">>>[%d] bytes sent.\n", ret);
+
+		if (strncmp(send_buf, "quit", 4) == 0
+			|| strncmp(send_buf, "exit", 4) == 0)
+			break;
+
+		memset(recv_buf, 0, sizeof(recv_buf));
+		ret = recv(sockfd, recv_buf, sizeof(recv_buf), 0);
+		if (ret < 0) {
+			perror("recv");
+			break;
+		}
+
+		printf("<<<[%d] bytes recevied: %s\n", ret, recv_buf);
 	}
 
 	close(sockfd);
