@@ -17,6 +17,7 @@ a.out
 
 # other
 client
+server
 server_blocked
 server_select
 server_epoll

@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
 	while(1) {
 		printf("[INFO] Waiting for new connection ...\n");
 
+		/* <UNIX环境高级编程> Ch3.3, 4.6, 8.2: Value-Result参数 */
+		clientlen = sizeof(clientaddr);
 		clientfd = accept(sockfd, (struct sockaddr *)&clientaddr, &clientlen);
 		if (clientfd < 0) {
 			perror("accept");

@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+#include <string.h>
 #include "inc.h"
 
 #define BUF_SIZE  1024
@@ -43,22 +44,41 @@ int main(int argc, char *argv[])
 
 	printf("Now UDP server listen at host:%s port:%d\n", IP_LISTEN, PORT);
 
-	int i = 0;
-	int cycle = 0;
+	struct sockaddr_in clientaddr;
+	socklen_t clientlen;
+	char clientaddr_str[16];
+	uint16_t clientport;
+
 	char buf[BUF_SIZE] = {0};
 
 	while(1) {
-		ret = recv(sockfd, buf, BUF_SIZE, 0);
+		/* Received from client */
+		memset(buf, 0, sizeof(buf));
+		
+		/* <UNIX环境高级编程> Ch3.3, 4.6, 8.2: Value-Result参数 */
+		clientlen = sizeof(clientaddr);
+		ret = recvfrom(sockfd, buf, sizeof(buf), 0, (struct sockaddr *)&clientaddr, &clientlen);
 		if (ret < 0) {
 			perror("recv");
 			continue;
 		}
 
-		printf("------------------cycle=%d------------------\n", cycle++);
-		for (i = 0; i < ret; ++i) {
-			putchar(buf[i]);
+		memset(clientaddr_str, 0, sizeof(clientaddr_str));
+		strncpy(clientaddr_str, inet_ntoa(clientaddr.sin_addr), sizeof(clientaddr_str));
+		clientport = ntohs(clientaddr.sin_port);
+		printf("<<<[%s:%d] %d bytes recevied: %s\n", clientaddr_str, clientport, ret, buf);
+
+		if (strncmp(buf, "quitall", 4) == 0
+				|| strncmp(buf, "exitall", 4) == 0)
+			break;
+
+		/* Send back to client */
+		ret = sendto(sockfd, &buf, strlen(buf), 0, (struct sockaddr *)&clientaddr, sizeof(struct sockaddr));
+		if (ret < 0) {
+			perror("send");
+			break;
 		}
-		putchar('\n');
+		printf(">>>[%s:%d] %d bytes sent back.\n", clientaddr_str, clientport, ret);
 	}
 
 	close(sockfd);
