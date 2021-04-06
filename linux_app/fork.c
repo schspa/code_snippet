@@ -8,25 +8,24 @@ int glob = 6;
 
 int main(void)
 {
-	int var;
+	int var = 88;
 	pid_t pid;
 
-	var = 88;
+	printf("before fork, getpid()=%d\n", getpid());
 
-	printf("before fork\n");
-
-	if ((pid = fork()) < 0) {
+	if ((pid = fork()) < 0) {   /* error */
 		printf("fork error");
 		return 1;
-	} else if (pid == 0) {      /* child */
-		printf("child pid = %d\n", getpid());
+	} else if (pid == 0) {      /* child process */
+		printf("After fork, in child process getpid()=%d, pid=%d\n", getpid(), pid);
 		glob++;
 		var++;
-	} else {                    /* parent */
-		printf("parent pid = %d\n", getpid());
+	} else {                    /* parent process */
+		printf("After fork, in parent process getpid()=%d, pid=%d\n", getpid(), pid);
 		sleep(2);
 	}
 
+	/* This statement will be executed in both parent and child processes */
 	printf("pid = %d, glob = %d, var = %d\n", getpid(), glob, var);
 
 	exit(0);
