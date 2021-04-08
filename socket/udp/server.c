@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 		/* Received from client */
 		memset(buf, 0, sizeof(buf));
 		
-		/* <UNIX环境高级编程> Ch3.3, 4.6, 8.2: Value-Result参数 */
+		/* <UNIX网络编程:卷1> Ch3.3, 4.6, 8.2: Value-Result参数 */
 		clientlen = sizeof(clientaddr);
 		ret = recvfrom(sockfd, buf, sizeof(buf), 0, (struct sockaddr *)&clientaddr, &clientlen);
 		if (ret < 0) {
