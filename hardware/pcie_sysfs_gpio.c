@@ -5,6 +5,7 @@
  * the 2 LED indirectly. It can access the PCIe memory space from
  * sysfs, and run without PCIe driver.
  */
+
 #include <stdio.h>
 #include <stdint.h>
 #include <sys/types.h>
@@ -17,11 +18,11 @@
 #include <errno.h>
 
 #define SYSFS_FPGA_PATH    "/sys/bus/pci/devices/0000:04:00.0/"
-#define SYSFS_FPGA_RES          SYSFS_FPGA_PATH "resource"
-#define SYSFS_FPGA_BAR0         SYSFS_FPGA_PATH "resource0"
-#define SYSFS_FPGA_BAR1         SYSFS_FPGA_PATH "resource1"
-#define SYSFS_FPGA_BAR2         SYSFS_FPGA_PATH "resource2"
-#define SYSFS_FPGA_BAR3         SYSFS_FPGA_PATH "resource3"
+#define SYSFS_FPGA_RES     SYSFS_FPGA_PATH "resource"
+#define SYSFS_FPGA_BAR0    SYSFS_FPGA_PATH "resource0"
+#define SYSFS_FPGA_BAR1    SYSFS_FPGA_PATH "resource1"
+#define SYSFS_FPGA_BAR2    SYSFS_FPGA_PATH "resource2"
+#define SYSFS_FPGA_BAR3    SYSFS_FPGA_PATH "resource3"
 
 #define BAR0   0
 #define BAR1   1
