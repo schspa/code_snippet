@@ -20,8 +20,10 @@ clean:
 
 else
 
+regrw-y += regrw1.o
+regrw-y += regrw2.o
+
 # The final module name is regrw.ko
 obj-m := regrw.o
-regrw-objs := regrw1.o regrw2.o
 
 endif
