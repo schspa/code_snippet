@@ -7,6 +7,7 @@
 int main()
 {
 	pid_t pid;
+	int ret = 0;
 	int status = 0;
 
 	pid = fork();
@@ -15,9 +16,13 @@ int main()
 		exit(1);
 	} else if (pid == 0) {
 		printf("\nChild Process: execute \'ls\' command\n\n");
-		execl("/bin/ls", "ls", "-l", "--color", NULL);
-		perror("execl failed");
-		exit(21);
+		ret = execl("/bin/ls", "ls", "-l", "--color", NULL);
+		if (ret < 0) {
+			perror("execl failed");
+			exit(21);
+		}
+		/* Will never be executed here */
+		exit(20);
 	} else {
 		if (wait(&status) != pid)
 			perror("wait error");
