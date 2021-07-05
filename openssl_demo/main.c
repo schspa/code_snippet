@@ -8,14 +8,63 @@
 #include <openssl/rsa.h>
 #include <openssl/err.h>
 
-#define BUF_SIZE 1024
+#define BUF_SIZE   1024
 
-RSA *get_key_from_file(const char *key, int is_public)
+#if 0
+#define KEY_LENGTH 2048
+#define PUB_EXP    3
+
+int create_rsa(int is_public)
+{
+	RSA *keypair = NULL;
+	BIO *keybio = NULL;
+	size_t key_len = 0;
+	char *keystr = NULL;
+
+	keypair = RSA_generate_key(KEY_LENGTH, PUB_EXP, NULL, NULL);
+
+	if (is_public) {
+		// Public Key
+		keybio = BIO_new(BIO_s_mem());
+		PEM_write_bio_RSAPublicKey(keybio, keypair);
+		key_len = BIO_pending(keybio);
+
+		keystr = malloc(key_len + 1);
+		BIO_read(keybio, keystr, key_len);
+		keystr[key_len] = '\0';
+
+		printf("Public Key:%ld\n%s\n", strlen(keystr), keystr);
+	} else {
+		// Private Key
+		keybio = BIO_new(BIO_s_mem());
+		PEM_write_bio_RSAPrivateKey(keybio, keypair, NULL, NULL, 0, NULL, NULL);
+		key_len = BIO_pending(keybio);
+
+		keystr = malloc(key_len + 1);
+		BIO_read(keybio, keystr, key_len);
+		keystr[key_len] = '\0';
+
+		printf("Private Key:%ld\n%s\n", strlen(keystr), keystr);
+	}
+
+	return 0;
+}
+
+int main(int argc, char *argv[])
+{
+	create_rsa(0);
+	create_rsa(1);
+	return 0;
+}
+
+#else
+
+RSA *create_rsa_from_file(const char *key_file, int is_public)
 {
 	RSA *rsa = NULL;
 	FILE *fp = NULL;
 
-	fp = fopen(key, "rb");
+	fp = fopen(key_file, "rb");
 	if (fp == NULL)
 	{
 		perror("fopen");
@@ -54,8 +103,8 @@ int main(int argc, char *argv[])
 	char str_en[BUF_SIZE] = {0};
 	char str_de[BUF_SIZE] = {0};
 
-	rsa_priv = get_key_from_file("test.key", 0);
-	rsa_pub = get_key_from_file("test_pub.key", 1);
+	rsa_priv = create_rsa_from_file("test.key", 0);
+	rsa_pub = create_rsa_from_file("test_pub.key", 1);
 	if (rsa_priv == NULL || rsa_pub == NULL) {
 		fprintf(stderr, "ERROR: Get key from file error, please run \"command.sh\" first!\n");
 		return -1;
@@ -85,3 +134,4 @@ end:
 
 	return 0;
 }
+#endif
