@@ -43,14 +43,30 @@ int is_running(char *service)
 	return 0;
 }
 
+void fun(int sig)
+{
+	if(sig == SIGINT) {
+		syslog(LOG_INFO, "Received SIGINT signal, ignored...\n");
+	} else if(sig == SIGTERM) {
+		syslog(LOG_INFO, "Received SIGTERM signal, ignored...\n");
+	} else if(sig == SIGQUIT) {
+		syslog(LOG_INFO, "Received SIGQUIT signal, ignored...\n");
+	}
+}
+
 int main(int argc, char *argv[])
 {
-	openlog(argv[0], LOG_CONS | LOG_PID, LOG_USER);
-
 	pid_t pid;
 	int ret = 0;
 	int status = 0;
 	int i = 0;
+
+	openlog(argv[0], LOG_CONS | LOG_PID, LOG_USER);
+	signal(SIGINT, fun);       /* kill  -2 xxx, Ctl + C */
+	signal(SIGTERM, fun);      /* kill -15 xxx, kill xxx */
+	signal(SIGQUIT, fun);      /* kill -15 xxx, kill xxx */
+
+	syslog(LOG_INFO, "argv[0]=%s started ...\n", argv[0]);
 
 	while(1) {
 		pid = fork();
@@ -58,7 +74,7 @@ int main(int argc, char *argv[])
 			perror("fork failed");
 			exit(1);
 		} else if (pid == 0) {
-			printf("\nChild Process: Start...\n\n");
+			syslog(LOG_INFO, "\nChild Process (PID=%d) start ...\n\n", getpid());
 
 			setenv("QTDIR", "/usr/local/QTE4.8.5", 1);
 			setenv("LD_LIBRARY_PATH", "/usr/local/QTE4.8.5/lib", 1);
@@ -73,7 +89,7 @@ int main(int argc, char *argv[])
 			if (wait(&status) != pid)
 				perror("wait error");
 
-			printf("\nParent Process: Child process completed, exit with %d\n\n", WEXITSTATUS(status));
+			syslog(LOG_INFO, "\nParent Process: Child process (PID=%d) exit with code=%d\n\n", pid, WEXITSTATUS(status));
 
 			for (i = 5; i > 0; i--) {
 				printf("i = %d\n", i);
