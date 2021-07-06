@@ -1,5 +1,6 @@
 /**
- * Read config file line by line.
+ * Read config file line by line
+ * Sample Config file: test1.conf
  */
 
 #include <stdio.h>
@@ -11,12 +12,21 @@
 #define LINE_NUM_MAX        5
 
 #define COMMENT_CHAR        '#'   /* Comment out character */
-#define COLUMN_DELIMITER    ";"   /* Column seperater set string */
+#define COLUMN_SEP          ";"   /* Column seperater set string */
+#define COLUMN_SEP_CHAR   (COLUMN_SEP)[0]   /* Column seperater set char */
 
-#define ISBLANKCHAR(c) \
+#define IS_START_BLANK_CHAR(c) \
 			((c) == ' ' \
 			 || (c) == '\t')
-#define ISBLANKLINE(c) \
+
+#define IS_END_BLANK_CHAR(c) \
+			((c) == ' ' \
+			 || (c) == '\t' \
+			 || (c) == '\r' \
+			 || (c) == '\n' \
+			 || (c) == COLUMN_SEP_CHAR)
+
+#define IS_BLANK_LINE(c) \
 			((c) == '\r' \
 			 || (c) == '\n' \
 			 || (c) == COMMENT_CHAR)
@@ -25,7 +35,7 @@ int read_config(char *pathname)
 {
 	FILE *fp = NULL;
 	char linebuf[LINE_LENGTH_MAX] = {0};
-	char *linep, *wordp;
+	char *linep, *lineendp, *wordp;
 	int lineno = 0, columnno = 0;
 
 	fp = fopen(pathname, "r");
@@ -41,19 +51,26 @@ int read_config(char *pathname)
 	{
 		linep = linebuf;
 
-		while (ISBLANKCHAR(*linep))
+		/* Strip start of line */
+		while (IS_START_BLANK_CHAR(*linep))
 			linep++;
 
-		if (ISBLANKLINE(*linep))
+		/* Strip blank line */
+		if (IS_BLANK_LINE(*linep))
 			continue;
+
+		/* Strip end of line */
+		lineendp = linep + strlen(linep) - 1;
+		while (IS_END_BLANK_CHAR(*lineendp)) {
+			*lineendp = '\0';
+			lineendp--;
+		}
 		
-		printf("\n> Get data from config file line %d.\n", lineno);
+		printf("\n> Get data from config file line num=%d, string=%s\n", lineno, linep);
 
 		columnno = 0;
-		while ((wordp = strsep(&linep, COLUMN_DELIMITER)) != NULL)
-		{
+		while ((wordp = strsep(&linep, COLUMN_SEP)) != NULL) {
 			printf(">>> Column %2d: %s [0x%2x]\n", columnno, wordp, *wordp);
-
 			columnno++;
 		}
 		
@@ -62,7 +79,6 @@ int read_config(char *pathname)
 	}
 
 	printf("\n> Config file read finished.\n");
-
 	fclose(fp);
 
 	return lineno;
