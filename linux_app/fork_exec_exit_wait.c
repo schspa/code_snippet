@@ -16,7 +16,18 @@ int main()
 		exit(1);
 	} else if (pid == 0) {
 		printf("\nChild Process: execute \'ls\' command\n\n");
+#if 0
 		ret = execl("/bin/ls", "ls", "-l", "--color", NULL);
+#else
+		char *argvec[5] = {
+			"ls",
+			"aaa",
+			"bbb",
+			"ccc",
+			NULL
+		};
+		ret = execv("/bin/ls", argvec);
+#endif
 		if (ret < 0) {
 			perror("execl failed");
 			exit(21);
