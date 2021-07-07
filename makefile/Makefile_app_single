@@ -9,7 +9,7 @@ objs := gpio.o
 all: $(out)
 
 $(out):$(objs)
-	$(CROSS)$(CC) $< -o $@ $(LFLAGS)
+	$(CROSS)$(CC) $^ -o $@ $(LFLAGS)
 
 %.o:%.c
 	$(CROSS)$(CC) -c $< -o $@ $(CFLAGS)
