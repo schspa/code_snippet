@@ -9,7 +9,6 @@
 #define DEBUG
 
 #define LINE_LENGTH_MAX     256
-#define LINE_NUM_MAX        5
 
 #define COMMENT_CHAR        '#'   /* Comment out character */
 #define COLUMN_SEP          ";"   /* Column seperater set string */
@@ -31,24 +30,20 @@
 			 || (c) == '\n' \
 			 || (c) == COMMENT_CHAR)
 
-int read_config(char *pathname)
+int read_config(char *config)
 {
 	FILE *fp = NULL;
 	char linebuf[LINE_LENGTH_MAX] = {0};
 	char *linep, *lineendp, *wordp;
 	int lineno = 0, columnno = 0;
 
-	fp = fopen(pathname, "r");
-	if (fp == NULL)
-	{
-		printf("Config file open failed.\n");
+	fp = fopen(config, "r");
+	if (fp == NULL) {
+		perror("fopen");
 		return -1;
 	}
 
-	printf("\nReading data from config file.\n");
-
-	while (lineno < LINE_NUM_MAX && fgets(linebuf, LINE_LENGTH_MAX, fp) != NULL)
-	{
+	while (fgets(linebuf, LINE_LENGTH_MAX, fp) != NULL) {
 		linep = linebuf;
 
 		/* Strip start of line */
@@ -65,7 +60,7 @@ int read_config(char *pathname)
 			*lineendp = '\0';
 			lineendp--;
 		}
-		
+
 		printf("\n> Get data from config file line num=%d, string=%s\n", lineno, linep);
 
 		columnno = 0;
@@ -87,8 +82,7 @@ int read_config(char *pathname)
 #ifdef DEBUG
 int main(int argc, char *argv[])
 {
-	if (argc < 2)
-	{
+	if (argc < 2) {
 		printf("Usage: %s <config path>\n", argv[0]);
 		return -1;
 	}

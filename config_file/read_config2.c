@@ -9,7 +9,6 @@
 #define DEBUG
 
 #define LINE_LENGTH_MAX     256
-#define LINE_NUM_MAX        5
 
 #define COMMENT_CHAR     '#'   /* Comment out character */
 #define SEPERATOR_CHAR   '='   /* Key & Value seperator */
@@ -29,7 +28,9 @@
 			 || (c) == '\n' \
 			 || (c) == COMMENT_CHAR)
 
-int read_config(char *pathname)
+typedef void (*key_value_handler_t)(char *key, char *value, void *arg);
+
+int read_config(char *config, key_value_handler_t handler, void *arg)
 {
 	FILE *fp = NULL;
 	char linebuf[LINE_LENGTH_MAX] = {0};
@@ -37,17 +38,13 @@ int read_config(char *pathname)
 	char *key, *value;
 	int lineno = 0;
 
-	fp = fopen(pathname, "r");
-	if (fp == NULL)
-	{
-		printf("Config file open failed.\n");
+	fp = fopen(config, "r");
+	if (fp == NULL) {
+		perror("fopen");
 		return -1;
 	}
 
-	printf("\nReading data from config file.\n");
-
-	while (lineno < LINE_NUM_MAX && fgets(linebuf, LINE_LENGTH_MAX, fp) != NULL)
-	{
+	while (fgets(linebuf, LINE_LENGTH_MAX, fp) != NULL) {
 		linep = linebuf;
 
 		/* Strip start of line */
@@ -65,7 +62,7 @@ int read_config(char *pathname)
 			lineendp--;
 		}
 		
-		printf("\n> Get data from config file line num=%d, string=%s\n", lineno, linep);
+		printf("\n> Read line: lineno=%d, string=%s\n", lineno, linep);
 
 		value = strchr(linep, SEPERATOR_CHAR);
 		if (value == NULL)
@@ -73,28 +70,32 @@ int read_config(char *pathname)
 		*value++ = '\0';
 		key = linep;
 
-		printf(">>> key=%s, value=%s\n", key, value);
+		handler(key, value, arg);
 		
 		lineno++;
 		memset(linebuf, 0, LINE_LENGTH_MAX);
 	}
 
-	printf("\n> Config file read finished.\n");
 	fclose(fp);
 
 	return lineno;
 }
 
 #ifdef DEBUG
+
+void handler_echo(char *key, char *value, void *arg)
+{
+	printf("%s: key=%s, value=%s\n", __func__, key, value);
+}
+
 int main(int argc, char *argv[])
 {
-	if (argc < 2)
-	{
+	if (argc < 2) {
 		printf("Usage: %s <config path>\n", argv[0]);
 		return -1;
 	}
 
-	read_config(argv[1]);
+	read_config(argv[1], handler_echo, NULL);
 
 	return 0;
 }
