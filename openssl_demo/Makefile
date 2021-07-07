@@ -1,22 +1,42 @@
-CROSS :=
-CC := gcc
-CFLAGS := -Wall -g
-LFLAGS := -lcrypto
+#CROSS = arm-unknown-linux-uclibcgnueabi-
+CC = gcc
+ODIR = .build
 
-out := main
-objs := main.o
+CFLAGS = -Wall \
+		 -Werror
 
-all: $(out)
+EXTRAINCDIRS +=
 
-$(out):$(objs)
-	$(CROSS)$(CC) $< -o $@ $(LFLAGS)
+CFLAGS += $(patsubst %,-I %,$(EXTRAINCDIRS))
+CFLAGS += -MD -MP -MF .dep/$(@F).d
 
-%.o:%.c
-	$(CROSS)$(CC) -c $< -o $@ $(CFLAGS)
+LFLAGS = -lcrypto
+
+encrypt_decrypt-obj += encrypt_decrypt.o
+
+decrypt-obj += decrypt.o
+
+TARGET := encrypt_decrypt decrypt
+
+all: $(TARGET)
+
+encrypt_decrypt: $(addprefix $(ODIR)/,$(encrypt_decrypt-obj))
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+
+decrypt: $(addprefix $(ODIR)/,$(decrypt-obj))
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+
+$(ODIR)/%.o: %.c
+	@mkdir -p $(@D)
+	@echo ">>> $<"
+	$(CROSS)$(CC) $(CFLAGS) -c $< -o $@
+
+include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
 clean:
-	rm -rf *.o $(objs) $(out)
-	rm -rf hello*
-	rm -rf test*
+	$(RM) -r $(ODIR) .dep
+	$(RM) $(TARGET)
+	$(RM) hello*
+	$(RM) test*
 
-.PHONY: clean
+.PHONY: all clean
