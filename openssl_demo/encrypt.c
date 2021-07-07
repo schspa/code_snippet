@@ -1,3 +1,7 @@
+/**
+ * OpenSSL RSA encrypt and decrpyt demo.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <openssl/pem.h>
@@ -43,39 +47,33 @@ end:
 
 int main(int argc, char *argv[])
 {
-	RSA *rsa_pub = NULL;
+	RSA *rsa_priv = NULL;
 	int ret = 0;
+	char str[BUF_SIZE] = {"hello world"};
 	char str_en[BUF_SIZE] = {0};
-	char str_de[BUF_SIZE] = {0};
 
-	FILE *fp = fopen("hello_en.txt", "r");
-	if (fp == NULL) {
-		perror("fopen");
-		goto end;
-	}
-	
-	/* read encryped string will return 0, but can get its content */
-	ret = fread(str_en, sizeof(str_en), 1, fp);
-	printf("strlen=%d, str_en:%s\n", ret, str_en);
-
-	rsa_pub = create_rsa_from_file("test_pub.key", 1);
-	if (rsa_pub == NULL) {
+	rsa_priv = create_rsa_from_file("test.key", 0);
+	if (rsa_priv == NULL) {
 		fprintf(stderr, "ERROR: Get key from file error, please run \"command.sh\" first!\n");
-		goto end;
+		return -1;
 	}
 
-	ret = RSA_public_decrypt(strlen(str_en), (unsigned char *)str_en, (unsigned char *)str_de, rsa_pub, RSA_PKCS1_PADDING);
+	printf("1-Original: ret=%d, strlen=%ld, str=%s\n", ret, strlen(str), str);
+
+	ret = RSA_private_encrypt(strlen(str), (unsigned char *)str, (unsigned char *)str_en, rsa_priv, RSA_PKCS1_PADDING);
 	if (ret < 0) {
 		ERR_print_errors_fp(stderr);
 		goto end;
 	}
-	printf("3-Decrpyt: ret=%d, strlen=%ld, str_de=%s\n", ret, strlen(str_de), str_de);
+	printf("2-Encrypt: ret=%d, strlen=%ld\n", ret, strlen(str_en));
+
+	FILE *fp = fopen("./hello_en.txt", "w+");
+	fwrite(str_en, 1, strlen(str_en), fp);
+	fclose(fp);
 
 end:
-	if (rsa_pub)
-		RSA_free(rsa_pub);
-	if (fp)
-		fclose(fp);
+	if (rsa_priv)
+		RSA_free(rsa_priv);
 
 	return 0;
 }

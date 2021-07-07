@@ -13,14 +13,17 @@ CFLAGS += -MD -MP -MF .dep/$(@F).d
 LFLAGS = -lcrypto
 
 encrypt_decrypt-obj += encrypt_decrypt.o
-
+encrypt-obj += encrypt.o
 decrypt-obj += decrypt.o
 
-TARGET := encrypt_decrypt decrypt
+TARGET := encrypt_decrypt encrypt decrypt
 
 all: $(TARGET)
 
 encrypt_decrypt: $(addprefix $(ODIR)/,$(encrypt_decrypt-obj))
+	$(CROSS)$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
+
+encrypt: $(addprefix $(ODIR)/,$(encrypt-obj))
 	$(CROSS)$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
 
 decrypt: $(addprefix $(ODIR)/,$(decrypt-obj))
