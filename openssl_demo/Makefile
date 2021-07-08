@@ -36,10 +36,13 @@ $(ODIR)/%.o: %.c
 
 include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
 
+distclean:clean
+	$(RM) rk_rsa* rk_erm*
+
 clean:
 	$(RM) -r $(ODIR) .dep
 	$(RM) $(TARGET)
 	$(RM) hello*
 	$(RM) test*
 
-.PHONY: all clean
+.PHONY: all clean distclean

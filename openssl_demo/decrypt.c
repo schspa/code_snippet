@@ -6,6 +6,10 @@
 
 #define BUF_SIZE   1024
 
+#define SSL_RSA_FILE     "rk_rsa"
+#define SSL_RSA_PUB_FILE "rk_rsa.pub"
+#define RK_ERM_KEY_FILE  "rk_erm.key"
+
 RSA *create_rsa_from_file(const char *key_file, int is_public)
 {
 	RSA *rsa = NULL;
@@ -47,8 +51,15 @@ int main(int argc, char *argv[])
 	int ret = 0;
 	char str_en[BUF_SIZE] = {0};
 	char str_de[BUF_SIZE] = {0};
+	char *enc_file = NULL;
 
-	FILE *fp = fopen("hello_en.txt", "r");
+	if (argc < 2) {
+		printf("Usage: %s <encrypt file>\n", argv[0]);
+		return -1;
+	}
+
+	enc_file = argv[1];
+	FILE *fp = fopen(enc_file, "r");
 	if (fp == NULL) {
 		perror("fopen");
 		goto end;
@@ -56,9 +67,9 @@ int main(int argc, char *argv[])
 	
 	/* read encryped string will return 0, but can get its content */
 	ret = fread(str_en, sizeof(str_en), 1, fp);
-	printf("strlen=%d, str_en:%s\n", ret, str_en);
+	printf("1-String: ret=%d, strlen(str_en)=%ld\n", ret, strlen(str_en));
 
-	rsa_pub = create_rsa_from_file("test_pub.key", 1);
+	rsa_pub = create_rsa_from_file(SSL_RSA_PUB_FILE, 1);
 	if (rsa_pub == NULL) {
 		fprintf(stderr, "ERROR: Get key from file error, please run \"command.sh\" first!\n");
 		goto end;
@@ -69,7 +80,7 @@ int main(int argc, char *argv[])
 		ERR_print_errors_fp(stderr);
 		goto end;
 	}
-	printf("3-Decrpyt: ret=%d, strlen=%ld, str_de=%s\n", ret, strlen(str_de), str_de);
+	printf("2-Decrpyt: ret=%d, strlen=%ld, str_de=%s\n", ret, strlen(str_de), str_de);
 
 end:
 	if (rsa_pub)
