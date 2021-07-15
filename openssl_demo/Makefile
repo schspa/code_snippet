@@ -42,7 +42,5 @@ distclean:clean
 clean:
 	$(RM) -r $(ODIR) .dep
 	$(RM) $(TARGET)
-	$(RM) hello*
-	$(RM) test*
 
 .PHONY: all clean distclean
