@@ -1,0 +1,25 @@
+#!/usr/bin/expect
+
+puts "*********************************"
+puts "*          Auto Reset Test      *"
+puts "*********************************"
+
+set loop [lindex $argv 0]
+set timeout 30
+set host 192.168.1.91
+set user root
+set pwd erm
+set sleep_secs 50
+
+puts "\nloop=${loop}"
+
+for {set i 1} {$i <= ${loop}} {incr i} {
+	puts "\n========== FOR LOOP $i =========="
+	spawn ssh -l ${user} ${host} "reboot"
+	expect "password:"
+	send "${pwd}\r"
+	puts "\nWaiting ${sleep_secs} seconds ... "
+	sleep ${sleep_secs}
+}
+
+puts "\nTest finished.\n"
