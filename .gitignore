@@ -21,3 +21,12 @@ server
 server_blocked
 server_select
 server_epoll
+
+*.key
+*.key.*
+*.dep
+rk_rsa
+rk_rsa.pub
+encrypt
+decrypt
+encrypt_decrypt
