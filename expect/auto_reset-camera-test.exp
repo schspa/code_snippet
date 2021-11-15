@@ -1,0 +1,39 @@
+#!/usr/bin/expect
+
+puts "********************************************"
+puts "*          Auto Reset for Camera Test      *"
+puts "********************************************"
+
+set host "192.168.1.94"
+set user "rk"
+set pwd  "123"
+set reboot_sleep_secs "50"
+
+set loop [lindex $argv 0]
+#set timeout ""
+set cmd "export DISPLAY=:0; timeout 6 /home/rk/camera_test.sh video0"
+
+puts "\nloop=${loop}"
+
+for {set i 1} {$i <= ${loop}} {incr i} {
+	puts "\n\n============== FOR LOOP $i =============="
+
+	if {$i > 1} {
+		puts "Waiting for system reboot: ${reboot_sleep_secs} seconds ... "
+		sleep ${reboot_sleep_secs}
+	}
+
+	spawn ssh -l ${user} ${host} ${cmd}
+	expect "password:"
+	send "${pwd}\r\n"
+
+	sleep 7
+
+	if {$i < ${loop}} {
+		spawn ssh -l root ${host} reboot
+		expect "password:"
+		send "${pwd}\r\n"
+	}
+}
+
+puts "\nTest finished.\n"
