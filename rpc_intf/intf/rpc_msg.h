@@ -42,13 +42,4 @@ typedef struct {
 #define SERVER_ST_NOT_SUPPORT_SOL    0x01
 #define SERVER_ST_RMCPP_SESSION_ERR  0x02
 
-/* Server info format */
-struct {
-	uint8_t ipmb_addr;
-	uint32_t hostname;
-	uint16_t port;
-	char desc[16];
-	uint8_t state;
-} server_info;
-
 #endif /* __RPC_MSG_H__ */

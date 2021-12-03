@@ -15,4 +15,4 @@ $(OUT): $(OBJS)
 
 .PHONY: clean
 clean:
-	rm $(OBJS) $(OUT)
+	-rm -rf $(OBJS) $(OUT)

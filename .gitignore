@@ -30,3 +30,8 @@ rk_rsa.pub
 encrypt
 decrypt
 encrypt_decrypt
+
+compile_commands.json
+
+.dir-locals.el
+**/build
