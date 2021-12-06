@@ -130,9 +130,8 @@ int main (int argc, char **argv)
 		ret = -EIO;
 		goto out;
 	}
+	fprintf(stdout, "Res:");
 	for (index = 0; index < sizeof(res) / sizeof(res[0]); index++) {
-		if (index != 0)
-			fprintf(stdout, " ");
 		if (use_hex) {
 			fprintf(stdout, "0x%lx", res[index]);
 		} else {

@@ -21,9 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+#define pr_fmt(fmt) KBUILD_MODNAME ":%s: " fmt, __func__
+
 #include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
+#include <linux/moduleparam.h>
 #include <linux/cdev.h>
 #include <linux/slab.h>
 #include <linux/fs.h>
@@ -32,11 +35,12 @@
 #include <linux/uaccess.h>
 #include <linux/arm-smccc.h>
 
-#define SMC_HELPER_MAJOR 0
 #define SMC_HELPER_NAME  "smc-helper"
 
-int smc_helper_major = 0;
-int smc_helper_minor = 0;
+static int dev_major = 0;
+static int dev_minor = 0;
+module_param(dev_major, int, 0444);
+module_param(dev_minor, int, 0444);
 
 struct smc_cmd_buf {
 	struct list_head node;
@@ -147,14 +151,14 @@ static int __init smc_helper_drv_init(void)
 	int ret;
 	dev_t devno = 0;
 
-	ret = alloc_chrdev_region(&devno, smc_helper_minor, 1, SMC_HELPER_NAME);
+	ret = alloc_chrdev_region(&devno, dev_minor, 1, SMC_HELPER_NAME);
 	if (ret < 0) {
 		pr_err("alloc chrdev regin faile with status %d\n", ret);
 		return ret;
 	}
 
-	smc_helper_major = MAJOR(devno);
-	smc_helper_minor = MINOR(devno);
+	dev_major = MAJOR(devno);
+	dev_minor = MINOR(devno);
 
 	smc_helper_dev = kzalloc(sizeof(*smc_helper_dev), GFP_KERNEL);
 	if (!smc_helper_dev) {
@@ -173,7 +177,7 @@ static int __init smc_helper_drv_init(void)
 	}
 
 	pr_info("%s init ok, major=%d, minor=%d\n",
-		SMC_HELPER_NAME, smc_helper_major, smc_helper_minor);
+		SMC_HELPER_NAME, dev_major, dev_minor);
 
 	return 0;
 
@@ -184,7 +188,7 @@ FAIL:
 
 static void __exit smc_helper_drv_exit(void)
 {
-	dev_t devno = MKDEV(smc_helper_major, smc_helper_minor);
+	dev_t devno = MKDEV(dev_major, dev_minor);
 
 	if (smc_helper_dev) {
 		cdev_del(&smc_helper_dev->cdev);
@@ -194,7 +198,7 @@ static void __exit smc_helper_drv_exit(void)
 	unregister_chrdev_region(devno, 1);
 
 	pr_info("%s exit ok, major=%d, minor=%d\n",
-		SMC_HELPER_NAME, smc_helper_major, smc_helper_minor);
+		SMC_HELPER_NAME, dev_major, dev_minor);
 }
 
 module_init(smc_helper_drv_init);
