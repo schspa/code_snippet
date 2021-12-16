@@ -43,7 +43,7 @@
 #include <linux/kthread.h>
 #include <linux/spinlock.h>
 
-#define CPUHP_QOS_NAME  "cpu_hp"
+#define CPUHP_QOS_NAME  "cpuhp_qos"
 
 static int dev_major = 0;
 static int dev_minor = 0;
@@ -53,6 +53,7 @@ module_param(dev_minor, int, 0444);
 struct cpu_hp_dev_t {
 	struct cdev cdev;
 	struct mutex lock;
+	struct device *dev;
 };
 
 /* To handle cpufreq min/max request */
@@ -250,16 +251,45 @@ static const struct file_operations cpu_hp_fops = {
 };
 
 struct cpu_hp_dev_t *cpu_hp_dev = NULL;
+static struct class *cpuhp_qos_class = NULL;
+static enum cpuhp_state cpuhp_online;
 
 static int __init cpu_hp_drv_init(void)
 {
 	int ret;
 	dev_t devno = 0;
 
+	cpuhp_qos_class = class_create(THIS_MODULE, CPUHP_QOS_NAME);
+	if (IS_ERR(cpuhp_qos_class)) {
+		ret = PTR_ERR(cpuhp_qos_class);
+		pr_warn("Unable to create fb class; errno = %d\n", ret);
+		cpuhp_qos_class = NULL;
+		return ret;
+	}
+
+
+	cpuhp_stat.min = 0;
+	cpuhp_stat.max = NR_CPUS;
+	spin_lock_init(&cpuhp_stat.lock);
+
+	cpuhp_online = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "hb_perf/qos:online",
+					cpufreq_hp_online, cpufreq_hp_offline);
+	if (cpuhp_online < 0) {
+		pr_warn("failed to register cpuhp online callbacks\n");
+		goto destory_class;
+	}
+
+	cpuhp_stat.hp_thread =
+		kthread_run(try_core_ctl, &cpuhp_stat, "core_ctl");
+	if (IS_ERR(cpuhp_stat.hp_thread)) {
+		ret = PTR_ERR(cpuhp_stat.hp_thread);
+		goto remove_cpuhp_state;
+	}
+
 	ret = alloc_chrdev_region(&devno, dev_minor, 1, CPUHP_QOS_NAME);
 	if (ret < 0) {
 		pr_err("alloc chrdev regin faile with status %d\n", ret);
-		return ret;
+		goto remove_cpuhp_state;
 	}
 
 	dev_major = MAJOR(devno);
@@ -268,26 +298,8 @@ static int __init cpu_hp_drv_init(void)
 	cpu_hp_dev = kzalloc(sizeof(*cpu_hp_dev), GFP_KERNEL);
 	if (!cpu_hp_dev) {
 		ret = -ENOMEM;
-		goto FAIL;
+		goto free_chrdev_region;
 	}
-
-	cpuhp_stat.min = 0;
-	cpuhp_stat.max = NR_CPUS;
-	spin_lock_init(&cpuhp_stat.lock);
-
-	ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "hb_perf/qos:online",
-				cpufreq_hp_online, cpufreq_hp_offline);
-	if (ret < 0) {
-		pr_warn("failed to register cpuhp online callbacks\n");
-		return ret;
-	}
-
-	cpuhp_stat.hp_thread =
-		kthread_run(try_core_ctl, &cpuhp_stat, "core_ctl");
-	if (IS_ERR(cpuhp_stat.hp_thread)) {
-		return PTR_ERR(cpuhp_stat.hp_thread);
-	}
-
 	mutex_init(&cpu_hp_dev->lock);
 
 	cdev_init(&cpu_hp_dev->cdev, &cpu_hp_fops);
@@ -295,6 +307,17 @@ static int __init cpu_hp_drv_init(void)
 	ret = cdev_add(&cpu_hp_dev->cdev, devno, 1);
 	if (ret) {
 		pr_err("Error %d adding %s\n", ret, CPUHP_QOS_NAME);
+		goto free_chrdev;
+	}
+
+	cpu_hp_dev->dev = device_create(cpuhp_qos_class, NULL, devno, NULL, CPUHP_QOS_NAME);
+	if (IS_ERR(cpu_hp_dev->dev)) {
+		/* Not fatal */
+		pr_warn("Unable to create device for " CPUHP_QOS_NAME
+			" errno = %ld\n", PTR_ERR((cpu_hp_dev->dev)));
+		cpu_hp_dev->dev = NULL;
+		ret = PTR_ERR((cpu_hp_dev->dev));
+		goto remove_cdev;
 	}
 
 	pr_info("%s init ok, major=%d, minor=%d\n",
@@ -302,14 +325,33 @@ static int __init cpu_hp_drv_init(void)
 
 	return 0;
 
-FAIL:
+remove_cdev:
+	if (cpu_hp_dev) {
+		cdev_del(&cpu_hp_dev->cdev);
+	}
+free_chrdev:
+	if (cpu_hp_dev) {
+		kfree(cpu_hp_dev);
+		cpu_hp_dev = NULL;
+	}
+free_chrdev_region:
 	unregister_chrdev_region(devno, 1);
+remove_cpuhp_state:
+	cpuhp_remove_state(cpuhp_online);
+destory_class:
+	if (cpuhp_qos_class) {
+		class_destroy(cpuhp_qos_class);
+		cpuhp_qos_class = NULL;
+	}
+
 	return ret;
 }
 
 static void __exit cpu_hp_drv_exit(void)
 {
 	dev_t devno = MKDEV(dev_major, dev_minor);
+
+	device_destroy(cpuhp_qos_class, devno);
 
 	if (cpu_hp_dev) {
 		cdev_del(&cpu_hp_dev->cdev);
@@ -318,6 +360,12 @@ static void __exit cpu_hp_drv_exit(void)
 	}
 
 	unregister_chrdev_region(devno, 1);
+
+	cpuhp_remove_state(cpuhp_online);
+	if (cpuhp_qos_class) {
+		class_destroy(cpuhp_qos_class);
+		cpuhp_qos_class = NULL;
+	}
 
 	pr_info("%s exit ok, major=%d, minor=%d\n",
 		CPUHP_QOS_NAME, dev_major, dev_minor);
