@@ -21,5 +21,6 @@ clean:
 else
 
 obj-m := cpufreq-qos.o
+obj-m := devfreq-qos.o
 
 endif
