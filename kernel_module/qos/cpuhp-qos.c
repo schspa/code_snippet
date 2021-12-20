@@ -81,6 +81,7 @@ static int cpufreq_hp_offline(unsigned int online_cpu)
 {
 	unsigned long flags;
 
+	(void) online_cpu;
 	spin_lock_irqsave(&cpuhp_stat.lock, flags);
 	cpuhp_stat.online_cpus--;
 	if (need_adjuest(&cpuhp_stat)) {
@@ -94,6 +95,7 @@ static int cpufreq_hp_offline(unsigned int online_cpu)
 static int cpufreq_hp_online(unsigned int online_cpu)
 {
 	unsigned long flags;
+	(void) online_cpu;
 
 	spin_lock_irqsave(&cpuhp_stat.lock, flags);
 	cpuhp_stat.online_cpus++;
@@ -128,11 +130,11 @@ static void __ref do_core_ctl(struct cpuhp_status *stats)
 	unsigned long flags;
 	unsigned int min, max, online;
 
-	spin_lock_irqsave(&cpuhp_stat.lock, flags);
-	min = cpuhp_stat.min;
-	max = cpuhp_stat.max;
-	online = cpuhp_stat.online_cpus;
-	spin_unlock_irqrestore(&cpuhp_stat.lock, flags);
+	spin_lock_irqsave(&stats->lock, flags);
+	min = stats->min;
+	max = stats->max;
+	online = stats->online_cpus;
+	spin_unlock_irqrestore(&stats->lock, flags);
 
 	if (online > max) {
 		core_ctl_offline_core(online - 1);

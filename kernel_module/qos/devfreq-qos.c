@@ -115,10 +115,10 @@ static ssize_t
 dev_freq_qos_read(struct file *file, char __user *buf, size_t count, loff_t *ppos)
 {
 	devfreq_qos_handle_t *handle = file->private_data;
-	devfreq_qos_dev_t *cpu_data = handle->dev;
+	devfreq_qos_dev_t *qos_dev = handle->dev;
 	s32 min = 0, max = 0;
 
-	dev_dbg(cpu_data->dev, "%s: count: %zu, pos: %lld\n",
+	dev_dbg(qos_dev->dev, "%s: count: %zu, pos: %lld\n",
 		__func__, count, *ppos);
 
 	if (count < sizeof(s32) * 2) {
@@ -129,8 +129,8 @@ dev_freq_qos_read(struct file *file, char __user *buf, size_t count, loff_t *ppo
 		return 0;
 	}
 
-	min = cpu_data->min;
-	max = cpu_data->max;
+	min = qos_dev->min * HZ_PER_KHZ;
+	max = qos_dev->max * HZ_PER_KHZ;
 
 	if (copy_to_user(buf, &min, sizeof(min))) {
 		return -EFAULT;
@@ -146,8 +146,8 @@ static ssize_t dev_freq_qos_write(struct file *file, const char __user *buf,
                          size_t count, loff_t *ppos)
 {
 	devfreq_qos_handle_t *handle = file->private_data;
-	devfreq_qos_dev_t *cpu_data = handle->dev;
-	struct devfreq *df = cpu_data->df;
+	devfreq_qos_dev_t *qos_dev = handle->dev;
+	struct devfreq *df = qos_dev->df;
 	unsigned long freq;
 	s32 min, max;
 	int ret;
@@ -165,18 +165,18 @@ static ssize_t dev_freq_qos_write(struct file *file, const char __user *buf,
 	if (copy_from_user(&max, buf + sizeof(s32), sizeof(s32)))
 		return -EFAULT;
 
-	cpu_data->min = min / HZ_PER_KHZ;
-	cpu_data->max = max / HZ_PER_KHZ;
+	qos_dev->min = min / HZ_PER_KHZ;
+	qos_dev->max = max / HZ_PER_KHZ;
 
 	dev_dbg(handle->dev->dev, "%s: limit: [%d, %d]\n", __func__,
-		cpu_data->min, cpu_data->max);
+		qos_dev->min, qos_dev->max);
 
-	ret = dev_pm_qos_update_request(&handle->qos_req_min, cpu_data->min);
+	ret = dev_pm_qos_update_request(&handle->qos_req_min, qos_dev->min);
 	if (ret >= 0) {
 		writen += sizeof(s32);
 	}
 
-	ret = dev_pm_qos_update_request(&handle->qos_req_max, cpu_data->max);
+	ret = dev_pm_qos_update_request(&handle->qos_req_max, qos_dev->max);
 	if (ret >= 0) {
 		writen += sizeof(s32);
 	}
@@ -218,9 +218,13 @@ static int devfreq_qos_register_by_compatible(char *compatible)
 {
 	struct device_node *np;
 	struct devfreq *df;
-	devfreq_qos_dev_t *cpu_data = NULL;
+	devfreq_qos_dev_t *qos_dev = NULL;
 	dev_t devno;
 	int ret;
+
+	if (dev_minor >= NR_DEVFREQS -1) {
+		return -ENODATA;
+	}
 
         np = of_find_compatible_node(NULL, NULL, compatible);
 	if (!np) {
@@ -233,43 +237,43 @@ static int devfreq_qos_register_by_compatible(char *compatible)
 		return -ENODEV;
 	}
 
-	cpu_data = kzalloc(sizeof *cpu_data, GFP_KERNEL);
-	if (!cpu_data) {
+	qos_dev = kzalloc(sizeof *qos_dev, GFP_KERNEL);
+	if (!qos_dev) {
 		return -ENOMEM;
 	}
 
-	cpu_data->df = df;
-	cdev_init(&cpu_data->cdev, &dev_freq_qos_fops);
-	cpu_data->cdev.owner = THIS_MODULE;
+	qos_dev->df = df;
+	cdev_init(&qos_dev->cdev, &dev_freq_qos_fops);
+	qos_dev->cdev.owner = THIS_MODULE;
 	devno = MKDEV(dev_major, dev_minor++);
 
-	ret = cdev_add(&cpu_data->cdev, devno, 1);
+	ret = cdev_add(&qos_dev->cdev, devno, 1);
 	if (ret) {
 		pr_err("Error %d adding %s\n", ret, DEVFREQ_QOS_NAME);
 		goto free_dev;
 	}
-	cpu_data->dev = device_create(devfreq_qos_class, NULL,
-				devno, cpu_data, DEVFREQ_QOS_NAME "-%s",
-				dev_name(&cpu_data->df->dev));
-	if (IS_ERR(cpu_data->dev)) {
+	qos_dev->dev = device_create(devfreq_qos_class, NULL,
+				devno, qos_dev, DEVFREQ_QOS_NAME "-%s",
+				dev_name(&qos_dev->df->dev));
+	if (IS_ERR(qos_dev->dev)) {
 		/* Not fatal */
 		pr_warn("Unable to create device for "
 			"devfreq-qos-%s errno = %ld\n",
-			dev_name(&cpu_data->df->dev), PTR_ERR(cpu_data->dev));
-		ret = PTR_ERR(cpu_data->dev);
-		cpu_data->dev = NULL;
+			dev_name(&qos_dev->df->dev), PTR_ERR(qos_dev->dev));
+		ret = PTR_ERR(qos_dev->dev);
+		qos_dev->dev = NULL;
 		goto cdev_del;
 	}
 	pr_debug("%s devfreq-qos-%s init ok, major=%d, minor=%d\n",
-		DEVFREQ_QOS_NAME, dev_name(&cpu_data->df->dev), dev_major, dev_minor);
+		DEVFREQ_QOS_NAME, dev_name(&qos_dev->df->dev), dev_major, dev_minor);
 
 	return 0;
 
 cdev_del:
-	cdev_del(&cpu_data->cdev);
+	cdev_del(&qos_dev->cdev);
 free_dev:
 	dev_minor--;
-	kfree(cpu_data);
+	kfree(qos_dev);
 
 	return ret;
 }
@@ -320,10 +324,13 @@ destory_class:
 
 static int __exit devfreq_qos_destory(struct device *dev, void *_data)
 {
-	devfreq_qos_dev_t *cpu_data = dev_get_drvdata(dev);
+	devfreq_qos_dev_t *qos_dev = dev_get_drvdata(dev);
 
-	device_destroy(devfreq_qos_class, dev->devt);
-	cdev_del(&cpu_data->cdev);
+	(void) _data;
+
+        device_destroy(devfreq_qos_class, dev->devt);
+	cdev_del(&qos_dev->cdev);
+	dev_minor--;
 
 	return 0;
 }

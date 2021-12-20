@@ -1,0 +1,30 @@
+config CPUFREQ_QOS
+	tristate "cpufreq qos support"
+    default m
+    help
+      The cpufreq qos driver add userspace interface to apply qos settings.
+
+config DEVFREQ_QOS
+	tristate "devfreq qos support"
+    default m
+    help
+      The devfreq qos driver add userspace interface to apply qos settings.
+
+config DEVFREQ_QOS_DEVICE_COMPATIBLES
+	string "devfreq qos device compatibles"
+    depends on DEVFREQ_QOS
+	default ""
+	help
+      This defines which devices too add devfreq-qos support. devfreq-qos
+      driver use this strings to find devfreq device & add qos support.
+      use ";" as separator to support multi compatibles strings.
+
+	  If you are not sure, leave it blank.
+
+config CPUHP_QOS
+	tristate "cpu hotplug qos support"
+    default m
+    help
+      The cpu hotplug qos driver add userspace interface to apply qos settings
+      to control online cpu numbers.
+

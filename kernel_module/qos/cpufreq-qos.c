@@ -82,6 +82,7 @@ static void add_cpu_dev_symlink(cpu_freq_qos_dev_t *cpu_data, unsigned int cpu)
 static void remove_cpu_dev_symlink(cpu_freq_qos_dev_t *cpu_data,
 				struct device *dev)
 {
+	(void) cpu_data;
 	dev_dbg(dev, "%s: Removing symlink\n", __func__);
 	sysfs_remove_link(&dev->kobj, CPUFREQ_QOS_NAME);
 }
@@ -194,7 +195,7 @@ static ssize_t cpu_freq_qos_write(struct file *file, const char __user *buf,
 	cpu_freq_qos_dev_t *cpu_data = handle->dev;
 	s32 min, max;
 	int ret;
-	size_t writen = 0;
+	ssize_t writen = 0;
 	struct cpufreq_policy *policy = cpu_data->policy;
 
 	if (*ppos != 0) {
@@ -205,12 +206,14 @@ static ssize_t cpu_freq_qos_write(struct file *file, const char __user *buf,
 		return -ENOENT;
 	}
 
-	if (count == sizeof(s32) * 2) {
-		if (copy_from_user(&min, buf, sizeof(s32)))
-			return -EFAULT;
-		if (copy_from_user(&max, buf + sizeof(s32), sizeof(s32)))
-			return -EFAULT;
+	if (count != sizeof(s32) * 2) {
+		return -EINVAL;
 	}
+
+        if (copy_from_user(&min, buf, sizeof(s32)))
+		return -EFAULT;
+	if (copy_from_user(&max, buf + sizeof(s32), sizeof(s32)))
+		return -EFAULT;
 
 	cpu_data->min = min;
 	cpu_data->max = max;
@@ -290,8 +293,6 @@ static int __init cpu_freq_qos_drv_init(void)
 			pr_err("Error %d adding %s\n", ret, CPUFREQ_QOS_NAME);
 			goto FAIL;
 		}
-		pr_info("%s core[%d] init ok, major=%d, minor=%d\n",
-			CPUFREQ_QOS_NAME, cpu, dev_major, dev_minor);
 
 		cpu_data->dev = device_create(cpufreq_qos_class, NULL,
 					devno, NULL, CPUFREQ_QOS_NAME "-%d", cpu);
@@ -338,14 +339,11 @@ destory_class:
 
 static void __exit cpu_freq_qos_drv_exit(void)
 {
-	dev_t devno = MKDEV(dev_major, dev_minor);
+	dev_t devno = MKDEV(dev_major, 0);
 	cpu_freq_qos_dev_t *cpu_data = NULL;
 	int cpu;
 
 	for_each_present_cpu(cpu) {
-		struct cpufreq_policy *cpu_policy;
-		cpu_policy = cpufreq_cpu_get(cpu);
-
 		cpu_data = &per_cpu(cpufreq_qos_cpu_data, cpu);
 		remove_cpu_dev_symlink(cpu_data, get_cpu_device(cpu));
 
@@ -366,8 +364,6 @@ static void __exit cpu_freq_qos_drv_exit(void)
 		class_destroy(cpufreq_qos_class);
 		cpufreq_qos_class = NULL;
 	}
-	pr_info("%s exit ok, major=%d, minor=%d\n",
-		CPUFREQ_QOS_NAME, dev_major, dev_minor);
 }
 
 module_init(cpu_freq_qos_drv_init);

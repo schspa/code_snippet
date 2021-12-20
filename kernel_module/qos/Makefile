@@ -20,7 +20,8 @@ clean:
 
 else
 
-obj-m := cpufreq-qos.o
-obj-m := devfreq-qos.o
+obj-$(CONFIG_CPUFREQ_QOS) += cpufreq-qos.o
+obj-$(CONFIG_DEVFREQ_QOS) += devfreq-qos.o
+obj-$(CONFIG_CPUHP_QOS)   += cpuhp-qos.o
 
 endif
