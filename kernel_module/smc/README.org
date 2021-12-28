@@ -19,7 +19,6 @@
 #+begin_src bash
   insmod smc_helper.ko
   # [  186.830088] smc-helper init ok, major=493, minor=0
-  mknod /dev/smc-helper c 493 0
   # PSCI_VERSION
   /mnt/smc 0x84000000
 #+end_src

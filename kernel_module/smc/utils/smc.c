@@ -133,9 +133,9 @@ int main (int argc, char **argv)
 	fprintf(stdout, "Res:");
 	for (index = 0; index < sizeof(res) / sizeof(res[0]); index++) {
 		if (use_hex) {
-			fprintf(stdout, "0x%lx", res[index]);
+			fprintf(stdout, " 0x%lx", res[index]);
 		} else {
-			fprintf(stdout, "0x%lu", res[index]);
+			fprintf(stdout, " 0x%lu", res[index]);
 		}
 	}
 	fprintf(stdout, "\n");

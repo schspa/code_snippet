@@ -54,6 +54,7 @@ struct smc_helper_dev_t {
 	struct cdev cdev;
 	struct mutex lock;
 	struct list_head cmdb_head;
+	struct device *dev;
 };
 
 static int smc_helper_open(struct inode *inode, struct file *filp)
@@ -144,12 +145,23 @@ static const struct file_operations smc_helper_fops = {
 	.write = smc_write,
 };
 
-struct smc_helper_dev_t *smc_helper_dev = NULL;
+static struct class *smc_helper_class = NULL;
 
 static int __init smc_helper_drv_init(void)
 {
+	struct smc_helper_dev_t *smc_helper_dev = NULL;
 	int ret;
 	dev_t devno = 0;
+
+	if (smc_helper_class == NULL) {
+		smc_helper_class = class_create(THIS_MODULE, "smc-helper");
+		if (IS_ERR(smc_helper_class)) {
+			ret = PTR_ERR(smc_helper_class);
+			pr_warn("Unable to create smc-helper class; errno = %d\n", ret);
+			smc_helper_class = NULL;
+			return ret;
+		}
+	}
 
 	ret = alloc_chrdev_region(&devno, dev_minor, 1, SMC_HELPER_NAME);
 	if (ret < 0) {
@@ -174,31 +186,54 @@ static int __init smc_helper_drv_init(void)
 	ret = cdev_add(&smc_helper_dev->cdev, devno, 1);
 	if (ret) {
 		pr_err("Error %d adding %s\n", ret, SMC_HELPER_NAME);
+		goto free_dev;
 	}
 
-	pr_info("%s init ok, major=%d, minor=%d\n",
-		SMC_HELPER_NAME, dev_major, dev_minor);
+	smc_helper_dev->dev = device_create(smc_helper_class, NULL, devno,
+					smc_helper_dev, SMC_HELPER_NAME);
+	if (IS_ERR(smc_helper_dev->dev)) {
+		/* Not fatal */
+		pr_warn("Unable to create device for " SMC_HELPER_NAME
+			" errno = %ld\n",
+			PTR_ERR(smc_helper_dev->dev));
+		ret = PTR_ERR(smc_helper_dev->dev);
+		smc_helper_dev->dev = NULL;
+	}
 
 	return 0;
 
+free_dev:
+	kfree(smc_helper_dev);
 FAIL:
 	unregister_chrdev_region(devno, 1);
 	return ret;
 }
 
+static int __exit smc_helper_destory(struct device *dev, void *_data)
+{
+	struct smc_helper_dev_t *smc_helper_dev = dev_get_drvdata(dev);
+	(void) _data;
+
+        device_destroy(smc_helper_class, dev->devt);
+	cdev_del(&smc_helper_dev->cdev);
+	kfree(smc_helper_dev);
+	dev_minor--;
+
+	return 0;
+}
+
 static void __exit smc_helper_drv_exit(void)
 {
-	dev_t devno = MKDEV(dev_major, dev_minor);
+	dev_t devno = MKDEV(dev_major, 0);
 
-	if (smc_helper_dev) {
-		cdev_del(&smc_helper_dev->cdev);
-		kfree(smc_helper_dev);
-	}
+        class_for_each_device(smc_helper_class, NULL, NULL, smc_helper_destory);
 
 	unregister_chrdev_region(devno, 1);
 
-	pr_info("%s exit ok, major=%d, minor=%d\n",
-		SMC_HELPER_NAME, dev_major, dev_minor);
+	if (smc_helper_class) {
+		class_destroy(smc_helper_class);
+		smc_helper_class = NULL;
+	}
 }
 
 module_init(smc_helper_drv_init);
