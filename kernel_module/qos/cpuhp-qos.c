@@ -228,12 +228,13 @@ static ssize_t cpuhp_qos_write(struct file *file, const char __user *buf,
 		return -ENOBUFS;
 	}
 
-	if (count == sizeof(s32) * 2) {
-		if (copy_from_user(&min, buf, sizeof(s32)))
-			return -EFAULT;
-		if (copy_from_user(&max, buf + sizeof(s32), sizeof(s32)))
-			return -EFAULT;
-	}
+	if (count != sizeof(s32) * 2)
+		return -EINVAL;
+
+	if (copy_from_user(&min, buf, sizeof(s32)))
+		return -EFAULT;
+	if (copy_from_user(&max, buf + sizeof(s32), sizeof(s32)))
+		return -EFAULT;
 
 	spin_lock_irqsave(&cpuhp_stat.lock, flags);
 	cpuhp_stat.min = min;
@@ -278,6 +279,7 @@ static int __init cpu_hp_drv_init(void)
 					cpufreq_hp_online, cpufreq_hp_offline);
 	if (cpuhp_online < 0) {
 		pr_warn("failed to register cpuhp online callbacks\n");
+		ret = -ENOSYS;
 		goto destory_class;
 	}
 
