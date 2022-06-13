@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 2.8.2)
+
+project(cjson-download NONE)
+
+include(ExternalProject)
+ExternalProject_Add(cjson
+  URL               "${CMAKE_CURRENT_SOURCE_DIR}/cJSON-1.7.14.tar.gz"
+  SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/cJSON-src"
+  BINARY_DIR        "${CMAKE_CURRENT_BINARY_DIR}/cJSON-build"
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+  TEST_COMMAND      ""
+  )
