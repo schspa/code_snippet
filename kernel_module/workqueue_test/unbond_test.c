@@ -32,41 +32,102 @@
 #include <linux/module.h>
 #include <linux/preempt.h>
 #include <linux/spinlock.h>
+#include <linux/cpu.h>
+#include <linux/smp.h>
+#include <linux/random.h>
+#include <linux/delay.h>
+#include <linux/hrtimer.h>
 
-static struct proc_dir_entry *test_proc = NULL;
-struct work_struct test_work;
+#define MAX_WORK_NUM 10
 
-DEFINE_RAW_SPINLOCK(test_lock);
+struct test_entry;
 
-static void test_work_fn(struct work_struct *work)
+struct entry_work{
+	struct work_struct		work;
+	struct test_entry *entry;
+};
+
+struct test_entry {
+	struct mutex			work_lock;
+	struct entry_work works[MAX_WORK_NUM];
+	struct hrtimer timer;
+	int cpu;
+};
+
+DEFINE_PER_CPU(struct test_entry, pcpu_test_entry);
+
+static enum hrtimer_restart hrtimer_func(struct hrtimer *timer)
 {
-	/* 10 s delay for test */
-	raw_spin_lock_bh(&test_lock);
-	mdelay(100 * 1000);
-	raw_spin_unlock_bh(&test_lock);
+	struct test_entry *entry = container_of(timer, struct test_entry, timer);
+	int i;
+
+	hrtimer_forward_now(timer, ns_to_ktime(2 * NSEC_PER_SEC));
+
+	for (i = 0; i < MAX_WORK_NUM; i++)
+		schedule_work(&entry->works[i].work);
+
+	return HRTIMER_RESTART;
 }
 
-static int workqueue_unbound_test_show(struct seq_file *m, void *v)
+static void test_work_func(struct work_struct *work)
 {
-	struct workqueue_struct *test_wq;
-	seq_puts(m, __func__);
-	seq_putc(m, '\n');
-	test_wq = alloc_workqueue("unbound_test_workqueue", WQ_HIGHPRI, 0);
-	INIT_WORK(&test_work, test_work_fn);
-	queue_work_on(1, test_wq, &test_work);
-	destroy_workqueue(test_wq);
-	return 0;
+	struct entry_work *work_entry = container_of(work, struct entry_work, work);
+	struct test_entry *entry = work_entry->entry;
+	unsigned long delay;
+
+	pr_debug("%s: [%d run on %d]\n", __func__, entry->cpu, smp_processor_id());
+	delay = get_random_u32() % 2000;
+
+        mdelay(delay);
+}
+
+static void sched_test_work(void *ignored)
+{
+	struct test_entry *entry = this_cpu_ptr(&pcpu_test_entry);
+	int i;
+
+        for (i = 0; i < MAX_WORK_NUM; i++) {
+		entry->works[i].entry = entry;
+		entry->cpu = smp_processor_id();
+		INIT_WORK(&entry->works[i].work, test_work_func);
+	}
+
+        hrtimer_init(&entry->timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS_PINNED_HARD);
+	entry->timer.function =	hrtimer_func;
+
+	hrtimer_start(&entry->timer, ns_to_ktime(NSEC_PER_SEC), HRTIMER_MODE_ABS_PINNED_HARD);
+}
+
+static int wq_test_cpu_online(unsigned int cpu) {
+	struct test_entry *entry = this_cpu_ptr(&pcpu_test_entry);
+
+        hrtimer_start(&entry->timer, ns_to_ktime(NSEC_PER_SEC), HRTIMER_MODE_ABS_PINNED_HARD);
+
+        return 0;
+}
+
+static int wq_test_cpu_offline(unsigned int cpu) {
+	struct test_entry *entry = this_cpu_ptr(&pcpu_test_entry);
+
+	hrtimer_cancel(&entry->timer);
+
+        return 0;
 }
 
 static int __init proc_workqueue_unbound_test_init(void)
 {
-	test_proc = proc_create_single("workqueue_unbound_test", 0, NULL, workqueue_unbound_test_show);
+
+	get_online_cpus();
+	on_each_cpu(sched_test_work, NULL, true);
+	cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN, "wq-test:online",
+			wq_test_cpu_online, wq_test_cpu_offline);
+	put_online_cpus();
+
 	return 0;
 }
 
 static void proc_workqueue_unbound_test_remove(void)
 {
-	proc_remove(test_proc);
 }
 
 module_init(proc_workqueue_unbound_test_init);
