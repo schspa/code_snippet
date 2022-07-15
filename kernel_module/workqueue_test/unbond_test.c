@@ -33,12 +33,16 @@
 #include <linux/preempt.h>
 #include <linux/spinlock.h>
 #include <linux/cpu.h>
+#include <linux/cpumask.h>
 #include <linux/smp.h>
 #include <linux/random.h>
 #include <linux/delay.h>
 #include <linux/hrtimer.h>
+#include <linux/kthread.h>
+#include <linux/kprobes.h>
 
-#define MAX_WORK_NUM 10
+
+#define MAX_WORK_NUM 20
 
 struct test_entry;
 
@@ -50,8 +54,10 @@ struct entry_work{
 struct test_entry {
 	struct mutex			work_lock;
 	struct entry_work works[MAX_WORK_NUM];
+	struct entry_work kworks[MAX_WORK_NUM];
 	struct hrtimer timer;
 	int cpu;
+	struct task_struct *thread;
 };
 
 DEFINE_PER_CPU(struct test_entry, pcpu_test_entry);
@@ -73,12 +79,38 @@ static void test_work_func(struct work_struct *work)
 {
 	struct entry_work *work_entry = container_of(work, struct entry_work, work);
 	struct test_entry *entry = work_entry->entry;
-	unsigned long delay;
+	unsigned long delay_time;
 
 	pr_debug("%s: [%d run on %d]\n", __func__, entry->cpu, smp_processor_id());
-	delay = get_random_u32() % 2000;
+	delay_time = get_random_u32() % (100);
 
-        mdelay(delay);
+        mdelay(delay_time);
+}
+
+static int test_kthread_func(void *data)
+{
+	struct test_entry *entry = data;
+	unsigned long sleep_time;
+	unsigned long timeleft;
+	unsigned long seed;
+	int i;
+
+	while (!kthread_should_stop()) {
+		seed = get_random_u32();
+		sleep_time = get_random_u32() % (10 * 1000);
+		sleep_time += 300 * 1000;
+		timeleft = schedule_timeout_interruptible(sleep_time);
+		if (kthread_should_stop() || timeleft)
+			break;
+
+		for (i = 0; i < MAX_WORK_NUM; i++) {
+			if (seed & (1UL << i)) {
+				schedule_work(&entry->kworks[i].work);
+			}
+		}
+	}
+
+        return 0;
 }
 
 static void sched_test_work(void *ignored)
@@ -88,14 +120,16 @@ static void sched_test_work(void *ignored)
 
         for (i = 0; i < MAX_WORK_NUM; i++) {
 		entry->works[i].entry = entry;
-		entry->cpu = smp_processor_id();
+		entry->kworks[i].entry = entry;
 		INIT_WORK(&entry->works[i].work, test_work_func);
+		INIT_WORK(&entry->kworks[i].work, test_work_func);
 	}
 
         hrtimer_init(&entry->timer, CLOCK_MONOTONIC, HRTIMER_MODE_ABS_PINNED_HARD);
 	entry->timer.function =	hrtimer_func;
 
 	hrtimer_start(&entry->timer, ns_to_ktime(NSEC_PER_SEC), HRTIMER_MODE_ABS_PINNED_HARD);
+	entry->cpu = smp_processor_id();
 }
 
 static int wq_test_cpu_online(unsigned int cpu) {
@@ -109,25 +143,145 @@ static int wq_test_cpu_online(unsigned int cpu) {
 static int wq_test_cpu_offline(unsigned int cpu) {
 	struct test_entry *entry = this_cpu_ptr(&pcpu_test_entry);
 
-	hrtimer_cancel(&entry->timer);
+	if (entry->cpu != -1)
+		hrtimer_cancel(&entry->timer);
 
         return 0;
 }
 
+static char func_name[NAME_MAX] = "worker_thread";
+module_param_string(func, func_name, NAME_MAX, S_IRUGO);
+MODULE_PARM_DESC(func, "Function to kretprobe; this module will report the"
+		" function's execution time");
+
+/* per-instance private data */
+struct my_data {
+	ktime_t entry_stamp;
+};
+
+/* Here we use the entry_hanlder to timestamp function entry */
+static int entry_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
+{
+	struct my_data *data;
+
+
+	data = (struct my_data *)ri->data;
+	data->entry_stamp = ktime_get();
+	pr_debug("%s: %s\n", __func__, func_name);
+
+        mdelay(50);
+
+        return 0;
+}
+
+/*
+ * Return-probe handler: Log the return value and duration. Duration may turn
+ * out to be zero consistently, depending upon the granularity of time
+ * accounting on the platform.
+ */
+static int ret_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
+{
+	unsigned long retval = regs_return_value(regs);
+	struct my_data *data = (struct my_data *)ri->data;
+	s64 delta;
+	ktime_t now;
+
+	now = ktime_get();
+	delta = ktime_to_ns(ktime_sub(now, data->entry_stamp));
+	pr_info("%s returned %lu and took %lld ns to execute\n",
+		func_name, retval, (long long)delta);
+	return 0;
+}
+
+static struct kretprobe my_kretprobe = {
+	.handler		= ret_handler,
+	.entry_handler		= entry_handler,
+	.data_size		= sizeof(struct my_data),
+	/* Probe up to 20 instances concurrently. */
+	.maxactive		= 512,
+};
+
+static int __init kretprobe_init(void)
+{
+	int ret;
+
+	my_kretprobe.kp.symbol_name = func_name;
+	ret = register_kretprobe(&my_kretprobe);
+	if (ret < 0) {
+		pr_err("register_kretprobe failed, returned %d\n", ret);
+		return -1;
+	}
+	pr_info("Planted return probe at %s: %p\n",
+		my_kretprobe.kp.symbol_name, my_kretprobe.kp.addr);
+	return 0;
+}
+
+static void __exit kretprobe_exit(void)
+{
+	unregister_kretprobe(&my_kretprobe);
+	pr_info("kretprobe at %p unregistered\n", my_kretprobe.kp.addr);
+
+	/* nmissed > 0 suggests that maxactive was set too low. */
+	pr_info("Missed probing %d instances of %s\n",
+		my_kretprobe.nmissed, my_kretprobe.kp.symbol_name);
+}
+
+static int g_cpuhp_state = -1;
 static int __init proc_workqueue_unbound_test_init(void)
 {
+	int cpu;
+	struct test_entry *entry;
 
-	get_online_cpus();
+        for_each_possible_cpu(cpu) {
+		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
+		entry->cpu = -1;
+	}
+
+	(void) kretprobe_init();
+        cpus_read_lock();
 	on_each_cpu(sched_test_work, NULL, true);
-	cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN, "wq-test:online",
+	msleep(500);
+	g_cpuhp_state = cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN, "wq-test:online",
 			wq_test_cpu_online, wq_test_cpu_offline);
-	put_online_cpus();
+	for_each_possible_cpu(cpu) {
+		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
+		entry->thread = kthread_run(test_kthread_func, entry,
+					"test_kthread%d", cpu);
+	}
+	cpus_read_unlock();
 
 	return 0;
 }
 
 static void proc_workqueue_unbound_test_remove(void)
 {
+	struct test_entry *entry;
+	int cpu;
+	int i;
+
+        for_each_possible_cpu(cpu) {
+		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
+		kthread_stop(entry->thread);
+	}
+
+	if (g_cpuhp_state != -1)
+		cpuhp_remove_state(g_cpuhp_state);
+
+	for_each_possible_cpu(cpu) {
+		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
+
+		if (entry->cpu == -1)
+			continue;
+
+                for (i = 0; i < MAX_WORK_NUM; i++) {
+			cancel_work_sync(&entry->works[i].work);
+		}
+		for (i = 0; i < MAX_WORK_NUM; i++) {
+			cancel_work_sync(&entry->kworks[i].work);
+		}
+	}
+
+	kretprobe_exit();
 }
 
 module_init(proc_workqueue_unbound_test_init);

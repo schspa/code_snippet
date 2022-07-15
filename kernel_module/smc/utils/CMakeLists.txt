@@ -9,8 +9,6 @@ else()
         set(CMAKE_SYSTEM_PROCESSOR "aarch64")
         set(CMAKE_CXX_COMPILER "$ENV{CROSS_COMPILE}g++")
         set(CMAKE_C_COMPILER "$ENV{CROSS_COMPILE}gcc")
-    else()
-        set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/toolchains/aarch64-linux-gnu.cmake)
     endif()
 endif()
 
