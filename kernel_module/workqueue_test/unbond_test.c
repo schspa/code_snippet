@@ -40,9 +40,10 @@
 #include <linux/hrtimer.h>
 #include <linux/kthread.h>
 #include <linux/kprobes.h>
-
+#include <linux/slab.h>
 
 #define MAX_WORK_NUM 20
+#define MAX_KTHREAD_WORKER 512
 
 struct test_entry;
 
@@ -54,7 +55,7 @@ struct entry_work{
 struct test_entry {
 	struct mutex			work_lock;
 	struct entry_work works[MAX_WORK_NUM];
-	struct entry_work kworks[MAX_WORK_NUM];
+	struct entry_work *kworks;
 	struct hrtimer timer;
 	int cpu;
 	struct task_struct *thread;
@@ -108,9 +109,13 @@ static int test_kthread_func(void *data)
 		if (kthread_should_stop() || timeleft)
 			break;
 
-		for (i = 0; i < MAX_WORK_NUM; i++) {
-			if (seed & (1UL << i)) {
-				schedule_work(&entry->kworks[i].work);
+		for (i = 0; i < MAX_KTHREAD_WORKER; i+=32) {
+			int j;
+			seed = get_random_u32();
+			for (j = 0; j < 32; j++) {
+				if (seed & (1UL << j)) {
+					schedule_work(&entry->kworks[i + j].work);
+				}
 			}
 		}
 	}
@@ -125,8 +130,10 @@ static void sched_test_work(void *ignored)
 
         for (i = 0; i < MAX_WORK_NUM; i++) {
 		entry->works[i].entry = entry;
-		entry->kworks[i].entry = entry;
 		INIT_WORK(&entry->works[i].work, test_work_func);
+	}
+	for (i = 0; i < MAX_KTHREAD_WORKER; i++) {
+		entry->kworks[i].entry = entry;
 		INIT_WORK(&entry->kworks[i].work, test_work_func);
 	}
 
@@ -244,6 +251,7 @@ static int __init proc_workqueue_unbound_test_init(void)
         for_each_possible_cpu(cpu) {
 		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
 		entry->cpu = -1;
+		entry->kworks = kzalloc(sizeof(entry->kworks[0]) * MAX_KTHREAD_WORKER, GFP_KERNEL);
 	}
 
 	(void) kretprobe_init();
@@ -285,12 +293,18 @@ static void proc_workqueue_unbound_test_remove(void)
                 for (i = 0; i < MAX_WORK_NUM; i++) {
 			cancel_work_sync(&entry->works[i].work);
 		}
-		for (i = 0; i < MAX_WORK_NUM; i++) {
+		for (i = 0; i < MAX_KTHREAD_WORKER; i++) {
 			cancel_work_sync(&entry->kworks[i].work);
 		}
 	}
 
 	kretprobe_exit();
+        for_each_possible_cpu(cpu) {
+		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
+
+		kfree(entry->kworks);
+		entry->kworks = NULL;
+	}
 }
 
 module_init(proc_workqueue_unbound_test_init);
