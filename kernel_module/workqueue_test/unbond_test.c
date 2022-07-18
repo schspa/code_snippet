@@ -64,6 +64,19 @@ struct test_entry {
 
 DEFINE_PER_CPU(struct test_entry, pcpu_test_entry);
 
+static void mdelay_with_yield(unsigned long timeout_ms)
+{
+	    unsigned long start = jiffies;
+
+	    migrate_disable();
+	    do {
+		    yield();
+	    } while (jiffies_to_msecs(jiffies - start) < timeout_ms);
+	    migrate_enable();
+
+            return;
+}
+
 static enum hrtimer_restart hrtimer_func(struct hrtimer *timer)
 {
 	struct test_entry *entry = container_of(timer, struct test_entry, timer);
@@ -86,9 +99,9 @@ static void test_work_func(struct work_struct *work)
 	pr_debug("%s: [%d run on %d]\n", __func__, entry->cpu, raw_smp_processor_id());
 	delay_time = get_random_u32() % (100);
 
-        mdelay(delay_time);
+        mdelay_with_yield(delay_time);
 	if (!cpu_active(raw_smp_processor_id())) {
-		mdelay(20000);
+		mdelay_with_yield(20000);
 	}
 }
 
