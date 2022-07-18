@@ -42,8 +42,8 @@
 #include <linux/kprobes.h>
 #include <linux/slab.h>
 
-#define MAX_WORK_NUM 20
-#define MAX_KTHREAD_WORKER 512
+#define MAX_WORK_NUM 1
+#define MAX_KTHREAD_WORKER 2
 
 struct test_entry;
 
@@ -88,7 +88,7 @@ static void test_work_func(struct work_struct *work)
 
         mdelay(delay_time);
 	if (!cpu_active(raw_smp_processor_id())) {
-		mdelay(10000);
+		mdelay(20000);
 	}
 }
 
@@ -108,13 +108,10 @@ static int test_kthread_func(void *data)
 		if (kthread_should_stop() || timeleft)
 			break;
 
-		for (i = 0; i < MAX_KTHREAD_WORKER; i+=32) {
-			int j;
+		for (i = 0; i < MAX_KTHREAD_WORKER; i++) {
 			seed = get_random_u32();
-			for (j = 0; j < 32; j++) {
-				if (seed & (1UL << j)) {
-					schedule_work(&entry->kworks[i + j].work);
-				}
+			if (seed & (1UL << i)) {
+				schedule_work(&entry->kworks[i].work);
 			}
 		}
 	}
@@ -182,9 +179,10 @@ static int entry_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
 	data->entry_stamp = ktime_get();
 	pr_debug("%s: %s\n", __func__, func_name);
 
-	if (!cpu_active(smp_processor_id())) {
-		pr_err("Create new worker on a inactive cpu\n");
-		mdelay(10000);
+	if (!cpu_active(raw_smp_processor_id())) {
+		pr_err("Create new worker on a inactive cpu %d\n",
+			raw_smp_processor_id());
+		mdelay(20000);
 	}
         mdelay(50);
 
@@ -254,13 +252,10 @@ static int wq_ret_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
 
 	entry = per_cpu_ptr(&pcpu_test_entry, raw_smp_processor_id());
 
-	for (i = 0; i < MAX_KTHREAD_WORKER; i+=32) {
-		int j;
+	for (i = 0; i < MAX_KTHREAD_WORKER; i++) {
 		seed = get_random_u32();
-		for (j = 0; j < 32; j++) {
-			if (seed & (1UL << j)) {
-				schedule_work(&entry->koworks[i + j].work);
-			}
+		if (seed & (1UL << i)) {
+			schedule_work(&entry->koworks[i].work);
 		}
 	}
 
