@@ -85,6 +85,11 @@ static void test_work_func(struct work_struct *work)
 	delay_time = get_random_u32() % (100);
 
         mdelay(delay_time);
+	if (!cpu_active(smp_processor_id())) {
+		pr_err("%s: [%d run on a none active %d cpu]\n",
+			__func__, entry->cpu, smp_processor_id());
+		mdelay(10000);
+	}
 }
 
 static int test_kthread_func(void *data)
@@ -169,6 +174,10 @@ static int entry_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
 	data->entry_stamp = ktime_get();
 	pr_debug("%s: %s\n", __func__, func_name);
 
+	if (!cpu_active(smp_processor_id())) {
+		pr_err("Create new worker on a inactive cpu\n");
+		mdelay(10000);
+	}
         mdelay(50);
 
         return 0;
