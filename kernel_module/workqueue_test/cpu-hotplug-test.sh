@@ -3,6 +3,9 @@
 script_file=$0
 cpu_num=512
 
+echo 1 > /proc/sys/kernel/panic_on_warn
+echo 9 > /proc/sysrq-trigger
+
 do_hotplug()
 {
     echo $0

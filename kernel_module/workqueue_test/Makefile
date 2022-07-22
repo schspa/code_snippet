@@ -20,4 +20,5 @@ clean:
 
 else
 obj-m := unbond_test.o
+obj-m := work-test.o
 endif
