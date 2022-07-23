@@ -1,0 +1,20 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     README.org
+#+AUTHOR:    Schspa
+#+EMAIL:     schspa@ArchLinux
+#+DATE:     <2022-07-24 02:28:13>
+#+DESCRIPTION: README.org
+#+KEYWORDS:
+#+TAGS:
+#+FILETAGS:
+#+CATEGORY:
+#+OPTIONS:   H:3 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+
+#+begin_src bash
+  while true; do stress --cpu 8 --io 4 --vm 2 --vm-bytes 128M --timeout $(shuf -i1-30 -n1); sleep $(shuf -i30-300 -n1); done
+  while true; do cat /proc/wq-test-info; sleep 1; done
+#+end_src
