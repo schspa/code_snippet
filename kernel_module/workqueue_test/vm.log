@@ -1,0 +1,1812 @@
+c[?7l[2J[0mSeaBIOS (version ArchLinux 1.16.0-1)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+BFF90FB0+BFEF0FB0 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2JWrong EFI loader signature.
+early console in extract_kernel
+input_data: 0x0000000002b1e40d
+input_len: 0x0000000000b51c87
+output: 0x0000000001000000
+output_len: 0x0000000002628edc
+kernel_total_size: 0x000000000242c000
+needed_size: 0x0000000002800000
+trampoline_32bit: 0x000000000009d000
+Physical KASLR using RDRAND RDTSC...
+Virtual KASLR using RDRAND RDTSC...
+
+Decompressing Linux... Parsing ELF... Performing relocations... done.
+Booting the kernel.
+[    0.000000] Linux version 5.10.21-rt34+ (schspa@ArchLinux) (gcc (GCC) 12.1.0, GNU ld (GNU Binutils) 2.38) #3 SMP PREEMPT_RT Sun Jul 24 01:49:48 CST 2022
+[    0.000000] Command line: root=/dev/sda console=ttyS0 earlyprintk=serial       oops=panic panic_on_warn=1 panic=86400 kvm-intel.nested=1       security=apparmor ima_policy=tcb workqueue.watchdog_thresh=140       nf-conntrack-ftp.ports=20000 nf-conntrack-tftp.ports=20000       nf-conntrack-sip.ports=20000 nf-conntrack-irc.ports=20000       nf-conntrack-sane.ports=20000 vivid.n_devs=16       vivid.multiplanar=1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2       spec_store_bypass_disable=prctl nopcid
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+[    0.000000] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+[    0.000000] x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x00000000bffdcfff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000bffdd000-0x00000000bfffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000013fffffff] usable
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    0.000000] nopcid: PCID feature disabled
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] SMBIOS 2.8 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ArchLinux 1.16.0-1 04/01/2014
+[    0.000000] Hypervisor detected: KVM
+[    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+[    0.000000] kvm-clock: cpu 0, msr 115398001, primary cpu clock
+[    0.000000] kvm-clock: using sched offset of 229622982 cycles
+[    0.000004] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.004021] tsc: Detected 4007.996 MHz processor
+[    0.007271] e820: update [mem 0x00000000-0x00000fff] usable ==> reserved
+[    0.008261] e820: remove [mem 0x000a0000-0x000fffff] usable
+[    0.009086] last_pfn = 0x140000 max_arch_pfn = 0x400000000
+[    0.009914] MTRR default type: write-back
+[    0.010503] MTRR fixed ranges enabled:
+[    0.011057]   00000-9FFFF write-back
+[    0.011588]   A0000-BFFFF uncachable
+[    0.012128]   C0000-FFFFF write-protect
+[    0.012696] MTRR variable ranges enabled:
+[    0.013288]   0 base 00C0000000 mask 7FC0000000 uncachable
+[    0.014101]   1 disabled
+[    0.014477]   2 disabled
+[    0.014853]   3 disabled
+[    0.015229]   4 disabled
+[    0.015604]   5 disabled
+[    0.015978]   6 disabled
+[    0.016352]   7 disabled
+[    0.016735] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+Memory KASLR using RDRAND RDTSC...
+[    0.018224] last_pfn = 0xbffdd max_arch_pfn = 0x400000000
+[    0.025550] found SMP MP-table at [mem 0x000f5b90-0x000f5b9f]
+[    0.026423] check: Scanning 1 areas for low memory corruption
+[    0.027380] Using GB pages for direct mapping
+[    0.028248] ACPI: Early table checksum verification disabled
+[    0.029102] ACPI: RSDP 0x00000000000F59A0 000014 (v00 BOCHS )
+[    0.029958] ACPI: RSDT 0x00000000BFFE1B9C 000034 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.031224] ACPI: FACP 0x00000000BFFE1A18 000074 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.032496] ACPI: DSDT 0x00000000BFFE0040 0019D8 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.033755] ACPI: FACS 0x00000000BFFE0000 000040
+[    0.034442] ACPI: APIC 0x00000000BFFE1A8C 0000B0 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.035702] ACPI: HPET 0x00000000BFFE1B3C 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.036962] ACPI: WAET 0x00000000BFFE1B74 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.038235] ACPI: Local APIC address 0xfee00000
+[    0.039330] No NUMA configuration found
+[    0.039896] Faking a node at [mem 0x0000000000000000-0x000000013fffffff]
+[    0.040893] NODE_DATA(0) allocated [mem 0x13fffc000-0x13fffffff]
+[    0.041976] Zone ranges:
+[    0.042355]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.043270]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.044181]   Normal   [mem 0x0000000100000000-0x000000013fffffff]
+[    0.045092] Movable zone start for each node
+[    0.045722] Early memory node ranges
+[    0.046249]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.047173]   node   0: [mem 0x0000000000100000-0x00000000bffdcfff]
+[    0.048100]   node   0: [mem 0x0000000100000000-0x000000013fffffff]
+[    0.049337] Zeroed struct page in unavailable ranges: 133 pages
+[    0.049339] Initmem setup node 0 [mem 0x0000000000001000-0x000000013fffffff]
+[    0.051256] On node 0 totalpages: 1048443
+[    0.051853]   DMA zone: 64 pages used for memmap
+[    0.052541]   DMA zone: 21 pages reserved
+[    0.053132]   DMA zone: 3998 pages, LIFO batch:0
+[    0.053829]   DMA32 zone: 12224 pages used for memmap
+[    0.054574]   DMA32 zone: 782301 pages, LIFO batch:63
+[    0.061985]   Normal zone: 4096 pages used for memmap
+[    0.062773]   Normal zone: 262144 pages, LIFO batch:63
+[    0.066206] ACPI: PM-Timer IO Port: 0x608
+[    0.066817] ACPI: Local APIC address 0xfee00000
+[    0.067503] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.068391] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+[    0.069407] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.070342] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.071316] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.072305] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.073300] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.074297] ACPI: IRQ0 used by override.
+[    0.074875] ACPI: IRQ5 used by override.
+[    0.075451] ACPI: IRQ9 used by override.
+[    0.076026] ACPI: IRQ10 used by override.
+[    0.076615] ACPI: IRQ11 used by override.
+[    0.077211] Using ACPI (MADT) for SMP configuration information
+[    0.078084] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.078846] TSC deadline timer available
+[    0.079305] smpboot: Allowing 8 CPUs, 0 hotplug CPUs
+[    0.079860] kvm-guest: KVM setup pv remote TLB flush
+[    0.080415] kvm-guest: setup PV sched yield
+[    0.080889] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.081715] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+[    0.082549] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000effff]
+[    0.083416] PM: hibernation: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+[    0.084534] PM: hibernation: Registered nosave memory: [mem 0xbffdd000-0xbfffffff]
+[    0.085641] PM: hibernation: Registered nosave memory: [mem 0xc0000000-0xfeffbfff]
+[    0.086748] PM: hibernation: Registered nosave memory: [mem 0xfeffc000-0xfeffffff]
+[    0.087857] PM: hibernation: Registered nosave memory: [mem 0xff000000-0xfffbffff]
+[    0.088967] PM: hibernation: Registered nosave memory: [mem 0xfffc0000-0xffffffff]
+[    0.090076] [mem 0xc0000000-0xfeffbfff] available for PCI devices
+[    0.090965] Booting paravirtualized kernel on KVM
+[    0.091662] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+[    0.098106] setup_percpu: NR_CPUS:64 nr_cpumask_bits:64 nr_cpu_ids:8 nr_node_ids:1
+[    0.099503] percpu: Embedded 49 pages/cpu s160320 r8192 d32192 u262144
+[    0.100476] pcpu-alloc: s160320 r8192 d32192 u262144 alloc=1*2097152
+[    0.101408] pcpu-alloc: [0] 0 1 2 3 4 5 6 7 
+[    0.102081] kvm-guest: KVM setup async PF for cpu 0
+[    0.102842] kvm-guest: stealtime: cpu 0, msr 13bc17680
+[    0.103624] Built 1 zonelists, mobility grouping on.  Total pages: 1032038
+[    0.104655] Policy zone: Normal
+[    0.105126] Kernel command line: root=/dev/sda console=ttyS0 earlyprintk=serial       oops=panic panic_on_warn=1 panic=86400 kvm-intel.nested=1       security=apparmor ima_policy=tcb workqueue.watchdog_thresh=140       nf-conntrack-ftp.ports=20000 nf-conntrack-tftp.ports=20000       nf-conntrack-sip.ports=20000 nf-conntrack-irc.ports=20000       nf-conntrack-sane.ports=20000 vivid.n_devs=16       vivid.multiplanar=1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2       spec_store_bypass_disable=prctl nopcid
+[    0.112258] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.113658] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.114961] mem auto-init: stack:off, heap alloc:off, heap free:off
+[    0.133121] Memory: 4017276K/4193772K available (18445K kernel code, 2668K rwdata, 3528K rodata, 1256K init, 2568K bss, 176236K reserved, 0K cma-reserved)
+[    0.135828] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[    0.137044] Kernel/User page tables isolation: enabled
+[    0.138287] rcu: Preemptible hierarchical RCU implementation.
+[    0.139313] rcu: 	RCU event tracing is enabled.
+[    0.140121] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+[    0.141283] rcu: 	RCU priority boosting: priority 1 delay 500 ms.
+[    0.142342] rcu: 	RCU_SOFTIRQ processing moved to rcuc kthreads.
+[    0.143363] 	No expedited grace period (rcu_normal_after_boot).
+[    0.144383] 	Trampoline variant of Tasks RCU enabled.
+[    0.145250] rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+[    0.146512] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=8
+[    0.148395] NR_IRQS: 4352, nr_irqs: 488, preallocated irqs: 16
+[    0.154564] Console: colour VGA+ 80x25
+[    0.155179] printk: console [ttyS0] enabled
+[    0.155179] printk: console [ttyS0] enabled
+[    0.156442] printk: bootconsole [earlyser0] disabled
+[    0.156442] printk: bootconsole [earlyser0] disabled
+[    0.157953] ACPI: Core revision 20200925
+[    0.158716] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.160189] APIC: Switch to symmetric I/O mode setup
+[    0.160948] kvm-guest: setup PV IPIs
+[    0.162619] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.163563] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x39c5ded8016, max_idle_ns: 440795406786 ns
+[    0.165160] Calibrating delay loop (skipped) preset value.. 8015.99 BogoMIPS (lpj=4007996)
+[    0.167158] pid_max: default: 32768 minimum: 301
+[    0.167889] LSM: Security Framework initializing
+[    0.168188] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.169163] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+Poking KASLR using RDRAND RDTSC...
+[    0.171028] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.172266] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.173065] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.173176] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.174168] Spectre V2 : Mitigation: Full generic retpoline
+[    0.175001] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.175157] Spectre V2 : Enabling Restricted Speculation for firmware calls
+[    0.176164] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.177168] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl
+[    0.178162] SRBDS: Unknown: Dependent on hypervisor status
+[    0.179157] MDS: Mitigation: Clear CPU buffers
+[    0.180592] Freeing SMP alternatives memory: 40K
+[    0.181207] random: get_random_u64 called from copy_process+0x31a/0x1f90 with crng_init=0
+[    0.182305] smpboot: CPU0: Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz (family: 0x6, model: 0x5e, stepping: 0x3)
+[    0.183290] Performance Events: Skylake events, full-width counters, Intel PMU driver.
+[    0.184166] ... version:                2
+[    0.184686] ... bit width:              48
+[    0.185159] ... generic registers:      4
+[    0.185623] ... value mask:             0000ffffffffffff
+[    0.186158] ... max period:             00007fffffffffff
+[    0.186764] ... fixed-purpose events:   3
+[    0.187164] ... event mask:             000000070000000f
+[    0.187926] rcu: Hierarchical SRCU implementation.
+[    0.188778] smp: Bringing up secondary CPUs ...
+[    0.189271] x86: Booting SMP configuration:
+[    0.189753] .... node  #0, CPUs:      #1
+[    0.013588] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[    0.190217] kvm-guest: KVM setup async PF for cpu 1
+[    0.191157] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[    0.192260]  #2
+[    0.013588] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[    0.192709] kvm-guest: KVM setup async PF for cpu 2
+[    0.193157] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[    0.194259]  #3
+[    0.013588] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[    0.195674] kvm-guest: KVM setup async PF for cpu 3
+[    0.196157] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[    0.198266]  #4
+[    0.013588] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[    0.198737] kvm-guest: KVM setup async PF for cpu 4
+[    0.199157] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[    0.201257]  #5
+[    0.013588] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[    0.201768] kvm-guest: KVM setup async PF for cpu 5
+[    0.202157] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[    0.204254]  #6
+[    0.013588] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[    0.205337] kvm-guest: KVM setup async PF for cpu 6
+[    0.206157] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[    0.207257]  #7
+[    0.013588] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[    0.207700] kvm-guest: KVM setup async PF for cpu 7
+[    0.208157] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[    0.210276] smp: Brought up 1 node, 8 CPUs
+[    0.210758] smpboot: Max logical packages: 1
+[    0.211162] smpboot: Total of 8 processors activated (64127.93 BogoMIPS)
+[    0.220346] devtmpfs: initialized
+[    0.221346] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.222168] futex hash table entries: 2048 (order: 6, 262144 bytes, linear)
+[    0.223219] PM: RTC time: 17:50:11, date: 2022-07-23
+[    0.223984] NET: Registered protocol family 16
+[    0.224384] audit: initializing netlink subsys (disabled)
+[    0.224991] audit: type=2000 audit(1658598611.827:1): state=initialized audit_enabled=0 res=1
+[    0.225160] thermal_sys: Registered thermal governor 'step_wise'
+[    0.225163] thermal_sys: Registered thermal governor 'user_space'
+[    0.225179] cpuidle: using governor menu
+[    0.226419] ACPI: bus type PCI registered
+[    0.227004] PCI: Using configuration type 1 for base access
+[    0.230700] Kprobes globally optimized
+[    0.231194] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.232194] cryptomgr_test (65) used greatest stack depth: 15400 bytes left
+[    0.233179] cryptomgr_test (74) used greatest stack depth: 15136 bytes left
+[    0.233250] ACPI: Added _OSI(Module Device)
+[    0.234167] ACPI: Added _OSI(Processor Device)
+[    0.234833] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.236161] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.236966] ACPI: Added _OSI(Linux-Dell-Video)
+[    0.237164] ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+[    0.237928] ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+[    0.240347] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    0.242410] ACPI: Interpreter enabled
+[    0.242852] ACPI: (supports S0 S3 S4 S5)
+[    0.243162] ACPI: Using IOAPIC for interrupt routing
+[    0.243741] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.244346] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    0.249319] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    0.250169] acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI HPX-Type3]
+[    0.251176] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+[    0.253211] PCI host bridge to bus 0000:00
+[    0.253827] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    0.255159] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    0.256159] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    0.257159] pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+[    0.258159] pci_bus 0000:00: root bus resource [mem 0x140000000-0x1bfffffff window]
+[    0.259159] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.259995] pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+[    0.261701] pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+[    0.262695] pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+[    0.265788] pci 0000:00:01.1: reg 0x20: [io  0xc080-0xc08f]
+[    0.266814] pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+[    0.268160] pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+[    0.269105] pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+[    0.270159] pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+[    0.271122] pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+[    0.272521] pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+[    0.273167] pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+[    0.274205] pci 0000:00:02.0: [1234:1111] type 00 class 0x030000
+[    0.275491] pci 0000:00:02.0: reg 0x10: [mem 0xfd000000-0xfdffffff pref]
+[    0.278506] pci 0000:00:02.0: reg 0x18: [mem 0xfebf0000-0xfebf0fff]
+[    0.282819] pci 0000:00:02.0: reg 0x30: [mem 0xfebe0000-0xfebeffff pref]
+[    0.283673] pci 0000:00:03.0: [8086:100e] type 00 class 0x020000
+[    0.285676] pci 0000:00:03.0: reg 0x10: [mem 0xfebc0000-0xfebdffff]
+[    0.286610] pci 0000:00:03.0: reg 0x14: [io  0xc000-0xc03f]
+[    0.290160] pci 0000:00:03.0: reg 0x30: [mem 0xfeb80000-0xfebbffff pref]
+[    0.292522] pci 0000:00:04.0: [1af4:1004] type 00 class 0x010000
+[    0.293953] pci 0000:00:04.0: reg 0x10: [io  0xc040-0xc07f]
+[    0.294872] pci 0000:00:04.0: reg 0x14: [mem 0xfebf1000-0xfebf1fff]
+[    0.298160] pci 0000:00:04.0: reg 0x20: [mem 0xfe000000-0xfe003fff 64bit pref]
+[    0.300802] ACPI: PCI Interrupt Link [LNKA] (IRQs 5 *10 11)
+[    0.302302] ACPI: PCI Interrupt Link [LNKB] (IRQs 5 *10 11)
+[    0.303290] ACPI: PCI Interrupt Link [LNKC] (IRQs 5 10 *11)
+[    0.304066] ACPI: PCI Interrupt Link [LNKD] (IRQs 5 10 *11)
+[    0.304234] ACPI: PCI Interrupt Link [LNKS] (IRQs *9)
+[    0.305521] iommu: Default domain type: Translated 
+[    0.306210] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    0.306853] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.308161] pci 0000:00:02.0: vgaarb: bridge control possible
+[    0.308829] vgaarb: loaded
+[    0.309244] SCSI subsystem initialized
+[    0.310178] libata version 3.00 loaded.
+[    0.310212] ACPI: bus type USB registered
+[    0.310696] usbcore: registered new interface driver usbfs
+[    0.311173] usbcore: registered new interface driver hub
+[    0.311950] usbcore: registered new device driver usb
+[    0.313213] pps_core: LinuxPPS API ver. 1 registered
+[    0.313952] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.315167] PTP clock support registered
+[    0.315606] Advanced Linux Sound Architecture Driver Initialized.
+[    0.316367] NetLabel: Initializing
+[    0.316805] NetLabel:  domain hash size = 128
+[    0.317159] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.317817] NetLabel:  unlabeled traffic allowed by default
+[    0.319180] PCI: Using ACPI for IRQ routing
+[    0.319715] PCI: pci_cache_line_size set to 64 bytes
+[    0.320259] e820: reserve RAM buffer [mem 0x0009fc00-0x0009ffff]
+[    0.320964] e820: reserve RAM buffer [mem 0xbffdd000-0xbfffffff]
+[    0.321311] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[    0.321940] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[    0.341617] clocksource: Switched to clocksource kvm-clock
+[    0.781610] VFS: Disk quotas dquot_6.6.0
+[    0.782104] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.782971] pnp: PnP ACPI init
+[    0.783396] pnp 00:00: Plug and Play ACPI device, IDs PNP0303 (active)
+[    0.784242] pnp 00:01: Plug and Play ACPI device, IDs PNP0f13 (active)
+[    0.784998] pnp 00:02: [dma 2]
+[    0.785364] pnp 00:02: Plug and Play ACPI device, IDs PNP0700 (active)
+[    0.786126] pnp 00:03: Plug and Play ACPI device, IDs PNP0400 (active)
+[    0.786923] pnp 00:04: Plug and Play ACPI device, IDs PNP0501 (active)
+[    0.787687] pnp 00:05: Plug and Play ACPI device, IDs PNP0b00 (active)
+[    0.788793] pnp: PnP ACPI: found 6 devices
+[    0.797429] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    0.798493] NET: Registered protocol family 2
+[    0.799151] tcp_listen_portaddr_hash hash table entries: 2048 (order: 5, 131072 bytes, linear)
+[    0.800149] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.801090] TCP bind hash table entries: 32768 (order: 8, 1835008 bytes, linear)
+[    0.802343] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.803238] UDP hash table entries: 2048 (order: 6, 262144 bytes, linear)
+[    0.804023] UDP-Lite hash table entries: 2048 (order: 6, 262144 bytes, linear)
+[    0.804903] NET: Registered protocol family 1
+[    0.805704] RPC: Registered named UNIX socket transport module.
+[    0.806385] RPC: Registered udp transport module.
+[    0.806981] RPC: Registered tcp transport module.
+[    0.807594] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.808751] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    0.809557] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    0.810277] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    0.811145] pci_bus 0000:00: resource 7 [mem 0xc0000000-0xfebfffff window]
+[    0.812031] pci_bus 0000:00: resource 8 [mem 0x140000000-0x1bfffffff window]
+[    0.812999] pci 0000:00:01.0: PIIX3: Enabling Passive Release
+[    0.813749] pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+[    0.814526] pci 0000:00:01.0: Activating ISA DMA hang workarounds
+[    0.815381] pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    0.816466] PCI: CLS 0 bytes, default 64
+[    0.817052] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.817839] software IO TLB: mapped [mem 0x00000000bbfdd000-0x00000000bffdd000] (64MB)
+[    0.819244] RAPL PMU: API unit is 2^-32 Joules, 0 fixed counters, 10737418240 ms ovfl timer
+[    0.820282] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x39c5ded8016, max_idle_ns: 440795406786 ns
+[    0.822804] check: Scanning for low memory corruption every 60 seconds
+[    0.826124] Initialise system trusted keyrings
+[    0.826869] workingset: timestamp_bits=56 max_order=20 bucket_order=0
+[    0.829987] NFS: Registering the id_resolver key type
+[    0.830596] Key type id_resolver registered
+[    0.831081] Key type id_legacy registered
+[    0.831638] 9p: Installing v9fs 9p2000 file system support
+[    0.838451] Key type asymmetric registered
+[    0.838959] Asymmetric key parser 'x509' registered
+[    0.839563] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    0.840463] io scheduler mq-deadline registered
+[    0.840958] io scheduler kyber registered
+[    0.841833] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+[    0.843231] ACPI: Power Button [PWRF]
+[    0.877958] PCI Interrupt Link [LNKD] enabled at IRQ 11
+[    0.879430] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    0.880239] 00:04: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    0.881624] Non-volatile memory driver v1.3
+[    0.882134] Linux agpgart interface v0.103
+[    0.886092] loop: module loaded
+[    0.889240] scsi host0: Virtio SCSI HBA
+[    0.890574] scsi 0:0:0:0: Direct-Access     QEMU     QEMU HARDDISK    2.5+ PQ: 0 ANSI: 5
+[    0.906505] sd 0:0:0:0: Power-on or device reset occurred
+[    0.906520] sd 0:0:0:0: Attached scsi generic sg0 type 0
+[    0.907572] sd 0:0:0:0: [sda] 4194304 512-byte logical blocks: (2.15 GB/2.00 GiB)
+[    0.908408] ata_piix 0000:00:01.1: version 2.13
+[    0.909215] sd 0:0:0:0: [sda] Write Protect is off
+[    0.910703] sd 0:0:0:0: [sda] Mode Sense: 63 00 00 08
+[    0.911362] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    0.911433] scsi host1: ata_piix
+[    0.913045] scsi host2: ata_piix
+[    0.913336] sd 0:0:0:0: [sda] Attached SCSI disk
+[    0.913616] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc080 irq 14
+[    0.914872] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc088 irq 15
+[    0.915794] e100: Intel(R) PRO/100 Network Driver
+[    0.916598] e100: Copyright(c) 1999-2006 Intel Corporation
+[    0.917263] e1000: Intel(R) PRO/1000 Network Driver
+[    0.917812] e1000: Copyright (c) 1999-2006 Intel Corporation.
+[    0.952067] PCI Interrupt Link [LNKC] enabled at IRQ 10
+[    1.253626] e1000 0000:00:03.0 eth0: (PCI:33MHz:32-bit) 52:54:00:12:34:56
+[    1.254367] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
+[    1.255130] e1000e: Intel(R) PRO/1000 Network Driver
+[    1.255675] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    1.256344] sky2: driver version 1.30
+[    1.256920] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    1.257651] ehci-pci: EHCI PCI platform driver
+[    1.258153] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    1.258833] ohci-pci: OHCI PCI platform driver
+[    1.259337] uhci_hcd: USB Universal Host Controller Interface driver
+[    1.260065] usbcore: registered new interface driver usblp
+[    1.260683] usbcore: registered new interface driver usb-storage
+[    1.261377] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    1.262873] irq/12-i8042 (122) used greatest stack depth: 15104 bytes left
+[    1.263359] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    1.264309] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    1.265342] rtc_cmos 00:05: RTC can wake from S4
+[    1.266354] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+[    1.266599] rtc_cmos 00:05: registered as rtc0
+[    1.268418] rtc_cmos 00:05: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    1.270294] device-mapper: ioctl: 4.43.0-ioctl (2020-10-01) initialised: dm-devel@redhat.com
+[    1.271753] intel_pstate: CPU model not supported
+[    1.272290] hid: raw HID events driver (C) Jiri Kosina
+[    1.273031] usbcore: registered new interface driver usbhid
+[    1.273644] usbhid: USB HID core driver
+[    1.274401] nf_conntrack_irc: failed to register helpers
+[    1.276706] nf_conntrack_sip: failed to register helpers
+[    1.277862] Initializing XFRM netlink socket
+[    1.278436] NET: Registered protocol family 10
+[    1.279191] Segment Routing with IPv6
+[    1.280248] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    1.280988] NET: Registered protocol family 17
+[    1.281488] 9pnet: Installing 9P2000 support
+[    1.282092] Key type dns_resolver registered
+[    1.283548] IPI shorthand broadcast: enabled
+[    1.284256] sched_clock: Marking stable (1271645798, 12588845)->(1319297630, -35062987)
+[    1.285821] printk: console [ttyS0]: printing thread started
+[    1.285841] registered taskstats version 1
+[    1.285842] Loading compiled-in X.509 certificates
+[    1.287040] PM:   Magic number: 14:326:846
+[    1.287579] printk: console [netcon0]: printing thread started
+[    1.287595] printk: console [netcon0] enabled
+[    1.287597] netconsole: network logging started
+[    1.287884] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    1.288073] kworker/u16:1 (131) used greatest stack depth: 14520 bytes left
+[    1.288662] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    1.288719] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    1.288729] cfg80211: failed to load regulatory.db
+[    1.288676] ALSA device list:
+[    1.288745]   No soundcards found.
+[    1.476429] random: fast init done
+[    1.891255] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input3
+[    1.891511] md: Waiting for all devices to be available before autodetect
+[    1.891514] md: If you don't use raid, use raid=noautodetect
+[    1.891519] md: Autodetecting RAID arrays.
+[    1.891521] md: autorun ...
+[    1.891523] md: ... autorun DONE.
+[    1.892606] EXT4-fs (sda): INFO: recovery required on readonly filesystem
+[    1.892610] EXT4-fs (sda): write access will be enabled during recovery
+
+Welcome to [1mDebian GNU/Linux 9 (stretch)[0m!
+
+[[0;32m  OK  [0m] Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Listening on Journal Socket.
+[[0;32m  OK  [0m] Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on Journal Socket (/dev/log).
+[[0;32m  OK  [0m] Created slice System Slice.
+         Starting Remount Root and Kernel File Systems...
+         Starting Load Kernel Modules...
+[[0;32m  OK  [0m] Created slice system-getty.slice.
+         Starting Create Static Device Nodes in /dev...
+         Mounting /sys/kernel/debug...
+[[0;32m  OK  [0m] Listening on Syslog Socket.
+[[0;32m  OK  [0m] Set up automount Arbitrary Executab…rmats File System Automount Point.
+         Mounting /proc/sys/fs/binfmt_misc...
+[[0;32m  OK  [0m] Started Dispatch Password Requests to Console Directory Watch.
+[[0;32m  OK  [0m] Reached target Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target Paths.
+[[0;32m  OK  [0m] Reached target Slices.
+         Mounting POSIX Message Queue File System...
+[[0;32m  OK  [0m] Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Reached target Swap.
+[    2.460916] EXT4-fs (sda): recovery complete
+[    2.481911] EXT4-fs (sda): mounted filesystem with ordered data mode. Opts: (null)
+[    2.481958] VFS: Mounted root (ext4 filesystem) readonly on device 8:0.
+[    2.482123] devtmpfs: mounted
+[    2.482709] Freeing unused kernel image (initmem) memory: 1256K
+[    2.482811] Write protecting the kernel read-only data: 24576k
+[    2.484351] Freeing unused kernel image (text/rodata gap) memory: 2032K
+[    2.484860] Freeing unused kernel image (rodata/data gap) memory: 568K
+[    2.485040] Run /sbin/init as init process
+[    2.512956] random: systemd: uninitialized urandom read (16 bytes read)
+[    2.525421] systemd[1]: systemd 232 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN)
+[    2.525481] systemd[1]: Detected virtualization qemu.
+[    2.525490] systemd[1]: Detected architecture x86-64.
+[    2.526427] systemd[1]: Set hostname to <syzkaller>.
+[    2.529893] random: systemd: uninitialized urandom read (16 bytes read)
+[    2.530791] random: systemd: uninitialized urandom read (16 bytes read)
+[    2.535242] selinuxenabled (152) used greatest stack depth: 13928 bytes left
+[    2.535379] selinux-autorel (142) used greatest stack depth: 12808 bytes left
+[    2.555043] systemd[1]: Started Forward Password Requests to Wall Directory Watch.
+[    2.555948] systemd[1]: Listening on Journal Socket.
+[    2.556561] systemd[1]: Listening on udev Kernel Socket.
+[    2.557210] systemd[1]: Listening on Journal Socket (/dev/log).
+[    2.557919] systemd[1]: Created slice System Slice.
+[[0;32m  OK  [[    2.558463] systemd[1]: dev-hugepages.mount: Couldn't determine result for ConditionVirtualization=!private-users, assuming failed: No such file or directory
+0m] Listening on udev Control So[    2.581856] EXT4-fs (sda): re-mounted. Opts: (null)
+cket.
+[[0;32m  OK  [0m] Listening on /dev/initctl Compatibility Named Pipe.
+         Mounting /sys/kernel/config...
+[[0;32m  OK  [0m] Reached target Remote File Systems.
+[[0;32m  OK  [0m] Listening on Journal Audit Socket.
+[[0;32m  OK  [0m] Reached target Sockets.
+         Starting Journal Service...
+[[0;32m  OK  [0m] Mounted POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted /sys/kernel/debug.
+[[0;32m  OK  [0m] Mounted /proc/sys/fs/binfmt_misc.
+[[0;32m  OK  [0m] Mounted /sys/kernel/config.
+[[0;32m  OK  [0m] Started Remount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Started Load Kernel Modules.
+[[0;32m  OK  [0m] Started Create Static Device Nodes in /dev.
+         Starting udev Kernel Device Manager...
+         Starting Apply Kernel Variables...
+         Starting udev Coldplug all Devices...
+[[0;32m  OK  [0m] Reached target Local File Systems (Pre).
+         Starting Load/Save Random Seed...
+[[0;32m  OK  [0m] Reached target Local File Systems.
+[[0;32m  OK  [0m] Started Apply Kernel Variables.
+[[0;32m  OK  [0m] Started Load/Save Random Seed.
+         Starting Raise network interfaces...
+[    2.637404] ifquery (179) used greatest stack depth: 12672 bytes left
+[[0;32m  OK  [0m] Started udev Kernel Device Manager.
+[    2.717270] ip (232) used greatest stack depth: 12504 bytes left
+[    2.717876] e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+[    2.718323] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+[[0;32m  OK  [0m] Started Journal Service.
+         Starting Flush Journal to Persistent Storage...
+[    2.768024] systemd-journald[169]: Received request to flush runtime journal from PID 1
+[[0;32m  OK  [0m] Started Flush Journal to Persistent Storage.
+         Starting Create Volatile Files and Directories...
+[[0;32m  OK  [0m] Started Create Volatile Files and Directories.
+         Starting Update UTMP about System Boot/Shutdown...
+         Starting Network Time Synchronization...
+[[0;32m  OK  [0m] Started Update UTMP about System Boot/Shutdown.
+[[0;32m  OK  [0m] Started udev Coldplug all Devices.
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Found device /dev/ttyS0.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[    3.060812] random: crng init done
+[    3.060815] random: 7 urandom warning(s) missed due to ratelimiting
+[[0;32m  OK  [0m] Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Reached target System Initialization.
+[[0;32m  OK  [0m] Started Daily Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Reached target Basic System.
+[[0;32m  OK  [0m] Started Regular background program processing daemon.
+         Starting System Logging Service...
+         Starting getty on tty2-tty6 if dbus and logind are not available...
+[[0;32m  OK  [0m] Reached target System Time Synchronized.
+[[0;32m  OK  [0m] Started Daily apt download activities.
+[[0;32m  OK  [0m] Started Daily apt upgrade and clean activities.
+[[0;32m  OK  [0m] Reached target Timers.
+[[0;32m  OK  [0m] Started System Logging Service.
+[[0;32m  OK  [0m] Started getty on tty2-tty6 if dbus and logind are not available.
+[[0;32m  OK  [0m] Started Raise network interfaces.
+[[0;32m  OK  [0m] Reached target Network.
+         Starting OpenBSD Secure Shell server...
+         Starting Permit User Sessions...
+[[0;32m  OK  [0m] Started Permit User Sessions.
+[[0;32m  OK  [0m] Started Serial Getty on ttyS0.
+[[0;32m  OK  [0m] Started Getty on tty6.
+[[0;32m  OK  [0m] Started Getty on tty5.
+[[0;32m  OK  [0m] Started Getty on tty2.
+[[0;32m  OK  [0m] Started Getty on tty4.
+[[0;32m  OK  [0m] Started Getty on tty3.
+[[0;32m  OK  [0m] Started Getty on tty1.
+[[0;32m  OK  [0m] Reached target Login Prompts.
+[[0;32m  OK  [0m] Started OpenBSD Secure Shell server.
+[[0;32m  OK  [0m] Reached target Multi-User System.
+[[0;32m  OK  [0m] Reached target Graphical Interface.
+         Starting Update UTMP about System Runlevel Changes...
+[[0;32m  OK  [0m] Started Update UTMP about System Runlevel Changes.
+
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: [   21.642530] work_test: loading out-of-tree module taints kernel.
+[   21.660539] work-test:Planted return probe at worker_thread: 00000000ba77e94f
+[   21.683682] work-test:Planted return probe at workqueue_offline_cpu: 00000000f35e0845
+[   21.683702] hrtimer: interrupt took 9986 ns
+[   38.047055] sysrq: Changing Loglevel
+[   38.047059] sysrq: Loglevel set to 9
+[   38.055637] sysrq: Changing Loglevel
+[   38.055641] sysrq: Loglevel set to 9
+[   38.058252] sysrq: Changing Loglevel
+[   38.058256] sysrq: Loglevel set to 9
+[   38.059359] sysrq: Changing Loglevel
+[   38.059362] sysrq: Loglevel set to 9
+[   38.059394] sysrq: Changing Loglevel
+[   38.059396] sysrq: Loglevel set to 9
+[   38.060394] sysrq: Changing Loglevel
+[   38.060397] sysrq: Loglevel set to 9
+[   38.060681] sysrq: Changing Loglevel
+[   38.060683] sysrq: Loglevel set to 9
+[   38.061583] sysrq: Changing Loglevel
+[   38.061586] sysrq: Loglevel set to 9
+[   48.080448] kvm-guest: Unregister pv shared memory for cpu 4
+[   48.080519] work-test:wq_ret_handler returned 0 and took 13781 ns to execute
+[   48.158305] smpboot: CPU 4 is now offline
+[   48.215358] kvm-guest: Unregister pv shared memory for cpu 1
+[   48.216177] work-test:wq_ret_handler returned 0 and took 762997 ns to execute
+[   48.217510] smpboot: CPU 1 is now offline
+[   48.276458] kvm-guest: Unregister pv shared memory for cpu 3
+[   48.276509] work-test:wq_ret_handler returned 0 and took 10415 ns to execute
+[   48.308253] smpboot: CPU 3 is now offline
+[   48.318893] kvm-guest: Unregister pv shared memory for cpu 7
+[   48.318941] work-test:wq_ret_handler returned 0 and took 9157 ns to execute
+[   48.320383] smpboot: CPU 7 is now offline
+[   48.326286] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   48.326485] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   48.371937] kvm-guest: KVM setup async PF for cpu 7
+[   48.371942] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   48.384353] kvm-guest: Unregister pv shared memory for cpu 5
+[   48.384439] work-test:wq_ret_handler returned 0 and took 48716 ns to execute
+[   48.428588] smpboot: CPU 5 is now offline
+[   48.492336] kvm-guest: Unregister pv shared memory for cpu 2
+[   48.492412] work-test:wq_ret_handler returned 0 and took 11156 ns to execute
+[   48.588334] smpboot: CPU 2 is now offline
+[   48.596961] kvm-guest: Unregister pv shared memory for cpu 6
+[   48.598171] work-test:wq_ret_handler returned 0 and took 1171316 ns to execute
+[   48.823174] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #82!!!
+[   48.823251] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #82!!!
+[   48.824606] smpboot: CPU 6 is now offline
+[   49.230245] x86: Booting SMP configuration:
+[   49.230248] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   49.230435] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[   49.230961] kvm-guest: KVM setup async PF for cpu 1
+[   49.230967] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[   50.166270] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   50.166449] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[   50.167079] kvm-guest: KVM setup async PF for cpu 4
+[   50.167085] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[   50.321204] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   50.321418] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   50.322080] kvm-guest: KVM setup async PF for cpu 3
+[   50.322086] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   50.627208] work-test:ret_handler returned 0 and took 28926526819 ns to execute
+[   50.694167] work-test:ret_handler returned 0 and took 2093001705 ns to execute
+[   50.882169] work-test:ret_handler returned 0 and took 12352479481 ns to execute
+[   50.882189] kworker/dying (436) used greatest stack depth: 12440 bytes left
+[   51.442216] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   51.442396] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   51.443039] kvm-guest: KVM setup async PF for cpu 5
+[   51.443044] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   51.608277] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   51.608456] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[   51.609246] kvm-guest: KVM setup async PF for cpu 2
+[   51.609250] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[   51.889241] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   51.889451] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[   51.914523] kvm-guest: KVM setup async PF for cpu 6
+[   51.914530] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[   52.348340] kvm-guest: Unregister pv shared memory for cpu 3
+[   52.348387] work-test:wq_ret_handler returned 0 and took 9921 ns to execute
+[   52.397170] smpboot: CPU 3 is now offline
+[   52.399619] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   52.399797] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   52.493207] kvm-guest: KVM setup async PF for cpu 3
+[   52.493213] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   53.197337] kvm-guest: Unregister pv shared memory for cpu 4
+[   53.197384] work-test:wq_ret_handler returned 0 and took 9481 ns to execute
+[   53.228226] smpboot: CPU 4 is now offline
+[   56.235252] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   56.235443] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[   56.258636] kvm-guest: KVM setup async PF for cpu 4
+[   56.258642] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[   57.510396] kvm-guest: Unregister pv shared memory for cpu 3
+[   57.510465] work-test:wq_ret_handler returned 0 and took 10451 ns to execute
+[   57.547171] smpboot: CPU 3 is now offline
+[   57.550346] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   57.550557] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   57.616000] kvm-guest: KVM setup async PF for cpu 3
+[   57.616006] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   59.276383] kvm-guest: Unregister pv shared memory for cpu 4
+[   59.276450] work-test:wq_ret_handler returned 0 and took 10732 ns to execute
+[   59.307152] smpboot: CPU 4 is now offline
+[   59.312174] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   59.312377] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[   59.378431] kvm-guest: KVM setup async PF for cpu 4
+[   59.378437] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[   59.394373] kvm-guest: Unregister pv shared memory for cpu 7
+[   59.394440] work-test:wq_ret_handler returned 0 and took 11048 ns to execute
+[   59.498305] smpboot: CPU 7 is now offline
+[   59.502103] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   59.502312] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   59.569801] kvm-guest: KVM setup async PF for cpu 7
+[   59.569805] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   59.585428] kvm-guest: Unregister pv shared memory for cpu 7
+[   59.585494] work-test:wq_ret_handler returned 0 and took 10836 ns to execute
+[   59.629286] smpboot: CPU 7 is now offline
+[   59.631528] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   59.631704] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   59.676513] kvm-guest: KVM setup async PF for cpu 7
+[   59.676519] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   60.698489] kvm-guest: Unregister pv shared memory for cpu 7
+[   60.698538] work-test:wq_ret_handler returned 0 and took 10739 ns to execute
+[   60.747258] smpboot: CPU 7 is now offline
+[   61.442170] work-test:ret_handler returned 0 and took 13283413543 ns to execute
+[   61.759251] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   61.759469] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   61.802087] kvm-guest: KVM setup async PF for cpu 7
+[   61.802093] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   62.640385] kvm-guest: Unregister pv shared memory for cpu 3
+[   62.640454] work-test:wq_ret_handler returned 0 and took 11428 ns to execute
+[   62.677176] smpboot: CPU 3 is now offline
+[   62.817445] kvm-guest: Unregister pv shared memory for cpu 7
+[   62.817500] work-test:wq_ret_handler returned 0 and took 13514 ns to execute
+[   62.818914] smpboot: CPU 7 is now offline
+[   63.746211] work-test:ret_handler returned 0 and took 11348754804 ns to execute
+[   64.723235] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   64.725641] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   64.726528] kvm-guest: KVM setup async PF for cpu 3
+[   64.726534] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   65.496225] kvm-guest: Unregister pv shared memory for cpu 5
+[   65.496296] work-test:wq_ret_handler returned 0 and took 10394 ns to execute
+[   65.528301] smpboot: CPU 5 is now offline
+[   65.843217] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   65.857184] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   65.857955] kvm-guest: KVM setup async PF for cpu 7
+[   65.857961] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   66.277971] kvm-guest: Unregister pv shared memory for cpu 1
+[   66.278044] work-test:wq_ret_handler returned 0 and took 13046 ns to execute
+[   66.279603] smpboot: CPU 1 is now offline
+[   66.679723] kvm-guest: Unregister pv shared memory for cpu 2
+[   66.679792] work-test:wq_ret_handler returned 0 and took 8184 ns to execute
+[   66.681119] smpboot: CPU 2 is now offline
+[   67.381219] x86: Booting SMP configuration:
+[   67.381221] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   67.381469] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[   67.382195] kvm-guest: KVM setup async PF for cpu 1
+[   67.382201] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[   67.636225] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   67.636472] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   67.637185] kvm-guest: KVM setup async PF for cpu 5
+[   67.637190] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   67.711721] kvm-guest: Unregister pv shared memory for cpu 5
+[   67.711813] work-test:wq_ret_handler returned 0 and took 14866 ns to execute
+[   67.713242] work-test:ret_handler returned 0 and took 18881397341 ns to execute
+[   67.713267] smpboot: CPU 5 is now offline
+[   68.737175] work-test:ret_handler returned 0 and took 20143980474 ns to execute
+[   68.848230] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   68.848475] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   68.849218] kvm-guest: KVM setup async PF for cpu 5
+[   68.849223] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   68.982900] kvm-guest: Unregister pv shared memory for cpu 6
+[   68.982952] work-test:wq_ret_handler returned 0 and took 11034 ns to execute
+[   69.314176] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #80!!!
+[   69.348304] smpboot: CPU 6 is now offline
+[   69.533178] kvm-guest: Unregister pv shared memory for cpu 1
+[   69.533251] work-test:wq_ret_handler returned 0 and took 11358 ns to execute
+[   69.578311] smpboot: CPU 1 is now offline
+[   69.968225] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   69.968446] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[   69.969413] kvm-guest: KVM setup async PF for cpu 2
+[   69.969418] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[   70.071199] kvm-guest: Unregister pv shared memory for cpu 2
+[   70.071269] work-test:wq_ret_handler returned 0 and took 10663 ns to execute
+[   70.072855] smpboot: CPU 2 is now offline
+[   70.540230] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   70.540446] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[   70.541047] kvm-guest: KVM setup async PF for cpu 6
+[   70.541052] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[   70.692237] x86: Booting SMP configuration:
+[   70.692240] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   70.692462] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[   70.693009] kvm-guest: KVM setup async PF for cpu 1
+[   70.693013] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[   70.981229] kvm-guest: Unregister pv shared memory for cpu 7
+[   70.981302] work-test:wq_ret_handler returned 0 and took 10938 ns to execute
+[   70.982884] smpboot: CPU 7 is now offline
+[   71.126233] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   71.126435] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   71.127111] kvm-guest: KVM setup async PF for cpu 7
+[   71.127135] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   71.809181] work-test:ret_handler returned 0 and took 6106781044 ns to execute
+[   72.401377] kvm-guest: Unregister pv shared memory for cpu 4
+[   72.401450] work-test:wq_ret_handler returned 0 and took 10018 ns to execute
+[   72.402768] smpboot: CPU 4 is now offline
+[   72.577178] work-test:ret_handler returned 0 and took 23917007230 ns to execute
+[   72.577211] work-test:ret_handler returned 0 and took 20659949679 ns to execute
+[   72.642243] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   72.642490] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[   72.643207] kvm-guest: KVM setup async PF for cpu 4
+[   72.643213] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[   73.187244] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   73.206373] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[   73.267355] kvm-guest: KVM setup async PF for cpu 2
+[   73.267361] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[   73.827219] kvm-guest: Unregister pv shared memory for cpu 3
+[   73.827295] work-test:wq_ret_handler returned 0 and took 12317 ns to execute
+[   73.857368] smpboot: CPU 3 is now offline
+[   73.858188] work-test:ret_handler returned 0 and took 10365809224 ns to execute
+[   75.905181] work-test:ret_handler returned 0 and took 8185003086 ns to execute
+[   76.033221] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   76.033455] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   76.078076] kvm-guest: KVM setup async PF for cpu 3
+[   76.078081] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   76.288205] kvm-guest: Unregister pv shared memory for cpu 7
+[   76.288276] work-test:wq_ret_handler returned 0 and took 10744 ns to execute
+[   76.327230] smpboot: CPU 7 is now offline
+[   77.205187] kvm-guest: Unregister pv shared memory for cpu 3
+[   77.205340] work-test:wq_ret_handler returned 0 and took 14534 ns to execute
+[   77.206680] smpboot: CPU 3 is now offline
+[   77.628723] kvm-guest: Unregister pv shared memory for cpu 6
+[   77.628789] work-test:wq_ret_handler returned 0 and took 10670 ns to execute
+[   77.630522] smpboot: CPU 6 is now offline
+[   77.818241] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   77.818503] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[   77.819365] kvm-guest: KVM setup async PF for cpu 6
+[   77.819370] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[   78.225171] work-test:ret_handler returned 0 and took 6400779656 ns to execute
+[   78.372242] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   78.372461] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   78.373132] kvm-guest: KVM setup async PF for cpu 3
+[   78.373137] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   78.418385] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   78.427479] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   78.478199] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #82!!!
+[   78.479193] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #82!!!
+[   78.480193] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #82!!!
+[   78.481195] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #82!!!
+[   78.482479] kvm-guest: KVM setup async PF for cpu 7
+[   78.482485] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   79.996443] kvm-guest: Unregister pv shared memory for cpu 5
+[   79.996516] work-test:wq_ret_handler returned 0 and took 9237 ns to execute
+[   80.027682] smpboot: CPU 5 is now offline
+[   80.216255] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   80.247237] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   80.289187] work-test:ret_handler returned 0 and took 6396009968 ns to execute
+[   80.307388] kvm-guest: KVM setup async PF for cpu 5
+[   80.307394] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   80.641169] work-test:ret_handler returned 0 and took 32319498177 ns to execute
+[   82.370171] work-test:ret_handler returned 0 and took 4131984739 ns to execute
+[   82.811008] kvm-guest: Unregister pv shared memory for cpu 1
+[   82.811080] work-test:wq_ret_handler returned 0 and took 11580 ns to execute
+[   82.847148] smpboot: CPU 1 is now offline
+[   84.418180] work-test:ret_handler returned 0 and took 4110709680 ns to execute
+[   84.661912] kvm-guest: Unregister pv shared memory for cpu 7
+[   84.661962] work-test:wq_ret_handler returned 0 and took 9644 ns to execute
+[   84.663897] smpboot: CPU 7 is now offline
+[   84.852237] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   84.852464] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[   84.853018] kvm-guest: KVM setup async PF for cpu 7
+[   84.853022] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[   85.984237] x86: Booting SMP configuration:
+[   85.984240] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   85.992260] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[   86.047592] kvm-guest: KVM setup async PF for cpu 1
+[   86.047598] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[   86.477987] kvm-guest: Unregister pv shared memory for cpu 5
+[   86.478060] work-test:wq_ret_handler returned 0 and took 12898 ns to execute
+[   86.478175] work-test:ret_handler returned 0 and took 10559748331 ns to execute
+[   86.521705] smpboot: CPU 5 is now offline
+[   88.701216] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   88.701608] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   88.737196] work-test:ret_handler returned 0 and took 4309016219 ns to execute
+[   88.760767] kvm-guest: KVM setup async PF for cpu 5
+[   88.760774] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   89.119228] kvm-guest: Unregister pv shared memory for cpu 5
+[   89.119301] work-test:wq_ret_handler returned 0 and took 11522 ns to execute
+[   89.154048] smpboot: CPU 5 is now offline
+[   90.275270] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   90.343208] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   90.388178] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #02!!!
+[   90.389175] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #02!!!
+[   90.402954] NOHZ tick-stop error: Non-RCU local softirq work is pending, handler #02!!!
+[   90.419652] kvm-guest: KVM setup async PF for cpu 5
+[   90.419657] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   90.629524] kvm-guest: Unregister pv shared memory for cpu 5
+[   90.629593] work-test:wq_ret_handler returned 0 and took 9309 ns to execute
+[   90.667280] smpboot: CPU 5 is now offline
+[   90.769380] kvm-guest: Unregister pv shared memory for cpu 2
+[   90.769455] work-test:wq_ret_handler returned 0 and took 11284 ns to execute
+[   90.771049] smpboot: CPU 2 is now offline
+[   90.817194] work-test:ret_handler returned 0 and took 4151011078 ns to execute
+[   91.458046] kvm-guest: Unregister pv shared memory for cpu 3
+[   91.458123] work-test:wq_ret_handler returned 0 and took 14549 ns to execute
+[   91.498296] smpboot: CPU 3 is now offline
+[   91.707578] kvm-guest: Unregister pv shared memory for cpu 4
+[   91.707650] work-test:wq_ret_handler returned 0 and took 11134 ns to execute
+[   91.758393] smpboot: CPU 4 is now offline
+[   91.779201] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   91.779439] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[   91.780101] kvm-guest: KVM setup async PF for cpu 3
+[   91.780107] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[   91.869232] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   91.869457] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[   91.870129] kvm-guest: KVM setup async PF for cpu 2
+[   91.870138] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[   92.801184] work-test:ret_handler returned 0 and took 27252769653 ns to execute
+[   92.866172] work-test:ret_handler returned 0 and took 10478000745 ns to execute
+[   92.866218] kworker/dying (871) used greatest stack depth: 12424 bytes left
+[   93.746215] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   93.776600] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[   93.777401] kvm-guest: KVM setup async PF for cpu 5
+[   93.777407] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[   93.826175] work-test:ret_handler returned 0 and took 36278706614 ns to execute
+[   94.868259] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   94.913174] work-test:ret_handler returned 0 and took 6111998169 ns to execute
+[   95.000207] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[   95.044918] kvm-guest: KVM setup async PF for cpu 4
+[   95.044925] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[   96.081216] kvm-guest: Unregister pv shared memory for cpu 6
+[   96.081266] work-test:wq_ret_handler returned 0 and took 9496 ns to execute
+[   96.148356] smpboot: CPU 6 is now offline
+[   96.288231] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   96.288498] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[   96.317724] kvm-guest: KVM setup async PF for cpu 6
+[   96.317729] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[   96.961171] work-test:ret_handler returned 0 and took 6136997496 ns to execute
+[   97.153174] work-test:ret_handler returned 0 and took 37844745123 ns to execute
+[   98.004274] kvm-guest: Unregister pv shared memory for cpu 2
+[   98.004345] work-test:wq_ret_handler returned 0 and took 8549 ns to execute
+[   98.095841] smpboot: CPU 2 is now offline
+[   98.320317] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   98.320550] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[   98.368938] kvm-guest: KVM setup async PF for cpu 2
+[   98.368944] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[   99.377485] kvm-guest: Unregister pv shared memory for cpu 1
+[   99.377560] work-test:wq_ret_handler returned 0 and took 12851 ns to execute
+[   99.412572] smpboot: CPU 1 is now offline
+[  100.289183] work-test:ret_handler returned 0 and took 3316001119 ns to execute
+[  100.598250] x86: Booting SMP configuration:
+[  100.598254] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  100.598524] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  100.651777] kvm-guest: KVM setup async PF for cpu 1
+[  100.651785] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  102.038308] kvm-guest: Unregister pv shared memory for cpu 7
+[  102.038379] work-test:wq_ret_handler returned 0 and took 9668 ns to execute
+[  102.128408] smpboot: CPU 7 is now offline
+[  102.337225] work-test:ret_handler returned 0 and took 9432049282 ns to execute
+[  103.345252] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  103.345518] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  103.387327] kvm-guest: KVM setup async PF for cpu 7
+[  103.387336] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  103.939580] kvm-guest: Unregister pv shared memory for cpu 3
+[  103.939650] work-test:wq_ret_handler returned 0 and took 9162 ns to execute
+[  104.058325] smpboot: CPU 3 is now offline
+[  104.890174] work-test:ret_handler returned 0 and took 4591241093 ns to execute
+[  107.133225] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  107.146494] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  107.217405] kvm-guest: KVM setup async PF for cpu 3
+[  107.217411] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  108.033174] work-test:ret_handler returned 0 and took 13102997405 ns to execute
+[  108.033220] work-test:ret_handler returned 0 and took 3122043340 ns to execute
+[  109.432313] kvm-guest: Unregister pv shared memory for cpu 6
+[  109.432386] work-test:wq_ret_handler returned 0 and took 10882 ns to execute
+[  109.478480] smpboot: CPU 6 is now offline
+[  109.566159] kvm-guest: Unregister pv shared memory for cpu 2
+[  109.566246] work-test:wq_ret_handler returned 0 and took 11853 ns to execute
+[  109.567945] smpboot: CPU 2 is now offline
+[  110.139189] work-test:ret_handler returned 0 and took 4107296107 ns to execute
+[  110.714233] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  110.751351] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  110.752085] kvm-guest: KVM setup async PF for cpu 2
+[  110.752091] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  111.809170] work-test:ret_handler returned 0 and took 42793427719 ns to execute
+[  111.901344] kvm-guest: Unregister pv shared memory for cpu 5
+[  111.901393] work-test:wq_ret_handler returned 0 and took 9926 ns to execute
+[  111.902688] smpboot: CPU 5 is now offline
+[  112.178382] kvm-guest: Unregister pv shared memory for cpu 4
+[  112.178457] work-test:wq_ret_handler returned 0 and took 12257 ns to execute
+[  112.179728] smpboot: CPU 4 is now offline
+[  112.732230] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  112.732473] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  112.733182] kvm-guest: KVM setup async PF for cpu 6
+[  112.733188] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  113.274233] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  113.274473] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  113.276220] kvm-guest: KVM setup async PF for cpu 4
+[  113.276226] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  114.173372] kvm-guest: Unregister pv shared memory for cpu 6
+[  114.173423] work-test:wq_ret_handler returned 0 and took 9945 ns to execute
+[  114.174665] smpboot: CPU 6 is now offline
+[  114.625176] work-test:ret_handler returned 0 and took 6587671756 ns to execute
+[  115.064241] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  115.064473] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  115.065032] kvm-guest: KVM setup async PF for cpu 5
+[  115.065036] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  116.268227] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  116.276669] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  116.327455] kvm-guest: KVM setup async PF for cpu 6
+[  116.327461] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  116.673171] work-test:ret_handler returned 0 and took 6511001326 ns to execute
+[  116.801363] kvm-guest: Unregister pv shared memory for cpu 1
+[  116.801431] work-test:wq_ret_handler returned 0 and took 12658 ns to execute
+[  116.857193] smpboot: CPU 1 is now offline
+[  117.221249] x86: Booting SMP configuration:
+[  117.221253] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  117.221498] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  117.277420] kvm-guest: KVM setup async PF for cpu 1
+[  117.277426] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  117.597983] kvm-guest: Unregister pv shared memory for cpu 7
+[  117.598034] work-test:wq_ret_handler returned 0 and took 10340 ns to execute
+[  117.667216] smpboot: CPU 7 is now offline
+[  118.363262] kvm-guest: Unregister pv shared memory for cpu 5
+[  118.363313] work-test:wq_ret_handler returned 0 and took 9524 ns to execute
+[  118.364885] smpboot: CPU 5 is now offline
+[  118.890171] work-test:ret_handler returned 0 and took 2206995390 ns to execute
+[  120.849239] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  120.952217] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  120.987199] work-test:ret_handler returned 0 and took 18631009455 ns to execute
+[  121.003175] kvm-guest: KVM setup async PF for cpu 7
+[  121.003181] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  121.370442] kvm-guest: Unregister pv shared memory for cpu 4
+[  121.370531] work-test:wq_ret_handler returned 0 and took 16786 ns to execute
+[  121.371858] smpboot: CPU 4 is now offline
+[  121.493831] kvm-guest: Unregister pv shared memory for cpu 1
+[  121.493906] work-test:wq_ret_handler returned 0 and took 12579 ns to execute
+[  121.531164] smpboot: CPU 1 is now offline
+[  121.531545] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  121.531757] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  121.533150] kvm-guest: KVM setup async PF for cpu 5
+[  121.533156] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  121.670635] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  121.670863] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  121.711042] kvm-guest: KVM setup async PF for cpu 4
+[  121.711048] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  121.717271] x86: Booting SMP configuration:
+[  121.717274] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  121.732942] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  121.787535] kvm-guest: KVM setup async PF for cpu 1
+[  121.787543] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  122.624840] kvm-guest: Unregister pv shared memory for cpu 6
+[  122.624912] work-test:wq_ret_handler returned 0 and took 10349 ns to execute
+[  122.651813] smpboot: CPU 6 is now offline
+[  122.903375] kvm-guest: Unregister pv shared memory for cpu 1
+[  122.903447] work-test:wq_ret_handler returned 0 and took 12570 ns to execute
+[  122.904739] smpboot: CPU 1 is now offline
+[  123.338172] kvm-guest: Unregister pv shared memory for cpu 3
+[  123.338227] work-test:wq_ret_handler returned 0 and took 10090 ns to execute
+[  123.428362] smpboot: CPU 3 is now offline
+[  123.793182] work-test:ret_handler returned 0 and took 101877011089 ns to execute
+[  124.008235] x86: Booting SMP configuration:
+[  124.008239] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  124.008462] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  124.008987] kvm-guest: KVM setup async PF for cpu 1
+[  124.008992] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  124.760246] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  124.760492] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  124.761405] kvm-guest: KVM setup async PF for cpu 6
+[  124.761412] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  125.204543] kvm-guest: Unregister pv shared memory for cpu 7
+[  125.204677] work-test:wq_ret_handler returned 0 and took 13027 ns to execute
+[  125.205998] smpboot: CPU 7 is now offline
+[  125.597242] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  125.614240] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  125.615450] kvm-guest: KVM setup async PF for cpu 3
+[  125.615457] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  125.872376] kvm-guest: Unregister pv shared memory for cpu 2
+[  125.872449] work-test:wq_ret_handler returned 0 and took 10162 ns to execute
+[  125.873800] smpboot: CPU 2 is now offline
+[  126.189232] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  126.189475] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  126.191527] kvm-guest: KVM setup async PF for cpu 2
+[  126.191534] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  126.593202] work-test:ret_handler returned 0 and took 7690024047 ns to execute
+[  127.042215] kvm-guest: Unregister pv shared memory for cpu 1
+[  127.042266] work-test:wq_ret_handler returned 0 and took 10040 ns to execute
+[  127.043889] smpboot: CPU 1 is now offline
+[  127.178238] x86: Booting SMP configuration:
+[  127.178241] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  127.178456] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  127.178984] kvm-guest: KVM setup async PF for cpu 1
+[  127.178989] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  127.807247] kvm-guest: Unregister pv shared memory for cpu 5
+[  127.807349] work-test:wq_ret_handler returned 0 and took 10429 ns to execute
+[  127.808966] smpboot: CPU 5 is now offline
+[  127.922260] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  127.922502] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  127.923215] kvm-guest: KVM setup async PF for cpu 5
+[  127.923221] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  128.341233] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  128.387237] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  128.425480] kvm-guest: KVM setup async PF for cpu 7
+[  128.425487] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  128.785879] kvm-guest: Unregister pv shared memory for cpu 3
+[  128.785953] work-test:wq_ret_handler returned 0 and took 13969 ns to execute
+[  128.812253] smpboot: CPU 3 is now offline
+[  128.865172] work-test:ret_handler returned 0 and took 14214993239 ns to execute
+[  130.968224] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  131.067259] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  131.138789] kvm-guest: KVM setup async PF for cpu 3
+[  131.138794] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  131.217180] work-test:ret_handler returned 0 and took 10221375487 ns to execute
+[  133.868454] kvm-guest: Unregister pv shared memory for cpu 4
+[  133.868533] work-test:wq_ret_handler returned 0 and took 13348 ns to execute
+[  134.157250] smpboot: CPU 4 is now offline
+[  134.467218] work-test:ret_handler returned 0 and took 5475042748 ns to execute
+[  134.467262] work-test:ret_handler returned 0 and took 3217250655 ns to execute
+[  135.405072] kvm-guest: Unregister pv shared memory for cpu 1
+[  135.405119] work-test:wq_ret_handler returned 0 and took 9730 ns to execute
+[  135.438364] smpboot: CPU 1 is now offline
+[  135.442367] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  135.442568] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  135.443625] kvm-guest: KVM setup async PF for cpu 4
+[  135.443630] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  136.034406] kvm-guest: Unregister pv shared memory for cpu 5
+[  136.034480] work-test:wq_ret_handler returned 0 and took 10966 ns to execute
+[  136.035771] smpboot: CPU 5 is now offline
+[  136.264233] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  136.264475] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  136.265215] kvm-guest: KVM setup async PF for cpu 5
+[  136.265220] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  136.513181] work-test:ret_handler returned 0 and took 9910000347 ns to execute
+[  136.597157] kvm-guest: Unregister pv shared memory for cpu 7
+[  136.597255] work-test:wq_ret_handler returned 0 and took 10423 ns to execute
+[  136.598876] smpboot: CPU 7 is now offline
+[  137.601174] work-test:ret_handler returned 0 and took 89382940370 ns to execute
+[  137.695244] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  137.695468] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  137.696183] kvm-guest: KVM setup async PF for cpu 7
+[  137.696189] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  138.319312] kvm-guest: Unregister pv shared memory for cpu 2
+[  138.319499] work-test:wq_ret_handler returned 0 and took 11467 ns to execute
+[  138.358359] smpboot: CPU 2 is now offline
+[  138.533236] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  138.533453] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  138.534150] kvm-guest: KVM setup async PF for cpu 2
+[  138.534157] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  138.561187] work-test:ret_handler returned 0 and took 6100018929 ns to execute
+[  138.730240] x86: Booting SMP configuration:
+[  138.730243] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  138.730458] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  138.797452] kvm-guest: KVM setup async PF for cpu 1
+[  138.797458] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  140.617245] work-test:ret_handler returned 0 and took 6136973319 ns to execute
+[  142.683678] kvm-guest: Unregister pv shared memory for cpu 4
+[  142.683751] work-test:wq_ret_handler returned 0 and took 10287 ns to execute
+[  142.725381] smpboot: CPU 4 is now offline
+[  142.831271] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  142.897279] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  142.958389] kvm-guest: KVM setup async PF for cpu 4
+[  142.958396] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  143.433226] kvm-guest: Unregister pv shared memory for cpu 5
+[  143.433300] work-test:wq_ret_handler returned 0 and took 11166 ns to execute
+[  143.483396] smpboot: CPU 5 is now offline
+[  143.628558] kvm-guest: Unregister pv shared memory for cpu 2
+[  143.628642] work-test:wq_ret_handler returned 0 and took 24791 ns to execute
+[  143.629984] smpboot: CPU 2 is now offline
+[  143.636219] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  143.636430] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  143.637093] kvm-guest: KVM setup async PF for cpu 5
+[  143.637098] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  144.705180] work-test:ret_handler returned 0 and took 8181904134 ns to execute
+[  144.905145] kvm-guest: Unregister pv shared memory for cpu 6
+[  144.905263] work-test:wq_ret_handler returned 0 and took 60392 ns to execute
+[  144.906867] smpboot: CPU 6 is now offline
+[  145.246097] kvm-guest: Unregister pv shared memory for cpu 3
+[  145.246185] work-test:wq_ret_handler returned 0 and took 9576 ns to execute
+[  145.278352] smpboot: CPU 3 is now offline
+[  145.389227] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  145.389456] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  145.390147] kvm-guest: KVM setup async PF for cpu 3
+[  145.390152] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  146.149251] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  146.149462] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  146.150118] kvm-guest: KVM setup async PF for cpu 6
+[  146.150122] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  146.753172] work-test:ret_handler returned 0 and took 6121551037 ns to execute
+[  146.826277] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  146.857995] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  146.913560] kvm-guest: KVM setup async PF for cpu 2
+[  146.913567] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  148.697273] kvm-guest: Unregister pv shared memory for cpu 3
+[  148.697342] work-test:wq_ret_handler returned 0 and took 11317 ns to execute
+[  148.740299] smpboot: CPU 3 is now offline
+[  148.807183] work-test:ret_handler returned 0 and took 10208003587 ns to execute
+[  148.982256] kvm-guest: Unregister pv shared memory for cpu 1
+[  148.982306] work-test:wq_ret_handler returned 0 and took 9156 ns to execute
+[  149.008327] smpboot: CPU 1 is now offline
+[  149.263246] x86: Booting SMP configuration:
+[  149.263251] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  149.263487] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  149.264032] kvm-guest: KVM setup async PF for cpu 1
+[  149.264036] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  149.765722] kvm-guest: Unregister pv shared memory for cpu 7
+[  149.765793] work-test:wq_ret_handler returned 0 and took 10025 ns to execute
+[  149.767079] smpboot: CPU 7 is now offline
+[  149.877579] kvm-guest: Unregister pv shared memory for cpu 5
+[  149.877650] work-test:wq_ret_handler returned 0 and took 9786 ns to execute
+[  149.878930] smpboot: CPU 5 is now offline
+[  150.152215] kvm-guest: Unregister pv shared memory for cpu 4
+[  150.152263] work-test:wq_ret_handler returned 0 and took 9362 ns to execute
+[  150.228398] smpboot: CPU 4 is now offline
+[  150.899229] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  150.899455] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  150.900116] kvm-guest: KVM setup async PF for cpu 3
+[  150.900123] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  150.949407] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  150.949633] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  150.950404] kvm-guest: KVM setup async PF for cpu 7
+[  150.950410] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  151.008570] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  151.008800] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  151.009718] kvm-guest: KVM setup async PF for cpu 5
+[  151.009724] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  152.408319] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  152.408605] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  152.470650] kvm-guest: KVM setup async PF for cpu 4
+[  152.470657] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  152.678969] kvm-guest: Unregister pv shared memory for cpu 4
+[  152.679108] work-test:wq_ret_handler returned 0 and took 10982 ns to execute
+[  152.727252] work-test:ret_handler returned 0 and took 5963226242 ns to execute
+[  152.737256] smpboot: CPU 4 is now offline
+[  152.961178] work-test:ret_handler returned 0 and took 93462596973 ns to execute
+[  152.961179] work-test:ret_handler returned 0 and took 74447708704 ns to execute
+[  155.407549] kvm-guest: Unregister pv shared memory for cpu 1
+[  155.407597] work-test:wq_ret_handler returned 0 and took 9033 ns to execute
+[  155.409861] smpboot: CPU 1 is now offline
+[  155.991226] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  155.991443] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  155.992001] kvm-guest: KVM setup async PF for cpu 4
+[  155.992006] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  156.929176] work-test:ret_handler returned 0 and took 12211000388 ns to execute
+[  158.593268] x86: Booting SMP configuration:
+[  158.593271] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  158.611037] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  158.677565] kvm-guest: KVM setup async PF for cpu 1
+[  158.677573] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  158.979168] work-test:ret_handler returned 0 and took 10146024367 ns to execute
+[  160.919183] kvm-guest: Unregister pv shared memory for cpu 1
+[  160.919256] work-test:wq_ret_handler returned 0 and took 9793 ns to execute
+[  160.957294] smpboot: CPU 1 is now offline
+[  161.129663] kvm-guest: Unregister pv shared memory for cpu 2
+[  161.129736] work-test:wq_ret_handler returned 0 and took 11383 ns to execute
+[  161.168626] smpboot: CPU 2 is now offline
+[  162.104215] x86: Booting SMP configuration:
+[  162.104218] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  162.104445] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  162.105438] kvm-guest: KVM setup async PF for cpu 1
+[  162.105444] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  162.386326] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  162.386638] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  162.440665] kvm-guest: KVM setup async PF for cpu 2
+[  162.440672] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  163.077315] work-test:ret_handler returned 0 and took 10176315341 ns to execute
+[  163.367179] kvm-guest: Unregister pv shared memory for cpu 1
+[  163.367262] work-test:wq_ret_handler returned 0 and took 9909 ns to execute
+[  163.419059] smpboot: CPU 1 is now offline
+[  164.321512] kvm-guest: Unregister pv shared memory for cpu 6
+[  164.321582] work-test:wq_ret_handler returned 0 and took 9593 ns to execute
+[  164.547002] smpboot: CPU 6 is now offline
+[  165.103560] kvm-guest: Unregister pv shared memory for cpu 4
+[  165.103633] work-test:wq_ret_handler returned 0 and took 11828 ns to execute
+[  165.104942] smpboot: CPU 4 is now offline
+[  165.122627] work-test:ret_handler returned 0 and took 8158045108 ns to execute
+[  166.099004] kvm-guest: Unregister pv shared memory for cpu 5
+[  166.099077] work-test:wq_ret_handler returned 0 and took 12442 ns to execute
+[  166.100585] smpboot: CPU 5 is now offline
+[  166.239216] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  166.239422] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  166.240155] kvm-guest: KVM setup async PF for cpu 4
+[  166.240162] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  166.618215] x86: Booting SMP configuration:
+[  166.618219] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  166.618465] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  166.619207] kvm-guest: KVM setup async PF for cpu 1
+[  166.619213] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  167.170171] work-test:ret_handler returned 0 and took 4077002980 ns to execute
+[  167.719225] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  167.747283] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  167.881409] kvm-guest: KVM setup async PF for cpu 6
+[  167.881416] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  168.120405] kvm-guest: Unregister pv shared memory for cpu 3
+[  168.120479] work-test:wq_ret_handler returned 0 and took 11461 ns to execute
+[  168.121808] smpboot: CPU 3 is now offline
+[  168.238240] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  168.238494] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  168.240413] kvm-guest: KVM setup async PF for cpu 3
+[  168.240457] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  169.075246] kvm-guest: Unregister pv shared memory for cpu 7
+[  169.075297] work-test:wq_ret_handler returned 0 and took 10517 ns to execute
+[  169.118406] smpboot: CPU 7 is now offline
+[  169.329259] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  169.329489] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  169.330077] kvm-guest: KVM setup async PF for cpu 5
+[  169.330083] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  169.403392] kvm-guest: Unregister pv shared memory for cpu 3
+[  169.403470] work-test:wq_ret_handler returned 0 and took 13858 ns to execute
+[  169.404775] smpboot: CPU 3 is now offline
+[  169.585182] work-test:ret_handler returned 0 and took 10585721249 ns to execute
+[  169.593251] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  169.593485] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  169.594215] kvm-guest: KVM setup async PF for cpu 3
+[  169.594221] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  171.713173] work-test:ret_handler returned 0 and took 4517995198 ns to execute
+[  172.281232] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  172.337605] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  172.396919] kvm-guest: KVM setup async PF for cpu 7
+[  172.396928] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  175.810184] work-test:ret_handler returned 0 and took 6148017568 ns to execute
+[  176.880211] kvm-guest: Unregister pv shared memory for cpu 7
+[  176.880282] work-test:wq_ret_handler returned 0 and took 8858 ns to execute
+[  176.938488] smpboot: CPU 7 is now offline
+[  177.280063] kvm-guest: Unregister pv shared memory for cpu 1
+[  177.280134] work-test:wq_ret_handler returned 0 and took 10401 ns to execute
+[  177.411492] smpboot: CPU 1 is now offline
+[  177.857177] work-test:ret_handler returned 0 and took 6104923710 ns to execute
+[  178.446240] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  178.446520] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  178.447450] kvm-guest: KVM setup async PF for cpu 7
+[  178.447457] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  178.577263] x86: Booting SMP configuration:
+[  178.577266] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  178.577489] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  178.618893] kvm-guest: KVM setup async PF for cpu 1
+[  178.618900] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  179.655799] kvm-guest: Unregister pv shared memory for cpu 2
+[  179.655857] work-test:wq_ret_handler returned 0 and took 12182 ns to execute
+[  179.748421] smpboot: CPU 2 is now offline
+[  180.481180] work-test:ret_handler returned 0 and took 3157576318 ns to execute
+[  180.778685] kvm-guest: Unregister pv shared memory for cpu 1
+[  180.778874] work-test:wq_ret_handler returned 0 and took 36328 ns to execute
+[  180.780314] smpboot: CPU 1 is now offline
+[  180.974242] x86: Booting SMP configuration:
+[  180.974246] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  180.974484] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  180.975199] kvm-guest: KVM setup async PF for cpu 1
+[  180.975204] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  181.058389] kvm-guest: Unregister pv shared memory for cpu 6
+[  181.058462] work-test:wq_ret_handler returned 0 and took 11400 ns to execute
+[  181.075727] smpboot: CPU 6 is now offline
+[  182.401178] work-test:ret_handler returned 0 and took 17235974106 ns to execute
+[  182.578987] kvm-guest: Unregister pv shared memory for cpu 4
+[  182.579061] work-test:wq_ret_handler returned 0 and took 13695 ns to execute
+[  182.661766] smpboot: CPU 4 is now offline
+[  182.711778] kvm-guest: Unregister pv shared memory for cpu 3
+[  182.711826] work-test:wq_ret_handler returned 0 and took 8465 ns to execute
+[  182.713767] smpboot: CPU 3 is now offline
+[  182.719340] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  182.719539] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  182.720077] kvm-guest: KVM setup async PF for cpu 4
+[  182.720081] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  182.890252] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  182.890492] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  182.891204] kvm-guest: KVM setup async PF for cpu 3
+[  182.891210] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  182.898534] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  182.898758] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  182.899307] kvm-guest: KVM setup async PF for cpu 2
+[  182.899311] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  184.013000] kvm-guest: Unregister pv shared memory for cpu 3
+[  184.013074] work-test:wq_ret_handler returned 0 and took 11680 ns to execute
+[  184.014975] smpboot: CPU 3 is now offline
+[  184.201224] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  184.201452] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  184.202218] kvm-guest: KVM setup async PF for cpu 3
+[  184.202225] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  184.208236] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  184.208498] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  184.230899] kvm-guest: KVM setup async PF for cpu 6
+[  184.230905] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  184.449179] work-test:ret_handler returned 0 and took 8633997270 ns to execute
+[  184.778174] work-test:ret_handler returned 0 and took 89657774319 ns to execute
+[  185.547338] kvm-guest: Unregister pv shared memory for cpu 5
+[  185.547414] work-test:wq_ret_handler returned 0 and took 12767 ns to execute
+[  185.597314] smpboot: CPU 5 is now offline
+[  186.241177] work-test:ret_handler returned 0 and took 94455552218 ns to execute
+[  187.714233] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  187.766380] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  187.805570] kvm-guest: KVM setup async PF for cpu 5
+[  187.805576] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  188.497327] work-test:ret_handler returned 0 and took 3965146337 ns to execute
+[  189.767410] kvm-guest: Unregister pv shared memory for cpu 7
+[  189.767482] work-test:wq_ret_handler returned 0 and took 9460 ns to execute
+[  189.828550] smpboot: CPU 7 is now offline
+[  192.092243] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  192.101328] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  192.150721] kvm-guest: KVM setup async PF for cpu 7
+[  192.150726] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  196.192670] kvm-guest: Unregister pv shared memory for cpu 5
+[  196.192742] work-test:wq_ret_handler returned 0 and took 9009 ns to execute
+[  196.248499] smpboot: CPU 5 is now offline
+[  196.790209] kvm-guest: Unregister pv shared memory for cpu 4
+[  196.790283] work-test:wq_ret_handler returned 0 and took 12123 ns to execute
+[  196.861684] smpboot: CPU 4 is now offline
+[  197.370248] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  197.370507] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  197.371223] kvm-guest: KVM setup async PF for cpu 5
+[  197.371230] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  198.926047] kvm-guest: Unregister pv shared memory for cpu 2
+[  198.926119] work-test:wq_ret_handler returned 0 and took 13793 ns to execute
+[  198.927670] smpboot: CPU 2 is now offline
+[  198.955230] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  198.995210] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  198.996407] kvm-guest: KVM setup async PF for cpu 4
+[  198.996413] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  199.001434] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  199.001672] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  199.039822] kvm-guest: KVM setup async PF for cpu 2
+[  199.039876] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  200.270259] kvm-guest: Unregister pv shared memory for cpu 1
+[  200.270310] work-test:wq_ret_handler returned 0 and took 9757 ns to execute
+[  200.347316] smpboot: CPU 1 is now offline
+[  200.510255] kvm-guest: Unregister pv shared memory for cpu 4
+[  200.510308] work-test:wq_ret_handler returned 0 and took 11079 ns to execute
+[  200.548455] smpboot: CPU 4 is now offline
+[  200.657599] kvm-guest: Unregister pv shared memory for cpu 6
+[  200.657683] work-test:wq_ret_handler returned 0 and took 23806 ns to execute
+[  200.698433] smpboot: CPU 6 is now offline
+[  201.153178] work-test:ret_handler returned 0 and took 147924739922 ns to execute
+[  201.350922] kvm-guest: Unregister pv shared memory for cpu 3
+[  201.350991] work-test:wq_ret_handler returned 0 and took 9840 ns to execute
+[  201.388723] smpboot: CPU 3 is now offline
+[  201.398890] x86: Booting SMP configuration:
+[  201.398893] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  201.399072] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  201.401416] kvm-guest: KVM setup async PF for cpu 1
+[  201.401420] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  201.444614] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  201.444829] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  201.491391] kvm-guest: KVM setup async PF for cpu 3
+[  201.491397] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  201.813228] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  201.853602] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  201.875062] kvm-guest: KVM setup async PF for cpu 6
+[  201.875069] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  202.834258] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  202.844353] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  203.009199] work-test:ret_handler returned 0 and took 14511524529 ns to execute
+[  203.037127] kvm-guest: KVM setup async PF for cpu 4
+[  203.037134] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  203.457179] work-test:ret_handler returned 0 and took 81796451278 ns to execute
+[  203.492180] work-test:ret_handler returned 0 and took 20587218764 ns to execute
+[  205.057189] work-test:ret_handler returned 0 and took 27181014723 ns to execute
+[  205.185169] work-test:ret_handler returned 0 and took 6094972235 ns to execute
+[  209.169166] work-test:ret_handler returned 0 and took 6152685533 ns to execute
+[  209.408461] kvm-guest: Unregister pv shared memory for cpu 7
+[  209.408535] work-test:wq_ret_handler returned 0 and took 11458 ns to execute
+[  209.931935] smpboot: CPU 7 is now offline
+[  210.035233] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  210.035446] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  210.078439] kvm-guest: KVM setup async PF for cpu 7
+[  210.078444] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  211.602176] work-test:ret_handler returned 0 and took 2393867180 ns to execute
+[  212.668876] kvm-guest: Unregister pv shared memory for cpu 5
+[  212.668944] work-test:wq_ret_handler returned 0 and took 7758 ns to execute
+[  212.717333] smpboot: CPU 5 is now offline
+[  214.110006] kvm-guest: Unregister pv shared memory for cpu 6
+[  214.110082] work-test:wq_ret_handler returned 0 and took 13792 ns to execute
+[  214.154086] smpboot: CPU 6 is now offline
+[  214.273173] work-test:ret_handler returned 0 and took 4704563601 ns to execute
+[  214.633192] work-test:ret_handler returned 0 and took 32214047830 ns to execute
+[  214.809253] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  214.809472] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  214.810327] kvm-guest: KVM setup async PF for cpu 5
+[  214.810331] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  215.211221] kvm-guest: Unregister pv shared memory for cpu 4
+[  215.211299] work-test:wq_ret_handler returned 0 and took 12797 ns to execute
+[  215.212953] smpboot: CPU 4 is now offline
+[  216.297233] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  216.317445] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  216.318438] kvm-guest: KVM setup async PF for cpu 6
+[  216.318444] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  216.505254] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  216.547337] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  216.603502] kvm-guest: KVM setup async PF for cpu 4
+[  216.603510] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  217.199249] kvm-guest: Unregister pv shared memory for cpu 2
+[  217.199352] work-test:wq_ret_handler returned 0 and took 10731 ns to execute
+[  217.568547] smpboot: CPU 2 is now offline
+[  219.192678] kvm-guest: Unregister pv shared memory for cpu 7
+[  219.192827] work-test:wq_ret_handler returned 0 and took 33514 ns to execute
+[  219.248502] smpboot: CPU 7 is now offline
+[  219.513377] kvm-guest: Unregister pv shared memory for cpu 1
+[  219.513449] work-test:wq_ret_handler returned 0 and took 11309 ns to execute
+[  219.537515] smpboot: CPU 1 is now offline
+[  220.671221] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  220.671444] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  220.672222] kvm-guest: KVM setup async PF for cpu 2
+[  220.672228] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  220.801185] work-test:ret_handler returned 0 and took 6142006234 ns to execute
+[  221.352230] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  221.352488] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  221.354732] kvm-guest: KVM setup async PF for cpu 7
+[  221.354739] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  221.548222] kvm-guest: Unregister pv shared memory for cpu 3
+[  221.548349] work-test:wq_ret_handler returned 0 and took 35940 ns to execute
+[  221.549977] smpboot: CPU 3 is now offline
+[  221.838186] kvm-guest: Unregister pv shared memory for cpu 4
+[  221.838251] work-test:wq_ret_handler returned 0 and took 11797 ns to execute
+[  221.839820] smpboot: CPU 4 is now offline
+[  222.447143] kvm-guest: Unregister pv shared memory for cpu 7
+[  222.447206] work-test:wq_ret_handler returned 0 and took 9600 ns to execute
+[  222.488470] smpboot: CPU 7 is now offline
+[  222.600247] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  222.600496] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  222.601215] kvm-guest: KVM setup async PF for cpu 7
+[  222.601220] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  222.643266] x86: Booting SMP configuration:
+[  222.643270] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  222.643494] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  222.644117] kvm-guest: KVM setup async PF for cpu 1
+[  222.644121] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  222.849171] work-test:ret_handler returned 0 and took 17765077047 ns to execute
+[  223.991228] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  223.991436] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  223.992154] kvm-guest: KVM setup async PF for cpu 4
+[  223.992210] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  224.717322] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  224.735252] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  224.782288] kvm-guest: KVM setup async PF for cpu 3
+[  224.782295] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  224.897182] work-test:ret_handler returned 0 and took 4082987661 ns to execute
+[  227.018058] kvm-guest: Unregister pv shared memory for cpu 5
+[  227.018129] work-test:wq_ret_handler returned 0 and took 9957 ns to execute
+[  227.058713] smpboot: CPU 5 is now offline
+[  228.747341] kvm-guest: Unregister pv shared memory for cpu 1
+[  228.747418] work-test:wq_ret_handler returned 0 and took 12150 ns to execute
+[  228.749053] smpboot: CPU 1 is now offline
+[  229.058174] work-test:ret_handler returned 0 and took 16791882061 ns to execute
+[  229.876234] x86: Booting SMP configuration:
+[  229.876238] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  229.876466] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  229.877266] kvm-guest: KVM setup async PF for cpu 1
+[  229.877273] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  230.241234] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  230.297372] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  230.366588] kvm-guest: KVM setup async PF for cpu 5
+[  230.366596] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  230.857603] kvm-guest: Unregister pv shared memory for cpu 2
+[  230.857671] work-test:wq_ret_handler returned 0 and took 12261 ns to execute
+[  230.897364] smpboot: CPU 2 is now offline
+[  231.065241] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  231.105175] work-test:ret_handler returned 0 and took 8247685087 ns to execute
+[  231.116050] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  231.187550] kvm-guest: KVM setup async PF for cpu 2
+[  231.187557] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  231.570754] kvm-guest: Unregister pv shared memory for cpu 5
+[  231.570830] work-test:wq_ret_handler returned 0 and took 13662 ns to execute
+[  231.627442] smpboot: CPU 5 is now offline
+[  231.771234] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  231.771456] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  231.827554] kvm-guest: KVM setup async PF for cpu 5
+[  231.827561] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  233.228190] work-test:ret_handler returned 0 and took 8225012088 ns to execute
+[  233.453388] kvm-guest: Unregister pv shared memory for cpu 6
+[  233.453438] work-test:wq_ret_handler returned 0 and took 9394 ns to execute
+[  233.567401] smpboot: CPU 6 is now offline
+[  234.122725] kvm-guest: Unregister pv shared memory for cpu 4
+[  234.122797] work-test:wq_ret_handler returned 0 and took 9448 ns to execute
+[  234.124087] smpboot: CPU 4 is now offline
+[  235.266188] work-test:ret_handler returned 0 and took 4108756919 ns to execute
+[  235.282232] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  235.282462] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  235.283332] kvm-guest: KVM setup async PF for cpu 4
+[  235.283342] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  235.773226] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  235.805891] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  235.869789] kvm-guest: KVM setup async PF for cpu 6
+[  235.869797] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  235.980108] kvm-guest: Unregister pv shared memory for cpu 5
+[  235.980194] work-test:wq_ret_handler returned 0 and took 10544 ns to execute
+[  236.007713] smpboot: CPU 5 is now offline
+[  237.313174] work-test:ret_handler returned 0 and took 4065990860 ns to execute
+[  237.942372] kvm-guest: Unregister pv shared memory for cpu 1
+[  237.942445] work-test:wq_ret_handler returned 0 and took 11748 ns to execute
+[  237.951497] smpboot: CPU 1 is now offline
+[  238.081174] work-test:ret_handler returned 0 and took 128474797609 ns to execute
+[  238.313045] kvm-guest: Unregister pv shared memory for cpu 2
+[  238.313119] work-test:wq_ret_handler returned 0 and took 12533 ns to execute
+[  238.314693] smpboot: CPU 2 is now offline
+[  238.590231] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  238.590472] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  238.591326] kvm-guest: KVM setup async PF for cpu 2
+[  238.591332] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  238.961662] kvm-guest: Unregister pv shared memory for cpu 6
+[  238.961733] work-test:wq_ret_handler returned 0 and took 8853 ns to execute
+[  239.055525] smpboot: CPU 6 is now offline
+[  239.162233] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  239.162498] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  239.163244] kvm-guest: KVM setup async PF for cpu 5
+[  239.163250] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  239.625173] work-test:ret_handler returned 0 and took 4322997976 ns to execute
+[  239.876771] kvm-guest: Unregister pv shared memory for cpu 3
+[  239.876842] work-test:wq_ret_handler returned 0 and took 9883 ns to execute
+[  239.878143] smpboot: CPU 3 is now offline
+[  240.023237] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  240.023503] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  240.024239] kvm-guest: KVM setup async PF for cpu 3
+[  240.024245] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  240.040534] x86: Booting SMP configuration:
+[  240.040538] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  240.040821] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  240.041544] kvm-guest: KVM setup async PF for cpu 1
+[  240.041550] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  240.167449] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  240.187408] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  240.267517] kvm-guest: KVM setup async PF for cpu 6
+[  240.267524] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  240.468390] kvm-guest: Unregister pv shared memory for cpu 4
+[  240.468465] work-test:wq_ret_handler returned 0 and took 11549 ns to execute
+[  240.518071] smpboot: CPU 4 is now offline
+[  240.763239] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  240.797384] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  240.844144] kvm-guest: KVM setup async PF for cpu 4
+[  240.844151] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  242.188173] work-test:ret_handler returned 0 and took 93152968487 ns to execute
+[  242.649377] kvm-guest: Unregister pv shared memory for cpu 7
+[  242.649449] work-test:wq_ret_handler returned 0 and took 11615 ns to execute
+[  242.698361] smpboot: CPU 7 is now offline
+[  243.037074] kvm-guest: Unregister pv shared memory for cpu 4
+[  243.037125] work-test:wq_ret_handler returned 0 and took 9445 ns to execute
+[  243.078456] smpboot: CPU 4 is now offline
+[  243.207235] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  243.207473] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  243.208014] kvm-guest: KVM setup async PF for cpu 4
+[  243.208019] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  244.847240] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  244.887376] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  244.970406] kvm-guest: KVM setup async PF for cpu 7
+[  244.970412] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  245.761185] work-test:ret_handler returned 0 and took 16680528206 ns to execute
+[  248.121179] work-test:ret_handler returned 0 and took 10790986504 ns to execute
+[  249.378711] kvm-guest: Unregister pv shared memory for cpu 6
+[  249.378787] work-test:wq_ret_handler returned 0 and took 11614 ns to execute
+[  249.448526] smpboot: CPU 6 is now offline
+[  250.178175] work-test:ret_handler returned 0 and took 10552906386 ns to execute
+[  252.225209] work-test:ret_handler returned 0 and took 6394828582 ns to execute
+[  252.284862] kvm-guest: Unregister pv shared memory for cpu 5
+[  252.284930] work-test:wq_ret_handler returned 0 and took 10423 ns to execute
+[  252.286888] smpboot: CPU 5 is now offline
+[  252.549237] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  252.557589] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  252.559365] kvm-guest: KVM setup async PF for cpu 6
+[  252.559371] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  254.067228] kvm-guest: Unregister pv shared memory for cpu 7
+[  254.067303] work-test:wq_ret_handler returned 0 and took 12971 ns to execute
+[  254.068974] smpboot: CPU 7 is now offline
+[  254.274171] work-test:ret_handler returned 0 and took 6141966404 ns to execute
+[  254.403221] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  254.403493] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  254.404372] kvm-guest: KVM setup async PF for cpu 5
+[  254.404378] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  255.787907] kvm-guest: Unregister pv shared memory for cpu 2
+[  255.787980] work-test:wq_ret_handler returned 0 and took 12038 ns to execute
+[  255.995810] smpboot: CPU 2 is now offline
+[  256.109250] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  256.109475] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  256.110186] kvm-guest: KVM setup async PF for cpu 2
+[  256.110192] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  256.218342] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  256.244866] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  256.305914] kvm-guest: KVM setup async PF for cpu 7
+[  256.305920] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  256.321206] work-test:ret_handler returned 0 and took 6129036279 ns to execute
+[  257.201035] kvm-guest: Unregister pv shared memory for cpu 3
+[  257.201112] work-test:wq_ret_handler returned 0 and took 14134 ns to execute
+[  257.258538] smpboot: CPU 3 is now offline
+[  258.388233] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  258.398223] kvm-clock: cpu 3, msr 1153980c1, secondary cpu clock
+[  258.437364] work-test:ret_handler returned 0 and took 4145188916 ns to execute
+[  258.495863] kvm-guest: KVM setup async PF for cpu 3
+[  258.495870] kvm-guest: stealtime: cpu 3, msr 13bcd7680
+[  258.558069] kvm-guest: Unregister pv shared memory for cpu 5
+[  258.558141] work-test:wq_ret_handler returned 0 and took 11859 ns to execute
+[  258.607385] smpboot: CPU 5 is now offline
+[  260.173661] kvm-guest: Unregister pv shared memory for cpu 1
+[  260.173750] work-test:wq_ret_handler returned 0 and took 10687 ns to execute
+[  260.175233] smpboot: CPU 1 is now offline
+[  260.609171] work-test:ret_handler returned 0 and took 59168180243 ns to execute
+[  260.691252] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  260.691519] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  260.693211] kvm-guest: KVM setup async PF for cpu 5
+[  260.693217] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  262.251832] kvm-guest: Unregister pv shared memory for cpu 4
+[  262.251901] work-test:wq_ret_handler returned 0 and took 8994 ns to execute
+[  262.253252] smpboot: CPU 4 is now offline
+[  263.251229] x86: Booting SMP configuration:
+[  263.251232] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  263.251502] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  263.252217] kvm-guest: KVM setup async PF for cpu 1
+[  263.252223] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  263.393400] kvm-guest: Unregister pv shared memory for cpu 1
+[  263.393501] work-test:wq_ret_handler returned 0 and took 11134 ns to execute
+[  263.394970] smpboot: CPU 1 is now offline
+[  264.360231] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  264.360460] kvm-clock: cpu 4, msr 115398101, secondary cpu clock
+[  264.361259] kvm-guest: KVM setup async PF for cpu 4
+[  264.361265] kvm-guest: stealtime: cpu 4, msr 13bd17680
+[  264.513186] work-test:ret_handler returned 0 and took 12280666952 ns to execute
+[  264.576221] x86: Booting SMP configuration:
+[  264.576224] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  264.607415] kvm-clock: cpu 1, msr 115398041, secondary cpu clock
+[  264.673417] kvm-guest: KVM setup async PF for cpu 1
+[  264.673423] kvm-guest: stealtime: cpu 1, msr 13bc57680
+[  265.477453] kvm-guest: Unregister pv shared memory for cpu 7
+[  265.477535] work-test:wq_ret_handler returned 0 and took 14133 ns to execute
+[  265.508602] smpboot: CPU 7 is now offline
+[  266.589227] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  266.686222] kvm-clock: cpu 7, msr 1153981c1, secondary cpu clock
+[  266.720898] kvm-guest: KVM setup async PF for cpu 7
+[  266.720906] kvm-guest: stealtime: cpu 7, msr 13bdd7680
+[  266.843932] kvm-guest: Unregister pv shared memory for cpu 5
+[  266.844003] work-test:wq_ret_handler returned 0 and took 8620 ns to execute
+[  267.330201] work-test:ret_handler returned 0 and took 10934718312 ns to execute
+[  267.330240] work-test:ret_handler returned 0 and took 2812170742 ns to execute
+[  267.648519] smpboot: CPU 5 is now offline
+[  269.728215] kvm-guest: Unregister pv shared memory for cpu 6
+[  269.728265] work-test:wq_ret_handler returned 0 and took 9727 ns to execute
+[  269.729933] smpboot: CPU 6 is now offline
+[  269.761173] work-test:ret_handler returned 0 and took 209013972292 ns to execute
+[  269.832272] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  269.832502] kvm-clock: cpu 5, msr 115398141, secondary cpu clock
+[  269.833243] kvm-guest: KVM setup async PF for cpu 5
+[  269.833248] kvm-guest: stealtime: cpu 5, msr 13bd57680
+[  269.883626] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  269.883917] kvm-clock: cpu 6, msr 115398181, secondary cpu clock
+[  269.916762] kvm-guest: KVM setup async PF for cpu 6
+[  269.916768] kvm-guest: stealtime: cpu 6, msr 13bd97680
+[  271.256769] kvm-guest: Unregister pv shared memory for cpu 2
+[  271.256895] work-test:wq_ret_handler returned 0 and took 11002 ns to execute
+[  271.318741] smpboot: CPU 2 is now offline
+[  271.553182] work-test:ret_handler returned 0 and took 4172551028 ns to execute
+[  272.066168] work-test:ret_handler returned 0 and took 202693431037 ns to execute
+[  273.601182] work-test:ret_handler returned 0 and took 8328864425 ns to execute
+[  274.455235] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  274.507411] kvm-clock: cpu 2, msr 115398081, secondary cpu clock
+[  274.558649] kvm-guest: KVM setup async PF for cpu 2
+[  274.558678] kvm-guest: stealtime: cpu 2, msr 13bc97680
+[  277.679211] work-test:ret_handler returned 0 and took 19223028817 ns to execute
+[  277.695392] kvm-guest: Unregister pv shared memory for cpu 3
+[  277.695447] work-test:wq_ret_handler returned 0 and took 11176 ns to execute
+[  278.045477] ------------[ cut here ]------------
+[  278.045480] kernel BUG at kernel/sched/core.c:7718!
+[  279.543387] invalid opcode: 0000 [#1] PREEMPT_RT SMP PTI
+[  279.560750] CPU: 3 PID: 29 Comm: migration/3 Tainted: G           O      5.10.21-rt34+ #3
+[  279.562877] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ArchLinux 1.16.0-1 04/01/2014
+[  279.565273] Stopper: multi_cpu_stop+0x0/0x120 <- 0x0
+[  279.566578] RIP: 0010:sched_cpu_dying+0x81/0x90
+[  279.567789] Code: b5 9c 00 00 48 89 df e8 3d 6f 05 00 84 c0 75 0e 31 c0 5b c3 f0 48 01 05 ed a9 0d 02 eb d2 48 89 df e8 53 87 05 00 31 c0 5b c3 <0f> 0b 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 53 48 89 fb e8 17 83
+[  279.572545] RSP: 0018:ffffa61a00133db8 EFLAGS: 00010002
+[  279.573823] RAX: 0000000000000082 RBX: ffff9df5bbce5f80 RCX: ffff9df58025b000
+[  279.575557] RDX: 0000000000000001 RSI: ffffffff96481d08 RDI: 0000000000000001
+[  279.577327] RBP: ffffffff964c3170 R08: 0000000000000000 R09: 0000000000000023
+[  279.579178] R10: ffffffff98593840 R11: 0000000000000400 R12: 0000000000000000
+[  279.581024] R13: 0000000000000003 R14: ffffffff9780b4e0 R15: ffffffff97c591d0
+[  279.582869] FS:  0000000000000000(0000) GS:ffff9df5bbcc0000(0000) knlGS:0000000000000000
+[  279.584967] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  279.586461] CR2: 0000000000eb2408 CR3: 0000000106db8000 CR4: 0000000000350ee0
+[  279.588317] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[  279.590101] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[  279.591841] Call Trace:
+[  279.592456]  cpuhp_invoke_callback+0xc0/0x880
+[  279.593532]  ? hpet_assign_irq+0x90/0x90
+[  279.594502]  take_cpu_down+0x81/0xe0
+[  279.595387]  multi_cpu_stop+0x78/0x120
+[  279.596316]  ? stop_machine_yield+0x10/0x10
+[  279.597349]  cpu_stopper_thread+0x9b/0x170
+[  279.598430]  ? smpboot_register_percpu_thread+0xf0/0xf0
+[  279.599763]  smpboot_thread_fn+0x28e/0x3f0
+[  279.600878]  kthread+0x1b4/0x1e0
+[  279.601729]  ? __kthread_parkme+0xd0/0xd0
+[  279.602777]  ret_from_fork+0x22/0x30
+[  279.603715] Modules linked in: work_test(O)
+[  279.604814] ---[ end trace 0000000000000002 ]---
+[  280.725377] printk: enabled sync mode
+[  281.920379] RIP: 0010:sched_cpu_dying+0x81/0x90
+[  281.921622] Code: b5 9c 00 00 48 89 df e8 3d 6f 05 00 84 c0 75 0e 31 c0 5b c3 f0 48 01 05 ed a9 0d 02 eb d2 48 89 df e8 53 87 05 00 31 c0 5b c3 <0f> 0b 66 66 2e 0f 1f 84 00 00 00 00 00 66 90 53 48 89 fb e8 17 83
+[  281.926500] RSP: 0018:ffffa61a00133db8 EFLAGS: 00010002
+[  281.927870] RAX: 0000000000000082 RBX: ffff9df5bbce5f80 RCX: ffff9df58025b000
+[  281.929615] RDX: 0000000000000001 RSI: ffffffff96481d08 RDI: 0000000000000001
+[  281.931358] RBP: ffffffff964c3170 R08: 0000000000000000 R09: 0000000000000023
+[  281.933100] R10: ffffffff98593840 R11: 0000000000000400 R12: 0000000000000000
+[  281.934844] R13: 0000000000000003 R14: ffffffff9780b4e0 R15: ffffffff97c591d0
+[  281.936575] FS:  0000000000000000(0000) GS:ffff9df5bbcc0000(0000) knlGS:0000000000000000
+[  281.939333] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  281.940838] CR2: 0000000000eb2408 CR3: 0000000106db8000 CR4: 0000000000350ee0
+[  281.942699] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[  281.944541] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[  281.946385] Kernel panic - not syncing:
+[  281.947322] Fatal exception
+[  284.346531] Shutting down cpus with NMI
+[  284.348459] Kernel Offset: 0x15400000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+[  284.349607] Rebooting in 86400 seconds..
+QEMU: Terminated
+

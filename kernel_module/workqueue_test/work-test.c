@@ -167,12 +167,13 @@ static void test_work_func(struct work_struct *work)
 
 	pr_debug("%s: [%d run on %d]\n", __func__, entry->last_run_cpu,
 		raw_smp_processor_id());
-	delay_ms = get_random_u32() % (10);
+	delay_ms = get_random_u32() % (3);
 	/* 200 -> 300 ms */
-	entry->delay_time = 200 + (get_random_u32() % 100);
+	entry->delay_time = get_random_u32() % 2;
+	entry->delay_time += 5;
 
         mdelay_with_yield(delay_ms);
-	if (!cpu_active(raw_smp_processor_id())) {
+	if (!cpu_online(raw_smp_processor_id())) {
 		mdelay_with_yield(200);
 	}
 }
@@ -194,8 +195,8 @@ static int test_kthread_func(void *data)
 		/* delay for 0 - 500 ms*/
 		sleep_time = get_random_u32() % (500);
 		mdelay_with_yield(sleep_time);
-		hrtimer_cancel_wait_running(&entry->timer);
-		hrtimer_restart(&entry->timer);
+		hrtimer_cancel(&entry->timer);
+		hrtimer_start_expires(&entry->timer, HRTIMER_MODE_ABS_HARD);
 	}
 
         return 0;
