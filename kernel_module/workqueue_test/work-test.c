@@ -46,6 +46,8 @@
 struct test_work {
 	struct work_struct work;
 	int last_run_cpu;
+	int timer_cpu;
+	int kthread_cpu;
 	int delay;
 	unsigned long delay_time;
 	struct hrtimer timer;
@@ -77,22 +79,51 @@ static void mdelay_with_yield(unsigned long timeout_ms)
 
 static int c_show(struct seq_file *m, void *v)
 {
-	return 0;
+	struct test_work *entry = v;
+
+	seq_printf(m, "%5u %10d %10d %10d %15lu\n",
+		entry->id,
+		entry->timer_cpu,
+		entry->last_run_cpu,
+		entry->kthread_cpu,
+		entry->delay_time);
+
+        return 0;
 }
 
 static void *c_start(struct seq_file *m, loff_t *pos)
 {
-	return *pos < 1 ? (void *)1 : NULL;
+	void *entry;
+	int id;
+
+	seq_printf(m, "%5s %10s %10s %10s %15s\n", "id",
+		"timer_cpu", "work_cpu",
+		"kthread_cpu",  "delay_time");
+
+	mutex_lock(&test_work_lock);
+
+	id = *pos;
+
+	entry = idr_get_next(&test_work_idr, &id);
+	*pos = id + 1;
+
+	return entry;
 }
 
 static void *c_next(struct seq_file *m, void *v, loff_t *pos)
 {
-	++*pos;
-	return NULL;
+	void *entry;
+	int id = *pos;
+
+        entry = idr_get_next(&test_work_idr, &id);
+	*pos = id + 1;
+
+        return entry;
 }
 
 static void c_stop(struct seq_file *m, void *v)
 {
+	mutex_unlock(&test_work_lock);
 }
 
 static const struct seq_operations work_test_op = {
@@ -119,6 +150,7 @@ static enum hrtimer_restart hrtimer_func(struct hrtimer *timer)
 {
 	struct test_work *entry = container_of(timer, struct test_work, timer);
 
+	entry->timer_cpu = raw_smp_processor_id();
 	hrtimer_forward_now(timer, ms_to_ktime(entry->delay_time));
 
 	schedule_work(&entry->work);
@@ -136,8 +168,8 @@ static void test_work_func(struct work_struct *work)
 	pr_debug("%s: [%d run on %d]\n", __func__, entry->last_run_cpu,
 		raw_smp_processor_id());
 	delay_ms = get_random_u32() % (10);
-	/* max 100 ms */
-	entry->delay_time = get_random_u32() % 100;
+	/* 200 -> 300 ms */
+	entry->delay_time = 200 + (get_random_u32() % 100);
 
         mdelay_with_yield(delay_ms);
 	if (!cpu_active(raw_smp_processor_id())) {
@@ -147,17 +179,23 @@ static void test_work_func(struct work_struct *work)
 
 static int test_kthread_func(void *data)
 {
+	struct test_work *entry = data;
 	unsigned long sleep_time;
 	unsigned long timeleft;
 
 	while (!kthread_should_stop()) {
-		sleep_time = get_random_u32() % (10 * 1000);
-		timeleft = schedule_timeout_interruptible(sleep_time);
+		/* sleep 1 - 1.5s*/
+		sleep_time = get_random_u32() % (1000);
+		timeleft = schedule_timeout_interruptible(sleep_time + 500);
 		if (kthread_should_stop() || timeleft)
 			break;
 
+		entry->kthread_cpu = raw_smp_processor_id();
+		/* delay for 0 - 500 ms*/
 		sleep_time = get_random_u32() % (500);
 		mdelay_with_yield(sleep_time);
+		hrtimer_cancel_wait_running(&entry->timer);
+		hrtimer_restart(&entry->timer);
 	}
 
         return 0;
@@ -299,7 +337,6 @@ static int __init proc_workqueue_unbound_test_init(void)
 
 	(void) kretprobe_init();
 
-
 	for (i = 0; i < num_work; i++) {
 		mutex_lock(&test_work_lock);
 		rc = idr_alloc(&test_work_idr, NULL, 0, num_work + 1, GFP_KERNEL);
@@ -321,7 +358,9 @@ static int __init proc_workqueue_unbound_test_init(void)
 
 		entry->kthread = kthread_run(test_kthread_func, entry,
 					"test_kthread%d", entry->id);
+		mutex_lock(&test_work_lock);
 		idr_replace(&test_work_idr, entry, entry->id);
+		mutex_unlock(&test_work_lock);
 	}
 
 	proc_test_info = proc_create("wq-test-info", 0, NULL, &cpuinfo_proc_ops);
@@ -332,6 +371,9 @@ static int __init proc_workqueue_unbound_test_init(void)
 int item_idr_free(int id, void *p, void *data)
 {
 	struct test_work *entry = p;
+
+	if (!entry)
+		return 0;
 
 	kthread_stop(entry->kthread);
 	hrtimer_cancel(&entry->timer);
