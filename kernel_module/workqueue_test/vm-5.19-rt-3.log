@@ -1,0 +1,2452 @@
+c[?7l[2J[0mSeaBIOS (version ArchLinux 1.16.0-1)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+BFF90FB0+BFEF0FB0 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from ROM..c[?7l[2J[0m.No EFI environment detected.
+early console in extract_kernel
+input_data: 0x0000000002cb140d
+input_len: 0x0000000000c6197a
+output: 0x0000000001000000
+output_len: 0x00000000028c977c
+kernel_total_size: 0x0000000002630000
+needed_size: 0x0000000002a00000
+trampoline_32bit: 0x000000000009d000
+Physical KASLR using RDRAND RDTSC...
+Virtual KASLR using RDRAND RDTSC...
+
+Decompressing Linux... Parsing ELF... Performing relocations... done.
+Booting the kernel.
+[    0.000000] Linux version 5.19.0-rc7-rt7+ (schspa@ArchLinux) (gcc (GCC) 12.1.0, GNU ld (GNU Binutils) 2.38) #5 SMP PREEMPT_RT Sun Jul 24 02:28:16 CST 2022
+[    0.000000] Command line: root=/dev/sda console=ttyS0 earlyprintk=serial       oops=panic panic_on_warn=1 panic=86400 kvm-intel.nested=1       security=apparmor ima_policy=tcb workqueue.watchdog_thresh=140       nf-conntrack-ftp.ports=20000 nf-conntrack-tftp.ports=20000       nf-conntrack-sip.ports=20000 nf-conntrack-irc.ports=20000       nf-conntrack-sane.ports=20000 vivid.n_devs=16       vivid.multiplanar=1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2       spec_store_bypass_disable=prctl nopcid
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x001: 'x87 floating point registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x002: 'SSE registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x004: 'AVX registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x008: 'MPX bounds registers'
+[    0.000000] x86/fpu: Supporting XSAVE feature 0x010: 'MPX CSR'
+[    0.000000] x86/fpu: xstate_offset[2]:  576, xstate_sizes[2]:  256
+[    0.000000] x86/fpu: xstate_offset[3]:  832, xstate_sizes[3]:   64
+[    0.000000] x86/fpu: xstate_offset[4]:  896, xstate_sizes[4]:   64
+[    0.000000] x86/fpu: Enabled xstate features 0x1f, context size is 960 bytes, using 'compacted' format.
+[    0.000000] signal: max sigframe size: 2032
+[    0.000000] BIOS-provided physical RAM map:
+[    0.000000] BIOS-e820: [mem 0x0000000000000000-0x000000000009fbff] usable
+[    0.000000] BIOS-e820: [mem 0x000000000009fc00-0x000000000009ffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000000f0000-0x00000000000fffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000000100000-0x00000000bffdcfff] usable
+[    0.000000] BIOS-e820: [mem 0x00000000bffdd000-0x00000000bfffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000feffc000-0x00000000feffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x00000000fffc0000-0x00000000ffffffff] reserved
+[    0.000000] BIOS-e820: [mem 0x0000000100000000-0x000000013fffffff] usable
+Memory KASLR using RDRAND RDTSC...
+[    0.000000] printk: bootconsole [earlyser0] enabled
+[    0.000000] nopcid: PCID feature disabled
+[    0.000000] NX (Execute Disable) protection: active
+[    0.000000] SMBIOS 2.8 present.
+[    0.000000] DMI: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ArchLinux 1.16.0-1 04/01/2014
+[    0.000000] Hypervisor detected: KVM
+[    0.000000] kvm-clock: Using msrs 4b564d01 and 4b564d00
+[    0.000003] kvm-clock: using sched offset of 309642869 cycles
+[    0.000011] clocksource: kvm-clock: mask: 0xffffffffffffffff max_cycles: 0x1cd42e4dffb, max_idle_ns: 881590591483 ns
+[    0.000022] tsc: Detected 4007.996 MHz processor
+[    0.004597] last_pfn = 0x140000 max_arch_pfn = 0x400000000
+[    0.004638] x86/PAT: Configuration [0-7]: WB  WC  UC- UC  WB  WP  UC- WT  
+[    0.005088] last_pfn = 0xbffdd max_arch_pfn = 0x400000000
+[    0.012742] found SMP MP-table at [mem 0x000f5b90-0x000f5b9f]
+[    0.012896] Using GB pages for direct mapping
+[    0.013270] ACPI: Early table checksum verification disabled
+[    0.013316] ACPI: RSDP 0x00000000000F59A0 000014 (v00 BOCHS )
+[    0.013332] ACPI: RSDT 0x00000000BFFE1B9C 000034 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.013355] ACPI: FACP 0x00000000BFFE1A18 000074 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.013372] ACPI: DSDT 0x00000000BFFE0040 0019D8 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.013385] ACPI: FACS 0x00000000BFFE0000 000040
+[    0.013394] ACPI: APIC 0x00000000BFFE1A8C 0000B0 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.013407] ACPI: HPET 0x00000000BFFE1B3C 000038 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.013420] ACPI: WAET 0x00000000BFFE1B74 000028 (v01 BOCHS  BXPC     00000001 BXPC 00000001)
+[    0.013432] ACPI: Reserving FACP table memory at [mem 0xbffe1a18-0xbffe1a8b]
+[    0.013436] ACPI: Reserving DSDT table memory at [mem 0xbffe0040-0xbffe1a17]
+[    0.013440] ACPI: Reserving FACS table memory at [mem 0xbffe0000-0xbffe003f]
+[    0.013445] ACPI: Reserving APIC table memory at [mem 0xbffe1a8c-0xbffe1b3b]
+[    0.013449] ACPI: Reserving HPET table memory at [mem 0xbffe1b3c-0xbffe1b73]
+[    0.013453] ACPI: Reserving WAET table memory at [mem 0xbffe1b74-0xbffe1b9b]
+[    0.014148] No NUMA configuration found
+[    0.014151] Faking a node at [mem 0x0000000000000000-0x000000013fffffff]
+[    0.014161] NODE_DATA(0) allocated [mem 0x13fffc000-0x13fffffff]
+[    0.014401] Zone ranges:
+[    0.014403]   DMA      [mem 0x0000000000001000-0x0000000000ffffff]
+[    0.014408]   DMA32    [mem 0x0000000001000000-0x00000000ffffffff]
+[    0.014413]   Normal   [mem 0x0000000100000000-0x000000013fffffff]
+[    0.014419] Movable zone start for each node
+[    0.014420] Early memory node ranges
+[    0.014421]   node   0: [mem 0x0000000000001000-0x000000000009efff]
+[    0.014428]   node   0: [mem 0x0000000000100000-0x00000000bffdcfff]
+[    0.014433]   node   0: [mem 0x0000000100000000-0x000000013fffffff]
+[    0.014439] Initmem setup node 0 [mem 0x0000000000001000-0x000000013fffffff]
+[    0.014616] On node 0, zone DMA: 1 pages in unavailable ranges
+[    0.014644] On node 0, zone DMA: 97 pages in unavailable ranges
+[    0.025658] On node 0, zone Normal: 35 pages in unavailable ranges
+[    0.026065] ACPI: PM-Timer IO Port: 0x608
+[    0.026089] ACPI: LAPIC_NMI (acpi_id[0xff] dfl dfl lint[0x1])
+[    0.026134] IOAPIC[0]: apic_id 0, version 17, address 0xfec00000, GSI 0-23
+[    0.026144] ACPI: INT_SRC_OVR (bus 0 bus_irq 0 global_irq 2 dfl dfl)
+[    0.026150] ACPI: INT_SRC_OVR (bus 0 bus_irq 5 global_irq 5 high level)
+[    0.026156] ACPI: INT_SRC_OVR (bus 0 bus_irq 9 global_irq 9 high level)
+[    0.026163] ACPI: INT_SRC_OVR (bus 0 bus_irq 10 global_irq 10 high level)
+[    0.026169] ACPI: INT_SRC_OVR (bus 0 bus_irq 11 global_irq 11 high level)
+[    0.026186] ACPI: Using ACPI (MADT) for SMP configuration information
+[    0.026189] ACPI: HPET id: 0x8086a201 base: 0xfed00000
+[    0.026199] TSC deadline timer available
+[    0.026206] smpboot: Allowing 8 CPUs, 0 hotplug CPUs
+[    0.026255] kvm-guest: KVM setup pv remote TLB flush
+[    0.026259] kvm-guest: setup PV sched yield
+[    0.026298] PM: hibernation: Registered nosave memory: [mem 0x00000000-0x00000fff]
+[    0.026305] PM: hibernation: Registered nosave memory: [mem 0x0009f000-0x0009ffff]
+[    0.026309] PM: hibernation: Registered nosave memory: [mem 0x000a0000-0x000effff]
+[    0.026313] PM: hibernation: Registered nosave memory: [mem 0x000f0000-0x000fffff]
+[    0.026319] PM: hibernation: Registered nosave memory: [mem 0xbffdd000-0xbfffffff]
+[    0.026323] PM: hibernation: Registered nosave memory: [mem 0xc0000000-0xfeffbfff]
+[    0.026327] PM: hibernation: Registered nosave memory: [mem 0xfeffc000-0xfeffffff]
+[    0.026331] PM: hibernation: Registered nosave memory: [mem 0xff000000-0xfffbffff]
+[    0.026334] PM: hibernation: Registered nosave memory: [mem 0xfffc0000-0xffffffff]
+[    0.026340] [mem 0xc0000000-0xfeffbfff] available for PCI devices
+[    0.026344] Booting paravirtualized kernel on KVM
+[    0.026356] clocksource: refined-jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1910969940391419 ns
+[    0.032742] setup_percpu: NR_CPUS:64 nr_cpumask_bits:64 nr_cpu_ids:8 nr_node_ids:1
+[    0.033099] percpu: Embedded 53 pages/cpu s177792 r8192 d31104 u262144
+[    0.033245] Fallback order for Node 0: 0 
+[    0.033253] Built 1 zonelists, mobility grouping on.  Total pages: 1031901
+[    0.033257] Policy zone: Normal
+[    0.033261] Kernel command line: root=/dev/sda console=ttyS0 earlyprintk=serial       oops=panic panic_on_warn=1 panic=86400 kvm-intel.nested=1       security=apparmor ima_policy=tcb workqueue.watchdog_thresh=140       nf-conntrack-ftp.ports=20000 nf-conntrack-tftp.ports=20000       nf-conntrack-sip.ports=20000 nf-conntrack-irc.ports=20000       nf-conntrack-sane.ports=20000 vivid.n_devs=16       vivid.multiplanar=1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2       spec_store_bypass_disable=prctl nopcid
+[    0.033719] Unknown kernel command line parameters "ima_policy=tcb spec_store_bypass_disable=prctl", will be passed to user space.
+[    0.034168] Dentry cache hash table entries: 524288 (order: 10, 4194304 bytes, linear)
+[    0.034411] Inode-cache hash table entries: 262144 (order: 9, 2097152 bytes, linear)
+[    0.034616] mem auto-init: stack:all(zero), heap alloc:off, heap free:off
+[    0.055106] Memory: 4014152K/4193772K available (20492K kernel code, 2668K rwdata, 3852K rodata, 1544K init, 1956K bss, 179360K reserved, 0K cma-reserved)
+[    0.055186] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=8, Nodes=1
+[    0.055205] Kernel/User page tables isolation: enabled
+[    0.055504] rcu: Preemptible hierarchical RCU implementation.
+[    0.055505] rcu: 	RCU event tracing is enabled.
+[    0.055506] rcu: 	RCU restricting CPUs from NR_CPUS=64 to nr_cpu_ids=8.
+[    0.055509] rcu: 	RCU priority boosting: priority 1 delay 500 ms.
+[    0.055511] rcu: 	RCU_SOFTIRQ processing moved to rcuc kthreads.
+[    0.055512] 	No expedited grace period (rcu_normal_after_boot).
+[    0.055513] 	Trampoline variant of Tasks RCU enabled.
+[    0.055517] rcu: RCU calculated value of scheduler-enlistment delay is 100 jiffies.
+[    0.055519] rcu: Adjusting geometry for rcu_fanout_leaf=16, nr_cpu_ids=8
+[    0.059037] NR_IRQS: 4352, nr_irqs: 488, preallocated irqs: 16
+[    0.059245] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+[    0.059309] random: crng init done
+[    0.063879] Console: colour VGA+ 80x25
+[    0.151006] printk: console [ttyS0] enabled
+[    0.151013] printk: bootconsole [earlyser0] disabled
+Poking KASLR using RDRAND RDTSC...
+[    0.153314] ACPI: Core revision 20220331
+[    0.153619] clocksource: hpet: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604467 ns
+[    0.153776] APIC: Switch to symmetric I/O mode setup
+[    0.153780] kvm-guest: setup PV IPIs
+[    0.155281] ..TIMER: vector=0x30 apic1=0 pin1=2 apic2=-1 pin2=-1
+[    0.155316] clocksource: tsc-early: mask: 0xffffffffffffffff max_cycles: 0x39c5ded8016, max_idle_ns: 440795406786 ns
+[    0.155339] Calibrating delay loop (skipped) preset value.. 8015.99 BogoMIPS (lpj=4007996)
+[    0.155348] pid_max: default: 32768 minimum: 301
+[    0.155399] LSM: Security Framework initializing
+[    0.155469] Mount-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.155482] Mountpoint-cache hash table entries: 8192 (order: 4, 65536 bytes, linear)
+[    0.157395] x86/cpu: User Mode Instruction Prevention (UMIP) activated
+[    0.157560] Last level iTLB entries: 4KB 0, 2MB 0, 4MB 0
+[    0.157566] Last level dTLB entries: 4KB 0, 2MB 0, 4MB 0, 1GB 0
+[    0.157608] Spectre V1 : Mitigation: usercopy/swapgs barriers and __user pointer sanitization
+[    0.157647] Spectre V2 : Mitigation: IBRS
+[    0.157650] Spectre V2 : Spectre v2 / SpectreRSB mitigation: Filling RSB on context switch
+[    0.157653] RETBleed: Mitigation: IBRS
+[    0.157673] Spectre V2 : mitigation: Enabling conditional Indirect Branch Prediction Barrier
+[    0.157705] Speculative Store Bypass: Mitigation: Speculative Store Bypass disabled via prctl
+[    0.157743] MDS: Mitigation: Clear CPU buffers
+[    0.157746] MMIO Stale Data: Vulnerable: Clear CPU buffers attempted, no microcode
+[    0.157752] SRBDS: Unknown: Dependent on hypervisor status
+[    0.222361] Freeing SMP alternatives memory: 44K
+[    0.222524] smpboot: CPU0: Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz (family: 0x6, model: 0x5e, stepping: 0x3)
+[    0.256696] cblist_init_generic: Setting adjustable number of callback queues.
+[    0.256701] cblist_init_generic: Setting shift to 3 and lim to 1.
+[    0.259688] Performance Events: Skylake events, full-width counters, Intel PMU driver.
+[    0.261406] ... version:                2
+[    0.262261] ... bit width:              48
+[    0.263132] ... generic registers:      4
+[    0.263991] ... value mask:             0000ffffffffffff
+[    0.265131] ... max period:             00007fffffffffff
+[    0.266314] ... fixed-purpose events:   3
+[    0.267197] ... event mask:             000000070000000f
+[    0.268632] rcu: Hierarchical SRCU implementation.
+[    0.268654] printk: console [ttyS0] printing thread started
+[    0.272165] smp: Bringing up secondary CPUs ...
+[    0.273368] x86: Booting SMP configuration:
+[    0.273371] .... node  #0, CPUs:      #1 #2 #3 #4 #5 #6 #7
+[    0.280685] smp: Brought up 1 node, 8 CPUs
+[    0.280691] smpboot: Max logical packages: 1
+[    0.280693] smpboot: Total of 8 processors activated (64127.93 BogoMIPS)
+[    0.315773] devtmpfs: initialized
+[    0.317646] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 1911260446275000 ns
+[    0.317654] futex hash table entries: 2048 (order: 5, 131072 bytes, linear)
+[    0.317826] PM: RTC time: 21:36:13, date: 2022-07-23
+[    0.318204] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[    0.318859] audit: initializing netlink subsys (disabled)
+[    0.319352] audit: type=2000 audit(1658612173.883:1): state=initialized audit_enabled=0 res=1
+[    0.320357] thermal_sys: Registered thermal governor 'step_wise'
+[    0.320362] thermal_sys: Registered thermal governor 'user_space'
+[    0.320433] cpuidle: using governor menu
+[    0.321741] PCI: Using configuration type 1 for base access
+[    0.333675] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[    0.342346] HugeTLB: can optimize 7 vmemmap pages for hugepages-2048kB
+[    0.342354] HugeTLB registered 2.00 MiB page size, pre-allocated 0 pages
+[    0.342455] ACPI: Added _OSI(Module Device)
+[    0.342455] ACPI: Added _OSI(Processor Device)
+[    0.342455] ACPI: Added _OSI(3.0 _SCP Extensions)
+[    0.342455] ACPI: Added _OSI(Processor Aggregator Device)
+[    0.342455] ACPI: Added _OSI(Linux-Dell-Video)
+[    0.342455] ACPI: Added _OSI(Linux-Lenovo-NV-HDMI-Audio)
+[    0.342455] ACPI: Added _OSI(Linux-HPI-Hybrid-Graphics)
+[    0.345549] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[    0.368093] ACPI: Interpreter enabled
+[    0.368144] ACPI: PM: (supports S0 S3 S4 S5)
+[    0.368147] ACPI: Using IOAPIC for interrupt routing
+[    0.368366] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    0.368370] PCI: Using E820 reservations for host bridge windows
+[    0.368905] ACPI: Enabled 2 GPEs in block 00 to 0F
+[    0.391870] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[    0.391885] acpi PNP0A03:00: _OSC: OS supports [ASPM ClockPM Segments MSI HPX-Type3]
+[    0.391894] acpi PNP0A03:00: _OSC: not requesting OS control; OS requires [ExtendedConfig ASPM ClockPM MSI]
+[    0.391922] acpi PNP0A03:00: fail to add MMCONFIG information, can't access extended PCI configuration space under this bridge.
+[    0.392039] PCI host bridge to bus 0000:00
+[    0.392043] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[    0.392051] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[    0.392058] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[    0.392066] pci_bus 0000:00: root bus resource [mem 0xc0000000-0xfebfffff window]
+[    0.392074] pci_bus 0000:00: root bus resource [mem 0x140000000-0x1bfffffff window]
+[    0.392083] pci_bus 0000:00: root bus resource [bus 00-ff]
+[    0.392144] pci 0000:00:00.0: [8086:1237] type 00 class 0x060000
+[    0.398118] pci 0000:00:01.0: [8086:7000] type 00 class 0x060100
+[    0.404424] pci 0000:00:01.1: [8086:7010] type 00 class 0x010180
+[    0.410617] pci 0000:00:01.1: reg 0x20: [io  0xc080-0xc08f]
+[    0.411646] pci 0000:00:01.1: legacy IDE quirk: reg 0x10: [io  0x01f0-0x01f7]
+[    0.411656] pci 0000:00:01.1: legacy IDE quirk: reg 0x14: [io  0x03f6]
+[    0.411663] pci 0000:00:01.1: legacy IDE quirk: reg 0x18: [io  0x0170-0x0177]
+[    0.411671] pci 0000:00:01.1: legacy IDE quirk: reg 0x1c: [io  0x0376]
+[    0.411950] pci 0000:00:01.3: [8086:7113] type 00 class 0x068000
+[    0.412540] pci 0000:00:01.3: quirk: [io  0x0600-0x063f] claimed by PIIX4 ACPI
+[    0.412561] pci 0000:00:01.3: quirk: [io  0x0700-0x070f] claimed by PIIX4 SMB
+[    0.412885] pci 0000:00:02.0: [1234:1111] type 00 class 0x030000
+[    0.415251] pci 0000:00:02.0: reg 0x10: [mem 0xfd000000-0xfdffffff pref]
+[    0.424734] pci 0000:00:02.0: reg 0x18: [mem 0xfebf0000-0xfebf0fff]
+[    0.433353] pci 0000:00:02.0: reg 0x30: [mem 0xfebe0000-0xfebeffff pref]
+[    0.433483] pci 0000:00:02.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[    0.436853] pci 0000:00:03.0: [8086:100e] type 00 class 0x020000
+[    0.437336] pci 0000:00:03.0: reg 0x10: [mem 0xfebc0000-0xfebdffff]
+[    0.437824] pci 0000:00:03.0: reg 0x14: [io  0xc000-0xc03f]
+[    0.449071] pci 0000:00:03.0: reg 0x30: [mem 0xfeb80000-0xfebbffff pref]
+[    0.468937] pci 0000:00:04.0: [1af4:1004] type 00 class 0x010000
+[    0.469959] pci 0000:00:04.0: reg 0x10: [io  0xc040-0xc07f]
+[    0.471801] pci 0000:00:04.0: reg 0x14: [mem 0xfebf1000-0xfebf1fff]
+[    0.497126] pci 0000:00:04.0: reg 0x20: [mem 0xfe000000-0xfe003fff 64bit pref]
+[    0.509927] ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+[    0.512172] ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+[    0.512451] ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+[    0.512667] ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+[    0.512841] ACPI: PCI: Interrupt link LNKS configured for IRQ 9
+[    0.518446] iommu: Default domain type: Translated 
+[    0.518449] iommu: DMA domain TLB invalidation policy: lazy mode 
+[    0.518857] SCSI subsystem initialized
+[    0.526454] ACPI: bus type USB registered
+[    0.526508] usbcore: registered new interface driver usbfs
+[    0.526543] usbcore: registered new interface driver hub
+[    0.526561] usbcore: registered new device driver usb
+[    0.526677] pps_core: LinuxPPS API ver. 1 registered
+[    0.526687] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[    0.526696] PTP clock support registered
+[    0.526944] Advanced Linux Sound Architecture Driver Initialized.
+[    0.527693] NetLabel: Initializing
+[    0.527694] NetLabel:  domain hash size = 128
+[    0.527697] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[    0.527741] NetLabel:  unlabeled traffic allowed by default
+[    0.529384] PCI: Using ACPI for IRQ routing
+[    0.530608] pci 0000:00:02.0: vgaarb: setting as boot VGA device
+[    0.530608] pci 0000:00:02.0: vgaarb: bridge control possible
+[    0.530608] pci 0000:00:02.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[    0.530608] vgaarb: loaded
+[    0.530639] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[    0.530651] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[    0.572424] clocksource: Switched to clocksource kvm-clock
+[    0.572653] VFS: Disk quotas dquot_6.6.0
+[    0.572682] VFS: Dquot-cache hash table entries: 512 (order 0, 4096 bytes)
+[    0.572790] pnp: PnP ACPI init
+[    0.573862] pnp: PnP ACPI: found 6 devices
+[    0.597082] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[    0.597156] NET: Registered PF_INET protocol family
+[    0.597400] IP idents hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[    0.599114] tcp_listen_portaddr_hash hash table entries: 2048 (order: 4, 81920 bytes, linear)
+[    0.599142] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[    0.599149] TCP established hash table entries: 32768 (order: 6, 262144 bytes, linear)
+[    0.599404] TCP bind hash table entries: 32768 (order: 8, 1310720 bytes, linear)
+[    0.602083] TCP: Hash tables configured (established 32768 bind 32768)
+[    0.602140] UDP hash table entries: 2048 (order: 5, 196608 bytes, linear)
+[    0.602194] UDP-Lite hash table entries: 2048 (order: 5, 196608 bytes, linear)
+[    0.602350] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[    0.610380] RPC: Registered named UNIX socket transport module.
+[    0.610383] RPC: Registered udp transport module.
+[    0.610386] RPC: Registered tcp transport module.
+[    0.610388] RPC: Registered tcp NFSv4.1 backchannel transport module.
+[    0.619083] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[    0.619097] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[    0.619105] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[    0.619113] pci_bus 0000:00: resource 7 [mem 0xc0000000-0xfebfffff window]
+[    0.619126] pci_bus 0000:00: resource 8 [mem 0x140000000-0x1bfffffff window]
+[    0.619275] pci 0000:00:01.0: PIIX3: Enabling Passive Release
+[    0.619455] pci 0000:00:00.0: Limiting direct PCI/PCI transfers
+[    0.619499] pci 0000:00:01.0: Activating ISA DMA hang workarounds
+[    0.622929] PCI: CLS 0 bytes, default 64
+[    0.622961] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[    0.622964] software IO TLB: mapped [mem 0x00000000bbfdd000-0x00000000bffdd000] (64MB)
+[    0.633454] RAPL PMU: API unit is 2^-32 Joules, 0 fixed counters, 10737418240 ms ovfl timer
+[    0.633475] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x39c5ded8016, max_idle_ns: 440795406786 ns
+[    1.575077] Initialise system trusted keyrings
+[    1.575273] workingset: timestamp_bits=56 max_order=20 bucket_order=0
+[    1.580281] NFS: Registering the id_resolver key type
+[    1.580288] Key type id_resolver registered
+[    1.580291] Key type id_legacy registered
+[    1.580480] 9p: Installing v9fs 9p2000 file system support
+[    1.591038] Key type asymmetric registered
+[    1.591045] Asymmetric key parser 'x509' registered
+[    1.591074] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 251)
+[    1.591083] io scheduler mq-deadline registered
+[    1.591087] io scheduler kyber registered
+[    1.591800] input: Power Button as /devices/LNXSYSTM:00/LNXPWRBN:00/input/input0
+[    1.595535] ACPI: button: Power Button [PWRF]
+[    1.708181] ACPI: \_SB_.LNKD: Enabled at IRQ 11
+[    1.709988] Serial: 8250/16550 driver, 4 ports, IRQ sharing enabled
+[    1.710223] 00:04: ttyS0 at I/O 0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[    1.711687] Non-volatile memory driver v1.3
+[    1.711690] Linux agpgart interface v0.103
+[    1.711875] ACPI: bus type drm_connector registered
+[    1.725363] loop: module loaded
+[    1.731107] scsi host0: Virtio SCSI HBA
+[    1.733083] scsi 0:0:0:0: Direct-Access     QEMU     QEMU HARDDISK    2.5+ PQ: 0 ANSI: 5
+[    1.794160] sd 0:0:0:0: Power-on or device reset occurred
+[    1.794311] sd 0:0:0:0: Attached scsi generic sg0 type 0
+[    1.794461] sd 0:0:0:0: [sda] 4194304 512-byte logical blocks: (2.15 GB/2.00 GiB)
+[    1.794552] sd 0:0:0:0: [sda] Write Protect is off
+[    1.796147] sd 0:0:0:0: [sda] Write cache: enabled, read cache: enabled, doesn't support DPO or FUA
+[    1.798276] sd 0:0:0:0: [sda] Attached SCSI disk
+[    1.812932] scsi host1: ata_piix
+[    1.818449] scsi host2: ata_piix
+[    1.818603] ata1: PATA max MWDMA2 cmd 0x1f0 ctl 0x3f6 bmdma 0xc080 irq 14
+[    1.818611] ata2: PATA max MWDMA2 cmd 0x170 ctl 0x376 bmdma 0xc088 irq 15
+[    1.819934] e100: Intel(R) PRO/100 Network Driver
+[    1.819938] e100: Copyright(c) 1999-2006 Intel Corporation
+[    1.820052] e1000: Intel(R) PRO/1000 Network Driver
+[    1.820056] e1000: Copyright (c) 1999-2006 Intel Corporation.
+[    1.939256] ACPI: \_SB_.LNKC: Enabled at IRQ 10
+[    2.247471] e1000 0000:00:03.0 eth0: (PCI:33MHz:32-bit) 52:54:00:12:34:56
+[    2.247489] e1000 0000:00:03.0 eth0: Intel(R) PRO/1000 Network Connection
+[    2.247538] e1000e: Intel(R) PRO/1000 Network Driver
+[    2.247540] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    2.247582] sky2: driver version 1.30
+[    2.247875] ehci_hcd: USB 2.0 'Enhanced' Host Controller (EHCI) Driver
+[    2.247879] ehci-pci: EHCI PCI platform driver
+[    2.247905] ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
+[    2.247912] ohci-pci: OHCI PCI platform driver
+[    2.247933] uhci_hcd: USB Universal Host Controller Interface driver
+[    2.248005] usbcore: registered new interface driver usblp
+[    2.248029] usbcore: registered new interface driver usb-storage
+[    2.248096] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[    2.249075] irq/12-i8042 (125) used greatest stack depth: 15296 bytes left
+[    2.253461] serio: i8042 KBD port at 0x60,0x64 irq 1
+[    2.253475] serio: i8042 AUX port at 0x60,0x64 irq 12
+[    2.258602] rtc_cmos 00:05: RTC can wake from S4
+[    2.259936] rtc_cmos 00:05: registered as rtc0
+[    2.259991] rtc_cmos 00:05: alarms up to one day, y3k, 242 bytes nvram, hpet irqs
+[    2.262682] device-mapper: ioctl: 4.46.0-ioctl (2022-02-22) initialised: dm-devel@redhat.com
+[    2.262697] intel_pstate: CPU model not supported
+[    2.262740] hid: raw HID events driver (C) Jiri Kosina
+[    2.263262] usbcore: registered new interface driver usbhid
+[    2.263267] usbhid: USB HID core driver
+[    2.264562] nf_conntrack_irc: failed to register helpers
+[    2.911314] input: ImExPS/2 Generic Explorer Mouse as /devices/platform/i8042/serio1/input/input2
+[    2.914689] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input3
+[    3.323242] nf_conntrack_sip: failed to register helpers
+[    3.323600] Initializing XFRM netlink socket
+[    3.323959] NET: Registered PF_INET6 protocol family
+[    3.324686] Segment Routing with IPv6
+[    3.324712] In-situ OAM (IOAM) with IPv6
+[    3.324781] sit: IPv6, IPv4 and MPLS over IPv4 tunneling driver
+[    3.325097] NET: Registered PF_PACKET protocol family
+[    3.325218] 9pnet: Installing 9P2000 support
+[    3.325246] Key type dns_resolver registered
+[    3.327885] IPI shorthand broadcast: enabled
+[    3.327929] sched_clock: Marking stable (3232470792, 95078670)->(3403461363, -75911901)
+[    3.328304] registered taskstats version 1
+[    3.328307] Loading compiled-in X.509 certificates
+[    3.336479] PM:   Magic number: 14:544:652
+[    3.336544] acpi LNXCPU:05: hash matches
+[    3.343832] printk: console [netcon0] printing thread started
+[    3.343838] printk: console [netcon0] enabled
+[    3.343843] netconsole: network logging started
+[    3.344538] cfg80211: Loading compiled-in X.509 certificates for regulatory database
+[    3.344812] kworker/u16:0 (159) used greatest stack depth: 14608 bytes left
+[    3.347217] cryptomgr_probe (161) used greatest stack depth: 14336 bytes left
+[    3.347937] cfg80211: Loaded X.509 cert 'sforshee: 00b28ddf47aef9cea7'
+[    3.348018] platform regulatory.0: Direct firmware load for regulatory.db failed with error -2
+[    3.348029] cfg80211: failed to load regulatory.db
+[    3.348061] ALSA device list:
+[    3.348064]   No soundcards found.
+[    3.357894] md: Waiting for all devices to be available before autodetect
+[    3.357898] md: If you don't use raid, use raid=noautodetect
+[    3.357903] md: Autodetecting RAID arrays.
+[    3.357908] md: autorun ...
+[    3.357910] md: ... autorun DONE.
+[    3.358998] EXT4-fs (sda): INFO: recovery required on readonly filesystem
+[    3.359005] EXT4-fs (sda): write access will be enabled during recovery
+[    3.413000] EXT4-fs (sda): recovery complete
+[    3.431493] EXT4-fs (sda): mounted filesystem with ordered data mode. Quota mode: none.
+[    3.431540] VFS: Mounted root (ext4 filesystem) readonly on device 8:0.
+[    3.431695] devtmpfs: mounted
+[    3.433150] Freeing unused kernel image (initmem) memory: 1544K
+[    3.435095] Write protecting the kernel read-only data: 26624k
+[    3.438016] Freeing unused kernel image (text/rodata gap) memory: 2032K
+[    3.438618] Freeing unused kernel image (rodata/data gap) memory: 244K
+[    3.438785] Run /sbin/init as init process
+
+Welcome to [1mDebian GNU/Linux 9 (stretch)[0m!
+
+[    3.496534] systemd[1]: systemd 232 running in system mode. (+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD +IDN)
+[    3.496624] systemd[1]: Detected virtualization qemu.
+[    3.496636] systemd[1]: Detected architecture x86-64.
+[    3.499877] systemd[1]: Set hostname to <syzkaller>.
+[    3.514889] selinuxenabled (171) used greatest stack depth: 13536 bytes left
+[    3.515003] systemd-rc-loca (169) used greatest stack depth: 12952 bytes left
+[    3.515387] selinux-autorel (168) used greatest stack depth: 12904 bytes left
+[[0;32m  OK  [0m] Reached targ[    3.558801] systemd[1]: Reached target Swap.
+et Swap.
+[[0;32m  OK  [0m] Created slice System Slice.
+[    3.560317] systemd[1]: Created slice System Slice.
+[    3.561137] systemd[1]: dev-hugepages.mount: Couldn't determine result for ConditionVirtualization=!private-users, assuming failed: No such file or directory
+[    3.561251] systemd[1]: Created slice system-getty.slice.
+[[0;32m  OK  [0m] Created slice system-getty.slice.
+         Mounting /sys/kernel/debug...
+[    3.565352] systemd[1]: Mounting /sys/kernel/debug...
+[    3.568396] systemd[1]: Mounting POSIX Message Queue File System...
+         Mounting POSIX Message Queue File System...
+         Mounting /sys/kernel/config...
+[[0;32m  OK  [0m] Started Dispatch Password Requests to Console Directory Watch.
+[[0;32m  OK  [0m] Started Forward Password Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Reached target Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target Paths.
+[[0;32m  OK  [0m] Reached target Remote File Systems.
+[[0;32m  OK  [0m] Listening on Journal Socket.
+         Starting Remount Root and Kernel File Systems...
+         Starting Create Static Device Nodes in /dev...
+         Starting Load Kernel Modules...
+[[0;32m  OK  [0m] Listening on Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on Syslog Socket.
+[[0;32m  OK  [0m] Created slice system-serial\x2dgetty.slice.
+[[0;32m  OK  [0m] Listening on udev Kernel Socket.
+[[0;32m  OK  [0m] Reached target Slices.
+[[0;32m  OK  [0m] Set up automount Arbitrary Executab…rmats File System Automount Point.
+[[0;32m  OK  [0m] Listening on /dev/initctl Compatibility Named Pipe.
+         Mounting /proc/sys/fs/binfmt_misc...
+[    3.617719] EXT4-fs (sda): re-mounted. Quota mode: none.
+[[0;32m  OK  [0m] Listening on Journal Socket (/dev/log).
+         Starting Journal Service...
+[[0;32m  OK  [0m] Listening on udev Control Socket.
+[[0;32m  OK  [0m] Reached target Sockets.
+[[0;32m  OK  [0m] Mounted POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted /sys/kernel/debug.
+[[0;32m  OK  [0m] Mounted /sys/kernel/config.
+[[0;32m  OK  [0m] Mounted /proc/sys/fs/binfmt_misc.
+[[0;32m  OK  [0m] Started Remount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Started Create Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Started Load Kernel Modules.
+         Starting Apply Kernel Variables...
+         Starting udev Kernel Device Manager...
+         Starting Load/Save Random Seed...
+[[0;32m  OK  [0m] Reached target Local File Systems (Pre).
+         Starting udev Coldplug all Devices...
+[[0;32m  OK  [0m] Reached target Local File Systems.
+[[0;32m  OK  [0m] Started Apply Kernel Variables.
+[[0;32m  OK  [0m] Started Load/Save Random Seed.
+         Starting Raise network interfaces...
+[[0;32m  OK  [0m] Started udev Kernel Device Manager.
+[[0;32m  OK  [0m] Started Journal Service.
+         Starting Flush Journal to Persistent Storage...
+[    3.774862] systemd-journald[196]: Received request to flush runtime journal from PID 1
+[[0;32m  OK  [0m] Started Flush Journal to Persistent Storage.
+         Starting Create Volatile Files and Directories...
+[    3.824290] systemd-tmpfile (255) used greatest stack depth: 12848 bytes left
+[[0;32m  OK  [0m] Started Create Volatile Files and Directories.
+         Starting Network Time Synchronization...
+         Starting Update UTMP about System Boot/Shutdown...
+[[0;32m  OK  [0m] Started udev Coldplug all Devices.
+[[0;32m  OK  [[    3.879571] ip (291) used greatest stack depth: 12400 bytes left
+0m] Started Update UTMP about System Boot/Shutdown.
+[    3.883879] e1000: eth0 NIC Link is Up 1000 Mbps Full Duplex, Flow Control: RX
+[    3.885706] IPv6: ADDRCONF(NETDEV_CHANGE): eth0: link becomes ready
+[[0;32m  OK  [0m] Found device /dev/ttyS0.
+[[0;32m  OK  [0m] Listening on Load/Save RF Kill Switch Status /dev/rfkill Watch.
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+         Starting Network Time Synchronization...
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Stopped Network Time Synchronization.
+[[0;1;31mFAILED[0m] Failed to start Network Time Synchronization.
+See 'systemctl status systemd-timesyncd.service' for details.
+[[0;32m  OK  [0m] Reached target System Initialization.
+[[0;32m  OK  [0m] Reached target Basic System.
+         Starting getty on tty2-tty6 if dbus and logind are not available...
+         Starting System Logging Service...
+[[0;32m  OK  [0m] Started Regular background program processing daemon.
+[[0;32m  OK  [0m] Started Daily Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Reached target System Time Synchronized.
+[[0;32m  OK  [0m] Started Daily apt download activities.
+[[0;32m  OK  [0m] Started Daily apt upgrade and clean activities.
+[[0;32m  OK  [0m] Reached target Timers.
+[[0;32m  OK  [0m] Started System Logging Service.
+[[0;32m  OK  [0m] Started getty on tty2-tty6 if dbus and logind are not available.
+[[0;32m  OK  [0m] Started Raise network interfaces.
+[[0;32m  OK  [0m] Reached target Network.
+         Starting OpenBSD Secure Shell server...
+         Starting Permit User Sessions...
+[[0;32m  OK  [0m] Started Permit User Sessions.
+[[0;32m  OK  [0m] Started Getty on tty2.
+[[0;32m  OK  [0m] Started Serial Getty on ttyS0.
+[[0;32m  OK  [0m] Started Getty on tty3.
+[[0;32m  OK  [0m] Started Getty on tty6.
+[[0;32m  OK  [0m] Started Getty on tty5.
+[[0;32m  OK  [0m] Started Getty on tty1.
+[[0;32m  OK  [0m] Started Getty on tty4.
+[[0;32m  OK  [0m] Reached target Login Prompts.
+[[0;32m  OK  [0m] Started OpenBSD Secure Shell server.
+[[0;32m  OK  [0m] Reached target Multi-User System.
+[[0;32m  OK  [0m] Reached target Graphical Interface.
+         Starting Update UTMP about System Runlevel Changes...
+[[0;32m  OK  [0m] Started Update UTMP about System Runlevel Changes.
+
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: [   14.755858] work_test: loading out-of-tree module taints kernel.
+[   14.765479] work-test:Planted return probe at worker_thread: 000000002ae3a575
+[   14.823177] work-test:Planted return probe at workqueue_offline_cpu: 0000000066c4b1d1
+[   14.823225] hrtimer: interrupt took 23654 ns
+[   17.292545] sysrq: Changing Loglevel
+[   17.293048] sysrq: Loglevel set to 9
+[   17.302369] sysrq: Changing Loglevel
+[   17.302725] sysrq: Loglevel set to 9
+[   17.304789] sysrq: Changing Loglevel
+[   17.305838] sysrq: Loglevel set to 9
+[   17.309640] sysrq: Changing Loglevel
+[   17.309643] sysrq: Loglevel set to 9
+[   17.313870] sysrq: Changing Loglevel
+[   17.313874] sysrq: Loglevel set to 9
+[   17.317391] sysrq: Changing Loglevel
+[   17.317394] sysrq: Loglevel set to 9
+[   17.317574] sysrq: Changing Loglevel
+[   17.317579] sysrq: Loglevel set to 9
+[   17.324294] sysrq: Changing Loglevel
+[   17.324298] sysrq: Loglevel set to 9
+
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: 
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: 
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: 
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: 
+Debian GNU/Linux 9 syzkaller ttyS0
+
+syzkaller login: [   27.350616] work-test:wq_ret_handler returned 0 and took 614875 ns to execute
+[   27.382436] smpboot: CPU 1 is now offline
+[   27.447624] work-test:wq_ret_handler returned 0 and took 18138 ns to execute
+[   27.476383] smpboot: CPU 5 is now offline
+[   27.527774] work-test:wq_ret_handler returned 0 and took 17298 ns to execute
+[   27.582383] smpboot: CPU 7 is now offline
+[   27.643560] work-test:wq_ret_handler returned 0 and took 16105 ns to execute
+[   27.738125] smpboot: CPU 6 is now offline
+[   27.769696] work-test:wq_ret_handler returned 0 and took 18962 ns to execute
+[   27.864752] smpboot: CPU 3 is now offline
+[   27.896433] work-test:wq_ret_handler returned 0 and took 136656 ns to execute
+[   27.993201] smpboot: CPU 4 is now offline
+[   28.006432] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   28.081425] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   28.134782] work-test:wq_ret_handler returned 0 and took 11143 ns to execute
+[   28.263084] smpboot: CPU 2 is now offline
+[   28.762443] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   29.471895] x86: Booting SMP configuration:
+[   29.471900] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   29.542132] work-test:ret_handler returned 0 and took 14704287488 ns to execute
+[   30.268356] work-test:ret_handler returned 0 and took 2116480143 ns to execute
+[   30.332073] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   30.494421] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   31.023478] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   33.633792] work-test:wq_ret_handler returned 0 and took 16697 ns to execute
+[   33.781772] smpboot: CPU 1 is now offline
+[   34.246261] work-test:wq_ret_handler returned 0 and took 17354 ns to execute
+[   34.293550] smpboot: CPU 7 is now offline
+[   34.363555] work-test:wq_ret_handler returned 0 and took 20781 ns to execute
+[   34.395449] smpboot: CPU 4 is now offline
+[   34.414511] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   34.901821] x86: Booting SMP configuration:
+[   34.901825] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   35.902005] work-test:ret_handler returned 0 and took 8518659027 ns to execute
+[   37.163981] work-test:wq_ret_handler returned 0 and took 8423 ns to execute
+[   37.199347] smpboot: CPU 3 is now offline
+[   37.333160] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   37.596136] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   38.075032] work-test:ret_handler returned 0 and took 4053279567 ns to execute
+[   39.361055] work-test:ret_handler returned 0 and took 11588945818 ns to execute
+[   40.362351] work-test:ret_handler returned 0 and took 8609775444 ns to execute
+[   42.554362] work-test:ret_handler returned 0 and took 6507448931 ns to execute
+[   42.936532] work-test:wq_ret_handler returned 0 and took 10886 ns to execute
+[   42.981585] smpboot: CPU 6 is now offline
+[   43.161686] work-test:wq_ret_handler returned 0 and took 10759 ns to execute
+[   43.271574] smpboot: CPU 1 is now offline
+[   44.618507] work-test:wq_ret_handler returned 0 and took 18161 ns to execute
+[   44.694024] smpboot: CPU 5 is now offline
+[   44.881567] work-test:ret_handler returned 0 and took 4380553436 ns to execute
+[   45.354029] x86: Booting SMP configuration:
+[   45.354033] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   45.553128] work-test:wq_ret_handler returned 0 and took 15399 ns to execute
+[   45.585076] smpboot: CPU 4 is now offline
+[   45.603543] work-test:wq_ret_handler returned 0 and took 15802 ns to execute
+[   45.605617] smpboot: CPU 2 is now offline
+[   46.024430] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   46.721561] work-test:ret_handler returned 0 and took 19248678182 ns to execute
+[   46.811592] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   47.036354] work-test:ret_handler returned 0 and took 8824697346 ns to execute
+[   47.691589] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   48.331181] work-test:wq_ret_handler returned 0 and took 22178 ns to execute
+[   48.361590] smpboot: CPU 6 is now offline
+[   48.458453] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   48.781247] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   49.221512] work-test:ret_handler returned 0 and took 6439699126 ns to execute
+[   49.861580] work-test:wq_ret_handler returned 0 and took 11830 ns to execute
+[   49.911081] smpboot: CPU 1 is now offline
+[   50.177315] work-test:wq_ret_handler returned 0 and took 13401 ns to execute
+[   50.349023] smpboot: CPU 2 is now offline
+[   50.375209] work-test:wq_ret_handler returned 0 and took 19622 ns to execute
+[   50.431534] smpboot: CPU 3 is now offline
+[   50.468439] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   51.532906] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   53.093478] x86: Booting SMP configuration:
+[   53.093482] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   53.511394] work-test:ret_handler returned 0 and took 6353169657 ns to execute
+[   53.763547] work-test:wq_ret_handler returned 0 and took 17505 ns to execute
+[   53.817714] smpboot: CPU 2 is now offline
+[   53.924473] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   57.044719] work-test:wq_ret_handler returned 0 and took 15838 ns to execute
+[   57.455398] smpboot: CPU 4 is now offline
+[   57.684762] work-test:wq_ret_handler returned 0 and took 19042 ns to execute
+[   57.741356] work-test:ret_handler returned 0 and took 12710995721 ns to execute
+[   57.746858] smpboot: CPU 7 is now offline
+[   57.777481] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   58.541471] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   59.514360] work-test:ret_handler returned 0 and took 31615998242 ns to execute
+[   59.773738] work-test:wq_ret_handler returned 0 and took 10358 ns to execute
+[   59.814052] smpboot: CPU 6 is now offline
+[   59.863475] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   60.911888] work-test:wq_ret_handler returned 0 and took 27956 ns to execute
+[   61.058447] smpboot: CPU 7 is now offline
+[   62.158202] work-test:wq_ret_handler returned 0 and took 13302 ns to execute
+[   62.268004] smpboot: CPU 2 is now offline
+[   62.293792] work-test:wq_ret_handler returned 0 and took 18903 ns to execute
+[   62.339379] smpboot: CPU 5 is now offline
+[   63.099929] work-test:ret_handler returned 0 and took 2187408346 ns to execute
+[   63.188484] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   63.706760] work-test:wq_ret_handler returned 0 and took 11413 ns to execute
+[   63.754383] smpboot: CPU 4 is now offline
+[   64.381214] work-test:ret_handler returned 0 and took 17304843262 ns to execute
+[   64.797071] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   65.294108] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   65.441416] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   69.284794] work-test:wq_ret_handler returned 0 and took 53582 ns to execute
+[   69.322015] smpboot: CPU 1 is now offline
+[   69.786535] work-test:wq_ret_handler returned 0 and took 8844 ns to execute
+[   69.820583] smpboot: CPU 3 is now offline
+[   70.856424] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   71.291757] work-test:wq_ret_handler returned 0 and took 151821 ns to execute
+[   71.441093] smpboot: CPU 7 is now offline
+[   71.461534] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   71.867443] work-test:ret_handler returned 0 and took 34667749955 ns to execute
+[   72.431446] x86: Booting SMP configuration:
+[   72.431449] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   73.466381] work-test:ret_handler returned 0 and took 12405981637 ns to execute
+[   75.466793] work-test:wq_ret_handler returned 0 and took 23061 ns to execute
+[   75.540391] smpboot: CPU 2 is now offline
+[   76.625535] work-test:wq_ret_handler returned 0 and took 15130 ns to execute
+[   76.675820] smpboot: CPU 7 is now offline
+[   77.691367] work-test:ret_handler returned 0 and took 49426966259 ns to execute
+[   77.716458] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   78.041443] work-test:wq_ret_handler returned 0 and took 19176 ns to execute
+[   78.302518] smpboot: CPU 3 is now offline
+[   78.560718] work-test:wq_ret_handler returned 0 and took 17417 ns to execute
+[   78.670409] smpboot: CPU 5 is now offline
+[   78.711465] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   79.101361] work-test:ret_handler returned 0 and took 18034432032 ns to execute
+[   79.356373] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   80.100950] work-test:wq_ret_handler returned 0 and took 11698 ns to execute
+[   80.152171] smpboot: CPU 6 is now offline
+[   80.193043] work-test:ret_handler returned 0 and took 2148543318 ns to execute
+[   80.278362] work-test:ret_handler returned 0 and took 10456581793 ns to execute
+[   80.310933] work-test:ret_handler returned 0 and took 2192089212 ns to execute
+[   80.698372] work-test:ret_handler returned 0 and took 35987497231 ns to execute
+[   81.721090] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[   82.234388] work-test:ret_handler returned 0 and took 2231432912 ns to execute
+[   83.212479] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   83.963471] work-test:wq_ret_handler returned 0 and took 11678 ns to execute
+[   84.029369] smpboot: CPU 4 is now offline
+[   86.076363] work-test:ret_handler returned 0 and took 28623285444 ns to execute
+[   87.082356] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   91.833967] work-test:wq_ret_handler returned 0 and took 14302 ns to execute
+[   91.989342] smpboot: CPU 2 is now offline
+[   92.313456] work-test:wq_ret_handler returned 0 and took 11675 ns to execute
+[   92.351082] smpboot: CPU 4 is now offline
+[   92.368207] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[   92.706053] work-test:wq_ret_handler returned 0 and took 11958 ns to execute
+[   92.767545] smpboot: CPU 1 is now offline
+[   93.320233] work-test:wq_ret_handler returned 0 and took 9592 ns to execute
+[   93.391888] smpboot: CPU 6 is now offline
+[   94.048835] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   94.394371] work-test:ret_handler returned 0 and took 10486874490 ns to execute
+[   94.394412] work-test:ret_handler returned 0 and took 2143672947 ns to execute
+[   94.471588] work-test:wq_ret_handler returned 0 and took 12391 ns to execute
+[   94.507374] smpboot: CPU 3 is now offline
+[   94.514469] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[   94.608453] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   94.778352] work-test:ret_handler returned 0 and took 25450995660 ns to execute
+[   94.802112] x86: Booting SMP configuration:
+[   94.802115] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[   95.292526] work-test:wq_ret_handler returned 0 and took 12093 ns to execute
+[   95.336443] smpboot: CPU 2 is now offline
+[   95.358436] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[   95.485090] work-test:ret_handler returned 0 and took 67841456111 ns to execute
+[   95.853118] work-test:wq_ret_handler returned 0 and took 12542 ns to execute
+[   96.048378] smpboot: CPU 7 is now offline
+[   96.902516] work-test:wq_ret_handler returned 0 and took 12592 ns to execute
+[   96.930669] smpboot: CPU 5 is now offline
+[   98.112347] work-test:ret_handler returned 0 and took 26819704945 ns to execute
+[   98.712783] work-test:wq_ret_handler returned 0 and took 16564 ns to execute
+[   98.755411] smpboot: CPU 3 is now offline
+[   98.824425] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[   98.942350] work-test:ret_handler returned 0 and took 20340978304 ns to execute
+[   99.080756] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[   99.565773] work-test:wq_ret_handler returned 0 and took 18496 ns to execute
+[   99.630638] smpboot: CPU 2 is now offline
+[   99.950457] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  100.538348] work-test:ret_handler returned 0 and took 72521588420 ns to execute
+[  100.694499] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  100.862378] work-test:ret_handler returned 0 and took 22669805164 ns to execute
+[  101.706367] work-test:ret_handler returned 0 and took 26174183078 ns to execute
+[  105.891679] work-test:wq_ret_handler returned 0 and took 16924 ns to execute
+[  106.230543] smpboot: CPU 1 is now offline
+[  106.668120] work-test:wq_ret_handler returned 0 and took 15762 ns to execute
+[  106.759008] smpboot: CPU 6 is now offline
+[  108.776430] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  108.828302] work-test:ret_handler returned 0 and took 2159596612 ns to execute
+[  109.266449] x86: Booting SMP configuration:
+[  109.266453] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  111.517409] work-test:wq_ret_handler returned 0 and took 8776 ns to execute
+[  111.581392] smpboot: CPU 4 is now offline
+[  112.378355] work-test:ret_handler returned 0 and took 41452015771 ns to execute
+[  113.723366] work-test:ret_handler returned 0 and took 64819811429 ns to execute
+[  114.703422] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  114.879038] work-test:wq_ret_handler returned 0 and took 226687 ns to execute
+[  115.011999] smpboot: CPU 6 is now offline
+[  116.225719] work-test:wq_ret_handler returned 0 and took 19689 ns to execute
+[  116.363387] smpboot: CPU 7 is now offline
+[  117.026720] work-test:wq_ret_handler returned 0 and took 17962 ns to execute
+[  117.115352] work-test:ret_handler returned 0 and took 23719952025 ns to execute
+[  117.365310] smpboot: CPU 5 is now offline
+[  117.386429] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  117.963407] work-test:wq_ret_handler returned 0 and took 11493 ns to execute
+[  118.079315] smpboot: CPU 3 is now offline
+[  118.388463] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  118.430344] work-test:ret_handler returned 0 and took 2200788136 ns to execute
+[  118.430419] work-test:ret_handler returned 0 and took 90848556620 ns to execute
+[  118.453436] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  119.226370] work-test:ret_handler returned 0 and took 22374027105 ns to execute
+[  119.370374] work-test:ret_handler returned 0 and took 2333165330 ns to execute
+[  120.034952] work-test:wq_ret_handler returned 0 and took 10357 ns to execute
+[  120.172685] smpboot: CPU 2 is now offline
+[  120.173373] work-test:ret_handler returned 0 and took 21417799244 ns to execute
+[  120.235800] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  121.104449] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  122.154385] work-test:ret_handler returned 0 and took 22638907308 ns to execute
+[  122.154444] work-test:ret_handler returned 0 and took 2114103685 ns to execute
+[  122.414357] work-test:wq_ret_handler returned 0 and took 9883 ns to execute
+[  122.486940] smpboot: CPU 1 is now offline
+[  124.731017] work-test:ret_handler returned 0 and took 32085667847 ns to execute
+[  125.443734] work-test:wq_ret_handler returned 0 and took 20881 ns to execute
+[  125.501861] smpboot: CPU 6 is now offline
+[  125.757444] x86: Booting SMP configuration:
+[  125.757448] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  126.548112] work-test:wq_ret_handler returned 0 and took 20365 ns to execute
+[  126.580392] smpboot: CPU 7 is now offline
+[  126.598143] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  127.425487] work-test:ret_handler returned 0 and took 43403625889 ns to execute
+[  127.591423] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  127.700217] work-test:ret_handler returned 0 and took 12698643598 ns to execute
+[  131.799744] work-test:wq_ret_handler returned 0 and took 20212 ns to execute
+[  131.829444] smpboot: CPU 4 is now offline
+[  132.318762] work-test:wq_ret_handler returned 0 and took 16726 ns to execute
+[  132.384980] smpboot: CPU 2 is now offline
+[  132.921428] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  133.573374] work-test:wq_ret_handler returned 0 and took 4210532 ns to execute
+[  133.650087] smpboot: CPU 5 is now offline
+[  133.653458] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  133.819814] work-test:wq_ret_handler returned 0 and took 10641 ns to execute
+[  133.917087] smpboot: CPU 7 is now offline
+[  133.947356] work-test:ret_handler returned 0 and took 22366798915 ns to execute
+[  134.400060] work-test:ret_handler returned 0 and took 14445613528 ns to execute
+[  134.400092] work-test:ret_handler returned 0 and took 2080660656 ns to execute
+[  134.674483] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  135.674362] work-test:ret_handler returned 0 and took 18562092643 ns to execute
+[  136.000046] work-test:ret_handler returned 0 and took 19637702597 ns to execute
+[  136.839806] work-test:ret_handler returned 0 and took 87407744496 ns to execute
+[  136.879672] work-test:wq_ret_handler returned 0 and took 11263 ns to execute
+[  137.001722] smpboot: CPU 2 is now offline
+[  137.049450] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  137.150087] work-test:ret_handler returned 0 and took 31229737567 ns to execute
+[  137.225225] work-test:wq_ret_handler returned 0 and took 9002 ns to execute
+[  137.250027] smpboot: CPU 3 is now offline
+[  137.470525] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  137.971205] work-test:wq_ret_handler returned 0 and took 12577 ns to execute
+[  138.079017] smpboot: CPU 1 is now offline
+[  139.066363] work-test:ret_handler returned 0 and took 6674945054 ns to execute
+[  139.074356] work-test:ret_handler returned 0 and took 85432921087 ns to execute
+[  139.413678] work-test:ret_handler returned 0 and took 21416247600 ns to execute
+[  139.862022] work-test:wq_ret_handler returned 0 and took 161228 ns to execute
+[  139.987576] smpboot: CPU 6 is now offline
+[  140.090351] work-test:ret_handler returned 0 and took 17617997497 ns to execute
+[  140.142437] x86: Booting SMP configuration:
+[  140.142441] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  140.239129] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  140.783876] work-test:wq_ret_handler returned 0 and took 15872 ns to execute
+[  140.829974] smpboot: CPU 3 is now offline
+[  141.162357] work-test:ret_handler returned 0 and took 6381194404 ns to execute
+[  142.079958] work-test:ret_handler returned 0 and took 16577891094 ns to execute
+[  142.173434] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  143.260012] work-test:ret_handler returned 0 and took 4105660774 ns to execute
+[  143.588661] work-test:wq_ret_handler returned 0 and took 12631 ns to execute
+[  143.647491] smpboot: CPU 6 is now offline
+[  143.684626] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  143.910101] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  146.290065] work-test:wq_ret_handler returned 0 and took 12484 ns to execute
+[  146.389888] smpboot: CPU 3 is now offline
+[  146.920018] work-test:wq_ret_handler returned 0 and took 12531 ns to execute
+[  146.968133] smpboot: CPU 5 is now offline
+[  147.036165] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  147.459886] work-test:ret_handler returned 0 and took 6278813085 ns to execute
+[  147.684349] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  150.182541] work-test:ret_handler returned 0 and took 13310813304 ns to execute
+[  150.189889] work-test:wq_ret_handler returned 0 and took 12327 ns to execute
+[  150.259826] smpboot: CPU 7 is now offline
+[  150.339454] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  151.195437] work-test:wq_ret_handler returned 0 and took 128244 ns to execute
+[  151.487026] smpboot: CPU 4 is now offline
+[  151.563748] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  151.812800] work-test:wq_ret_handler returned 0 and took 28448 ns to execute
+[  151.868380] smpboot: CPU 6 is now offline
+[  152.038490] work-test:wq_ret_handler returned 0 and took 12173 ns to execute
+[  152.103307] smpboot: CPU 3 is now offline
+[  153.475212] work-test:wq_ret_handler returned 0 and took 12508 ns to execute
+[  153.513304] smpboot: CPU 2 is now offline
+[  153.514360] work-test:ret_handler returned 0 and took 2386016546 ns to execute
+[  153.514393] work-test:ret_handler returned 0 and took 2188978955 ns to execute
+[  153.527416] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  153.979353] work-test:ret_handler returned 0 and took 38969734556 ns to execute
+[  154.943525] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  155.193889] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  156.295611] work-test:wq_ret_handler returned 0 and took 15370 ns to execute
+[  156.389736] smpboot: CPU 1 is now offline
+[  156.457902] x86: Booting SMP configuration:
+[  156.457906] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  158.415375] work-test:ret_handler returned 0 and took 124759368289 ns to execute
+[  158.656545] work-test:wq_ret_handler returned 0 and took 17902 ns to execute
+[  158.863415] smpboot: CPU 1 is now offline
+[  159.906402] x86: Booting SMP configuration:
+[  159.906406] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  160.859668] work-test:ret_handler returned 0 and took 2159969241 ns to execute
+[  160.859711] work-test:ret_handler returned 0 and took 22846323504 ns to execute
+[  161.051712] work-test:wq_ret_handler returned 0 and took 16762 ns to execute
+[  161.131415] smpboot: CPU 1 is now offline
+[  163.455782] work-test:wq_ret_handler returned 0 and took 19534 ns to execute
+[  163.783035] smpboot: CPU 7 is now offline
+[  164.194086] x86: Booting SMP configuration:
+[  164.194090] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  164.641179] work-test:wq_ret_handler returned 0 and took 10001 ns to execute
+[  164.837370] smpboot: CPU 4 is now offline
+[  164.862100] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  165.008094] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  165.225729] work-test:wq_ret_handler returned 0 and took 17834 ns to execute
+[  165.484340] smpboot: CPU 5 is now offline
+[  165.790381] work-test:ret_handler returned 0 and took 31923335995 ns to execute
+[  165.790421] work-test:ret_handler returned 0 and took 2330914303 ns to execute
+[  166.351724] work-test:wq_ret_handler returned 0 and took 22250 ns to execute
+[  166.550921] smpboot: CPU 3 is now offline
+[  166.906376] work-test:ret_handler returned 0 and took 35069234727 ns to execute
+[  167.378538] work-test:wq_ret_handler returned 0 and took 10801 ns to execute
+[  167.454565] smpboot: CPU 1 is now offline
+[  167.466352] work-test:ret_handler returned 0 and took 2145010453 ns to execute
+[  167.466513] work-test:ret_handler returned 0 and took 105134148858 ns to execute
+[  167.606449] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  168.473424] x86: Booting SMP configuration:
+[  168.473428] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  168.571384] work-test:ret_handler returned 0 and took 2217878599 ns to execute
+[  168.571497] work-test:ret_handler returned 0 and took 16532917713 ns to execute
+[  168.599427] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  169.469378] work-test:ret_handler returned 0 and took 13224009177 ns to execute
+[  170.708437] work-test:wq_ret_handler returned 0 and took 10214 ns to execute
+[  170.755048] smpboot: CPU 2 is now offline
+[  171.810515] work-test:wq_ret_handler returned 0 and took 9967 ns to execute
+[  171.943430] smpboot: CPU 3 is now offline
+[  172.009507] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  172.794367] work-test:ret_handler returned 0 and took 127159883082 ns to execute
+[  173.040019] work-test:wq_ret_handler returned 0 and took 19147 ns to execute
+[  173.186026] smpboot: CPU 7 is now offline
+[  174.020363] work-test:ret_handler returned 0 and took 36758991793 ns to execute
+[  174.020363] work-test:ret_handler returned 0 and took 2208863484 ns to execute
+[  175.020434] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  175.100020] work-test:ret_handler returned 0 and took 2110187036 ns to execute
+[  175.136542] work-test:wq_ret_handler returned 0 and took 20173 ns to execute
+[  175.186372] work-test:ret_handler returned 0 and took 2105973365 ns to execute
+[  175.650724] smpboot: CPU 6 is now offline
+[  175.652806] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  176.690444] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  177.181800] work-test:wq_ret_handler returned 0 and took 18685 ns to execute
+[  177.303660] smpboot: CPU 2 is now offline
+[  177.659443] work-test:ret_handler returned 0 and took 2517100709 ns to execute
+[  177.714504] work-test:wq_ret_handler returned 0 and took 10669 ns to execute
+[  177.751391] smpboot: CPU 1 is now offline
+[  178.177232] work-test:wq_ret_handler returned 0 and took 10325 ns to execute
+[  178.306009] smpboot: CPU 3 is now offline
+[  179.322400] work-test:ret_handler returned 0 and took 8677049402 ns to execute
+[  179.343000] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  179.770473] work-test:ret_handler returned 0 and took 2116111114 ns to execute
+[  179.770508] work-test:ret_handler returned 0 and took 12442121882 ns to execute
+[  179.789469] x86: Booting SMP configuration:
+[  179.789472] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  180.116747] work-test:wq_ret_handler returned 0 and took 14135 ns to execute
+[  180.162045] smpboot: CPU 4 is now offline
+[  180.348392] work-test:ret_handler returned 0 and took 13786978934 ns to execute
+[  180.348401] work-test:ret_handler returned 0 and took 2145265386 ns to execute
+[  180.841595] work-test:wq_ret_handler returned 0 and took 22583 ns to execute
+[  180.900757] smpboot: CPU 7 is now offline
+[  181.426410] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  181.836800] work-test:wq_ret_handler returned 0 and took 11311 ns to execute
+[  181.866987] smpboot: CPU 6 is now offline
+[  181.912129] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  182.270340] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  182.312089] work-test:ret_handler returned 0 and took 17658996017 ns to execute
+[  182.897387] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  183.031365] work-test:wq_ret_handler returned 0 and took 138573 ns to execute
+[  183.146381] smpboot: CPU 1 is now offline
+[  183.181070] x86: Booting SMP configuration:
+[  183.181073] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  183.381781] work-test:wq_ret_handler returned 0 and took 14125 ns to execute
+[  183.469367] smpboot: CPU 1 is now offline
+[  183.469367] work-test:ret_handler returned 0 and took 50474014929 ns to execute
+[  183.875364] work-test:ret_handler returned 0 and took 8222986703 ns to execute
+[  183.875403] work-test:ret_handler returned 0 and took 77115558833 ns to execute
+[  184.018677] work-test:wq_ret_handler returned 0 and took 20228 ns to execute
+[  184.299409] smpboot: CPU 6 is now offline
+[  185.083351] work-test:ret_handler returned 0 and took 21466975093 ns to execute
+[  185.211391] work-test:ret_handler returned 0 and took 2176209742 ns to execute
+[  185.382459] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  185.503067] work-test:wq_ret_handler returned 0 and took 21955 ns to execute
+[  185.537402] smpboot: CPU 6 is now offline
+[  185.546465] x86: Booting SMP configuration:
+[  185.546468] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  185.627778] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  186.618997] work-test:ret_handler returned 0 and took 46749015867 ns to execute
+[  186.747639] work-test:wq_ret_handler returned 0 and took 9850 ns to execute
+[  186.819326] smpboot: CPU 5 is now offline
+[  188.858488] work-test:ret_handler returned 0 and took 2109718520 ns to execute
+[  188.859012] work-test:ret_handler returned 0 and took 23627658346 ns to execute
+[  189.862425] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  191.952754] work-test:wq_ret_handler returned 0 and took 16432 ns to execute
+[  192.025419] smpboot: CPU 7 is now offline
+[  192.079170] work-test:ret_handler returned 0 and took 58598513335 ns to execute
+[  192.131530] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  193.952395] work-test:wq_ret_handler returned 0 and took 12488 ns to execute
+[  194.030975] smpboot: CPU 6 is now offline
+[  194.170396] work-test:ret_handler returned 0 and took 13404658304 ns to execute
+[  195.501566] work-test:wq_ret_handler returned 0 and took 10806 ns to execute
+[  195.564677] smpboot: CPU 2 is now offline
+[  196.087432] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  196.113052] work-test:ret_handler returned 0 and took 11813528879 ns to execute
+[  196.113086] work-test:ret_handler returned 0 and took 44243726990 ns to execute
+[  197.627383] work-test:ret_handler returned 0 and took 60676835581 ns to execute
+[  197.631013] work-test:ret_handler returned 0 and took 20441662258 ns to execute
+[  198.075075] work-test:wq_ret_handler returned 0 and took 137975 ns to execute
+[  198.285382] smpboot: CPU 5 is now offline
+[  198.322460] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  198.442321] work-test:wq_ret_handler returned 0 and took 18086 ns to execute
+[  198.495013] smpboot: CPU 4 is now offline
+[  198.557189] work-test:wq_ret_handler returned 0 and took 9831 ns to execute
+[  198.601398] smpboot: CPU 3 is now offline
+[  198.673486] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  200.315439] work-test:ret_handler returned 0 and took 2134220744 ns to execute
+[  200.315480] work-test:ret_handler returned 0 and took 10379226710 ns to execute
+[  200.541068] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  200.698392] work-test:ret_handler returned 0 and took 22389368466 ns to execute
+[  200.887549] work-test:wq_ret_handler returned 0 and took 289015 ns to execute
+[  201.131948] smpboot: CPU 1 is now offline
+[  201.685138] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  203.124373] work-test:ret_handler returned 0 and took 46753259442 ns to execute
+[  203.124436] work-test:ret_handler returned 0 and took 2344087272 ns to execute
+[  203.164729] work-test:wq_ret_handler returned 0 and took 5955474 ns to execute
+[  203.227049] work-test:ret_handler returned 0 and took 9298707449 ns to execute
+[  203.503370] smpboot: CPU 6 is now offline
+[  203.526374] x86: Booting SMP configuration:
+[  203.526376] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  204.727733] work-test:wq_ret_handler returned 0 and took 19591 ns to execute
+[  204.829347] smpboot: CPU 4 is now offline
+[  205.500984] work-test:ret_handler returned 0 and took 11624041488 ns to execute
+[  205.506413] work-test:ret_handler returned 0 and took 2334533720 ns to execute
+[  206.579132] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  206.906355] work-test:ret_handler returned 0 and took 26745645706 ns to execute
+[  207.498509] work-test:wq_ret_handler returned 0 and took 10794 ns to execute
+[  207.549024] smpboot: CPU 5 is now offline
+[  207.918486] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  208.317851] work-test:wq_ret_handler returned 0 and took 19944 ns to execute
+[  208.377477] smpboot: CPU 7 is now offline
+[  208.463172] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  209.574476] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  209.638996] work-test:ret_handler returned 0 and took 22825652177 ns to execute
+[  209.639042] work-test:ret_handler returned 0 and took 2194678035 ns to execute
+[  210.508984] work-test:ret_handler returned 0 and took 18488967870 ns to execute
+[  210.608574] work-test:wq_ret_handler returned 0 and took 16704 ns to execute
+[  210.695385] smpboot: CPU 7 is now offline
+[  211.117550] work-test:wq_ret_handler returned 0 and took 11884 ns to execute
+[  211.209376] smpboot: CPU 3 is now offline
+[  211.349474] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  212.350482] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  212.749968] work-test:wq_ret_handler returned 0 and took 12851 ns to execute
+[  212.852729] work-test:ret_handler returned 0 and took 4481378628 ns to execute
+[  212.852746] smpboot: CPU 5 is now offline
+[  212.929043] work-test:wq_ret_handler returned 0 and took 4283453 ns to execute
+[  213.010385] smpboot: CPU 2 is now offline
+[  213.174433] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  213.252642] work-test:ret_handler returned 0 and took 2242530799 ns to execute
+[  213.252686] work-test:ret_handler returned 0 and took 14649726535 ns to execute
+[  213.763790] work-test:wq_ret_handler returned 0 and took 20169 ns to execute
+[  213.869377] smpboot: CPU 6 is now offline
+[  214.969044] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  215.100922] work-test:ret_handler returned 0 and took 50166541184 ns to execute
+[  215.103517] work-test:ret_handler returned 0 and took 19652773430 ns to execute
+[  215.334702] work-test:wq_ret_handler returned 0 and took 15834 ns to execute
+[  215.511352] smpboot: CPU 2 is now offline
+[  215.602342] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  215.717404] work-test:wq_ret_handler returned 0 and took 23584 ns to execute
+[  215.860375] smpboot: CPU 7 is now offline
+[  215.919468] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  216.737351] work-test:wq_ret_handler returned 0 and took 40391 ns to execute
+[  216.924678] smpboot: CPU 1 is now offline
+[  217.919681] work-test:ret_handler returned 0 and took 2200518793 ns to execute
+[  217.924460] work-test:ret_handler returned 0 and took 7252060785 ns to execute
+[  217.924637] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  218.077389] x86: Booting SMP configuration:
+[  218.077392] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  219.034436] work-test:ret_handler returned 0 and took 41284080338 ns to execute
+[  219.642374] work-test:ret_handler returned 0 and took 6662007180 ns to execute
+[  220.071290] work-test:wq_ret_handler returned 0 and took 20948 ns to execute
+[  220.153796] smpboot: CPU 4 is now offline
+[  221.343486] work-test:wq_ret_handler returned 0 and took 17362 ns to execute
+[  221.504465] smpboot: CPU 1 is now offline
+[  221.568370] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  221.919869] work-test:wq_ret_handler returned 0 and took 10990 ns to execute
+[  222.073441] smpboot: CPU 2 is now offline
+[  222.372362] work-test:ret_handler returned 0 and took 17537374516 ns to execute
+[  223.119432] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  223.610357] work-test:ret_handler returned 0 and took 6871236243 ns to execute
+[  224.568003] x86: Booting SMP configuration:
+[  224.568007] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  226.170352] work-test:ret_handler returned 0 and took 4419954544 ns to execute
+[  226.188852] work-test:ret_handler returned 0 and took 13206510957 ns to execute
+[  227.209562] work-test:wq_ret_handler returned 0 and took 24440 ns to execute
+[  227.337429] smpboot: CPU 5 is now offline
+[  228.515688] work-test:wq_ret_handler returned 0 and took 18308 ns to execute
+[  228.522675] smpboot: CPU 3 is now offline
+[  229.370356] work-test:ret_handler returned 0 and took 21830789167 ns to execute
+[  229.370361] work-test:ret_handler returned 0 and took 2237650698 ns to execute
+[  229.510752] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  230.586389] work-test:ret_handler returned 0 and took 19379012715 ns to execute
+[  231.665088] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  232.035489] work-test:wq_ret_handler returned 0 and took 17690 ns to execute
+[  232.109933] smpboot: CPU 7 is now offline
+[  232.200491] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  232.810862] work-test:wq_ret_handler returned 0 and took 18288 ns to execute
+[  232.928789] smpboot: CPU 3 is now offline
+[  233.128586] work-test:wq_ret_handler returned 0 and took 23993 ns to execute
+[  233.410012] smpboot: CPU 6 is now offline
+[  233.479815] work-test:wq_ret_handler returned 0 and took 21730 ns to execute
+[  233.508385] smpboot: CPU 7 is now offline
+[  234.234356] work-test:ret_handler returned 0 and took 138190870899 ns to execute
+[  235.005374] work-test:ret_handler returned 0 and took 6482487466 ns to execute
+[  235.437437] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  235.455916] work-test:ret_handler returned 0 and took 32091159975 ns to execute
+[  235.523443] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  236.018715] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  237.758001] work-test:wq_ret_handler returned 0 and took 9380 ns to execute
+[  237.850388] smpboot: CPU 1 is now offline
+[  237.946759] work-test:wq_ret_handler returned 0 and took 17696 ns to execute
+[  238.028619] smpboot: CPU 4 is now offline
+[  238.089532] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  238.218297] work-test:wq_ret_handler returned 0 and took 486775 ns to execute
+[  238.331322] smpboot: CPU 2 is now offline
+[  238.649562] work-test:wq_ret_handler returned 0 and took 19139 ns to execute
+[  238.698619] smpboot: CPU 7 is now offline
+[  239.932492] work-test:ret_handler returned 0 and took 18584591624 ns to execute
+[  239.973360] x86: Booting SMP configuration:
+[  239.973364] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  240.138628] work-test:ret_handler returned 0 and took 19979905422 ns to execute
+[  240.378363] work-test:ret_handler returned 0 and took 25035016351 ns to execute
+[  241.374461] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  241.718083] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  242.186261] work-test:wq_ret_handler returned 0 and took 18882 ns to execute
+[  242.228593] smpboot: CPU 1 is now offline
+[  242.302109] x86: Booting SMP configuration:
+[  242.302112] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  245.648540] work-test:wq_ret_handler returned 0 and took 10416 ns to execute
+[  245.720610] smpboot: CPU 5 is now offline
+[  245.798563] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  246.278676] work-test:wq_ret_handler returned 0 and took 18050 ns to execute
+[  246.403346] work-test:ret_handler returned 0 and took 8554303179 ns to execute
+[  246.408383] smpboot: CPU 4 is now offline
+[  246.434993] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  247.811556] work-test:ret_handler returned 0 and took 20488189664 ns to execute
+[  248.000691] work-test:wq_ret_handler returned 0 and took 20177 ns to execute
+[  248.149024] smpboot: CPU 7 is now offline
+[  248.228423] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  248.828009] work-test:ret_handler returned 0 and took 156479569979 ns to execute
+[  250.362377] work-test:ret_handler returned 0 and took 28472996861 ns to execute
+[  250.364026] work-test:ret_handler returned 0 and took 2356681978 ns to execute
+[  250.364052] work-test:ret_handler returned 0 and took 18254141819 ns to execute
+[  251.376747] work-test:wq_ret_handler returned 0 and took 20061 ns to execute
+[  251.499045] smpboot: CPU 1 is now offline
+[  251.608591] x86: Booting SMP configuration:
+[  251.608595] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  251.762743] work-test:wq_ret_handler returned 0 and took 13236 ns to execute
+[  251.834403] smpboot: CPU 1 is now offline
+[  251.911471] x86: Booting SMP configuration:
+[  251.911475] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  252.483569] work-test:wq_ret_handler returned 0 and took 23950 ns to execute
+[  252.547341] smpboot: CPU 2 is now offline
+[  252.575722] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  253.630371] work-test:ret_handler returned 0 and took 11405029020 ns to execute
+[  255.223685] work-test:wq_ret_handler returned 0 and took 18413 ns to execute
+[  255.292076] smpboot: CPU 3 is now offline
+[  255.508779] work-test:wq_ret_handler returned 0 and took 21146 ns to execute
+[  255.598407] smpboot: CPU 6 is now offline
+[  256.634349] work-test:ret_handler returned 0 and took 18404005973 ns to execute
+[  257.015561] work-test:wq_ret_handler returned 0 and took 9695 ns to execute
+[  257.064213] smpboot: CPU 5 is now offline
+[  257.355423] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  257.403365] work-test:ret_handler returned 0 and took 24495110894 ns to execute
+[  257.677471] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  258.152366] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  259.130352] work-test:ret_handler returned 0 and took 13407328605 ns to execute
+[  259.327463] work-test:wq_ret_handler returned 0 and took 12210 ns to execute
+[  259.429406] smpboot: CPU 5 is now offline
+[  259.614323] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  260.071356] work-test:wq_ret_handler returned 0 and took 29093 ns to execute
+[  260.336348] smpboot: CPU 1 is now offline
+[  260.998362] work-test:ret_handler returned 0 and took 117639993963 ns to execute
+[  261.518348] work-test:ret_handler returned 0 and took 4447003073 ns to execute
+[  262.397351] work-test:ret_handler returned 0 and took 10907002540 ns to execute
+[  262.510696] x86: Booting SMP configuration:
+[  262.510700] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  262.879510] work-test:wq_ret_handler returned 0 and took 15789 ns to execute
+[  262.968312] smpboot: CPU 4 is now offline
+[  263.260223] work-test:wq_ret_handler returned 0 and took 18944 ns to execute
+[  263.350716] smpboot: CPU 1 is now offline
+[  264.263028] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  265.146353] work-test:ret_handler returned 0 and took 27126473960 ns to execute
+[  265.382523] work-test:wq_ret_handler returned 0 and took 16450 ns to execute
+[  265.467303] work-test:ret_handler returned 0 and took 64480896078 ns to execute
+[  265.469412] smpboot: CPU 7 is now offline
+[  265.838072] work-test:wq_ret_handler returned 0 and took 10265 ns to execute
+[  265.881567] smpboot: CPU 5 is now offline
+[  266.533437] x86: Booting SMP configuration:
+[  266.533441] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  266.555020] work-test:ret_handler returned 0 and took 119045148538 ns to execute
+[  266.704422] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  266.979956] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  267.278109] work-test:wq_ret_handler returned 0 and took 18632 ns to execute
+[  267.306238] smpboot: CPU 5 is now offline
+[  267.429479] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  267.514358] work-test:ret_handler returned 0 and took 21613015688 ns to execute
+[  267.712753] work-test:wq_ret_handler returned 0 and took 19206 ns to execute
+[  267.788245] smpboot: CPU 2 is now offline
+[  268.668352] work-test:ret_handler returned 0 and took 7518348972 ns to execute
+[  269.946356] work-test:ret_handler returned 0 and took 74376973787 ns to execute
+[  270.018226] work-test:ret_handler returned 0 and took 10638878507 ns to execute
+[  270.075809] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  270.778357] work-test:ret_handler returned 0 and took 4174658910 ns to execute
+[  272.827044] work-test:ret_handler returned 0 and took 13951138195 ns to execute
+[  273.513664] work-test:wq_ret_handler returned 0 and took 10205 ns to execute
+[  273.578183] smpboot: CPU 3 is now offline
+[  273.980356] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  274.916165] work-test:wq_ret_handler returned 0 and took 12439 ns to execute
+[  275.018258] smpboot: CPU 6 is now offline
+[  275.067010] work-test:ret_handler returned 0 and took 6295357530 ns to execute
+[  275.257142] work-test:wq_ret_handler returned 0 and took 8662 ns to execute
+[  275.299674] smpboot: CPU 7 is now offline
+[  275.666352] work-test:ret_handler returned 0 and took 103723992162 ns to execute
+[  276.439767] work-test:wq_ret_handler returned 0 and took 16113 ns to execute
+[  276.478153] smpboot: CPU 2 is now offline
+[  276.770281] work-test:wq_ret_handler returned 0 and took 14657 ns to execute
+[  276.828206] smpboot: CPU 1 is now offline
+[  276.887433] x86: Booting SMP configuration:
+[  276.887438] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  277.138020] work-test:wq_ret_handler returned 0 and took 51960 ns to execute
+[  277.146917] smpboot: CPU 1 is now offline
+[  277.178350] work-test:ret_handler returned 0 and took 4119232274 ns to execute
+[  277.351470] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  277.434357] work-test:ret_handler returned 0 and took 29289305144 ns to execute
+[  278.094420] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  279.204145] x86: Booting SMP configuration:
+[  279.204149] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  279.296106] work-test:ret_handler returned 0 and took 4179693646 ns to execute
+[  279.324536] work-test:wq_ret_handler returned 0 and took 17227 ns to execute
+[  279.370022] smpboot: CPU 1 is now offline
+[  279.428342] x86: Booting SMP configuration:
+[  279.428347] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  279.705478] work-test:wq_ret_handler returned 0 and took 13821 ns to execute
+[  279.754918] smpboot: CPU 5 is now offline
+[  279.775266] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  282.552773] work-test:wq_ret_handler returned 0 and took 15264 ns to execute
+[  282.619324] smpboot: CPU 4 is now offline
+[  282.878424] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  284.769461] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  285.908068] work-test:ret_handler returned 0 and took 6531480795 ns to execute
+[  286.251939] work-test:wq_ret_handler returned 0 and took 13906 ns to execute
+[  286.358061] smpboot: CPU 2 is now offline
+[  286.970350] work-test:ret_handler returned 0 and took 23993907297 ns to execute
+[  287.998018] work-test:ret_handler returned 0 and took 17190653467 ns to execute
+[  288.229826] work-test:wq_ret_handler returned 0 and took 18532 ns to execute
+[  288.328017] smpboot: CPU 4 is now offline
+[  288.558712] work-test:wq_ret_handler returned 0 and took 15756 ns to execute
+[  288.610715] smpboot: CPU 6 is now offline
+[  288.635426] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  288.815342] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  290.372394] work-test:ret_handler returned 0 and took 13133042095 ns to execute
+[  290.608101] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  290.848412] work-test:wq_ret_handler returned 0 and took 24711 ns to execute
+[  291.030403] smpboot: CPU 1 is now offline
+[  292.095352] work-test:ret_handler returned 0 and took 28992073111 ns to execute
+[  292.292530] work-test:wq_ret_handler returned 0 and took 26161 ns to execute
+[  292.607979] smpboot: CPU 3 is now offline
+[  292.634687] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  292.725460] x86: Booting SMP configuration:
+[  292.725463] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  293.057999] work-test:ret_handler returned 0 and took 2208651693 ns to execute
+[  293.058031] work-test:ret_handler returned 0 and took 29693573748 ns to execute
+[  294.143110] work-test:wq_ret_handler returned 0 and took 15950 ns to execute
+[  294.239713] smpboot: CPU 5 is now offline
+[  294.637950] work-test:ret_handler returned 0 and took 2310279580 ns to execute
+[  294.637995] work-test:ret_handler returned 0 and took 2174655253 ns to execute
+[  295.933504] work-test:wq_ret_handler returned 0 and took 13423 ns to execute
+[  296.067920] smpboot: CPU 4 is now offline
+[  296.270480] work-test:ret_handler returned 0 and took 98193322409 ns to execute
+[  296.290505] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  296.948100] work-test:wq_ret_handler returned 0 and took 8789 ns to execute
+[  297.125423] smpboot: CPU 2 is now offline
+[  297.157971] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  297.327744] work-test:wq_ret_handler returned 0 and took 15961 ns to execute
+[  297.373349] smpboot: CPU 4 is now offline
+[  297.791464] work-test:wq_ret_handler returned 0 and took 14348 ns to execute
+[  297.842390] smpboot: CPU 7 is now offline
+[  298.108359] work-test:ret_handler returned 0 and took 97203910989 ns to execute
+[  298.113632] work-test:ret_handler returned 0 and took 51705288300 ns to execute
+[  298.502378] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  298.738533] work-test:wq_ret_handler returned 0 and took 14541 ns to execute
+[  298.801382] smpboot: CPU 4 is now offline
+[  299.194376] work-test:ret_handler returned 0 and took 2244816266 ns to execute
+[  299.994413] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  300.034387] work-test:ret_handler returned 0 and took 84141032182 ns to execute
+[  300.201456] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  301.826762] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  303.779265] work-test:wq_ret_handler returned 0 and took 13712 ns to execute
+[  303.967997] smpboot: CPU 3 is now offline
+[  304.058349] work-test:ret_handler returned 0 and took 8225005013 ns to execute
+[  305.028953] work-test:wq_ret_handler returned 0 and took 97915410 ns to execute
+[  305.069769] smpboot: CPU 6 is now offline
+[  306.021505] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  306.083456] work-test:ret_handler returned 0 and took 10167551345 ns to execute
+[  306.083460] work-test:ret_handler returned 0 and took 2298118423 ns to execute
+[  306.540735] work-test:wq_ret_handler returned 0 and took 15735 ns to execute
+[  306.777806] smpboot: CPU 5 is now offline
+[  306.894750] work-test:wq_ret_handler returned 0 and took 17138 ns to execute
+[  307.168987] smpboot: CPU 1 is now offline
+[  307.219226] work-test:ret_handler returned 0 and took 125350581183 ns to execute
+[  307.272905] work-test:wq_ret_handler returned 0 and took 10174 ns to execute
+[  307.277076] smpboot: CPU 7 is now offline
+[  307.281272] x86: Booting SMP configuration:
+[  307.281274] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  307.287294] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  308.097412] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  308.392805] work-test:wq_ret_handler returned 0 and took 19650 ns to execute
+[  308.467765] smpboot: CPU 7 is now offline
+[  308.923386] work-test:ret_handler returned 0 and took 43021981321 ns to execute
+[  309.180373] work-test:ret_handler returned 0 and took 2283666353 ns to execute
+[  309.180404] work-test:ret_handler returned 0 and took 18159066909 ns to execute
+[  309.909021] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  310.523362] work-test:ret_handler returned 0 and took 12663566584 ns to execute
+[  311.525504] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  312.203064] work-test:wq_ret_handler returned 0 and took 12414 ns to execute
+[  312.242414] smpboot: CPU 6 is now offline
+[  313.294471] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  315.703815] work-test:wq_ret_handler returned 0 and took 40855 ns to execute
+[  315.846482] smpboot: CPU 7 is now offline
+[  315.869474] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  317.400661] work-test:wq_ret_handler returned 0 and took 9532 ns to execute
+[  317.433703] smpboot: CPU 2 is now offline
+[  317.882373] work-test:ret_handler returned 0 and took 9479696272 ns to execute
+[  318.403589] work-test:wq_ret_handler returned 0 and took 22780 ns to execute
+[  318.536082] smpboot: CPU 6 is now offline
+[  319.173637] work-test:wq_ret_handler returned 0 and took 12582 ns to execute
+[  319.263360] smpboot: CPU 3 is now offline
+[  319.392059] work-test:wq_ret_handler returned 0 and took 11306 ns to execute
+[  319.505025] smpboot: CPU 1 is now offline
+[  319.528448] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  319.546414] work-test:ret_handler returned 0 and took 51721288068 ns to execute
+[  319.609450] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  321.299417] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  321.530351] work-test:ret_handler returned 0 and took 61292006582 ns to execute
+[  322.095261] work-test:wq_ret_handler returned 0 and took 16280 ns to execute
+[  322.171988] smpboot: CPU 4 is now offline
+[  322.522425] x86: Booting SMP configuration:
+[  322.522428] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  322.683342] work-test:ret_handler returned 0 and took 17752299394 ns to execute
+[  324.249417] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  324.298013] work-test:ret_handler returned 0 and took 22374518108 ns to execute
+[  326.361422] work-test:wq_ret_handler returned 0 and took 17604 ns to execute
+[  326.447556] smpboot: CPU 4 is now offline
+[  326.709706] work-test:wq_ret_handler returned 0 and took 20949 ns to execute
+[  326.757997] smpboot: CPU 6 is now offline
+[  327.489025] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  328.827361] work-test:ret_handler returned 0 and took 10423670679 ns to execute
+[  329.114549] work-test:wq_ret_handler returned 0 and took 8622097 ns to execute
+[  329.164079] smpboot: CPU 5 is now offline
+[  329.832481] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  329.933590] work-test:wq_ret_handler returned 0 and took 11525 ns to execute
+[  330.085376] smpboot: CPU 7 is now offline
+[  330.176088] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  330.646550] work-test:wq_ret_handler returned 0 and took 16081 ns to execute
+[  330.717586] smpboot: CPU 1 is now offline
+[  331.174490] work-test:ret_handler returned 0 and took 24395087596 ns to execute
+[  332.173440] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  332.798362] work-test:ret_handler returned 0 and took 13402470365 ns to execute
+[  332.800558] x86: Booting SMP configuration:
+[  332.800561] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  334.138343] work-test:ret_handler returned 0 and took 32211980015 ns to execute
+[  334.395357] work-test:ret_handler returned 0 and took 59081138361 ns to execute
+[  336.293781] work-test:wq_ret_handler returned 0 and took 17245 ns to execute
+[  336.358511] smpboot: CPU 5 is now offline
+[  336.429439] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  338.427364] work-test:ret_handler returned 0 and took 9384742213 ns to execute
+[  338.564763] work-test:wq_ret_handler returned 0 and took 19000 ns to execute
+[  338.690458] smpboot: CPU 2 is now offline
+[  339.439788] work-test:wq_ret_handler returned 0 and took 19471 ns to execute
+[  339.521373] smpboot: CPU 3 is now offline
+[  339.909661] work-test:wq_ret_handler returned 0 and took 16300 ns to execute
+[  340.075016] smpboot: CPU 6 is now offline
+[  340.800040] work-test:ret_handler returned 0 and took 23366687042 ns to execute
+[  341.113005] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  341.615216] work-test:wq_ret_handler returned 0 and took 15939 ns to execute
+[  341.660348] work-test:ret_handler returned 0 and took 86379442064 ns to execute
+[  341.672092] smpboot: CPU 4 is now offline
+[  341.817391] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  342.605073] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  342.799199] work-test:wq_ret_handler returned 0 and took 11546 ns to execute
+[  342.871750] smpboot: CPU 3 is now offline
+[  343.242809] work-test:wq_ret_handler returned 0 and took 15938 ns to execute
+[  343.325387] smpboot: CPU 7 is now offline
+[  343.346480] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  343.741025] work-test:ret_handler returned 0 and took 21567761275 ns to execute
+[  343.799405] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  343.891716] work-test:wq_ret_handler returned 0 and took 18633 ns to execute
+[  344.099800] smpboot: CPU 2 is now offline
+[  344.186365] work-test:ret_handler returned 0 and took 110781994113 ns to execute
+[  344.186434] work-test:ret_handler returned 0 and took 70148057198 ns to execute
+[  345.921469] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  345.978403] work-test:ret_handler returned 0 and took 7288303955 ns to execute
+[  346.110378] work-test:ret_handler returned 0 and took 2217959283 ns to execute
+[  347.117575] work-test:wq_ret_handler returned 0 and took 21566 ns to execute
+[  347.196409] smpboot: CPU 1 is now offline
+[  347.278114] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  349.058756] work-test:wq_ret_handler returned 0 and took 23837 ns to execute
+[  349.207375] smpboot: CPU 3 is now offline
+[  349.252073] work-test:ret_handler returned 0 and took 2288728088 ns to execute
+[  349.255039] work-test:ret_handler returned 0 and took 42085848344 ns to execute
+[  349.270688] work-test:wq_ret_handler returned 0 and took 16771 ns to execute
+[  349.354400] smpboot: CPU 6 is now offline
+[  349.381529] x86: Booting SMP configuration:
+[  349.381534] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  349.445048] work-test:ret_handler returned 0 and took 19365700571 ns to execute
+[  350.325120] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  350.699855] work-test:wq_ret_handler returned 0 and took 19093 ns to execute
+[  350.777828] smpboot: CPU 1 is now offline
+[  351.231379] work-test:ret_handler returned 0 and took 11711905983 ns to execute
+[  351.231411] work-test:ret_handler returned 0 and took 2143167997 ns to execute
+[  351.420394] work-test:ret_handler returned 0 and took 2149039181 ns to execute
+[  352.440129] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  352.532776] work-test:wq_ret_handler returned 0 and took 16171 ns to execute
+[  352.570376] smpboot: CPU 5 is now offline
+[  352.601471] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  352.826456] x86: Booting SMP configuration:
+[  352.826461] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  353.492506] work-test:wq_ret_handler returned 0 and took 12230 ns to execute
+[  353.728418] smpboot: CPU 2 is now offline
+[  355.879436] work-test:ret_handler returned 0 and took 2253097169 ns to execute
+[  355.879490] work-test:ret_handler returned 0 and took 11915144876 ns to execute
+[  355.958080] work-test:wq_ret_handler returned 0 and took 20168 ns to execute
+[  356.128466] smpboot: CPU 4 is now offline
+[  356.193405] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  356.761540] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  357.050345] work-test:ret_handler returned 0 and took 27120044194 ns to execute
+[  357.295385] work-test:wq_ret_handler returned 0 and took 897585 ns to execute
+[  357.364378] smpboot: CPU 4 is now offline
+[  357.378514] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  357.457670] work-test:wq_ret_handler returned 0 and took 15765 ns to execute
+[  357.633312] smpboot: CPU 3 is now offline
+[  358.202412] work-test:ret_handler returned 0 and took 16540749258 ns to execute
+[  358.436571] work-test:wq_ret_handler returned 0 and took 24082 ns to execute
+[  358.584034] smpboot: CPU 7 is now offline
+[  358.667213] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  359.641011] work-test:ret_handler returned 0 and took 10442967861 ns to execute
+[  359.641053] work-test:ret_handler returned 0 and took 2090698985 ns to execute
+[  360.640018] work-test:ret_handler returned 0 and took 17364665967 ns to execute
+[  360.640067] work-test:ret_handler returned 0 and took 2192779875 ns to execute
+[  361.057457] work-test:wq_ret_handler returned 0 and took 10994 ns to execute
+[  361.089513] smpboot: CPU 2 is now offline
+[  361.627447] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  362.752798] work-test:wq_ret_handler returned 0 and took 19053 ns to execute
+[  362.782507] smpboot: CPU 5 is now offline
+[  363.101480] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  363.131374] work-test:ret_handler returned 0 and took 110578009345 ns to execute
+[  363.131401] work-test:ret_handler returned 0 and took 23221024894 ns to execute
+[  364.844450] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  364.877182] work-test:ret_handler returned 0 and took 28516834489 ns to execute
+[  366.464759] work-test:wq_ret_handler returned 0 and took 21148 ns to execute
+[  366.533013] smpboot: CPU 4 is now offline
+[  368.617338] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  369.529108] work-test:wq_ret_handler returned 0 and took 23099 ns to execute
+[  369.608198] smpboot: CPU 6 is now offline
+[  371.707020] work-test:ret_handler returned 0 and took 44948859687 ns to execute
+[  371.733998] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  371.878654] work-test:wq_ret_handler returned 0 and took 16495 ns to execute
+[  371.936015] smpboot: CPU 7 is now offline
+[  372.019512] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  373.010686] work-test:wq_ret_handler returned 0 and took 12621 ns to execute
+[  373.107416] smpboot: CPU 1 is now offline
+[  373.119155] x86: Booting SMP configuration:
+[  373.119158] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  374.181060] work-test:wq_ret_handler returned 0 and took 8709 ns to execute
+[  374.272421] smpboot: CPU 2 is now offline
+[  376.382368] work-test:ret_handler returned 0 and took 15387029576 ns to execute
+[  376.412365] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  377.213661] work-test:wq_ret_handler returned 0 and took 21230 ns to execute
+[  377.297047] smpboot: CPU 1 is now offline
+[  377.420509] x86: Booting SMP configuration:
+[  377.420512] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  377.831377] work-test:wq_ret_handler returned 0 and took 14406 ns to execute
+[  378.004617] smpboot: CPU 3 is now offline
+[  378.108495] work-test:ret_handler returned 0 and took 19599055367 ns to execute
+[  379.965506] work-test:ret_handler returned 0 and took 22506160963 ns to execute
+[  379.965519] work-test:ret_handler returned 0 and took 2132022198 ns to execute
+[  380.027009] work-test:ret_handler returned 0 and took 27114650968 ns to execute
+[  380.057480] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  380.525730] work-test:wq_ret_handler returned 0 and took 20830 ns to execute
+[  380.610032] smpboot: CPU 1 is now offline
+[  380.855512] work-test:wq_ret_handler returned 0 and took 19091 ns to execute
+[  380.906991] smpboot: CPU 6 is now offline
+[  381.212149] work-test:wq_ret_handler returned 0 and took 11607 ns to execute
+[  381.362043] smpboot: CPU 3 is now offline
+[  381.372816] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  381.404358] work-test:ret_handler returned 0 and took 50686766909 ns to execute
+[  382.000176] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  383.050973] work-test:ret_handler returned 0 and took 13459623412 ns to execute
+[  383.418363] work-test:ret_handler returned 0 and took 5472870406 ns to execute
+[  383.632435] x86: Booting SMP configuration:
+[  383.632440] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  383.930468] work-test:wq_ret_handler returned 0 and took 9931 ns to execute
+[  384.046361] smpboot: CPU 5 is now offline
+[  386.107365] work-test:ret_handler returned 0 and took 2176767512 ns to execute
+[  387.064932] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  387.798824] work-test:wq_ret_handler returned 0 and took 21324 ns to execute
+[  387.916997] smpboot: CPU 4 is now offline
+[  388.554045] work-test:wq_ret_handler returned 0 and took 18949 ns to execute
+[  388.572702] smpboot: CPU 2 is now offline
+[  388.656511] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  388.967457] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  389.254440] work-test:wq_ret_handler returned 0 and took 10539 ns to execute
+[  389.329381] smpboot: CPU 6 is now offline
+[  389.946381] work-test:ret_handler returned 0 and took 33817837130 ns to execute
+[  390.651349] work-test:ret_handler returned 0 and took 16360003866 ns to execute
+[  391.374397] work-test:ret_handler returned 0 and took 10467210262 ns to execute
+[  391.375370] work-test:ret_handler returned 0 and took 2189443761 ns to execute
+[  392.148737] work-test:wq_ret_handler returned 0 and took 20067 ns to execute
+[  392.278136] smpboot: CPU 7 is now offline
+[  392.353422] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  392.908794] work-test:wq_ret_handler returned 0 and took 19527 ns to execute
+[  392.948659] smpboot: CPU 2 is now offline
+[  393.343466] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  394.203771] work-test:wq_ret_handler returned 0 and took 18439 ns to execute
+[  394.305410] smpboot: CPU 5 is now offline
+[  394.305617] work-test:ret_handler returned 0 and took 22369426929 ns to execute
+[  394.317299] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  395.008402] work-test:ret_handler returned 0 and took 6435659766 ns to execute
+[  396.019452] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  396.516878] work-test:wq_ret_handler returned 0 and took 7124699 ns to execute
+[  396.704051] smpboot: CPU 3 is now offline
+[  397.813012] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  398.109727] work-test:wq_ret_handler returned 0 and took 21029 ns to execute
+[  398.270403] smpboot: CPU 4 is now offline
+[  398.293819] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  398.718620] work-test:ret_handler returned 0 and took 2198200653 ns to execute
+[  398.718653] work-test:ret_handler returned 0 and took 125058331148 ns to execute
+[  400.318389] work-test:ret_handler returned 0 and took 12451431022 ns to execute
+[  400.860111] work-test:wq_ret_handler returned 0 and took 13139 ns to execute
+[  401.266789] smpboot: CPU 1 is now offline
+[  403.133779] work-test:wq_ret_handler returned 0 and took 19827 ns to execute
+[  403.165373] smpboot: CPU 2 is now offline
+[  403.266542] work-test:ret_handler returned 0 and took 25973196164 ns to execute
+[  403.266568] work-test:ret_handler returned 0 and took 2209225116 ns to execute
+[  403.313449] x86: Booting SMP configuration:
+[  403.313452] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  403.357047] work-test:ret_handler returned 0 and took 42434029005 ns to execute
+[  405.446740] work-test:ret_handler returned 0 and took 12498710332 ns to execute
+[  406.313422] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  408.448959] work-test:wq_ret_handler returned 0 and took 11958 ns to execute
+[  408.645033] smpboot: CPU 1 is now offline
+[  408.678750] work-test:wq_ret_handler returned 0 and took 20764 ns to execute
+[  408.789299] smpboot: CPU 6 is now offline
+[  408.827471] x86: Booting SMP configuration:
+[  408.827475] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  410.599409] work-test:wq_ret_handler returned 0 and took 5566520 ns to execute
+[  410.682900] smpboot: CPU 5 is now offline
+[  410.691376] work-test:ret_handler returned 0 and took 9806588651 ns to execute
+[  410.794426] work-test:ret_handler returned 0 and took 2114914648 ns to execute
+[  410.817476] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  411.258370] work-test:ret_handler returned 0 and took 33245753957 ns to execute
+[  411.427727] work-test:wq_ret_handler returned 0 and took 18953 ns to execute
+[  411.806794] smpboot: CPU 2 is now offline
+[  411.864113] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  412.507015] work-test:wq_ret_handler returned 0 and took 23031 ns to execute
+[  412.599346] smpboot: CPU 7 is now offline
+[  412.796368] work-test:ret_handler returned 0 and took 50013970658 ns to execute
+[  413.763369] work-test:ret_handler returned 0 and took 2334971251 ns to execute
+[  413.826370] work-test:ret_handler returned 0 and took 10657904947 ns to execute
+[  413.826377] work-test:ret_handler returned 0 and took 2273956135 ns to execute
+[  414.620449] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  414.650761] work-test:ret_handler returned 0 and took 2143415299 ns to execute
+[  414.866709] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  415.058306] work-test:wq_ret_handler returned 0 and took 11893 ns to execute
+[  415.122359] smpboot: CPU 1 is now offline
+[  415.145699] work-test:wq_ret_handler returned 0 and took 10057 ns to execute
+[  415.294380] smpboot: CPU 3 is now offline
+[  415.334999] work-test:wq_ret_handler returned 0 and took 12970 ns to execute
+[  415.354008] smpboot: CPU 6 is now offline
+[  416.201339] x86: Booting SMP configuration:
+[  416.201344] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  416.418753] work-test:wq_ret_handler returned 0 and took 19178 ns to execute
+[  416.482822] smpboot: CPU 4 is now offline
+[  417.338390] work-test:ret_handler returned 0 and took 20633714951 ns to execute
+[  417.372447] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  417.426830] work-test:ret_handler returned 0 and took 77497457525 ns to execute
+[  418.328456] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  419.516480] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  425.713313] work-test:wq_ret_handler returned 0 and took 22007 ns to execute
+[  425.769386] smpboot: CPU 7 is now offline
+[  426.793424] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  427.241841] work-test:ret_handler returned 0 and took 111445390123 ns to execute
+[  428.064396] work-test:wq_ret_handler returned 0 and took 11358 ns to execute
+[  428.156532] smpboot: CPU 5 is now offline
+[  428.163199] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  428.883693] work-test:wq_ret_handler returned 0 and took 16719 ns to execute
+[  429.045082] smpboot: CPU 7 is now offline
+[  430.206004] work-test:ret_handler returned 0 and took 19702658700 ns to execute
+[  431.106488] work-test:ret_handler returned 0 and took 38953202615 ns to execute
+[  431.316851] work-test:wq_ret_handler returned 0 and took 23811 ns to execute
+[  431.376491] smpboot: CPU 1 is now offline
+[  432.079420] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  433.479004] work-test:ret_handler returned 0 and took 24931611969 ns to execute
+[  434.468504] x86: Booting SMP configuration:
+[  434.468508] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  434.568431] work-test:wq_ret_handler returned 0 and took 13051 ns to execute
+[  434.622468] smpboot: CPU 6 is now offline
+[  435.055521] work-test:wq_ret_handler returned 0 and took 12622 ns to execute
+[  435.109111] smpboot: CPU 2 is now offline
+[  435.496750] work-test:wq_ret_handler returned 0 and took 14102 ns to execute
+[  435.611382] smpboot: CPU 3 is now offline
+[  436.624275] work-test:wq_ret_handler returned 0 and took 21739 ns to execute
+[  437.003163] smpboot: CPU 4 is now offline
+[  437.047422] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  437.177425] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  437.627352] work-test:ret_handler returned 0 and took 2129929405 ns to execute
+[  437.627392] work-test:ret_handler returned 0 and took 56409233122 ns to execute
+[  438.171021] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  438.975242] work-test:ret_handler returned 0 and took 40859747455 ns to execute
+[  439.011364] work-test:ret_handler returned 0 and took 2387003497 ns to execute
+[  439.135481] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  439.266490] work-test:ret_handler returned 0 and took 150918435607 ns to execute
+[  441.406352] work-test:ret_handler returned 0 and took 155468295987 ns to execute
+[  445.229528] work-test:wq_ret_handler returned 0 and took 16432 ns to execute
+[  445.316373] smpboot: CPU 7 is now offline
+[  445.408504] work-test:wq_ret_handler returned 0 and took 16426 ns to execute
+[  445.470063] smpboot: CPU 5 is now offline
+[  445.498474] work-test:ret_handler returned 0 and took 8312818533 ns to execute
+[  445.726471] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  446.009462] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  447.029426] work-test:wq_ret_handler returned 0 and took 10829 ns to execute
+[  447.132027] smpboot: CPU 7 is now offline
+[  447.675021] work-test:ret_handler returned 0 and took 6218617621 ns to execute
+[  448.236477] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  448.596121] work-test:wq_ret_handler returned 0 and took 17037 ns to execute
+[  448.666481] smpboot: CPU 4 is now offline
+[  448.728960] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  449.866324] work-test:ret_handler returned 0 and took 10489845300 ns to execute
+[  450.685085] work-test:wq_ret_handler returned 0 and took 13182 ns to execute
+[  450.769560] smpboot: CPU 1 is now offline
+[  451.970037] work-test:ret_handler returned 0 and took 4125019137 ns to execute
+[  452.096488] work-test:wq_ret_handler returned 0 and took 13270 ns to execute
+[  452.140102] smpboot: CPU 4 is now offline
+[  452.256733] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  452.415875] work-test:wq_ret_handler returned 0 and took 13002 ns to execute
+[  452.448991] smpboot: CPU 4 is now offline
+[  452.491676] work-test:wq_ret_handler returned 0 and took 16155 ns to execute
+[  452.493120] smpboot: CPU 6 is now offline
+[  452.551426] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  452.726419] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  452.923351] work-test:ret_handler returned 0 and took 21556740751 ns to execute
+[  453.966459] x86: Booting SMP configuration:
+[  453.966464] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  454.205348] work-test:ret_handler returned 0 and took 8547993024 ns to execute
+[  455.116455] work-test:wq_ret_handler returned 0 and took 13561 ns to execute
+[  455.220055] smpboot: CPU 6 is now offline
+[  455.389322] work-test:wq_ret_handler returned 0 and took 12845 ns to execute
+[  455.496454] smpboot: CPU 3 is now offline
+[  456.250353] work-test:ret_handler returned 0 and took 4252387143 ns to execute
+[  456.416858] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  456.658454] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  457.315648] work-test:wq_ret_handler returned 0 and took 15422 ns to execute
+[  457.396255] smpboot: CPU 2 is now offline
+[  458.168741] work-test:wq_ret_handler returned 0 and took 14731 ns to execute
+[  458.276238] smpboot: CPU 3 is now offline
+[  458.299346] work-test:ret_handler returned 0 and took 4063035746 ns to execute
+[  458.548140] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  458.699663] work-test:wq_ret_handler returned 0 and took 20010 ns to execute
+[  458.766270] smpboot: CPU 7 is now offline
+[  459.089776] work-test:ret_handler returned 0 and took 23478662449 ns to execute
+[  459.284531] work-test:wq_ret_handler returned 0 and took 17569 ns to execute
+[  459.336298] smpboot: CPU 1 is now offline
+[  459.482469] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  460.372641] work-test:ret_handler returned 0 and took 10430506993 ns to execute
+[  460.380697] x86: Booting SMP configuration:
+[  460.380706] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  461.470960] work-test:wq_ret_handler returned 0 and took 18764 ns to execute
+[  461.550993] smpboot: CPU 1 is now offline
+[  461.577449] x86: Booting SMP configuration:
+[  461.577453] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  461.910413] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  462.086717] work-test:wq_ret_handler returned 0 and took 16597 ns to execute
+[  462.138395] smpboot: CPU 7 is now offline
+[  462.176114] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  462.971380] work-test:ret_handler returned 0 and took 61966760897 ns to execute
+[  463.611389] work-test:ret_handler returned 0 and took 12843046849 ns to execute
+[  464.234784] work-test:wq_ret_handler returned 0 and took 18418 ns to execute
+[  464.296180] smpboot: CPU 5 is now offline
+[  464.665668] work-test:wq_ret_handler returned 0 and took 15963 ns to execute
+[  464.907059] smpboot: CPU 1 is now offline
+[  465.026403] x86: Booting SMP configuration:
+[  465.026407] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  465.360952] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  465.803606] work-test:wq_ret_handler returned 0 and took 171058 ns to execute
+[  465.968389] smpboot: CPU 4 is now offline
+[  466.364006] work-test:ret_handler returned 0 and took 38365021764 ns to execute
+[  466.915355] work-test:ret_handler returned 0 and took 2189184057 ns to execute
+[  466.915396] work-test:ret_handler returned 0 and took 119702076024 ns to execute
+[  467.066355] work-test:ret_handler returned 0 and took 58171007914 ns to execute
+[  468.026394] work-test:ret_handler returned 0 and took 31092999410 ns to execute
+[  468.986351] work-test:ret_handler returned 0 and took 4313355914 ns to execute
+[  469.007468] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  469.686614] work-test:wq_ret_handler returned 0 and took 15521 ns to execute
+[  469.826159] smpboot: CPU 2 is now offline
+[  470.895460] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  471.056137] work-test:wq_ret_handler returned 0 and took 7888883 ns to execute
+[  471.126156] smpboot: CPU 2 is now offline
+[  471.215426] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  471.870388] work-test:ret_handler returned 0 and took 60113634226 ns to execute
+[  473.298777] work-test:wq_ret_handler returned 0 and took 20227 ns to execute
+[  473.386108] smpboot: CPU 7 is now offline
+[  474.507485] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  475.519385] work-test:ret_handler returned 0 and took 46633921337 ns to execute
+[  475.646543] work-test:wq_ret_handler returned 0 and took 15978 ns to execute
+[  475.708000] smpboot: CPU 6 is now offline
+[  477.185517] work-test:wq_ret_handler returned 0 and took 10899 ns to execute
+[  477.231076] smpboot: CPU 4 is now offline
+[  477.241250] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  477.754747] work-test:wq_ret_handler returned 0 and took 20989 ns to execute
+[  477.807298] smpboot: CPU 3 is now offline
+[  477.859527] work-test:ret_handler returned 0 and took 88541180259 ns to execute
+[  477.866416] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  479.078526] work-test:wq_ret_handler returned 0 and took 16629 ns to execute
+[  479.134421] smpboot: CPU 6 is now offline
+[  479.290368] work-test:ret_handler returned 0 and took 194332267016 ns to execute
+[  479.870030] work-test:ret_handler returned 0 and took 64718339237 ns to execute
+[  480.114751] work-test:wq_ret_handler returned 0 and took 19762 ns to execute
+[  480.187263] smpboot: CPU 1 is now offline
+[  480.887458] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  481.212018] work-test:ret_handler returned 0 and took 5511607311 ns to execute
+[  481.214434] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  481.254423] x86: Booting SMP configuration:
+[  481.254426] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  482.236405] work-test:ret_handler returned 0 and took 17329964108 ns to execute
+[  484.156347] work-test:ret_handler returned 0 and took 55192938645 ns to execute
+[  484.361776] work-test:wq_ret_handler returned 0 and took 21557 ns to execute
+[  484.395033] smpboot: CPU 1 is now offline
+[  485.555671] work-test:wq_ret_handler returned 0 and took 10059 ns to execute
+[  485.602044] smpboot: CPU 5 is now offline
+[  485.617429] x86: Booting SMP configuration:
+[  485.617433] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  485.966737] work-test:wq_ret_handler returned 0 and took 9878 ns to execute
+[  486.138011] smpboot: CPU 7 is now offline
+[  486.153476] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  486.475007] work-test:ret_handler returned 0 and took 24979908620 ns to execute
+[  487.624351] work-test:ret_handler returned 0 and took 23333979927 ns to execute
+[  488.624386] work-test:ret_handler returned 0 and took 2632925497 ns to execute
+[  488.624421] work-test:ret_handler returned 0 and took 76026023062 ns to execute
+[  488.625438] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  489.312772] work-test:wq_ret_handler returned 0 and took 20514 ns to execute
+[  489.458432] smpboot: CPU 2 is now offline
+[  491.520356] work-test:ret_handler returned 0 and took 21821930396 ns to execute
+[  492.477467] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  495.699229] work-test:wq_ret_handler returned 0 and took 18943 ns to execute
+[  495.790399] smpboot: CPU 5 is now offline
+[  496.306713] work-test:wq_ret_handler returned 0 and took 19282 ns to execute
+[  496.366014] smpboot: CPU 6 is now offline
+[  496.625384] work-test:wq_ret_handler returned 0 and took 14744930 ns to execute
+[  496.727492] smpboot: CPU 4 is now offline
+[  497.827365] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  497.904157] work-test:ret_handler returned 0 and took 2195249048 ns to execute
+[  498.496354] work-test:ret_handler returned 0 and took 19361804802 ns to execute
+[  498.760386] work-test:ret_handler returned 0 and took 2134920681 ns to execute
+[  499.044776] work-test:wq_ret_handler returned 0 and took 10048 ns to execute
+[  499.162390] smpboot: CPU 3 is now offline
+[  499.504423] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  499.753418] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  500.249452] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  500.588788] work-test:wq_ret_handler returned 0 and took 11885 ns to execute
+[  500.667441] smpboot: CPU 6 is now offline
+[  502.074348] work-test:ret_handler returned 0 and took 24176643664 ns to execute
+[  502.133813] work-test:ret_handler returned 0 and took 3027908659 ns to execute
+[  502.133847] work-test:ret_handler returned 0 and took 45209829210 ns to execute
+[  503.354887] work-test:wq_ret_handler returned 0 and took 15784 ns to execute
+[  503.403049] smpboot: CPU 7 is now offline
+[  503.473067] work-test:wq_ret_handler returned 0 and took 9801 ns to execute
+[  503.535843] smpboot: CPU 3 is now offline
+[  503.623503] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  503.742446] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  505.046319] work-test:wq_ret_handler returned 0 and took 11996 ns to execute
+[  505.086008] smpboot: CPU 1 is now offline
+[  505.156030] x86: Booting SMP configuration:
+[  505.156034] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  505.660020] work-test:ret_handler returned 0 and took 27850674846 ns to execute
+[  506.619002] work-test:wq_ret_handler returned 0 and took 12976 ns to execute
+[  506.723434] smpboot: CPU 2 is now offline
+[  506.790121] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  507.059017] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  507.135830] work-test:ret_handler returned 0 and took 26942485255 ns to execute
+[  508.797404] work-test:ret_handler returned 0 and took 19482707706 ns to execute
+[  508.865474] work-test:wq_ret_handler returned 0 and took 8205 ns to execute
+[  508.892533] smpboot: CPU 4 is now offline
+[  509.023988] work-test:wq_ret_handler returned 0 and took 21113 ns to execute
+[  509.066079] smpboot: CPU 3 is now offline
+[  509.180349] work-test:ret_handler returned 0 and took 24786967050 ns to execute
+[  510.970366] work-test:ret_handler returned 0 and took 33853574812 ns to execute
+[  511.215701] work-test:wq_ret_handler returned 0 and took 17841 ns to execute
+[  511.277363] smpboot: CPU 1 is now offline
+[  511.620375] work-test:ret_handler returned 0 and took 38244186833 ns to execute
+[  511.939452] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  512.107373] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  512.356440] x86: Booting SMP configuration:
+[  512.356444] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  513.338371] work-test:ret_handler returned 0 and took 8342458105 ns to execute
+[  516.067838] work-test:wq_ret_handler returned 0 and took 20162 ns to execute
+[  516.103003] smpboot: CPU 5 is now offline
+[  516.227312] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  516.857780] work-test:wq_ret_handler returned 0 and took 19356 ns to execute
+[  516.928031] smpboot: CPU 6 is now offline
+[  518.204408] work-test:ret_handler returned 0 and took 32711020643 ns to execute
+[  518.970367] work-test:ret_handler returned 0 and took 103616026039 ns to execute
+[  518.970387] work-test:ret_handler returned 0 and took 2112080366 ns to execute
+[  519.040450] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  520.720815] work-test:wq_ret_handler returned 0 and took 19691 ns to execute
+[  520.783363] smpboot: CPU 7 is now offline
+[  521.178461] work-test:wq_ret_handler returned 0 and took 23743 ns to execute
+[  521.329862] smpboot: CPU 2 is now offline
+[  522.351441] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  522.876719] work-test:ret_handler returned 0 and took 36740316417 ns to execute
+[  523.402001] work-test:ret_handler returned 0 and took 2216293670 ns to execute
+[  523.890429] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  524.325671] work-test:wq_ret_handler returned 0 and took 15882 ns to execute
+[  524.783413] smpboot: CPU 5 is now offline
+[  525.810450] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  526.787382] work-test:ret_handler returned 0 and took 2451619589 ns to execute
+[  526.787422] work-test:ret_handler returned 0 and took 10686077936 ns to execute
+[  526.796455] work-test:ret_handler returned 0 and took 6014062457 ns to execute
+[  528.122360] work-test:ret_handler returned 0 and took 63163827775 ns to execute
+[  528.213924] work-test:wq_ret_handler returned 0 and took 12809 ns to execute
+[  528.287085] smpboot: CPU 3 is now offline
+[  529.512779] work-test:wq_ret_handler returned 0 and took 20643 ns to execute
+[  529.617372] smpboot: CPU 1 is now offline
+[  530.237719] work-test:wq_ret_handler returned 0 and took 17160 ns to execute
+[  530.356944] smpboot: CPU 7 is now offline
+[  530.393383] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  530.674433] x86: Booting SMP configuration:
+[  530.674437] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  531.436822] work-test:wq_ret_handler returned 0 and took 18742 ns to execute
+[  531.480406] smpboot: CPU 2 is now offline
+[  531.643360] work-test:ret_handler returned 0 and took 2130520337 ns to execute
+[  532.081289] work-test:wq_ret_handler returned 0 and took 11491 ns to execute
+[  532.200383] smpboot: CPU 4 is now offline
+[  532.407415] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  532.445768] work-test:ret_handler returned 0 and took 29036233907 ns to execute
+[  532.596754] work-test:wq_ret_handler returned 0 and took 18657 ns to execute
+[  532.646401] smpboot: CPU 3 is now offline
+[  533.566354] work-test:ret_handler returned 0 and took 26947315111 ns to execute
+[  533.578649] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  534.244640] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  534.302076] work-test:ret_handler returned 0 and took 68331723076 ns to execute
+[  534.692471] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  537.284607] work-test:wq_ret_handler returned 0 and took 16043 ns to execute
+[  537.345592] smpboot: CPU 6 is now offline
+[  537.829790] work-test:wq_ret_handler returned 0 and took 20890 ns to execute
+[  537.853139] smpboot: CPU 3 is now offline
+[  538.947092] work-test:wq_ret_handler returned 0 and took 16147 ns to execute
+[  539.020381] smpboot: CPU 5 is now offline
+[  539.036046] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  539.405411] work-test:ret_handler returned 0 and took 22479588604 ns to execute
+[  539.406628] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  539.992930] work-test:ret_handler returned 0 and took 36447101731 ns to execute
+[  540.937550] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  541.377594] work-test:wq_ret_handler returned 0 and took 13849 ns to execute
+[  541.408376] smpboot: CPU 4 is now offline
+[  541.487690] work-test:wq_ret_handler returned 0 and took 11223 ns to execute
+[  541.666059] smpboot: CPU 7 is now offline
+[  541.837457] work-test:wq_ret_handler returned 0 and took 12338 ns to execute
+[  541.906372] smpboot: CPU 1 is now offline
+[  542.687454] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  543.676002] work-test:ret_handler returned 0 and took 13366623974 ns to execute
+[  543.932351] work-test:ret_handler returned 0 and took 32651999548 ns to execute
+[  543.933449] work-test:ret_handler returned 0 and took 38847101768 ns to execute
+[  543.996438] x86: Booting SMP configuration:
+[  543.996441] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  544.461446] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  548.737294] work-test:wq_ret_handler returned 0 and took 8606 ns to execute
+[  548.955524] smpboot: CPU 2 is now offline
+[  550.155613] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  550.975504] work-test:ret_handler returned 0 and took 27042026510 ns to execute
+[  551.035386] work-test:ret_handler returned 0 and took 19559366578 ns to execute
+[  553.801898] work-test:wq_ret_handler returned 0 and took 3940235 ns to execute
+[  553.935519] smpboot: CPU 4 is now offline
+[  554.166484] work-test:wq_ret_handler returned 0 and took 9327 ns to execute
+[  554.236317] smpboot: CPU 3 is now offline
+[  555.965952] work-test:ret_handler returned 0 and took 58031236684 ns to execute
+[  556.109670] work-test:ret_handler returned 0 and took 24027297056 ns to execute
+[  556.167167] work-test:wq_ret_handler returned 0 and took 14543 ns to execute
+[  556.346366] work-test:ret_handler returned 0 and took 18494390059 ns to execute
+[  556.435466] smpboot: CPU 5 is now offline
+[  557.159536] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  557.379645] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  557.576497] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  558.460368] work-test:ret_handler returned 0 and took 264400939782 ns to execute
+[  559.685421] work-test:wq_ret_handler returned 0 and took 6689087 ns to execute
+[  559.825414] smpboot: CPU 6 is now offline
+[  562.016887] work-test:ret_handler returned 0 and took 24667073391 ns to execute
+[  562.016909] work-test:ret_handler returned 0 and took 2177456876 ns to execute
+[  562.141874] work-test:wq_ret_handler returned 0 and took 13877 ns to execute
+[  562.474423] smpboot: CPU 1 is now offline
+[  562.832615] work-test:wq_ret_handler returned 0 and took 9765 ns to execute
+[  562.895374] smpboot: CPU 7 is now offline
+[  563.175462] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  564.546378] work-test:ret_handler returned 0 and took 22772997220 ns to execute
+[  565.185375] work-test:ret_handler returned 0 and took 23696016504 ns to execute
+[  565.531422] x86: Booting SMP configuration:
+[  565.531425] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  566.175418] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  566.368795] work-test:wq_ret_handler returned 0 and took 18101 ns to execute
+[  566.475370] smpboot: CPU 2 is now offline
+[  568.626439] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  568.686965] work-test:ret_handler returned 0 and took 19941482646 ns to execute
+[  569.151389] work-test:ret_handler returned 0 and took 20193381269 ns to execute
+[  569.806798] work-test:wq_ret_handler returned 0 and took 20312 ns to execute
+[  569.889379] smpboot: CPU 2 is now offline
+[  570.697763] work-test:wq_ret_handler returned 0 and took 18838 ns to execute
+[  570.787060] smpboot: CPU 1 is now offline
+[  571.369360] work-test:wq_ret_handler returned 0 and took 9534 ns to execute
+[  571.407069] smpboot: CPU 6 is now offline
+[  572.491709] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  572.859365] work-test:ret_handler returned 0 and took 10713601099 ns to execute
+[  572.928497] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  573.499368] work-test:ret_handler returned 0 and took 13548616320 ns to execute
+[  573.628794] work-test:wq_ret_handler returned 0 and took 16775 ns to execute
+[  573.706350] smpboot: CPU 6 is now offline
+[  573.814440] x86: Booting SMP configuration:
+[  573.814443] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  574.299732] work-test:wq_ret_handler returned 0 and took 17371 ns to execute
+[  574.716535] smpboot: CPU 4 is now offline
+[  574.745553] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  574.873829] work-test:wq_ret_handler returned 0 and took 23178 ns to execute
+[  574.982292] smpboot: CPU 5 is now offline
+[  574.994507] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  576.102429] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  576.636345] work-test:ret_handler returned 0 and took 2325891893 ns to execute
+[  576.722388] work-test:ret_handler returned 0 and took 22775038834 ns to execute
+[  577.025282] work-test:ret_handler returned 0 and took 52372695513 ns to execute
+[  577.025326] work-test:ret_handler returned 0 and took 2150826846 ns to execute
+[  577.523440] work-test:wq_ret_handler returned 0 and took 15491 ns to execute
+[  577.547401] smpboot: CPU 3 is now offline
+[  579.415259] work-test:wq_ret_handler returned 0 and took 11645 ns to execute
+[  579.535323] smpboot: CPU 7 is now offline
+[  579.596593] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  579.655436] work-test:ret_handler returned 0 and took 25428488006 ns to execute
+[  580.622456] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  581.245608] work-test:wq_ret_handler returned 0 and took 16656 ns to execute
+[  581.549034] smpboot: CPU 6 is now offline
+[  581.566389] work-test:ret_handler returned 0 and took 18680017702 ns to execute
+[  581.928297] work-test:wq_ret_handler returned 0 and took 10111 ns to execute
+[  582.092132] smpboot: CPU 1 is now offline
+[  583.612369] work-test:ret_handler returned 0 and took 12203056449 ns to execute
+[  584.125248] work-test:ret_handler returned 0 and took 13389213903 ns to execute
+[  584.135015] work-test:ret_handler returned 0 and took 2195666769 ns to execute
+[  584.172433] x86: Booting SMP configuration:
+[  584.172435] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  584.612401] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  587.898396] work-test:ret_handler returned 0 and took 33949021012 ns to execute
+[  592.226761] work-test:wq_ret_handler returned 0 and took 19674 ns to execute
+[  592.332387] smpboot: CPU 5 is now offline
+[  592.386496] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  592.945816] work-test:wq_ret_handler returned 0 and took 17533 ns to execute
+[  593.085377] smpboot: CPU 4 is now offline
+[  593.131094] work-test:wq_ret_handler returned 0 and took 8624 ns to execute
+[  593.316735] smpboot: CPU 2 is now offline
+[  593.327543] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  593.428653] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  594.441372] work-test:ret_handler returned 0 and took 38004022387 ns to execute
+[  594.569124] work-test:wq_ret_handler returned 0 and took 19538 ns to execute
+[  594.660398] smpboot: CPU 2 is now offline
+[  595.130348] work-test:ret_handler returned 0 and took 20135174873 ns to execute
+[  596.606373] work-test:ret_handler returned 0 and took 3473054385 ns to execute
+[  597.567464] work-test:wq_ret_handler returned 0 and took 12106 ns to execute
+[  597.639613] smpboot: CPU 4 is now offline
+[  597.718384] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  598.541840] work-test:wq_ret_handler returned 0 and took 9902 ns to execute
+[  598.595121] smpboot: CPU 5 is now offline
+[  598.729797] work-test:wq_ret_handler returned 0 and took 19207 ns to execute
+[  598.757021] smpboot: CPU 7 is now offline
+[  598.814485] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  598.857465] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  599.630383] work-test:ret_handler returned 0 and took 6634902644 ns to execute
+[  599.647391] work-test:ret_handler returned 0 and took 90748003127 ns to execute
+[  599.840372] work-test:wq_ret_handler returned 0 and took 865444 ns to execute
+[  600.102429] smpboot: CPU 3 is now offline
+[  600.259818] work-test:wq_ret_handler returned 0 and took 17076 ns to execute
+[  600.296240] smpboot: CPU 1 is now offline
+[  600.634348] work-test:ret_handler returned 0 and took 8356008019 ns to execute
+[  600.753743] work-test:wq_ret_handler returned 0 and took 20076 ns to execute
+[  600.755110] smpboot: CPU 6 is now offline
+[  600.826356] work-test:ret_handler returned 0 and took 76790600751 ns to execute
+[  600.883725] work-test:wq_ret_handler returned 0 and took 9819 ns to execute
+[  600.916277] smpboot: CPU 4 is now offline
+[  600.984411] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  601.604440] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  602.151441] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  602.195243] work-test:ret_handler returned 0 and took 24647457067 ns to execute
+[  602.195243] work-test:ret_handler returned 0 and took 2309817304 ns to execute
+[  602.362365] work-test:ret_handler returned 0 and took 20268479119 ns to execute
+[  603.003367] work-test:ret_handler returned 0 and took 5378023040 ns to execute
+[  603.403094] x86: Booting SMP configuration:
+[  603.403099] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  603.804009] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  604.952791] work-test:wq_ret_handler returned 0 and took 20892 ns to execute
+[  605.021015] smpboot: CPU 7 is now offline
+[  606.579739] work-test:wq_ret_handler returned 0 and took 19259 ns to execute
+[  606.675033] smpboot: CPU 1 is now offline
+[  607.050452] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  608.765362] work-test:ret_handler returned 0 and took 8467309035 ns to execute
+[  609.750427] x86: Booting SMP configuration:
+[  609.750431] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  610.273734] work-test:wq_ret_handler returned 0 and took 10343 ns to execute
+[  610.399442] smpboot: CPU 3 is now offline
+[  611.207741] work-test:wq_ret_handler returned 0 and took 24992 ns to execute
+[  611.285067] smpboot: CPU 7 is now offline
+[  612.069093] work-test:wq_ret_handler returned 0 and took 11089 ns to execute
+[  612.174443] smpboot: CPU 4 is now offline
+[  612.304417] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  612.410395] work-test:ret_handler returned 0 and took 113233983177 ns to execute
+[  612.410439] work-test:ret_handler returned 0 and took 2136081032 ns to execute
+[  612.909772] work-test:wq_ret_handler returned 0 and took 16621 ns to execute
+[  613.001346] smpboot: CPU 6 is now offline
+[  613.081137] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  613.306390] work-test:ret_handler returned 0 and took 14549013888 ns to execute
+[  613.426520] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  614.213381] work-test:ret_handler returned 0 and took 2143029353 ns to execute
+[  614.213435] work-test:ret_handler returned 0 and took 39774918027 ns to execute
+[  614.234375] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  615.099364] work-test:ret_handler returned 0 and took 33555237368 ns to execute
+[  616.857285] work-test:wq_ret_handler returned 0 and took 19447 ns to execute
+[  617.004953] smpboot: CPU 2 is now offline
+[  619.053320] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  619.107596] work-test:ret_handler returned 0 and took 52652201925 ns to execute
+[  619.517378] work-test:wq_ret_handler returned 0 and took 12692 ns to execute
+[  619.575024] smpboot: CPU 4 is now offline
+[  620.612410] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  621.834300] work-test:wq_ret_handler returned 0 and took 28016 ns to execute
+[  621.864962] smpboot: CPU 5 is now offline
+[  622.917450] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  623.551876] work-test:wq_ret_handler returned 0 and took 9137 ns to execute
+[  623.675416] work-test:ret_handler returned 0 and took 4209410384 ns to execute
+[  623.904964] work-test:ret_handler returned 0 and took 25421621268 ns to execute
+[  623.924946] smpboot: CPU 3 is now offline
+[  625.726475] work-test:wq_ret_handler returned 0 and took 22198 ns to execute
+[  625.742218] smpboot: CPU 4 is now offline
+[  625.930360] work-test:ret_handler returned 0 and took 15540010495 ns to execute
+[  625.930363] work-test:ret_handler returned 0 and took 25826213385 ns to execute
+[  625.946433] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  626.299665] work-test:ret_handler returned 0 and took 167963390931 ns to execute
+[  626.875377] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  627.322368] work-test:ret_handler returned 0 and took 34421940709 ns to execute
+[  627.834888] work-test:ret_handler returned 0 and took 26916013239 ns to execute
+[  628.863661] work-test:wq_ret_handler returned 0 and took 16982 ns to execute
+[  628.969345] smpboot: CPU 1 is now offline
+[  629.354726] work-test:wq_ret_handler returned 0 and took 16200 ns to execute
+[  629.716208] smpboot: CPU 7 is now offline
+[  630.763447] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  631.035389] work-test:ret_handler returned 0 and took 89128952898 ns to execute
+[  631.565410] work-test:ret_handler returned 0 and took 2090023901 ns to execute
+[  631.565454] work-test:ret_handler returned 0 and took 2185104805 ns to execute
+[  632.057467] x86: Booting SMP configuration:
+[  632.057471] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  633.192800] work-test:wq_ret_handler returned 0 and took 17005 ns to execute
+[  633.274849] smpboot: CPU 1 is now offline
+[  633.337783] work-test:wq_ret_handler returned 0 and took 18881 ns to execute
+[  633.404866] smpboot: CPU 6 is now offline
+[  633.473427] x86: Booting SMP configuration:
+[  633.473431] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  635.491928] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  635.560223] work-test:ret_handler returned 0 and took 22563906596 ns to execute
+[  636.055784] work-test:wq_ret_handler returned 0 and took 20139 ns to execute
+[  636.081155] smpboot: CPU 5 is now offline
+[  637.659574] work-test:wq_ret_handler returned 0 and took 8521 ns to execute
+[  637.695618] smpboot: CPU 6 is now offline
+[  638.212368] work-test:ret_handler returned 0 and took 16437348230 ns to execute
+[  639.017716] work-test:wq_ret_handler returned 0 and took 20080 ns to execute
+[  639.226483] work-test:ret_handler returned 0 and took 76226136330 ns to execute
+[  639.449715] smpboot: CPU 3 is now offline
+[  639.469705] work-test:wq_ret_handler returned 0 and took 18377 ns to execute
+[  639.575815] smpboot: CPU 2 is now offline
+[  639.587446] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  639.591416] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  639.623422] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  639.715429] work-test:ret_handler returned 0 and took 6311780211 ns to execute
+[  639.776798] work-test:wq_ret_handler returned 0 and took 22304 ns to execute
+[  639.819024] smpboot: CPU 2 is now offline
+[  639.889434] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  640.732463] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  641.082637] work-test:wq_ret_handler returned 0 and took 13362 ns to execute
+[  641.154666] work-test:ret_handler returned 0 and took 2135895161 ns to execute
+[  641.154802] smpboot: CPU 4 is now offline
+[  641.597381] work-test:ret_handler returned 0 and took 24739684250 ns to execute
+[  641.597422] work-test:ret_handler returned 0 and took 2073038037 ns to execute
+[  643.194350] work-test:ret_handler returned 0 and took 19289316976 ns to execute
+[  643.238462] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  643.546800] work-test:wq_ret_handler returned 0 and took 16628 ns to execute
+[  643.599410] smpboot: CPU 1 is now offline
+[  643.813583] work-test:wq_ret_handler returned 0 and took 13443 ns to execute
+[  643.874952] smpboot: CPU 5 is now offline
+[  645.690402] work-test:ret_handler returned 0 and took 16738031373 ns to execute
+[  645.882361] work-test:ret_handler returned 0 and took 9799291235 ns to execute
+[  646.677438] x86: Booting SMP configuration:
+[  646.677442] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  646.923271] work-test:wq_ret_handler returned 0 and took 15471 ns to execute
+[  647.069838] smpboot: CPU 7 is now offline
+[  647.114306] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  647.220286] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  647.380385] work-test:wq_ret_handler returned 0 and took 10303 ns to execute
+[  647.471340] smpboot: CPU 4 is now offline
+[  649.085016] work-test:ret_handler returned 0 and took 2213850402 ns to execute
+[  649.519429] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  649.584066] work-test:ret_handler returned 0 and took 23831712669 ns to execute
+[  650.811781] work-test:wq_ret_handler returned 0 and took 18625 ns to execute
+[  650.906508] smpboot: CPU 3 is now offline
+[  650.971469] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  652.903145] work-test:wq_ret_handler returned 0 and took 10945 ns to execute
+[  652.986402] work-test:ret_handler returned 0 and took 13904931526 ns to execute
+[  653.309744] smpboot: CPU 6 is now offline
+[  654.347364] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  655.296067] work-test:ret_handler returned 0 and took 158929827009 ns to execute
+[  655.339768] work-test:ret_handler returned 0 and took 2179821888 ns to execute
+[  655.492247] work-test:wq_ret_handler returned 0 and took 16866 ns to execute
+[  655.538001] smpboot: CPU 6 is now offline
+[  655.975788] work-test:wq_ret_handler returned 0 and took 22514 ns to execute
+[  656.009021] smpboot: CPU 2 is now offline
+[  657.115101] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  657.405350] work-test:ret_handler returned 0 and took 40451002566 ns to execute
+[  658.108396] work-test:ret_handler returned 0 and took 18635992201 ns to execute
+[  658.555483] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  660.241915] work-test:wq_ret_handler returned 0 and took 18508 ns to execute
+[  660.283065] smpboot: CPU 7 is now offline
+[  660.498817] work-test:wq_ret_handler returned 0 and took 17488 ns to execute
+[  660.711021] smpboot: CPU 5 is now offline
+[  661.406468] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  661.571778] work-test:wq_ret_handler returned 0 and took 14257 ns to execute
+[  661.616463] smpboot: CPU 7 is now offline
+[  661.769745] work-test:wq_ret_handler returned 0 and took 15546 ns to execute
+[  661.902444] smpboot: CPU 1 is now offline
+[  661.927442] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  662.395366] work-test:ret_handler returned 0 and took 51160336508 ns to execute
+[  662.663533] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  662.745095] work-test:ret_handler returned 0 and took 87757699699 ns to execute
+[  662.745133] work-test:ret_handler returned 0 and took 2239775276 ns to execute
+[  663.934364] work-test:ret_handler returned 0 and took 20358012872 ns to execute
+[  663.943109] x86: Booting SMP configuration:
+[  663.943112] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  668.237864] work-test:wq_ret_handler returned 0 and took 164919 ns to execute
+[  668.371063] smpboot: CPU 3 is now offline
+[  668.685364] work-test:wq_ret_handler returned 0 and took 152784 ns to execute
+[  668.893370] smpboot: CPU 4 is now offline
+[  669.061192] work-test:wq_ret_handler returned 0 and took 20767 ns to execute
+[  669.214508] smpboot: CPU 5 is now offline
+[  669.981466] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  670.249005] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  670.398006] work-test:ret_handler returned 0 and took 2294430073 ns to execute
+[  670.398015] work-test:ret_handler returned 0 and took 19493277219 ns to execute
+[  670.402026] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  670.913366] work-test:ret_handler returned 0 and took 2222463371 ns to execute
+[  670.913406] work-test:ret_handler returned 0 and took 23531868471 ns to execute
+[  671.492007] work-test:ret_handler returned 0 and took 27758463093 ns to execute
+[  673.345492] work-test:wq_ret_handler returned 0 and took 12052 ns to execute
+[  673.412399] smpboot: CPU 2 is now offline
+[  674.071494] work-test:wq_ret_handler returned 0 and took 11955 ns to execute
+[  674.156276] smpboot: CPU 1 is now offline
+[  674.371588] work-test:wq_ret_handler returned 0 and took 15867 ns to execute
+[  674.428439] smpboot: CPU 4 is now offline
+[  674.525718] work-test:wq_ret_handler returned 0 and took 16869 ns to execute
+[  674.708045] smpboot: CPU 3 is now offline
+[  675.450357] work-test:ret_handler returned 0 and took 2162954298 ns to execute
+[  675.450361] work-test:ret_handler returned 0 and took 19445230454 ns to execute
+[  676.436462] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  676.514124] work-test:ret_handler returned 0 and took 64331670876 ns to execute
+[  676.607437] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  676.730362] work-test:ret_handler returned 0 and took 8454657311 ns to execute
+[  676.744595] work-test:ret_handler returned 0 and took 2198156883 ns to execute
+[  676.896533] work-test:wq_ret_handler returned 0 and took 15327 ns to execute
+[  676.926030] smpboot: CPU 6 is now offline
+[  677.013240] work-test:ret_handler returned 0 and took 52757001528 ns to execute
+[  677.221410] x86: Booting SMP configuration:
+[  677.221414] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  677.805450] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  678.141405] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  678.849526] work-test:wq_ret_handler returned 0 and took 13284 ns to execute
+[  678.924543] smpboot: CPU 2 is now offline
+[  679.173116] work-test:ret_handler returned 0 and took 4189752536 ns to execute
+[  679.178577] work-test:ret_handler returned 0 and took 41479219332 ns to execute
+[  680.044921] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  681.211313] work-test:ret_handler returned 0 and took 224934692661 ns to execute
+[  681.429511] work-test:wq_ret_handler returned 0 and took 12675 ns to execute
+[  681.601498] smpboot: CPU 2 is now offline
+[  681.825532] work-test:wq_ret_handler returned 0 and took 10369 ns to execute
+[  681.864540] smpboot: CPU 5 is now offline
+[  682.167867] work-test:wq_ret_handler returned 0 and took 8133 ns to execute
+[  682.171354] smpboot: CPU 6 is now offline
+[  682.321724] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  682.454670] work-test:wq_ret_handler returned 0 and took 13322 ns to execute
+[  682.460026] smpboot: CPU 1 is now offline
+[  682.850271] work-test:wq_ret_handler returned 0 and took 12525 ns to execute
+[  682.944521] smpboot: CPU 7 is now offline
+[  683.684423] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  683.778350] work-test:ret_handler returned 0 and took 6625998110 ns to execute
+[  684.044543] work-test:ret_handler returned 0 and took 14982151267 ns to execute
+[  684.218354] work-test:ret_handler returned 0 and took 7261415653 ns to execute
+[  685.257453] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  685.515446] x86: Booting SMP configuration:
+[  685.515450] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  686.040065] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  686.469522] work-test:wq_ret_handler returned 0 and took 12984 ns to execute
+[  686.510643] smpboot: CPU 7 is now offline
+[  688.620354] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  690.015012] work-test:ret_handler returned 0 and took 10805200889 ns to execute
+[  691.728842] work-test:wq_ret_handler returned 0 and took 18828 ns to execute
+[  691.784488] smpboot: CPU 1 is now offline
+[  691.973626] work-test:wq_ret_handler returned 0 and took 12630 ns to execute
+[  692.015876] smpboot: CPU 4 is now offline
+[  692.070788] work-test:wq_ret_handler returned 0 and took 18789 ns to execute
+[  692.142069] work-test:ret_handler returned 0 and took 10730232772 ns to execute
+[  692.142250] smpboot: CPU 3 is now offline
+[  692.177353] x86: Booting SMP configuration:
+[  692.177356] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  693.056415] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  694.209117] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  695.274403] work-test:wq_ret_handler returned 0 and took 11735 ns to execute
+[  695.409398] smpboot: CPU 1 is now offline
+[  695.425713] work-test:wq_ret_handler returned 0 and took 14871 ns to execute
+[  695.560381] smpboot: CPU 5 is now offline
+[  695.612524] x86: Booting SMP configuration:
+[  695.612527] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  697.469040] work-test:ret_handler returned 0 and took 35697610548 ns to execute
+[  697.594411] work-test:ret_handler returned 0 and took 15728068488 ns to execute
+[  698.171356] work-test:ret_handler returned 0 and took 69199401203 ns to execute
+[  698.697374] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  699.862714] work-test:wq_ret_handler returned 0 and took 16909 ns to execute
+[  699.917405] smpboot: CPU 5 is now offline
+[  699.948459] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  700.032783] work-test:wq_ret_handler returned 0 and took 21463 ns to execute
+[  700.114528] smpboot: CPU 2 is now offline
+[  700.519539] work-test:wq_ret_handler returned 0 and took 9684 ns to execute
+[  700.588317] smpboot: CPU 6 is now offline
+[  701.363266] work-test:wq_ret_handler returned 0 and took 18469 ns to execute
+[  701.452199] smpboot: CPU 3 is now offline
+[  701.474455] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  702.169466] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  702.208069] work-test:ret_handler returned 0 and took 348819722757 ns to execute
+[  702.665390] work-test:ret_handler returned 0 and took 49759016922 ns to execute
+[  703.482414] work-test:ret_handler returned 0 and took 28775072401 ns to execute
+[  703.659450] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  704.225493] work-test:wq_ret_handler returned 0 and took 10482 ns to execute
+[  704.317002] smpboot: CPU 4 is now offline
+[  706.069379] work-test:wq_ret_handler returned 0 and took 10134 ns to execute
+[  706.131473] smpboot: CPU 5 is now offline
+[  706.174643] work-test:wq_ret_handler returned 0 and took 9982 ns to execute
+[  706.192302] smpboot: CPU 7 is now offline
+[  706.494350] work-test:ret_handler returned 0 and took 37600902901 ns to execute
+[  707.451421] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  708.154370] work-test:ret_handler returned 0 and took 47445351678 ns to execute
+[  708.346395] work-test:ret_handler returned 0 and took 48068048992 ns to execute
+[  709.175628] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  709.318087] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  709.692767] work-test:wq_ret_handler returned 0 and took 23606 ns to execute
+[  709.807569] smpboot: CPU 1 is now offline
+[  711.874013] work-test:ret_handler returned 0 and took 2181092317 ns to execute
+[  712.889245] x86: Booting SMP configuration:
+[  712.889248] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  713.508289] work-test:wq_ret_handler returned 0 and took 21322 ns to execute
+[  713.686409] smpboot: CPU 7 is now offline
+[  715.137270] work-test:wq_ret_handler returned 0 and took 119242 ns to execute
+[  715.160433] smpboot: CPU 1 is now offline
+[  715.537742] work-test:wq_ret_handler returned 0 and took 21350 ns to execute
+[  715.575849] smpboot: CPU 3 is now offline
+[  715.630249] work-test:ret_handler returned 0 and took 9432432241 ns to execute
+[  715.640124] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  715.688137] work-test:ret_handler returned 0 and took 2230670072 ns to execute
+[  716.180453] x86: Booting SMP configuration:
+[  716.180457] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  716.778496] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  717.114345] work-test:ret_handler returned 0 and took 35019211893 ns to execute
+[  717.204292] work-test:ret_handler returned 0 and took 110539239569 ns to execute
+[  717.703410] work-test:ret_handler returned 0 and took 16338702348 ns to execute
+[  717.785750] work-test:wq_ret_handler returned 0 and took 21853 ns to execute
+[  717.830404] smpboot: CPU 6 is now offline
+[  717.910442] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  718.332494] work-test:wq_ret_handler returned 0 and took 10228 ns to execute
+[  718.428320] smpboot: CPU 2 is now offline
+[  719.474531] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  719.930393] work-test:ret_handler returned 0 and took 19363039627 ns to execute
+[  720.449785] work-test:ret_handler returned 0 and took 47037295908 ns to execute
+[  720.449827] work-test:ret_handler returned 0 and took 20343498568 ns to execute
+[  722.752921] work-test:wq_ret_handler returned 0 and took 155788 ns to execute
+[  722.874277] smpboot: CPU 4 is now offline
+[  723.364466] work-test:wq_ret_handler returned 0 and took 12480 ns to execute
+[  723.396988] smpboot: CPU 1 is now offline
+[  723.541932] x86: Booting SMP configuration:
+[  723.541936] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  724.735801] work-test:wq_ret_handler returned 0 and took 12154 ns to execute
+[  724.779984] smpboot: CPU 3 is now offline
+[  724.786713] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  724.882363] work-test:ret_handler returned 0 and took 2184065841 ns to execute
+[  724.904434] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  725.882382] work-test:ret_handler returned 0 and took 2589040715 ns to execute
+[  725.882432] work-test:ret_handler returned 0 and took 10796788249 ns to execute
+[  727.165047] work-test:ret_handler returned 0 and took 80252604705 ns to execute
+[  727.173354] work-test:ret_handler returned 0 and took 52882985388 ns to execute
+[  728.289734] work-test:wq_ret_handler returned 0 and took 16599 ns to execute
+[  728.374397] smpboot: CPU 5 is now offline
+[  728.989800] work-test:wq_ret_handler returned 0 and took 19282 ns to execute
+[  729.070339] smpboot: CPU 6 is now offline
+[  729.475421] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  730.490367] work-test:ret_handler returned 0 and took 2125019653 ns to execute
+[  731.554841] work-test:wq_ret_handler returned 0 and took 9483 ns to execute
+[  731.591043] smpboot: CPU 5 is now offline
+[  731.640636] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  731.741738] work-test:wq_ret_handler returned 0 and took 20215 ns to execute
+[  731.814025] smpboot: CPU 2 is now offline
+[  731.956749] work-test:wq_ret_handler returned 0 and took 27375 ns to execute
+[  732.069390] smpboot: CPU 7 is now offline
+[  732.163101] smpboot: Booting Node 0 Processor 6 APIC 0x6
+[  732.214764] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  732.890486] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  733.643005] work-test:ret_handler returned 0 and took 27570638674 ns to execute
+[  733.884365] work-test:ret_handler returned 0 and took 15551842234 ns to execute
+[  734.082375] work-test:ret_handler returned 0 and took 2124862402 ns to execute
+[  734.082416] work-test:ret_handler returned 0 and took 20472691634 ns to execute
+[  734.095388] work-test:ret_handler returned 0 and took 9133041954 ns to execute
+[  736.670784] work-test:wq_ret_handler returned 0 and took 19526 ns to execute
+[  736.689409] smpboot: CPU 1 is now offline
+[  738.777436] x86: Booting SMP configuration:
+[  738.777440] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  738.924182] work-test:ret_handler returned 0 and took 15508811411 ns to execute
+[  740.071955] work-test:wq_ret_handler returned 0 and took 16716 ns to execute
+[  740.205389] smpboot: CPU 1 is now offline
+[  740.467549] work-test:wq_ret_handler returned 0 and took 19802 ns to execute
+[  740.539377] smpboot: CPU 7 is now offline
+[  740.602620] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  742.268651] work-test:ret_handler returned 0 and took 5577308814 ns to execute
+[  742.268651] work-test:ret_handler returned 0 and took 2191273624 ns to execute
+[  742.318476] x86: Booting SMP configuration:
+[  742.318479] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  742.873420] work-test:ret_handler returned 0 and took 10804059871 ns to execute
+[  742.873455] work-test:ret_handler returned 0 and took 163336082382 ns to execute
+[  742.890674] work-test:wq_ret_handler returned 0 and took 9926 ns to execute
+[  743.125369] work-test:ret_handler returned 0 and took 4196023138 ns to execute
+[  743.128377] smpboot: CPU 3 is now offline
+[  743.189482] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  743.373504] work-test:wq_ret_handler returned 0 and took 12811 ns to execute
+[  743.424168] smpboot: CPU 2 is now offline
+[  743.489997] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  743.744759] work-test:wq_ret_handler returned 0 and took 18840 ns to execute
+[  743.805466] smpboot: CPU 5 is now offline
+[  744.824443] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  745.140997] work-test:wq_ret_handler returned 0 and took 10443 ns to execute
+[  745.271409] smpboot: CPU 4 is now offline
+[  745.272385] work-test:ret_handler returned 0 and took 29692206358 ns to execute
+[  745.284148] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  745.374633] work-test:wq_ret_handler returned 0 and took 9782 ns to execute
+[  745.414131] smpboot: CPU 3 is now offline
+[  745.466388] work-test:ret_handler returned 0 and took 2163030459 ns to execute
+[  745.466427] work-test:ret_handler returned 0 and took 27042005573 ns to execute
+[  745.974142] work-test:wq_ret_handler returned 0 and took 11908 ns to execute
+[  746.034136] smpboot: CPU 5 is now offline
+[  746.376769] work-test:wq_ret_handler returned 0 and took 18260 ns to execute
+[  746.378693] smpboot: CPU 4 is now offline
+[  746.397523] smpboot: Booting Node 0 Processor 4 APIC 0x4
+[  747.478390] work-test:ret_handler returned 0 and took 4587075193 ns to execute
+[  748.169940] smpboot: Booting Node 0 Processor 5 APIC 0x5
+[  748.411389] work-test:ret_handler returned 0 and took 23387047556 ns to execute
+[  748.433473] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  749.444228] work-test:wq_ret_handler returned 0 and took 12454 ns to execute
+[  749.544854] smpboot: CPU 1 is now offline
+[  750.748315] work-test:wq_ret_handler returned 0 and took 19450 ns to execute
+[  750.851250] smpboot: CPU 7 is now offline
+[  751.589373] x86: Booting SMP configuration:
+[  751.589377] smpboot: Booting Node 0 Processor 1 APIC 0x1
+[  752.252097] work-test:wq_ret_handler returned 0 and took 17043 ns to execute
+[  752.319478] smpboot: CPU 6 is now offline
+[  752.925458] smpboot: Booting Node 0 Processor 7 APIC 0x7
+[  752.960009] work-test:ret_handler returned 0 and took 12424595030 ns to execute
+[  753.524147] work-test:wq_ret_handler returned 0 and took 16885 ns to execute
+[  753.541469] smpboot: CPU 3 is now offline
+[  753.636653] work-test:wq_ret_handler returned 0 and took 15334 ns to execute
+[  753.647011] smpboot: CPU 2 is now offline
+[  753.737078] smpboot: Booting Node 0 Processor 2 APIC 0x2
+[  754.427364] work-test:ret_handler returned 0 and took 36596347670 ns to execute
+[  754.609437] smpboot: Booting Node 0 Processor 3 APIC 0x3
+[  755.074167] ------------[ cut here ]------------
+[  755.074171] WARNING: CPU: 3 PID: 296 at kernel/sched/core.c:2824 affine_move_task+0x325/0x590
+[  755.074199] Modules linked in: work_test(O)
+[  755.074212] CPU: 3 PID: 296 Comm: irq/10-eth0 Tainted: G           O      5.19.0-rc7-rt7+ #5
+[  755.074222] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ArchLinux 1.16.0-1 04/01/2014
+[  755.074230] RIP: 0010:affine_move_task+0x325/0x590
+[  755.074244] Code: ff ff 48 8b 00 a9 00 00 08 00 0f 84 84 fe ff ff e8 87 29 f3 ff e9 7a fe ff ff 48 c7 83 28 04 00 00 00 00 00 00 e9 35 ff ff ff <0f> 0b 41 c6 04 24 00 bf 01 00 00 00 e8 ba a8 ff ff 65 8b 05 83 b5
+[  755.074255] RSP: 0018:ffff9f9101557d18 EFLAGS: 00010046
+[  755.074262] RAX: 0000000000000003 RBX: ffff98e1c41c10c0 RCX: 0000000000000000
+[  755.074268] RDX: ffff9f9101557e50 RSI: ffff98e1c41c10c0 RDI: ffff9f9101557dd8
+[  755.074274] RBP: 0000000000000000 R08: 0000000000000004 R09: 0000000000000007
+[  755.074279] R10: 0000000000000000 R11: 0000000000009000 R12: ffff98e1fbcea2c0
+[  755.074285] R13: ffff9f9101557d68 R14: 0000000000000000 R15: ffff9f9101557e50
+[  755.074294] FS:  0000000000000000(0000) GS:ffff98e1fbcc0000(0000) knlGS:0000000000000000
+[  755.074302] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  755.074308] CR2: 00007f68aab1a7f0 CR3: 0000000105e16000 CR4: 0000000000350ee0
+[  755.074314] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+[  755.074319] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+[  755.074328] Call Trace:
+[  755.074342]  <TASK>
+[  755.074349]  ? __schedule+0x2c2/0x770
+[  755.074368]  __set_cpus_allowed_ptr_locked+0x16b/0x1c0
+[  755.074380]  ? irq_thread_fn+0x70/0x70
+[  755.074392]  migrate_enable+0x79/0x150
+[  755.074402]  __local_bh_enable_ip+0x57/0x110
+[  755.074414]  irq_forced_thread_fn+0x83/0x90
+[  755.074428]  irq_thread+0x121/0x1f0
+[  755.074439]  ? irq_finalize_oneshot.part.0+0x130/0x130
+[  755.074452]  ? irq_forced_thread_fn+0x90/0x90
+[  755.074463]  kthread+0x134/0x160
+[  755.074473]  ? kthread_complete_and_exit+0x30/0x30
+[  755.074486]  ret_from_fork+0x1f/0x30
+[  755.074500]  </TASK>
+[  755.074507] Kernel panic - not syncing: panic_on_warn set ...
+[  755.074511] CPU: 3 PID: 296 Comm: irq/10-eth0 Tainted: G           O      5.19.0-rc7-rt7+ #5
+[  755.074521] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS ArchLinux 1.16.0-1 04/01/2014
+[  755.074526] Call Trace:
+[  755.074535]  <TASK>
+[  755.074538]  dump_stack_lvl+0x4c/0x64
+[  755.074554]  panic+0x147/0x37a
+[  755.074568]  ? __warn.cold+0x13/0x105
+[  755.074579]  ? affine_move_task+0x325/0x590
+[  755.074590]  __warn.cold+0x1f/0x105
+[  755.074601]  ? affine_move_task+0x325/0x590
+[  755.074612]  report_bug+0xc6/0x110
+[  755.074626]  handle_bug+0x3c/0x70
+[  755.074638]  exc_invalid_op+0x13/0x60
+[  755.074648]  asm_exc_invalid_op+0x16/0x20
+[  755.074663] RIP: 0010:affine_move_task+0x325/0x590
+[  755.074675] Code: ff ff 48 8b 00 a9 00 00 08 00 0f 84 84 fe ff ff e8 87 29 f3 ff e9 7a fe ff ff 48 c7 83 28 04 00 00 00 00 00 00 e9 35 ff ff ff <0f> 0b 41 c6 04 24 00 bf 01 00 00 00 e8 ba a8 ff ff 65 8b 05 83 b5
+[  755.074685] RSP: 0018:ffff9f9101557d18 EFLAGS: 00010046
+[  755.074691] RAX: 0000000000000003 RBX: ffff98e1c41c10c0 RCX: 0000000000000000
+[  755.074697] RDX: ffff9f9101557e50 RSI: ffff98e1c41c10c0 RDI: ffff9f9101557dd8
+[  755.074703] RBP: 0000000000000000 R08: 0000000000000004 R09: 0000000000000007
+[  755.074709] R10: 0000000000000000 R11: 0000000000009000 R12: ffff98e1fbcea2c0
+[  755.074714] R13: ffff9f9101557d68 R14: 0000000000000000 R15: ffff9f9101557e50
+[  755.074725]  ? __schedule+0x2c2/0x770
+[  755.074738]  __set_cpus_allowed_ptr_locked+0x16b/0x1c0
+[  755.074750]  ? irq_thread_fn+0x70/0x70
+[  755.074761]  migrate_enable+0x79/0x150
+[  755.074771]  __local_bh_enable_ip+0x57/0x110
+[  755.074781]  irq_forced_thread_fn+0x83/0x90
+[  755.074792]  irq_thread+0x121/0x1f0
+[  755.074803]  ? irq_finalize_oneshot.part.0+0x130/0x130
+[  755.074816]  ? irq_forced_thread_fn+0x90/0x90
+[  755.074827]  kthread+0x134/0x160
+[  755.074837]  ? kthread_complete_and_exit+0x30/0x30
+[  755.074849]  ret_from_fork+0x1f/0x30
+[  755.074860]  </TASK>
+[  755.246544] Kernel Offset: 0x30c00000 from 0xffffffff81000000 (relocation range: 0xffffffff80000000-0xffffffffbfffffff)
+QEMU: Terminated
+./start-qemu.sh: line 19: tcp::1234: command not found
