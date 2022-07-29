@@ -195,8 +195,6 @@ static int test_kthread_func(void *data)
 		/* delay for 0 - 500 ms*/
 		sleep_time = get_random_u32() % (500);
 		mdelay_with_yield(sleep_time);
-		hrtimer_cancel(&entry->timer);
-		hrtimer_start_expires(&entry->timer, HRTIMER_MODE_ABS_HARD);
 	}
 
         return 0;
@@ -330,6 +328,34 @@ static void __exit kretprobe_exit(void)
 	pr_info("kretprobe at %p unregistered\n", my_wq_offline_kretprobe.kp.addr);
 }
 
+static int wq_test_cpu_online(unsigned int cpu)
+{
+	struct test_work *entry;
+	int id, i;
+
+	/* rebind hrtimer to online cpu */
+	for (i = 0; i < num_work; i++) {
+		if (i % num_possible_cpus() != cpu)
+			continue;
+
+                id = i;
+		entry = idr_get_next(&test_work_idr, &id);
+		hrtimer_cancel(&entry->timer);
+		hrtimer_start_expires(&entry->timer, HRTIMER_MODE_ABS_HARD);
+	}
+
+	return 0;
+}
+
+static int wq_test_cpu_offline(unsigned int cpu)
+{
+	(void) cpu;
+
+	return 0;
+}
+
+static int g_cpuhp_state = -1;
+
 static int __init proc_workqueue_unbound_test_init(void)
 {
 	struct test_work *entry;
@@ -364,6 +390,10 @@ static int __init proc_workqueue_unbound_test_init(void)
 		mutex_unlock(&test_work_lock);
 	}
 
+	g_cpuhp_state = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN, "wq-test:online",
+					wq_test_cpu_online, wq_test_cpu_offline);
+
+
 	proc_test_info = proc_create("wq-test-info", 0, NULL, &cpuinfo_proc_ops);
 
 	return 0;
@@ -375,6 +405,9 @@ int item_idr_free(int id, void *p, void *data)
 
 	if (!entry)
 		return 0;
+
+	if (g_cpuhp_state != -1)
+		cpuhp_remove_state(g_cpuhp_state);
 
 	kthread_stop(entry->kthread);
 	hrtimer_cancel(&entry->timer);
