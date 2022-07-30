@@ -1,6 +1,6 @@
 #$(warning KERNELRELEASE=$(KERNELRELEASE))
 
-#EXTRA_CFLAGS = -g -O0
+EXTRA_CFLAGS = -g -O0
 
 ifeq ($(KERNELRELEASE),)
 

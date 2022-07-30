@@ -303,8 +303,6 @@ static int __init kretprobe_init(void)
 		pr_err("register_kretprobe failed, returned %d\n", ret);
 		return -1;
 	}
-	pr_info("Planted return probe at %s: %p\n",
-		my_kretprobe.kp.symbol_name, my_kretprobe.kp.addr);
 
 	my_wq_offline_kretprobe.kp.symbol_name = "workqueue_offline_cpu";
 	ret = register_kretprobe(&my_wq_offline_kretprobe);
@@ -312,8 +310,6 @@ static int __init kretprobe_init(void)
 		pr_err("register_kretprobe failed, returned %d\n", ret);
 		return -1;
 	}
-	pr_info("Planted return probe at %s: %p\n",
-		my_wq_offline_kretprobe.kp.symbol_name, my_wq_offline_kretprobe.kp.addr);
 
 
 	return 0;
@@ -399,7 +395,7 @@ static int __init proc_workqueue_unbound_test_init(void)
 	return 0;
 }
 
-int item_idr_free(int id, void *p, void *data)
+int __exit item_idr_free(int id, void *p, void *data)
 {
 	struct test_work *entry = p;
 
@@ -418,7 +414,7 @@ int item_idr_free(int id, void *p, void *data)
 	return 0;
 }
 
-static void proc_workqueue_unbound_test_remove(void)
+static void __exit proc_workqueue_unbound_test_remove(void)
 {
 	proc_remove(proc_test_info);
 
