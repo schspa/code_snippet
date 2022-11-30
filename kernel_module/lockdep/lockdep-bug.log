@@ -1,0 +1,207 @@
+root@syzkaller:~# insmod lockdep-rwlock.ko
+[   27.359525] lockdep_rwlock: loading out-of-tree module taints kernel.
+[   27.473168]
+[   27.474295] =====================================================
+[   27.479322] WARNING: HARDIRQ-safe -> HARDIRQ-unsafe lock order detected
+[   27.486627] 6.1.0-rc5-14009-g503b12523cb9 #6 Tainted: G           O
+[   27.491869] -----------------------------------------------------
+[   27.498297] insmod/393 [HC0[0]:SC0[0]:HE0:SE1] is trying to acquire:
+[   27.503272] ffffffffa0002438 (&test_rw_lock){.?.+}-{2:2}, at: test_lockdep_init+0xb9/0x1000 [lockdep_rwlock]
+[   27.510282]
+[   27.510282] and this task is already holding:
+[   27.514272] ffffffffa00023f8 (&eventlock){-...}-{2:2}, at: test_lockdep_init+0xad/0x1000 [lockdep_rwlock]
+[   27.519252] which would create a new lock dependency:
+[   27.522307]  (&eventlock){-...}-{2:2} -> (&test_rw_lock){.?.+}-{2:2}
+[   27.527239]
+[   27.527239] but this new dependency connects a HARDIRQ-irq-safe lock:
+[   27.531251]  (&eventlock){-...}-{2:2}
+[   27.531251]
+[   27.531251] ... which became HARDIRQ-irq-safe at:
+[   27.538287]   lock_acquire+0xca/0x2e0
+[   27.539313]   _raw_spin_lock+0x2a/0x40
+[   27.542419]   lockdep_test_hrtimer_handler+0xc/0x1000 [lockdep_rwlock]
+[   27.546274]   __hrtimer_run_queues+0x81/0x3d0
+[   27.547235]   hrtimer_interrupt+0x101/0x220
+[   27.550274]   __sysvec_apic_timer_interrupt+0x8e/0x260
+[   27.554296]   sysvec_apic_timer_interrupt+0x89/0xc0
+[   27.558274]   asm_sysvec_apic_timer_interrupt+0x16/0x20
+[   27.559260]   delay_tsc+0x45/0xb0
+[   27.563299]   test_lockdep_init+0x93/0x1000 [lockdep_rwlock]
+[   27.567419]   do_one_initcall+0x53/0x2f0
+[   27.567419]   do_init_module+0x47/0x1c0
+[   27.571240]   __do_sys_finit_module+0xa6/0x100
+[   27.574314]   do_syscall_64+0x38/0x90
+[   27.574314]   entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.578282]
+[   27.578282] to a HARDIRQ-irq-unsafe lock:
+[   27.583411]  (&test_rw_lock){.?.+}-{2:2}
+[   27.583411]
+[   27.583411] ... which became HARDIRQ-irq-unsafe at:
+[   27.590281] ...
+[   27.590281]   lock_acquire+0xca/0x2e0
+[   27.594274]   _raw_read_lock+0x5b/0x70
+[   27.594274]   test_lockdep_init+0x84/0x1000 [lockdep_rwlock]
+[   27.599235]   do_one_initcall+0x53/0x2f0
+[   27.602384]   do_init_module+0x47/0x1c0
+[   27.603340]   __do_sys_finit_module+0xa6/0x100
+[   27.607244]   do_syscall_64+0x38/0x90
+[   27.610320]   entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.611290]
+[   27.611290] other info that might help us debug this:
+[   27.611290]
+[   27.618282]  Possible interrupt unsafe locking scenario:
+[   27.618282]
+[   27.622306]        CPU0                    CPU1
+[   27.622306]        ----                    ----
+[   27.626281]   lock(&test_rw_lock);
+[   27.630288]                                local_irq_disable();
+[   27.634335]                                lock(&eventlock);
+[   27.635408]                                lock(&test_rw_lock);
+[   27.638279]   <Interrupt>
+[   27.642288]     lock(&eventlock);
+[   27.642288]
+[   27.642288]  *** DEADLOCK ***
+[   27.642288]
+[   27.646302] 1 lock held by insmod/393:
+[   27.651339]  #0: ffffffffa00023f8 (&eventlock){-...}-{2:2}, at: test_lockdep_init+0xad/0x1000 [lockdep_rwlock]
+[   27.655667]
+[   27.655667] the dependencies between HARDIRQ-irq-safe lock and the holding lock:
+[   27.662272] -> (&eventlock){-...}-{2:2} {
+[   27.662272]    IN-HARDIRQ-W at:
+[   27.666282]                     lock_acquire+0xca/0x2e0
+[   27.671235]                     _raw_spin_lock+0x2a/0x40
+[   27.674271]                     lockdep_test_hrtimer_handler+0xc/0x1000 [lockdep_rwlock]
+[   27.678283]                     __hrtimer_run_queues+0x81/0x3d0
+[   27.682287]                     hrtimer_interrupt+0x101/0x220
+[   27.686272]                     __sysvec_apic_timer_interrupt+0x8e/0x260
+[   27.690302]                     sysvec_apic_timer_interrupt+0x89/0xc0
+[   27.694289]                     asm_sysvec_apic_timer_interrupt+0x16/0x20
+[   27.699268]                     delay_tsc+0x45/0xb0
+[   27.702275]                     test_lockdep_init+0x93/0x1000 [lockdep_rwlock]
+[   27.706340]                     do_one_initcall+0x53/0x2f0
+[   27.710280]                     do_init_module+0x47/0x1c0
+[   27.711313]                     __do_sys_finit_module+0xa6/0x100
+[   27.714273]                     do_syscall_64+0x38/0x90
+[   27.718310]                     entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.723266]    INITIAL USE at:
+[   27.726273]                    lock_acquire+0xca/0x2e0
+[   27.730273]                    _raw_spin_lock+0x2a/0x40
+[   27.730273]                    lockdep_test_hrtimer_handler+0xc/0x1000 [lockdep_rwlock]
+[   27.738272]                    __hrtimer_run_queues+0x81/0x3d0
+[   27.742271]                    hrtimer_interrupt+0x101/0x220
+[   27.742271]                    __sysvec_apic_timer_interrupt+0x8e/0x260
+[   27.746312]                    sysvec_apic_timer_interrupt+0x89/0xc0
+[   27.751245]                    asm_sysvec_apic_timer_interrupt+0x16/0x20
+[   27.755246]                    delay_tsc+0x45/0xb0
+[   27.759496]                    test_lockdep_init+0x93/0x1000 [lockdep_rwlock]
+[   27.763238]                    do_one_initcall+0x53/0x2f0
+[   27.767299]                    do_init_module+0x47/0x1c0
+[   27.770274]                    __do_sys_finit_module+0xa6/0x100
+[   27.775497]                    do_syscall_64+0x38/0x90
+[   27.779261]                    entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.783334]  }
+[   27.783334]  ... key      at: [<ffffffffa00023d0>] __key.24+0x0/0xffffffffffffec30 [lockdep_rwlock]
+[   27.787267]
+[   27.787267] the dependencies between the lock to be acquired
+[   27.787267]  and HARDIRQ-irq-unsafe lock:
+[   27.795266] -> (&test_rw_lock){.?.+}-{2:2} {
+[   27.798279]    IN-HARDIRQ-R at:
+[   27.802250]                     lock_acquire+0xca/0x2e0
+[   27.803238]                     _raw_read_lock+0x36/0x70
+[   27.806278]                     lockdep_test_hrtimer_handler+0x18/0x1000 [lockdep_rwlock]
+[   27.810272]                     __hrtimer_run_queues+0x81/0x3d0
+[   27.814274]                     hrtimer_interrupt+0x101/0x220
+[   27.820024]                     __sysvec_apic_timer_interrupt+0x8e/0x260
+[   27.823437]                     sysvec_apic_timer_interrupt+0x89/0xc0
+[   27.827370]                     asm_sysvec_apic_timer_interrupt+0x16/0x20
+[   27.831337]                     delay_tsc+0x45/0xb0
+[   27.834278]                     test_lockdep_init+0x93/0x1000 [lockdep_rwlock]
+[   27.839347]                     do_one_initcall+0x53/0x2f0
+[   27.843271]                     do_init_module+0x47/0x1c0
+[   27.846276]                     __do_sys_finit_module+0xa6/0x100
+[   27.851234]                     do_syscall_64+0x38/0x90
+[   27.854290]                     entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.858443]    HARDIRQ-ON-R at:
+[   27.858443]                     lock_acquire+0xca/0x2e0
+[   27.863297]                     _raw_read_lock+0x5b/0x70
+[   27.866280]                     test_lockdep_init+0x84/0x1000 [lockdep_rwlock]
+[   27.871300]                     do_one_initcall+0x53/0x2f0
+[   27.874272]                     do_init_module+0x47/0x1c0
+[   27.879261]                     __do_sys_finit_module+0xa6/0x100
+[   27.883239]                     do_syscall_64+0x38/0x90
+[   27.886284]                     entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.890287]    SOFTIRQ-ON-R at:
+[   27.891528]                     lock_acquire+0xca/0x2e0
+[   27.894291]                     _raw_read_lock+0x5b/0x70
+[   27.898291]                     test_lockdep_init+0x84/0x1000 [lockdep_rwlock]
+[   27.903259]                     do_one_initcall+0x53/0x2f0
+[   27.907266]                     do_init_module+0x47/0x1c0
+[   27.911262]                     __do_sys_finit_module+0xa6/0x100
+[   27.914284]                     do_syscall_64+0x38/0x90
+[   27.918283]                     entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.922469]    INITIAL USE at:
+[   27.923949]                    lock_acquire+0xca/0x2e0
+[   27.927239]                    _raw_write_lock_irqsave+0x39/0x60
+[   27.931268]                    test_lockdep_init+0xb9/0x1000 [lockdep_rwlock]
+[   27.935236]                    do_one_initcall+0x53/0x2f0
+[   27.938287]                    do_init_module+0x47/0x1c0
+[   27.942282]                    __do_sys_finit_module+0xa6/0x100
+[   27.946283]                    do_syscall_64+0x38/0x90
+[   27.947274]                    entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.954285]    INITIAL READ USE at:
+[   27.955234]                         lock_acquire+0xca/0x2e0
+[   27.959296]                         _raw_read_lock+0x5b/0x70
+[   27.963237]                         test_lockdep_init+0x84/0x1000 [lockdep_rwlock]
+[   27.967379]                         do_one_initcall+0x53/0x2f0
+[   27.971293]                         do_init_module+0x47/0x1c0
+[   27.975266]                         __do_sys_finit_module+0xa6/0x100
+[   27.979239]                         do_syscall_64+0x38/0x90
+[   27.982288]                         entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   27.987327]  }
+[   27.987327]  ... key      at: [<ffffffffa00023c0>] __key.25+0x0/0xffffffffffffec40 [lockdep_rwlock]
+[   27.994292]  ... acquired at:
+[   27.994308]    lock_acquire+0xca/0x2e0
+[   27.998282]    _raw_write_lock_irqsave+0x39/0x60
+[   27.999315]    test_lockdep_init+0xb9/0x1000 [lockdep_rwlock]
+[   28.003440]    do_one_initcall+0x53/0x2f0
+[   28.007256]    do_init_module+0x47/0x1c0
+[   28.010255]    __do_sys_finit_module+0xa6/0x100
+[   28.011270]    do_syscall_64+0x38/0x90
+[   28.015264]    entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   28.018285]
+[   28.019242]
+[   28.019242] stack backtrace:
+[   28.022272] CPU: 3 PID: 393 Comm: insmod Tainted: G           O       6.1.0-rc5-14009-g503b12523cb9 #6
+[   28.027240] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS rel-1.16.0-0-gd239552ce722-prebuilt.qemu.or4
+[   28.035419] Call Trace:
+[   28.035419]  <TASK>
+[   28.038282]  dump_stack_lvl+0x45/0x5d
+[   28.039255]  check_irq_usage.cold+0x267/0x273
+[   28.043269]  ? save_trace+0x3f/0x380
+[   28.046245]  ? check_noncircular+0x7f/0x120
+[   28.046335]  ? __lock_acquire+0x1266/0x22c0
+[   28.051400]  __lock_acquire+0x1266/0x22c0
+[   28.051400]  ? cpupri_set+0x60/0x90
+[   28.055419]  lock_acquire+0xca/0x2e0
+[   28.058285]  ? test_lockdep_init+0xb9/0x1000 [lockdep_rwlock]
+[   28.062276]  _raw_write_lock_irqsave+0x39/0x60
+[   28.063236]  ? test_lockdep_init+0xb9/0x1000 [lockdep_rwlock]
+[   28.067265]  test_lockdep_init+0xb9/0x1000 [lockdep_rwlock]
+[   28.071560]  ? 0xffffffffa0005000
+[   28.075263]  do_one_initcall+0x53/0x2f0
+[   28.075263]  ? rcu_read_lock_sched_held+0x3e/0x80
+[   28.079260]  ? trace_kmalloc+0x30/0xe0
+[   28.082274]  ? kmalloc_trace+0x3f/0x50
+[   28.083238]  do_init_module+0x47/0x1c0
+[   28.087271]  __do_sys_finit_module+0xa6/0x100
+[   28.090279]  do_syscall_64+0x38/0x90
+[   28.091407]  entry_SYSCALL_64_after_hwframe+0x63/0xcd
+[   28.095387] RIP: 0033:0x7fb8083e7469
+[   28.098287] Code: 00 f3 c3 66 2e 0f 1f 84 00 00 00 00 00 0f 1f 40 00 48 89 f8 48 89 f7 48 89 d6 48 89 ca 4d 89 c2 48
+[   28.107268] RSP: 002b:00007fff396eb038 EFLAGS: 00000246 ORIG_RAX: 0000000000000139
+[   28.114276] RAX: ffffffffffffffda RBX: 0000560defb9b520 RCX: 00007fb8083e7469
+[   28.118272] RDX: 0000000000000000 RSI: 0000560deea1b638 RDI: 0000000000000003
+[   28.123451] RBP: 0000560deea1b638 R08: 0000000000000000 R09: 00007fb80869eea0
+[   28.127273] R10: 0000000000000003 R11: 0000000000000246 R12: 0000000000000000
+[   28.130277] R13: 0000560defb9a090 R14: 0000000000000000 R15: 0000000000000000
+[   28.134271]  </TASK>
