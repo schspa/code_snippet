@@ -1,0 +1,151 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     UAF test for wrong complete API usage
+#+AUTHOR:    Schspa Shi
+#+EMAIL:     schspa@gmail.com
+#+DATE:     <2022-12-22 19:40:18>
+#+DESCRIPTION: UAF test for wrong complete API usage
+#+KEYWORDS:
+#+TAGS:
+#+FILETAGS:
+#+CATEGORY:
+#+OPTIONS:   H:3 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil 
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+
+* Overall
+
+This is a test case for kernel patch:
+
+[[https://lore.kernel.org/all/20221115140233.21981-1-schspa@gmail.com/][umh: fix UAF when the process is being killed]]
+
+* Build & install
+
+#+begin_src bash
+  make
+#+end_src
+
+* Test bad case
+
+Test command:
+#+begin_src bash
+  sudo insmod ~/complete-uaf.ko use_fix=0
+  while true; do cat /proc/complete_uaf_test; done
+#+end_src
+
+#+begin_src text
+  [  OK  ] Finished Record Runlevel Change in UTMP.
+  [   13.906323] cloud-init[1092]: Cloud-init v. 22.2-0ubuntu1~22.04.3 running 'modules:final' at Thu, 22 Dec 2022 11:52:29 +0000. Up 13.85 seconds.
+  [   13.963373] cloud-init[1092]: Cloud-init v. 22.2-0ubuntu1~22.04.3 finished at Thu, 22 Dec 2022 11:52:29 +0000. Datasource DataSourceNoCloud [seed=/dev/sr0][dsmode=net].  Up 13.95 seconds
+  [  OK  ] Finished Execute cloud user/final scripts.
+  [  OK  ] Reached target Cloud-init target.
+
+  Ubuntu 22.04.1 LTS cloudimg ttyS0
+
+  cloudimg login: [   23.531194] BUG: unable to handle page fault for address: ffffa509c094bcb0
+  [   23.532583] #PF: supervisor write access in kernel mode
+  [   23.533595] #PF: error_code(0x0002) - not-present page
+  [   23.534593] PGD 100000067 P4D 100000067 PUD 1001db067 PMD 108354067 PTE 0
+  [   23.535905] Oops: 0002 [#1] SMP PTI
+  [   23.536619] CPU: 3 PID: 1132 Comm: complete_uaf_te Tainted: G           OE     5.15.0-56-generic #62-Ubuntu
+  [   23.538522] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.10.2-1ubuntu1 04/01/2014
+  [   23.540430] RIP: 0010:_raw_spin_lock_irqsave+0x23/0x50
+  [   23.541454] Code: ff 5d c3 cc cc cc cc 0f 1f 44 00 00 55 48 89 e5 41 54 9c 58 0f 1f 44 00 00 49 89 c4 fa 66 0f 1f 44 00 00 31 c0 ba 01 00 00 00 <f0> 0f b1 17 75 0d 4c 89 e0 4c 8b 65 f8 c9 c3 cc cc cc cc 89 c6 e8
+  [   23.545219] RSP: 0018:ffffa509c0963eb0 EFLAGS: 00010046
+  [   23.546380] RAX: 0000000000000000 RBX: ffffa509c094bca8 RCX: 0000000000000000
+  [   23.547816] RDX: 0000000000000001 RSI: 0000000000000286 RDI: ffffa509c094bcb0
+  [   23.549438] RBP: ffffa509c0963eb8 R08: 0000000000000000 R09: 0000000000000000
+  [   23.550989] R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000282
+  [   23.552427] R13: ffff99dcc6bedfa0 R14: ffffa509c094bbd8 R15: ffff99dcc6bedfa0
+  [   23.553894] FS:  0000000000000000(0000) GS:ffff99def3d80000(0000) knlGS:0000000000000000
+  [   23.555734] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+  [   23.556986] CR2: ffffa509c094bcb0 CR3: 0000000103aa2005 CR4: 00000000003706e0
+  [   23.558567] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+  [   23.559981] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+  [   23.561361] Call Trace:
+  [   23.561965]  <TASK>
+  [   23.562533]  complete+0x1d/0x50
+  [   23.563277]  completion_thread+0x68/0x80 [complete_uaf]
+  [   23.564392]  ? 0xffffffffc09b3000
+  [   23.565162]  kthread+0x127/0x150
+  [   23.565916]  ? set_kthread_struct+0x50/0x50
+  [   23.566851]  ret_from_fork+0x1f/0x30
+  [   23.567753]  </TASK>
+  [   23.568367] Modules linked in: complete_uaf(OE) isofs binfmt_misc nls_iso8859_1 kvm_intel input_leds joydev kvm serio_raw sch_fq_codel dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua ipmi_devintf ipmi_msghandler msr efi_pstore drm y
+  [   23.578812] CR2: ffffa509c094bcb0
+  [   23.579573] ---[ end trace 95f214adb8ccf385 ]---
+  [   23.580550] RIP: 0010:_raw_spin_lock_irqsave+0x23/0x50
+  [   23.581728] Code: ff 5d c3 cc cc cc cc 0f 1f 44 00 00 55 48 89 e5 41 54 9c 58 0f 1f 44 00 00 49 89 c4 fa 66 0f 1f 44 00 00 31 c0 ba 01 00 00 00 <f0> 0f b1 17 75 0d 4c 89 e0 4c 8b 65 f8 c9 c3 cc cc cc cc 89 c6 e8
+  [   23.585703] RSP: 0018:ffffa509c0963eb0 EFLAGS: 00010046
+  [   23.586890] RAX: 0000000000000000 RBX: ffffa509c094bca8 RCX: 0000000000000000
+  [   23.588476] RDX: 0000000000000001 RSI: 0000000000000286 RDI: ffffa509c094bcb0
+  [   23.590014] RBP: ffffa509c0963eb8 R08: 0000000000000000 R09: 0000000000000000
+  [   23.591561] R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000282
+  [   23.593130] R13: ffff99dcc6bedfa0 R14: ffffa509c094bbd8 R15: ffff99dcc6bedfa0
+  [   23.594699] FS:  0000000000000000(0000) GS:ffff99def3d80000(0000) knlGS:0000000000000000
+  [   23.596530] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+  [   23.597826] CR2: ffffa509c094bcb0 CR3: 0000000103aa2005 CR4: 00000000003706e0
+  [   23.599151] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+  [   23.600581] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+  [   23.739118] BUG: unable to handle page fault for address: ffffa509c0a33cf8
+  [   23.740638] #PF: supervisor write access in kernel mode
+  [   23.741836] #PF: error_code(0x0002) - not-present page
+  [   23.743000] PGD 100000067 P4D 100000067 PUD 1001db067 PMD 1028f3067 PTE 0
+  [   23.744553] Oops: 0002 [#2] SMP PTI
+  [   23.745312] CPU: 3 PID: 1142 Comm: complete_uaf_te Tainted: G      D    OE     5.15.0-56-generic #62-Ubuntu
+  [   23.747209] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.10.2-1ubuntu1 04/01/2014
+  [   23.748952] RIP: 0010:_raw_spin_lock_irqsave+0x23/0x50
+  [   23.749998] Code: ff 5d c3 cc cc cc cc 0f 1f 44 00 00 55 48 89 e5 41 54 9c 58 0f 1f 44 00 00 49 89 c4 fa 66 0f 1f 44 00 00 31 c0 ba 01 00 00 00 <f0> 0f b1 17 75 0d 4c 89 e0 4c 8b 65 f8 c9 c3 cc cc cc cc 89 c6 e8
+  [   23.753465] RSP: 0018:ffffa509c0a3beb0 EFLAGS: 00010046
+  [   23.754544] RAX: 0000000000000000 RBX: ffffa509c0a33cf0 RCX: 0000000000000000
+  [   23.756019] RDX: 0000000000000001 RSI: 0000000000000286 RDI: ffffa509c0a33cf8
+  [   23.757440] RBP: ffffa509c0a3beb8 R08: 000000000000000c R09: 0000000000000004
+  [   23.758845] R10: ffffffffbd098600 R11: 0000000000000000 R12: 0000000000000286
+  [   23.760397] R13: ffff99dcca0b36c0 R14: ffffa509c0a33c20 R15: ffff99dcca0b36c0
+  [   23.761835] FS:  0000000000000000(0000) GS:ffff99def3d80000(0000) knlGS:0000000000000000
+  [   23.763602] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+  [   23.764826] CR2: ffffa509c0a33cf8 CR3: 0000000103aa2003 CR4: 00000000003706e0
+  [   23.766239] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+  [   23.767612] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+  [   23.769003] Call Trace:
+  [   23.769620]  <TASK>
+  [   23.770179]  complete+0x1d/0x50
+  [   23.770917]  completion_thread+0x68/0x80 [complete_uaf]
+  [   23.772067]  ? 0xffffffffc09b3000
+  [   23.772860]  kthread+0x127/0x150
+  [   23.773675]  ? set_kthread_struct+0x50/0x50
+  [   23.774681]  ret_from_fork+0x1f/0x30
+  [   23.775584]  </TASK>
+  [   23.776180] Modules linked in: complete_uaf(OE) isofs binfmt_misc nls_iso8859_1 kvm_intel input_leds joydev kvm serio_raw sch_fq_codel dm_multipath scsi_dh_rdac scsi_dh_emc scsi_dh_alua ipmi_devintf ipmi_msghandler msr efi_pstore drm y
+  [   23.785531] CR2: ffffa509c0a33cf8
+  [   23.786216] ---[ end trace 95f214adb8ccf386 ]---
+  [   23.787100] RIP: 0010:_raw_spin_lock_irqsave+0x23/0x50
+  [   23.788072] Code: ff 5d c3 cc cc cc cc 0f 1f 44 00 00 55 48 89 e5 41 54 9c 58 0f 1f 44 00 00 49 89 c4 fa 66 0f 1f 44 00 00 31 c0 ba 01 00 00 00 <f0> 0f b1 17 75 0d 4c 89 e0 4c 8b 65 f8 c9 c3 cc cc cc cc 89 c6 e8
+  [   23.791334] RSP: 0018:ffffa509c0963eb0 EFLAGS: 00010046
+  [   23.792340] RAX: 0000000000000000 RBX: ffffa509c094bca8 RCX: 0000000000000000
+  [   23.793866] RDX: 0000000000000001 RSI: 0000000000000286 RDI: ffffa509c094bcb0
+  [   23.795337] RBP: ffffa509c0963eb8 R08: 0000000000000000 R09: 0000000000000000
+  [   23.796924] R10: 0000000000000001 R11: 0000000000000000 R12: 0000000000000282
+  [   23.798421] R13: ffff99dcc6bedfa0 R14: ffffa509c094bbd8 R15: ffff99dcc6bedfa0
+  [   23.799785] FS:  0000000000000000(0000) GS:ffff99def3d80000(0000) knlGS:0000000000000000
+  [   23.801321] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+  [   23.802588] CR2: ffffa509c0a33cf8 CR3: 0000000103aa2003 CR4: 00000000003706e0
+  [   23.804091] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 0000000000000000
+  [   23.805615] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 0000000000000400
+  [   23.807242] BUG: unable to handle page fault for address: ffffa509c0a53c88
+  [   23.809061] #PF: supervisor write access in kernel mode
+  [   23.810141] #PF: error_code(0x0002) - not-present page
+  [   23.811199] PGD 100000067 P4D 100000067 PUD 1001db067 PMD 1028f3067 PTE 0
+#+end_src
+
+* Test good case
+
+Test command:
+#+begin_src bash
+  sudo insmod ~/complete-uaf.ko use_fix=1
+  while true; do cat /proc/complete_uaf_test; done
+#+end_src
+
+There is no error.
+
