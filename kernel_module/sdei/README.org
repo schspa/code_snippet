@@ -1,0 +1,111 @@
+# -*- coding:utf-8 -*-
+#+LANGUAGE:  zh
+#+TITLE:     SDEI test
+#+AUTHOR:    Schspa
+#+EMAIL:     schspa@gmail.com
+#+DATE:     <2023-02-23 18:51:34>
+#+DESCRIPTION: SDEI test
+#+KEYWORDS:
+#+TAGS:
+#+FILETAGS:
+#+CATEGORY:
+#+OPTIONS:   H:3 num:nil toc:t \n:t @:t ::t |:t ^:nil -:t f:t *:t <:t
+#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setmainfont{PingFang SC}
+
+* Build
+
+** Add configs
+
+打开下面的config
+#+begin_src bash
+  CONFIG_ARM_SDE_INTERFACE=y
+  CONFIG_ARM64_VHE=y
+#+end_src
+
+
+** export needed function
+当编译为module时，需要将下面使用的symbol先进行export
+
+#+begin_src patch
+modified   drivers/firmware/arm_sdei.c
+@@ -427,6 +427,8 @@ int sdei_event_enable(u32 event_num)
+ 	return err;
+ }
+
++EXPORT_SYMBOL_GPL(sdei_event_enable);
++
+ static int sdei_api_event_disable(u32 event_num)
+ {
+ 	return invoke_sdei_fn(SDEI_1_0_FN_SDEI_EVENT_DISABLE, event_num, 0, 0,
+@@ -521,6 +523,7 @@ int sdei_event_unregister(u32 event_num)
+
+ 	return err;
+ }
++EXPORT_SYMBOL_GPL(sdei_event_unregister);
+
+ /*
+  * unregister events, but don't destroy them as they are re-registered by
+@@ -620,6 +623,8 @@ int sdei_event_register(u32 event_num, sdei_event_callback *cb, void *arg)
+ 	return err;
+ }
+
++EXPORT_SYMBOL_GPL(sdei_event_register);
++
+ static int sdei_reregister_shared(void)
+ {
+ 	int err = 0;
+#+end_src
+
+* Usage
+
+insmod之后读取节点，会自动向每个cpu注入sdei的事件。
+#+begin_src bash
+  root@localhost:~# cat /proc/sdei-test
+  cpu[0] mpidr: 0x0000000081000000
+  smc event inject return 0x0000000000000000
+  cpu[0] sdei callback ok
+  cpu[1] mpidr: 0x0000000081000100
+  smc event inject return 0x0000000000000000
+  cpu[1] sdei callback ok
+  cpu[2] mpidr: 0x0000000081000200
+  smc event inject return 0x0000000000000000
+  cpu[2] sdei callback ok
+  cpu[3] mpidr: 0x0000000081000300
+  smc event inject return 0x0000000000000000
+  cpu[3] sdei callback ok
+  cpu[4] mpidr: 0x0000000081000400
+  smc event inject return 0x0000000000000000
+  cpu[4] sdei callback ok
+  cpu[5] mpidr: 0x0000000081000500
+  smc event inject return 0x0000000000000000
+  cpu[5] sdei callback ok
+  cpu[6] mpidr: 0x0000000081000600
+  smc event inject return 0x0000000000000000
+  cpu[6] sdei callback ok
+  cpu[7] mpidr: 0x0000000081000700
+  smc event inject return 0x0000000000000000
+  cpu[7] sdei callback ok
+  #+end_src
+
+dmesg 中会有handler的打印
+
+#+begin_src bash
+  [ 1360.530801] sdei_test:sdei_event_test_handler: cpu[0], sdei event 0 handler
+#+end_src
+
+* trouble shot
+
+#+begin_src bash
+[    0.525159] sdei: Failed to get SDEI version: -95
+[    0.525845] sdei: disabling SDEI firmware interface
+[    0.526572] sdei: failed to mask CPU[4]: -95
+[    0.527212] sdei: probe of sdei failed with error -95
+#+end_src
+-95 == -EOPNOTSUPP
+
+遇到此问题请尝试开启VHE
+#+begin_src bash
+CONFIG_ARM64_VHE=y
+#+end_src
