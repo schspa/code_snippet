@@ -6,6 +6,7 @@ ifeq ($(KERNELRELEASE),)
 
 KERNELDIR ?= /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)
+ROOT_DIR ?= $(shell pwd)
 
 utils: modules
 	-mkdir -p ${ROOT_DIR}/build
