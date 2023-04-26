@@ -118,15 +118,17 @@ static int ret_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
 }
 
 static struct kretprobe my_kretprobes[] = {
-	{.handler = ret_handler,
-	 .entry_handler = entry_handler,
-	 .data_size = sizeof(struct my_data),
-	 /* Probe up to 20 instances concurrently. */
-	 .maxactive = 512,
-	 .kp =
-	 {
+	{
+		.handler = ret_handler,
+		.entry_handler = entry_handler,
+		.data_size = sizeof(struct my_data),
+		/* Probe up to 20 instances concurrently. */
+		.maxactive = 512,
+		.kp =
+		{
 		 .symbol_name = "timer_is_static_object",
-	 }}
+		}
+	}
 };
 
 static int __init kretprobe_init(void)
