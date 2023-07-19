@@ -8,7 +8,7 @@ ifeq ($(DEBUG),1)
 CFLAGS+= -g
 endif
 
-is_gnu_linux = $(if [[ $OSTYPE = linux-gnu ]]; then echo 1; else echo 0; fi,1,0)
+is_gnu_linux=$(shell if [[ $OSTYPE = linux-gnu ]]; then echo -n 1; else echo -n 0; fi)
 
 ifeq ($(is_gnu_linux),1)
 $(OUT): $(OBJS)
