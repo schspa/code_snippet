@@ -25,6 +25,7 @@
 
 #include <linux/init.h>
 #include <linux/kernel.h>
+#include <linux/version.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/cdev.h>
@@ -154,7 +155,12 @@ static int __init smc_helper_drv_init(void)
 	dev_t devno = 0;
 
 	if (smc_helper_class == NULL) {
+		// PATCH: 1aaba11da9aa ("driver core: class: remove module * from class_create()")
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
+		smc_helper_class = class_create("smc-helper");
+#else
 		smc_helper_class = class_create(THIS_MODULE, "smc-helper");
+#endif
 		if (IS_ERR(smc_helper_class)) {
 			ret = PTR_ERR(smc_helper_class);
 			pr_warn("Unable to create smc-helper class; errno = %d\n", ret);

@@ -25,6 +25,7 @@
 
 #include <linux/init.h>
 #include <linux/kernel.h>
+#include <linux/version.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/cdev.h>
@@ -156,7 +157,12 @@ static int __init regulator_test_drv_init(void)
 	int ret;
 
 	if (regulator_test_class == NULL) {
+		// PATCH: 1aaba11da9aa ("driver core: class: remove module * from class_create()")
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 3, 0)
+		regulator_test_class = class_create("regulator-test");
+#else
 		regulator_test_class = class_create(THIS_MODULE, "regulator-test");
+#endif
 		if (IS_ERR(regulator_test_class)) {
 			ret = PTR_ERR(regulator_test_class);
 			pr_warn("Unable to create devfreq-qos class; errno = %d\n", ret);
