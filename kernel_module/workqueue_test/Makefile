@@ -1,6 +1,6 @@
 #$(warning KERNELRELEASE=$(KERNELRELEASE))
 
-EXTRA_CFLAGS = -g -O0
+EXTRA_CFLAGS = -g
 
 ifeq ($(KERNELRELEASE),)
 
@@ -20,5 +20,5 @@ clean:
 
 else
 obj-m := unbond_test.o
-obj-m := work-test.o
+obj-m += work-test.o
 endif

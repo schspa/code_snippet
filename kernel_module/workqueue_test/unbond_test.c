@@ -324,7 +324,7 @@ static int __init proc_workqueue_unbound_test_init(void)
 	int cpu;
 	struct test_entry *entry;
 
-        for_each_possible_cpu(cpu) {
+	for_each_possible_cpu(cpu) {
 		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
 		entry->cpu = -1;
 		entry->kworks = kzalloc(sizeof(entry->kworks[0]) * MAX_KTHREAD_WORKER, GFP_KERNEL);
@@ -332,7 +332,8 @@ static int __init proc_workqueue_unbound_test_init(void)
 	}
 
 	(void) kretprobe_init();
-        cpus_read_lock();
+
+	cpus_read_lock();
 	on_each_cpu(sched_test_work, NULL, true);
 	msleep(500);
 	g_cpuhp_state = cpuhp_setup_state_nocalls(CPUHP_AP_ONLINE_DYN, "wq-test:online",
@@ -347,13 +348,13 @@ static int __init proc_workqueue_unbound_test_init(void)
 	return 0;
 }
 
-static void proc_workqueue_unbound_test_remove(void)
+static void __exit proc_workqueue_unbound_test_remove(void)
 {
 	struct test_entry *entry;
 	int cpu;
 	int i;
 
-        for_each_possible_cpu(cpu) {
+	for_each_possible_cpu(cpu) {
 		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
 		kthread_stop(entry->thread);
 	}
@@ -377,7 +378,7 @@ static void proc_workqueue_unbound_test_remove(void)
 	}
 
 	kretprobe_exit();
-        for_each_possible_cpu(cpu) {
+	for_each_possible_cpu(cpu) {
 		entry = per_cpu_ptr(&pcpu_test_entry, cpu);
 
 		kfree(entry->kworks);
