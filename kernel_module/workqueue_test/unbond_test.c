@@ -63,6 +63,7 @@ struct test_entry {
 };
 
 DEFINE_PER_CPU(struct test_entry, pcpu_test_entry);
+static u32 delay_seed = 0xffffffff;
 
 static void mdelay_with_yield(unsigned long timeout_ms)
 {
@@ -115,6 +116,7 @@ static int test_kthread_func(void *data)
 
 	while (!kthread_should_stop()) {
 		seed = get_random_u32();
+		delay_seed = seed;
 		sleep_time = get_random_u32() % (10 * 1000);
 		sleep_time += 300 * 1000;
 		timeleft = schedule_timeout_interruptible(sleep_time);
@@ -266,7 +268,7 @@ static int wq_ret_handler(struct kretprobe_instance *ri, struct pt_regs *regs)
 	entry = per_cpu_ptr(&pcpu_test_entry, raw_smp_processor_id());
 
 	for (i = 0; i < MAX_KTHREAD_WORKER; i++) {
-		seed = get_random_u32();
+		seed = delay_seed;
 		if (seed & (1UL << i)) {
 			schedule_work(&entry->koworks[i].work);
 		}
